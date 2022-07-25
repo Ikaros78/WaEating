@@ -24,9 +24,9 @@
         <h4 class="mb-3 ms-1">맛집리스트</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="user_matziplist_grade.html" class="list-group-item list-group-item-action py-3 select">평점별</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="user_matziplist_location.html" class="list-group-item list-group-item-action py-3">지역별</a>
-          <a href="user_matziplist_category.html" class="list-group-item list-group-item-action py-3">종류별</a>
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/finish" class="list-group-item list-group-item-action py-3 ">이전 예약</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/now" class="list-group-item list-group-item-action py-3 select">현재 예약</a>
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/cancel" class="list-group-item list-group-item-action py-3">취소한 예약</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->

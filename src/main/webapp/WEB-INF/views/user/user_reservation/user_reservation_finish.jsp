@@ -47,7 +47,7 @@
             
               <button type="button" class="btn btn-outline-success" disabled>방문 완료</button>
             
-            <a href="/user_review.html">
+            <a href="${ pageContext.servletContext.contextPath }/user/review">
               <button type="button" class="btn btn-success">리뷰 쓰기</button> 
             </a>
         </div>
@@ -62,7 +62,7 @@
             <p>전화번호 : 010-1234-5678</p>
 
             <button type="button" class="btn btn-outline-success" disabled>방문 완료</button>
-            <a href="/user_review_delet&update.html">
+            <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate">
               <button type="button" class="btn btn-success">내가 쓴 리뷰 보기</button>
             </a>
         </div>
