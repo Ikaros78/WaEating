@@ -33,7 +33,7 @@
                 	<!-- 숫자버튼 -->
                 	<c:forEach var="p" begin="${ requestScope.selectCriteria.startPage }" end="${requestScope.selectCriteria.endPage }" step="1">
                 		<c:if test="${ requestScope.selectCriteria.pageNo eq p }">
-                			<li class="page-item disalbed"><a><c:out value="${ p }"/></a>
+                			<li class="page-item active"><a><c:out value="${ p }"/></a>
                 		</c:if>
                 		<c:if test="${ requestScope.selectCriteria.pageNo ne p }">
                 			<li><a onclick="pageButtonAction(this.innerText);"><c:out value="${ p }"/></a>
@@ -55,7 +55,7 @@
 	
 	<script>
 	
-		const link = "";
+		const link = '${ requestScope.link }';
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false}){

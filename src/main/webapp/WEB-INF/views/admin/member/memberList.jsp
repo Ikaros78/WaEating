@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" id="details">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -52,12 +52,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="account" items="${ requestScope.accountList }">
+                    <c:forEach var="member" items="${ requestScope.memberList }">
                     <tr>
-                    	<td><c:out value="${ account.id }"/></td>
-                    	<td><c:out value="${ account.name }"/></td>
-                    	<td><c:out value="${ account.email }"/></td>
-                    	<td><c:out value="${ account.phone }"/></td>
+                    	<td><c:out value="${ member.id }"/></td>
+                    	<td><c:out value="${ member.name }"/></td>
+                    	<td><c:out value="${ member.email }"/></td>
+                    	<td><c:out value="${ member.phone }"/></td>
                     </tr>
                     </c:forEach>
                     </tbody>
@@ -65,6 +65,7 @@
             </div>
         </div>    
 
+		<!-- 검색 폼 -->
         <div id="searchContainer">
             <div class="row">
                 <div class="col-md-offset-7 col-md-4" align="right">
@@ -85,8 +86,33 @@
             <!-- 페이지 처리 -->
             <jsp:include page="../common/paging.jsp"/>
         </div>
-
         
     </div>
+    
+    <!-- 상세 보기 이동 -->
+    <script>
+    	
+    	const link = "${ pageContext.servletContext.contextPath}/admin/member/detail"
+    
+    	if(document.getElementsByid("details")) {
+    		
+    		const $tds = document.getElementsByTagName("td");
+    		for(let i = 0; i < $tds.length; i++){
+    			
+    			$tds[i].onmouseenter = function(){
+    				this.parentNode.style.backgroundColor = "grey";
+    				this.parentNode.style.cursor = "pointer";
+    			}
+    			
+    			$tds[i].onmouseout = function(){
+    				this.parentNode.style.backgroundColor = "white";
+    			}
+    			
+    			$tds[i].onclick = function(){
+    				location.href = link;
+    			}
+    		}
+    	}
+    </script>
 </body>
 </html>
