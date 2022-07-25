@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ohgiraffers.waeating.member.model.dao.MemberMapper">
-	<resultMap type="com.ohgiraffers.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+<mapper namespace="com.waeating.member.model.dao.MemberMapper">
+	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
 		<id property="id" column="MEMBER_ID"/>
 		<result property="pwd" column="MEMBER_PWD"/>
 		<result property="email" column="EMAIL"/>

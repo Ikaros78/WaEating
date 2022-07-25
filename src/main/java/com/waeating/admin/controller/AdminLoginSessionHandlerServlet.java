@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.admin.controller;
+package com.waeating.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

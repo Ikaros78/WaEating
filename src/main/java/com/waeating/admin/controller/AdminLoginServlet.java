@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.admin.controller;
+package com.waeating.admin.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ohgiraffers.waeating.admin.service.AdminService;
-import com.ohgiraffers.waeating.member.model.dto.MemberDTO;
+import com.waeating.admin.service.AdminService;
+import com.waeating.member.model.dto.MemberDTO;
 
 /**
  * Servlet implementation class AdminLoginServlet

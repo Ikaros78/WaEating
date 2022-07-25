@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.common.config;
+package com.waeating.common.config;
 
 public class ConfigLocation {
 	

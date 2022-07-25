@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.common.wrapper;
+package com.waeating.common.wrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

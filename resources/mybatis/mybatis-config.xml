@@ -17,6 +17,6 @@
 	</environments>
 	
 	<mappers>
-		<package name="com.ohgiraffers.waeating.member.model.dao"/>
+		<package name="com.waeating.member.model.dao"/>
 	</mappers>
 </configuration>
