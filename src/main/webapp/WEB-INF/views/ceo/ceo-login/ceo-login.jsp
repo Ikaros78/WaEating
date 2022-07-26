@@ -10,10 +10,10 @@
 <body>
 	<div class="wrap">
         <div class="logo">
-            <a href="#"><img src="../img/logo_font.png" alt="로고"></a>
+            <img src="${ pageContext.servletContext.contextPath }/resources/images/logo_font.png" alt="로고">
         </div>
         <div class="login">
-            <form action="">
+            <form action="/ceo/main">
                 <div class="login"></div>
                 <input type="text" class="login_box" id="login_id" placeholder="아이디 입력"> 
                 <input type="password" class="login_box" id="login_pw" placeholder="비밀번호 입력">
@@ -23,9 +23,9 @@
         </div>
         <div class="sub">
             <ul>
-                <li><a href="../ceo-sign-up/ceo-sign-up.html">회원가입</a></li>
-                <li><a href="../ceo-find-id/ceo-find-id.html">아이디 찾기</a></li>
-                <li><a href="../ceo-find-pw/ceo-find-pw.html">비밀번호 찾기</a></li>
+                <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/signup">회원가입</a></li>
+                <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/findid">아이디 찾기</a></li>
+                <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/findpw">비밀번호 찾기</a></li>
             </ul>
         </div>
     </div>
