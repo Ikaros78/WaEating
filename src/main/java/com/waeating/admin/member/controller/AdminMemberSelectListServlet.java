@@ -27,6 +27,10 @@ public class AdminMemberSelectListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getSession().getAttribute("ifUpdate") != null){
+			request.getSession().removeAttribute("ifUpdate");
+		}
+		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
