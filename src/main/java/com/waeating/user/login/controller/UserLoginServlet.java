@@ -19,4 +19,10 @@ public class UserLoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-login.jsp").forward(request, response);
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userId = request.getParameter("userId");
+		String userPw = request.getParameter("userPw");
+		
+	}
 }
