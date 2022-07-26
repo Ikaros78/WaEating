@@ -63,8 +63,6 @@ public class AdminLoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(request, response);
 
 
-
-	
 		}
 	}
 
