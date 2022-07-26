@@ -1,4 +1,4 @@
-package com.waeating.admin.review.controller;
+package com.waeating.admin.company.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,17 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReviewSelectListServlet
+ * Servlet implementation class CompanySelectListServlet
  */
-@WebServlet("/admin/review/list")
-public class ReviewSelectListServlet extends HttpServlet {
+@WebServlet("/admin/company/list")
+public class AdminCompanySelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		String path = "";
-		path= "/WEB-INF/views/admin/review/reviewList.jsp";		
+		path= "/WEB-INF/views/admin/company/companyList.jsp";
+		
 		request.getRequestDispatcher(path).forward(request, response);
+		
 	}
 
 }

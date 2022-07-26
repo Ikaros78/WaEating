@@ -11,7 +11,7 @@ import com.waeating.common.paging.SelectCriteria;
 import com.waeating.member.model.dao.MemberMapper;
 import com.waeating.member.model.dto.MemberDTO;
 
-public class MemberService {
+public class AdminMemberService {
 	
 	private MemberMapper memberMapper;
 

@@ -43,7 +43,6 @@
 	<select id="selectLoginAdmin" resultMap="memberResultMap">
 		SELECT
 				A.MEMBER_ID
-			  , A.MEMBER_PWD
 			  , A.EMAIL
 			  , A.NAME
 			  , A.MEMBER_TYPE

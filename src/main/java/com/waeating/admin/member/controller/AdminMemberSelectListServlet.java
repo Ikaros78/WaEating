@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.admin.member.service.MemberService;
+import com.waeating.admin.member.service.AdminMemberService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.member.model.dto.MemberDTO;
@@ -20,10 +20,10 @@ import com.waeating.member.model.dto.MemberDTO;
  * Servlet implementation class AccountSelectListServlet
  */
 @WebServlet("/admin/member/list")
-public class MemberSelectListServlet extends HttpServlet {
+public class AdminMemberSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MemberSelectListServlet() {}
+    public AdminMemberSelectListServlet() {}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -45,7 +45,7 @@ public class MemberSelectListServlet extends HttpServlet {
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		
-		MemberService memberService = new MemberService();
+		AdminMemberService memberService = new AdminMemberService();
 		int totalCount = memberService.selectTotalCount(searchMap);
 		
 		int limit = 10;
