@@ -92,7 +92,7 @@
     <!-- 상세 보기 이동 -->
     <script>
     	
-    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/member/detail"
+    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/member/detail/session"
     
     	if(document.getElementsByTagName("td")) {
     		

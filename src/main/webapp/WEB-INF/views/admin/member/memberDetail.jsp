@@ -116,7 +116,7 @@
         <div id="container">
 
             <div class="col-md-9 col-md-offset-2" align="right">
-                <button type="submit" class="btn btn-primary" id="doUpdate">수정</button>
+                <button type="button" class="btn btn-primary" id="doUpdate">수정</button>
                 <button type="button" class="btn btn-default" id="backToList">목록으로</button>
             </div>
         </div>

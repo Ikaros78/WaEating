@@ -23,7 +23,7 @@ public class AdminMemberSelectDetailServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String memberId = request.getParameter("memberId");
+		String memberId = (String) request.getSession().getAttribute("memberId");
 		
 		Map<String, String> searchMap = new HashMap<>();
 		searchMap.put("memberId", memberId);
