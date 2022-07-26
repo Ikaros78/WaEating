@@ -1,0 +1,67 @@
+package waeating.common.paging;
+
+public class Pagenation {
+
+	
+	/**
+	 * <pre>
+	 *   검색어가 없는 경우 페이징 처리만 해주는 메소드
+	 * </pre>
+	 * @param pageNo
+	 * @param totalCount
+	 * @param limit
+	 * @param buttonAmount
+	 * @return
+	 */
+	public static SelectCriteria getSelectCriteria(int pageNo, int totalCount, int limit, int buttonAmount) {
+		
+		return getSelectCriteria(pageNo, totalCount, limit, buttonAmount, null, null);
+	}
+	
+	/**
+	 * <pre>
+	 * 	 검색어가 존재하는 경우 검색 조건으로 select 후 페이징 처리를 해주는 메소드
+	 * </pre>
+	 * @param pageNo
+	 * @param totalCount
+	 * @param limit
+	 * @param buttonAmount
+	 * @param searchCondition
+	 * @param searchValue
+	 * @return
+	 */
+	public static SelectCriteria getSelectCriteria(int pageNo, int totalCount, int limit, int buttonAmount, String searchCondition, String searchValue) {
+		
+		int maxPage;
+		int startPage;
+		int endPage;
+		int startRow;
+		int endRow;
+		
+		maxPage = (int) Math.ceil((double) totalCount / limit);
+		
+		startPage = (int) (Math.ceil((double) pageNo / buttonAmount) - 1) * buttonAmount + 1;
+		
+		endPage = startPage + buttonAmount -1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		if(maxPage == 0 && endPage == 0) {
+			maxPage = startPage;
+			endPage = startPage;
+		}
+		
+		startRow = (pageNo - 1) * limit + 1;
+		endRow = startRow + limit - 1;
+		
+		System.out.println(endPage);
+		System.out.println(startRow);
+		System.out.println(endRow);
+		
+		SelectCriteria selectCriteria = new SelectCriteria(pageNo, totalCount, limit, buttonAmount, maxPage, startPage, endPage, startRow, endRow, searchCondition, searchValue);
+		
+		return selectCriteria;
+	}
+}
