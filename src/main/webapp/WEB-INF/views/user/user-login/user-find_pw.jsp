@@ -5,20 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
-<link rel="stylesheet" href="find-pw.css">
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/user-login/user-find_pw.css">
 </head>
 <body>
 	<div class="wrap">
         <label for="find_id">비밀번호 찾기</label>
         <div id="f_phone" class="find">
-            <a href="../find-detail/find-pw-phone.html">
-                <img src="../img/phone2.png" alt="">
+            <a href="${ pageContext.servletContext.contextPath }/member/user/findpw/phone">
+                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phon2.png" alt="전화번호로 찾기">
                 <p>전화번호로 찾기</p>
             </a>
         </div>
         <div id="f_email" class="find">
-            <a href="../find-detail/find-pw-email.html">
-                <img src="../img/email.png" alt="">
+            <a href="${ pageContext.servletContext.contextPath }/member/user/findpw/email">
+                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/email.png" alt="이메일로 찾기">
                 <p>이메일로 찾기</p>
             </a>
         </div>

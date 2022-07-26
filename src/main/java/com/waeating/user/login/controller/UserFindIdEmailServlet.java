@@ -16,6 +16,7 @@ public class UserFindIdEmailServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.getRequestDispatcher("WEB-INF/views/user/user-login/user-find_id.jsp").forward(request, response);
 	}
 
 }
