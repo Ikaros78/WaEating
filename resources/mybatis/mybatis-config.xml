@@ -17,6 +17,8 @@
 	</environments>
 	
 	<mappers>
-		<package name="waeating.member.model.dao"/>
+
+		<package name="com.waeating.member.model.dao"/>
+		
 	</mappers>
 </configuration>

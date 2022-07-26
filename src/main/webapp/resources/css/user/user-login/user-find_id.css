@@ -1,0 +1,68 @@
+@charset "UTF-8";
+*{margin: 0;padding: 0;}
+
+body{
+    width: 1920px;
+    height: 1080px;
+    background-color: #f1f1f1;
+}
+
+.wrap{
+    width: 1600px;
+    height: 1200px;
+    margin: auto;
+    background-color: #f1f1f1;
+    position: relative;
+}
+
+label{
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.find{
+    background-color: #ffffff !important;
+    width: 400px;
+    height: 400px;
+    float: left;
+    margin-top: 400px !important;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 5px rgb(155, 155, 155);
+    text-align: center;
+}
+
+.find img{
+    filter: invert(31%) sepia(67%) saturate(2357%) hue-rotate(351deg) brightness(91%) contrast(85%);
+    width: 150px;
+    margin-top: 90px;
+}
+
+.find a{
+    text-decoration: none;
+    display: inline-block;
+    width: 400px;
+    height: 400px;
+}
+
+.find p{
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+    margin-top: 30px;
+}
+
+#f_phone{
+    margin:0 100px 0 350px;
+}
+#backBtn{
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 2px;
+}
