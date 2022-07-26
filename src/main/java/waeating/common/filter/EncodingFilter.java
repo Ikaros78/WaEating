@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.common.filter;
+package waeating.common.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

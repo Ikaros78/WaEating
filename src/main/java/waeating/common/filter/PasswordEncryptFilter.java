@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.common.filter;
+package waeating.common.filter;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-import com.ohgiraffers.waeating.common.wrapper.EncryptRequestWrapper;
+import waeating.common.wrapper.EncryptRequestWrapper;
 
 /**
  * Servlet Filter implementation class PasswordEncryptFilter

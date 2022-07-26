@@ -1,12 +1,12 @@
-package com.ohgiraffers.waeating.admin.service;
+package waeating.admin.service;
 
-import static com.ohgiraffers.waeating.common.mybatis.Template.getSqlSession;
+import static waeating.common.mybatis.Template.getSqlSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.ohgiraffers.waeating.member.model.dao.MemberMapper;
-import com.ohgiraffers.waeating.member.model.dto.MemberDTO;
+import waeating.member.model.dao.MemberMapper;
+import waeating.member.model.dto.MemberDTO;
 
 public class AdminService {
 

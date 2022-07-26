@@ -1,6 +1,6 @@
-package com.ohgiraffers.waeating.member.model.dao;
+package waeating.member.model.dao;
 
-import com.ohgiraffers.waeating.member.model.dto.MemberDTO;
+import waeating.member.model.dto.MemberDTO;
 
 public interface MemberMapper {
 

@@ -1,4 +1,4 @@
-package com.ohgiraffers.waeating.member.model.dto;
+package waeating.member.model.dto;
 
 public class MemberDTO {
 	private String id;
