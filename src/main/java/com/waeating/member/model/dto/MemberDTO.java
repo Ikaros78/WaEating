@@ -1,5 +1,7 @@
 package com.waeating.member.model.dto;
 
+import java.util.List;
+
 public class MemberDTO {
 	private String id;
 	private String pwd;
@@ -8,6 +10,7 @@ public class MemberDTO {
 	private String memberType;
 	private String phone;
 	private String emailCheck;
+	private List<UserDTO> userInfo;
 	
 	public MemberDTO() {}
 
@@ -23,6 +26,19 @@ public class MemberDTO {
 		this.emailCheck = emailCheck;
 	}
 	
+	public MemberDTO(String id, String pwd, String email, String name, String memberType, String phone,
+			String emailCheck, List<UserDTO> userInfo) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.email = email;
+		this.name = name;
+		this.memberType = memberType;
+		this.phone = phone;
+		this.emailCheck = emailCheck;
+		this.userInfo = userInfo;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -79,10 +95,19 @@ public class MemberDTO {
 		this.emailCheck = emailCheck;
 	}
 
+	public List<UserDTO> getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(List<UserDTO> userInfo) {
+		this.userInfo = userInfo;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name + ", memberType="
-				+ memberType + ", phone=" + phone + ", emailCheck=" + emailCheck + "]";
+				+ memberType + ", phone=" + phone + ", emailCheck=" + emailCheck + ", userInfo=" + userInfo + "]";
+
 	}
 
 	
