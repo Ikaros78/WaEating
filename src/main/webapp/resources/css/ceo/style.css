@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap');
+      *{
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 400;
+      }
+      #wrap{
+        margin: 0 auto;
+        padding: 0;
+        width: 100%;
+        position: absolute;
+        top: 100px;
+      }
+      header{
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+        
+      }
+      /* .main .dropmenu:hover{
+        box-sizing: border-box;
+        /* border-bottom: 3px solid #D94925;
+        box-sizing: border-box; 
+      }
+      .main .dropmenu a:hover{
+        border-bottom: 3px solid #D94925;
+        box-sizing: border-box;
+      } */
+      .select{
+        background: #D94925 !important;
+        color: #fff !important;
+      }
+      .select :hover{
+        background: #D94925 !important;
+        color: #fff !important;
+      }
+      nav .flex-column{
+        position: absolute;
+        display: none;
+        text-align: center;
+        z-index: 1;
+
+      }
+      nav .flex-column a{
+        background-color: #fff;
+        
+      }
+      .dropmenu:hover .flex-column{
+        display: block;
+        /*margin-top: 0;*/
+      }
+      nav .flex-column :hover{
+        border: 0;
+        background: #D94925;
+        color: #fff !important;
+      }
+
+      .list-group a:hover{
+        background: #f4f4f6;
+        
+      }
+      footer{
+        background: #D94925;
+        position: relative;
+        bottom: 0;
+      }

@@ -9,7 +9,6 @@
 </head>
 <body>
 	<!-- 일반사용자, 업체사용자, 관리자 선택해서 입장하는 페이지 -->
-	<!-- <a href="${ pageContext.servletContext.contextPath }/admin/login/session">관리자로그인</a> -->
 	
 	<div class="wrap">
         <div id="user" class="main">
@@ -31,5 +30,6 @@
             </a>
         </div>
     </div>
+
 </body>
 </html>

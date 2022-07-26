@@ -18,6 +18,7 @@ import com.waeating.member.model.dto.MemberDTO;
 @WebServlet("/admin/login")
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -60,6 +61,8 @@ public class AdminLoginServlet extends HttpServlet {
 			
 			request.setAttribute("message", "로그인 실패");
 			request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(request, response);
+
+
 		}
 	}
 
