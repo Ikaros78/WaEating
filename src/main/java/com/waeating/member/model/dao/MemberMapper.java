@@ -1,5 +1,9 @@
 package com.waeating.member.model.dao;
 
+
+import com.waeating.member.model.dto.MemberDTO;
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,5 +19,6 @@ public interface MemberMapper {
 	int selectTotalCount(Map<String, String> searchMap);
 
 	List<MemberDTO> selectMemberList(SelectCriteria selectCriteria);
+
 
 }

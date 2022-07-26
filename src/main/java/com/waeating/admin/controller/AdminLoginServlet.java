@@ -19,50 +19,52 @@ import com.waeating.member.model.dto.MemberDTO;
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
-
+				
 		request.getRequestDispatcher("/WEB-INF/views/admin/login.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
-
+		
 		String adminId = request.getParameter("id");
 		String pwd = request.getParameter("password");
 		String memberType = (String) session.getAttribute("memberType");
-
+		
 		System.out.println("adminId : " + adminId);
 		System.out.println("password : " + pwd);
 		System.out.println("memberTye : " + memberType);
-
+		
 		MemberDTO requestMember = new MemberDTO();
 		requestMember.setId(adminId);
 		requestMember.setPwd(pwd);
 		requestMember.setMemberType(memberType);
-
+		
 		AdminService adminService = new AdminService();
-
+		
 		MemberDTO loginMember = adminService.loginCheck(requestMember);
 		System.out.println(loginMember);
-
-		String path = "";
-		if (loginMember != null) {
-
+		
+		if(loginMember != null) {
+			
 			session.setAttribute("loginMember", loginMember);
-			path = "/WEB-INF/views/admin/main.jsp";
-
-			/* response.sendRedirect(path); */ // 안되는중
-			request.getRequestDispatcher(path).forward(request, response); // 가능
+			
+			response.sendRedirect(request.getContextPath());
 		} else {
-
-			path = "/WEB-INF/views/common/failed.jsp";
+			
 			request.setAttribute("message", "로그인 실패");
-			request.getRequestDispatcher(path).forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(request, response);
+
+
+
+	
 		}
 	}
 
