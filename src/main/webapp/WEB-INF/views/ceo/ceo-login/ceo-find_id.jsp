@@ -5,24 +5,24 @@
 <head>
     <meta charset="UTF-8">
     <title>업주 아이디 찾기</title>
-    <link rel="stylesheet" href="ceo-find-id.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/ceo/ceo-login/ceo-find_id.css">
 </head>
 <body>
     <div class="wrap">
-        <label for="find_id"></label>
+        <label for="title">업주 아이디 찾기</label>
         <div id="f_phone" class="find">
-            <a href="../ceo-find-detail/ceo-find-id-phone.html">
-                <img src="../img/phone2.png" alt="">
+            <a href="${ pageContext.servletContext.contextPath }/member/ceo/findid/phone">
+                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phone2.png" alt="전화번호로 찾기">
                 <p>전화번호로 찾기</p>
             </a>
         </div>
         <div id="f_email" class="find">
-            <a href="../ceo-find-detail/ceo-find-id-email.html">
-                <img src="../img/email.png" alt="">
+            <a href="${ pageContext.servletContext.contextPath }/member/ceo/findid/email">
+                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/email.png" alt="이메일로 찾기">
                 <p>이메일로 찾기</p>
             </a>
         </div>
-        <a href="../ceo-login/ceo-login.html"><button type="button" id="backBtn">뒤로가기</button></a>
+        <a href="${ pageContext.servletContext.contextPath }/member/login/ceo"><button type="button" id="backBtn">뒤로가기</button></a>
     </div>
 </body>
 </html>

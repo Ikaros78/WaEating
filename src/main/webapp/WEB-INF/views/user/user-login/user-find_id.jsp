@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="wrap">
-        <label for="find_id"></label>
+        <label for="title">아이디 찾기</label>
         <div id="f_phone" class="find">
             <a href="${ pageContext.servletContext.contextPath }/member/user/findid/phone">
                 <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phone2.png" alt="전화번호로 찾기">

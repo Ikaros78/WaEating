@@ -69,7 +69,7 @@
          </div>
         </div>
         <footer class="my-3 text-center text-small">
-        <p class="mb-1" id="copyright">&copy; 2022 Wai-eating</p>
+        <p class="mb-1" id="copyright">&copy; 2022 Waeating</p>
         </footer>
     </div>
 </body>

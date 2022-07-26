@@ -3,13 +3,11 @@
 
 body{
     width: 1920px;
-    height: 1080px;
     background-color: #f1f1f1;
 }
 
 .wrap{
-    width: 1600px;
-    height: 1200px;
+    width: 1600PX;
     margin: auto;
     background-color: #f1f1f1;
     position: relative;
@@ -18,7 +16,7 @@ body{
 label{
     position: absolute;
     left: 50%;
-    top: 25%;
+    top: 300px;
     transform: translate(-50%, -50%);
     font-size: 30px;
     font-weight: 600;
@@ -29,10 +27,10 @@ label{
     width: 400px;
     height: 400px;
     float: left;
-    margin-top: 400px !important;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 5px rgb(155, 155, 155);
     text-align: center;
+    margin-top: 400PX !important;
 }
 
 .find img{
@@ -59,10 +57,12 @@ label{
     margin:0 100px 0 350px;
 }
 #backBtn{
-    position: absolute;
-    bottom: 50px;
-    right: 50px;
-    background-color: #ffffff;
-    padding: 5px;
-    border-radius: 2px;
+    position: fixed;
+    bottom: 100px;
+    right: 200px;
+    background-color: #D94925;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
 }
