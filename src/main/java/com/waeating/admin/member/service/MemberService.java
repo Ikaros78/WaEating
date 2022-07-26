@@ -53,4 +53,16 @@ public class MemberService {
 		return memberList;
 	}
 
+	public MemberDTO selectMemberDetail(Map<String, String> searchMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO member = memberMapper.selectMemberDetail(searchMap);
+		
+		sqlSession.close();
+		
+		return member;
+	}
+
 }

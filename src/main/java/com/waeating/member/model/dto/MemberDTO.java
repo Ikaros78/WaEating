@@ -10,7 +10,7 @@ public class MemberDTO {
 	private String memberType;
 	private String phone;
 	private String emailCheck;
-	private List<UserDTO> userInfo;
+	private UserDTO userInfo;
 	
 	public MemberDTO() {}
 
@@ -27,7 +27,7 @@ public class MemberDTO {
 	}
 	
 	public MemberDTO(String id, String pwd, String email, String name, String memberType, String phone,
-			String emailCheck, List<UserDTO> userInfo) {
+			String emailCheck, UserDTO userInfo) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -95,11 +95,11 @@ public class MemberDTO {
 		this.emailCheck = emailCheck;
 	}
 
-	public List<UserDTO> getUserInfo() {
+	public UserDTO getUserInfo() {
 		return userInfo;
 	}
 
-	public void setUserInfo(List<UserDTO> userInfo) {
+	public void setUserInfo(UserDTO userInfo) {
 		this.userInfo = userInfo;
 	}
 

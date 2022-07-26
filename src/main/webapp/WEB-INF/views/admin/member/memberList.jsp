@@ -33,15 +33,15 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="#">회원정보 조회</a></li>
-                                    <li role="presentation"><a href="#">회원정보 수정</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/list">회원정보 조회</a></li>
+                                    <li role="presentation"><a href="#">회원정보 등록</a></li>
                                 </ul>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-9" id="details">
+            <div class="col-md-9">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -53,11 +53,11 @@
                     </thead>
                     <tbody>
                     <c:forEach var="member" items="${ requestScope.memberList }">
-                    <tr>
-                    	<td><c:out value="${ member.id }"/></td>
-                    	<td><c:out value="${ member.name }"/></td>
-                    	<td><c:out value="${ member.email }"/></td>
-                    	<td><c:out value="${ member.phone }"/></td>
+                    <tr class="rowClick">
+                    	<td class="details"><c:out value="${ member.id }"/></td>
+                    	<td class="details"><c:out value="${ member.name }"/></td>
+                    	<td class="details"><c:out value="${ member.email }"/></td>
+                    	<td class="details"><c:out value="${ member.phone }"/></td>
                     </tr>
                     </c:forEach>
                     </tbody>
@@ -66,21 +66,21 @@
         </div>    
 
 		<!-- 검색 폼 -->
-        <div id="searchContainer">
-            <div class="row">
-                <div class="col-md-offset-7 col-md-4" align="right">
-                        <select class="form-select" id="option">
-                            <option value="이름">이름</option>
-                            <option value="나이">나이</option>
-                            <option value="휴대폰">휴대폰</option>
-                            <option value="아이디">아이디</option>
-                            <option value="옵션5">옵션5</option>
-                        </select>
-                        <input type="text">
-                        <input type="submit" value="검색">
-                </div>
-            </div>
-        </div>
+		
+		<div class="col-md-offset-7 clo-md-4" align="right" id="searchArea">
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/member/list" method="get" style="display:inline-block">		
+			    <input type="hidden" name="currentPage" value="1">
+			    <select id="searchCondition" name="searchCondition">
+					<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>아이디</option>
+					<option value="name" ${ requestScope.selectCriteria.searchCondition eq "name"? "selected": "" }>이름</option>
+					<option value="email" ${ requestScope.selectCriteria.searchCondition eq "email"? "selected": "" }>이메일</option>
+					<option value="phone" ${ requestScope.selectCriteria.searchCondition eq "phone"? "selected": "" }>전화번호</option>
+				</select>
+		        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+
+				<button type="submit">검색하기</button>
+			</form>
+		</div>
 
         <div id="container">
             <!-- 페이지 처리 -->
@@ -88,31 +88,38 @@
         </div>
         
     </div>
-    a
+    
     <!-- 상세 보기 이동 -->
     <script>
     	
-    	const link = "${ pageContext.servletContext.contextPath}/admin/member/detail"
+    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/member/detail"
     
-    	if(document.getElementsByid("details")) {
+    	if(document.getElementsByTagName("td")) {
     		
-    		const $tds = document.getElementsByTagName("td");
+    		const $tds = document.getElementsByClassName("details");
     		for(let i = 0; i < $tds.length; i++){
     			
     			$tds[i].onmouseenter = function(){
-    				this.parentNode.style.backgroundColor = "grey";
+    				this.parentNode.style.backgroundColor = "lightgrey";
     				this.parentNode.style.cursor = "pointer";
     			}
     			
     			$tds[i].onmouseout = function(){
     				this.parentNode.style.backgroundColor = "white";
     			}
+    		}
+    		const $trs = document.getElementsByClassName("rowClick");
+    		for(let j = 0; j < $trs.length; j++){
     			
-    			$tds[i].onclick = function(){
-    				location.href = link;
+    			$trs[j].onclick = function(){
+    				/* alert($(this).children().eq(0).text()); */
+    				var memberId = $(this).children().eq(0).text();
+    				location.href = detailLink + "?memberId=" + memberId; 
     			}
     		}
+    		
     	}
+
     </script>
 </body>
 </html>

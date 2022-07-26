@@ -17,5 +17,7 @@ public interface MemberMapper {
 
 	List<MemberDTO> selectMemberList(SelectCriteria selectCriteria);
 
+	MemberDTO selectMemberDetail(Map<String, String> searchMap);
+
 
 }

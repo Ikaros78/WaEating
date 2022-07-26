@@ -69,7 +69,7 @@ public class MemberSelectListServlet extends HttpServlet {
 			request.setAttribute("link", "list");
 		}else {
 			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "게시물 목록 조회 실패!");
+			request.setAttribute("message", "회원정보 목록 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);

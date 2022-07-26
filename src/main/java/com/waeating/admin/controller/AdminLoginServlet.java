@@ -40,7 +40,7 @@ public class AdminLoginServlet extends HttpServlet {
 		
 		System.out.println("adminId : " + adminId);
 		System.out.println("password : " + pwd);
-		System.out.println("memberTye : " + memberType);
+		System.out.println("memberType : " + memberType);
 		
 		MemberDTO requestMember = new MemberDTO();
 		requestMember.setId(adminId);
@@ -52,16 +52,21 @@ public class AdminLoginServlet extends HttpServlet {
 		MemberDTO loginMember = adminService.loginCheck(requestMember);
 		System.out.println(loginMember);
 		
+		String path = "";
 		if(loginMember != null) {
 			
 			session.setAttribute("loginMember", loginMember);
 			
-			response.sendRedirect(request.getContextPath());
+			path = "/WEB-INF/views/admin/main.jsp";
+
+			/* response.sendRedirect(path); */ // 안되는중
+			request.getRequestDispatcher(path).forward(request, response); // 가능
+
 		} else {
 			
+			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "로그인 실패");
-			request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(request, response);
-
+			request.getRequestDispatcher(path).forward(request, response);
 
 		}
 	}

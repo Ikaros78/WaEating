@@ -57,8 +57,22 @@
 		SELECT
 				COUNT(*)
 			FROM MEMBER_INFO A
-		   WHERE A.MEMBER_TYPE = 'user'
 		   <!-- 검색조건문 -->
+		 <where>
+		 	<if test="searchCondition =='id'">
+		 		A.MEMBER_ID = #{ searchValue }
+		 	</if>
+		 	<if test="searchCondition =='name'">
+		 		A.NAME LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 	<if test="searchCondition =='email'">
+		 		A.EMAIL LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 	<if test="searchCondition =='phone'">
+		 		A.PHONE LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 	AND A.MEMBER_TYPE = 'user'
+		 </where>
 	</select>
 	
 	<select id="selectMemberList" resultMap="generalUserResultMap">
@@ -84,6 +98,18 @@
 						 , C.PHONE
 					  FROM MEMBER_INFO C
 					 <where>
+						 <if test="searchCondition =='id'">
+					 		C.MEMBER_ID = #{ searchValue }
+					 	</if>
+					 	<if test="searchCondition =='name'">
+					 		C.NAME LIKE '%' || #{ searchValue } || '%'
+					 	</if>
+					 	<if test="searchCondition =='email'">
+					 		C.EMAIL LIKE '%' || #{ searchValue } || '%'
+					 	</if>
+					 	<if test="searchCondition =='phone'">
+					 		C.PHONE LIKE '%' || #{ searchValue } || '%'
+					 	</if>
 					 	AND C.MEMBER_TYPE = 'user'
 					 </where>
 				  ORDER BY C.MEMBER_ID ASC
@@ -93,6 +119,20 @@
 			     ]]>
 		 )A
      JOIN USER_INFO D ON(A.MEMBER_ID = D.MEMBER_ID)
-    WHERE A.RNUM >= #{ startRow }
+    WHERE A.RNUM >= #{ startRow } 
+	</select>
+	
+	<select id="selectMemberDetail" resultMap ="generalUserResultMap" parameterType="hashMap">
+		SELECT
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.PHONE
+			  , B.BIRTH
+			  , B.GENDER
+			FROM MEMBER_INFO A
+			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.MEMBER_ID = #{ memberId }
 	</select>
 </mapper>
