@@ -1,4 +1,4 @@
-package com.waeating.ceo.controller;
+package com.waeating.ceo.login.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

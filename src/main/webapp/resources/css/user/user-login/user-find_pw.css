@@ -3,7 +3,6 @@
 
 body{
     width: 1920px;
-    height: 1080px;
     background-color: #f1f1f1;
 }
 
@@ -29,7 +28,7 @@ label{
     width: 400px;
     height: 400px;
     float: left;
-    margin-top: 400px !important;
+    margin-top: 450px !important;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 5px rgb(155, 155, 155);
     text-align: center;
