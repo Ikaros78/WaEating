@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>웨잇-팅 업주 로그인</title>
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/ceo/ceo-login.css">
 </head>
 <body>
 	<div class="wrap">

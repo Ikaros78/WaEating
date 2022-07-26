@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserLoginServlet
  */
-@WebServlet("/member/user/login")
+@WebServlet("/member/login/user")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("WEB-INF/views/user/user-login/user-login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-login.jsp").forward(request, response);
 	}
 
 }

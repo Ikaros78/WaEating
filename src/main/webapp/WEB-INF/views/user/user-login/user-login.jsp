@@ -10,7 +10,7 @@
 <body>
 	<div class="wrap">
         <div class="logo">
-            <img src="${ pageContext.servletContext.contextPath }/resources/images/logo_front.png" alt="로고">
+            <img src="${ pageContext.servletContext.contextPath }/resources/images/logo_font.png" alt="로고">
         </div>
         <div class="login">
             <form action="">

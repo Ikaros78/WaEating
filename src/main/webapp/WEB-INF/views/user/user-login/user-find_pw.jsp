@@ -12,7 +12,7 @@
         <label for="find_id">비밀번호 찾기</label>
         <div id="f_phone" class="find">
             <a href="${ pageContext.servletContext.contextPath }/member/user/findpw/phone">
-                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phon2.png" alt="전화번호로 찾기">
+                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phone2.png" alt="전화번호로 찾기">
                 <p>전화번호로 찾기</p>
             </a>
         </div>
