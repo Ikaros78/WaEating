@@ -1,4 +1,4 @@
-package com.common.controller;
+package com.waeating.common.controller;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.annotation.WebServlet;
