@@ -30,19 +30,19 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice" method="post">
+          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_new" method="post">
             <table width="100%">
               <tr>
                 <td><h5>제목</h5></td>
-                <td style="width: 95%;"><input type="text" class="form-control mb-2 ms-1" placeholder="제목을 입력해주세요." name="title" id="title"></td>
+                <td style="width: 95%;"><input type="text" class="form-control mb-2 ms-1" placeholder="제목을 입력해주세요." name="noticeTitle" id="title"></td>
               </tr>
               <tr>
                 <td class="d-flex align-content-start mt-2"><h5>내용</h5></td>
-                <td><textarea class="form-control mb-2 ms-1" rows="10" name="content" id="content" placeholder="가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요."></textarea></td>
+                <td><textarea class="form-control mb-2 ms-1" rows="10" name="noticeContent" id="content" placeholder="가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요."></textarea></td>
               </tr>
             </table>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소" onclick="history.go(-1)">취소</button>
+              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>
               <button type="button" class="btn btn-primary" value="등록" data-bs-toggle="modal" data-bs-target="#modalSubmit">등록</button>
             </div>
             <!-- Modal -->
@@ -63,7 +63,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="history.go(-1)">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
             
                 </div>
