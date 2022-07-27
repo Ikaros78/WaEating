@@ -1,4 +1,4 @@
-package com.waeating.user.login.controller;
+package com.waeating.ceo.login.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UserFindIdEmailServlet
+ * Servlet implementation class CeoSingUpServlet
  */
-@WebServlet("/member/user/findpw/email")
-public class UserFindPasswordEmailServlet extends HttpServlet {
+@WebServlet("/member/ceo/signup")
+public class CeoSingUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-find_pw-email.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/WEB-INF/views/ceo/ceo-login/ceo-sign_up.jsp").forward(request, response);
 	}
 
 }
