@@ -59,11 +59,11 @@
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false}){
-			searchText += "&searchCondtion=${ requestScope.selectCriteria.searchCondition }"
+			searchText += "&searchCondition=${ requestScope.selectCriteria.searchCondition }"
 		}
 		
 		if(${ !empty requestScope.selectCriteria.searchValue? true: false}){
-			searchText += "&searchValue=${ requestScope.selectCrteira.searchValue}"
+			searchText += "&searchValue=${ requestScope.selectCriteria.searchValue}"
 		}
 		
 		if(document.getElementById("startPage")) {
