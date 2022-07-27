@@ -168,4 +168,10 @@
 		</set>
 		WHERE A.MEMBER_ID = #{ id }
 	</update>
+	
+	<delete id="deleteMember">
+		DELETE
+			FROM MEMBER_INFO A
+		WHERE A.MEMBER_ID = #{ id }
+	</delete>
 </mapper>

@@ -53,8 +53,8 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 			int userResult = memberService.updateUser(updateUserMap);
 			
 			if(userResult > 0) {
-				response.sendRedirect(request.getContextPath() + "/admin/member/detail");
 				request.getSession().removeAttribute("ifUpdate");
+				response.sendRedirect(request.getContextPath() + "/admin/member/detail");
 			}else {
 				path = "WEB-INF/views/common/failed.jsp";
 				request.setAttribute("message", "회원정보 수정 실패!");
@@ -74,8 +74,8 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 			int memberResult = memberService.updateMember(updateMemberMap);
 			
 			if(memberResult > 0) {
-				response.sendRedirect(request.getContextPath() + "/admin/member/detail");
 				request.getSession().removeAttribute("ifUpdate");
+				response.sendRedirect(request.getContextPath() + "/admin/member/detail");
 			}else {
 				path = "WEB-INF/views/common/failed.jsp";
 				request.setAttribute("message", "회원정보 수정 실패!");
@@ -100,8 +100,8 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 			int userResult = memberService.updateUser(updateUserMap);
 			
 			if(memberResult > 0 && userResult > 0) {
-				response.sendRedirect(request.getContextPath() + "/admin/member/detail");
 				request.getSession().removeAttribute("ifUpdate");
+				response.sendRedirect(request.getContextPath() + "/admin/member/detail");
 			} else {
 				path = "WEB-INF/views/common/failed.jsp";
 				request.setAttribute("message", "회원정보 수정 실패!");

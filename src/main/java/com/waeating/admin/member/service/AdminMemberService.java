@@ -105,4 +105,22 @@ public class AdminMemberService {
 		return result;
 	}
 
+	public int deleteMember(String id) {
+		
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		int result= memberMapper.deleteMember(id);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		return result;
+	}
+
 }

@@ -23,6 +23,8 @@ public interface MemberMapper {
 
 	int adminUpdateUser(Map<String, String> updateUserMap);
 
+	int deleteMember(String id);
+
 
 
 }
