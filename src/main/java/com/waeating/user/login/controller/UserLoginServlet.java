@@ -24,5 +24,10 @@ public class UserLoginServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
 		
+		System.out.println("userId : " + userId);
+		System.out.println("userPw : " + userPw);
+		
+		
+		
 	}
 }
