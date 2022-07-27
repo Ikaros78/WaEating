@@ -1,98 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
+
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.waeating.member.model.dao.MemberMapper">
+
 	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+
 		<id property="id" column="MEMBER_ID"/>
+
 		<result property="pwd" column="MEMBER_PWD"/>
+
 		<result property="email" column="EMAIL"/>
+
 		<result property="name" column="NAME"/>
+
 		<result property="memberType" column="MEMBER_TYPE"/>
+
 		<result property="phone" column="PHONE"/>
+
 		<result property="emailCheck" column="EMAIL_CHECK"/>
+
 	</resultMap>
+
 	
 	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="generalUserResultMap">
+
 		<id property="id" column="MEMBER_ID"/>
+
 		<result property="pwd" column="MEMBER_PWD"/>
+
 		<result property="email" column="EMAIL"/>
+
 		<result property="name" column="NAME"/>
+
 		<result property="memberType" column="MEMBER_TYPE"/>
+
 		<result property="phone" column="PHONE"/>
+
 		<result property="emailCheck" column="EMAIL_CHECK"/>
+
 		
 		<association property="userInfo" resultMap="userResultMap"/>
+
 	</resultMap>
+
 	
 	<resultMap type="com.waeating.member.model.dto.UserDTO" id="userResultMap">
+
 		<id property="userId" column="MEMBER_ID"/>
+
 		<result property="birth" column="BIRTH"/>
+
 		<result property="gender" column="GENDER"/>
+
 		
 	</resultMap>
+
 	
 	<select id="selectEncryptedPwd" resultType="java.lang.String">
+
 		SELECT
+
 				A.MEMBER_PWD
+
 		  FROM MEMBER_INFO A
+
 		 WHERE A.MEMBER_TYPE = #{ memberType }
+
 		   AND A.MEMBER_ID = #{ id }
+
 	</select>
+
 	
 	<select id="selectLoginAdmin" resultMap="memberResultMap">
+
 		SELECT
+
 				A.MEMBER_ID
+
 			  , A.MEMBER_PWD
+
 			  , A.EMAIL
+
 			  , A.NAME
+
 			  , A.MEMBER_TYPE
+
 			  , A.PHONE
+
 			  , A.EMAIL_CHECK	
+
 		  FROM MEMBER_INFO A
+
 		 WHERE A.MEMBER_ID = #{ id }
+
 	</select>
+
 	
 	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+
 		SELECT
+
 				COUNT(*)
+
 			FROM MEMBER_INFO A
+
 		   WHERE A.MEMBER_TYPE = 'user'
+
 		   <!-- 검색조건문 -->
+
 	</select>
+
 	
 	<select id="selectMemberList" resultMap="generalUserResultMap">
+
 	   SELECT 
+
 	   			A.RNUM
+
 			  , A.MEMBER_ID
+
 			  , A.MEMBER_PWD
+
 		      , A.EMAIL
+
 			  , A.NAME
+
 			  , A.PHONE
+
 			  , D.BIRTH
+
 			  , D.GENDER	   
+
 	   FROM (SELECT ROWNUM RNUM
+
 				  , B.MEMBER_ID
+
 			      , B.MEMBER_PWD
+
 				  , B.EMAIL
+
 				  , B.NAME
+
 				  , B.PHONE
+
 			   FROM(SELECT C.MEMBER_ID
+
 						 , C.MEMBER_PWD
+
 						 , C.EMAIL
+
 						 , C.NAME
+
 						 , C.PHONE
+
 					  FROM MEMBER_INFO C
+
 					 <where>
+
 					 	AND C.MEMBER_TYPE = 'user'
+
 					 </where>
+
 				  ORDER BY C.MEMBER_ID ASC
+
 				  ) B
+
 				 <![CDATA[
+
 			     WHERE ROWNUM <= #{ endRow }
+
 			     ]]>
+
 		 )A
+
      JOIN USER_INFO D ON(A.MEMBER_ID = D.MEMBER_ID)
+
     WHERE A.RNUM >= #{ startRow }
+
 	</select>
+
 </mapper>
