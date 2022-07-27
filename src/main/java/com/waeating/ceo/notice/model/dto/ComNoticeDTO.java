@@ -9,6 +9,7 @@ public class ComNoticeDTO {
 	private String noticeContent;
 	private java.sql.Date regDate;
 	private int comNo;
+	private ComNoticeAttachDTO comNoticeAttach;
 	
 	public ComNoticeDTO() {}
 

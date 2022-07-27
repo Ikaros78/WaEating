@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,8 +37,6 @@
               <button type="button" class="btn btn-light"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_new" style="color:#6c757d; text-decoration: none;">공지 등록하기</a></button>
             </div>
           </div>
-              
-            
             <div class="thead">
               <div class="tr">
                 <div class="th col-1 text-center">번호</div>
@@ -46,32 +45,74 @@
               </div>
             </div>
             <div class="tbody">
-              <div class="tr">
-                <div class="td col-1 text-center">2</div>
-                <div class="td fs-5"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify">방문고객 이벤트</a></div>
-                <div class="td col-2 text-center">2022.07.01</div>
-              </div>
-              <div class="tr">
-                <div class="td col-1 text-center">1</div>
-                <div class="td fs-5"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify">공지사항</a></div>
-                <div class="td col-2 text-center">2022.06.23</div>
-              </div>
+              <c:forEach var="notice" items="${ requestScope.selectAllNotice }" varStatus="status">
+	              <div class="tr">
+	                <div class="td col-1 text-center">${ status.count }</div>
+	                <div class="td fs-5"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify"><c:out value="${ notice.noticeTitle }"/></a></div>
+	                <div class="td col-2 text-center"><c:out value="${ notice.regDate }"/></div>
+	              </div>
+              </c:forEach>
             </div>
+            
+            <jsp:include page="../common/paging.jsp"/>
            
-            <ul class="pagination justify-content-center">
+            <!-- <ul class="pagination justify-content-center">
               <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;"><</a></li>
               <li class="page-item active"><a class="page-link" href="#" style="border:#D94925 1px solid; background-color: #D94925; color: #fff;">1</a></li>
-              <!-- <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">2</a></li>
-              <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">3</a></li> -->
+              <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">2</a></li>
+              <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">3</a></li>
               <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">></a></li>
-            </ul>     
+            </ul> -->     
+            
+            <!-- 검색 폼 -->
+			<div class="search-area" align="center">
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/board/list" method="get" style="display:inline-block">		
+				    <input type="hidden" name="currentPage" value="1">
+				    <select id="searchCondition" name="searchCondition">
+						<option value="title" ${ requestScope.selectCriteria.searchCondition eq "title"? "selected": "" }>제목</option>
+					</select>
+			        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+	
+					<button type="submit">검색하기</button>
+				</form>
+				<%-- <c:if test="${ !empty sessionScope.loginMember }">
+					<button id="writeBoard">작성하기</button>
+				</c:if> --%>
+			</div>
              
         </div>
        </aside>
     </section>
    
     <jsp:include page="../common/ceo_footer.jsp"/>
-
+	
   </div>
+  
+  <script>
+		
+		if(document.getElementById("td")) {
+			
+			const $tds = document.getElementById("td");
+			for(let i = 0; i < $tds.length; i++) {
+				
+				$tds[i].onmouseenter = function() {
+					this.parentNode.style.backgroundColor = "orangered";
+					this.parentNode.style.cursor = "pointer";
+				}
+				
+				$tds[i].onmouseout = function() {
+					this.parentNode.style.backgroundColor = "black";
+				}
+				
+				$tds[i].onclick = function() {
+					/* 게시물 번호까지 알아왔으니 이제 상세보기는 할 수 있습니다. */
+					alert(this.parentNode.children[0].innerText);
+				}
+				
+			}
+			
+		}
+		
+	</script>
 </body>
 </html>
