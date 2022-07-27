@@ -1,4 +1,4 @@
-package com.waeating.ceo.controller;
+package com.waeating.ceo.login.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CeoLoginServlet
  */
-@WebServlet("/member/ceo/login")
+@WebServlet("/member/login/ceo")
 public class CeoLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("WEB-INF/views/ceo/ceo-login/ceo-login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/ceo/ceo-login/ceo-login.jsp").forward(request, response);
 	}
 
 }

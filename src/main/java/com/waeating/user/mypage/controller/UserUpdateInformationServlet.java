@@ -1,4 +1,4 @@
-package com.waeating.admin.notice.controller;
+package com.waeating.user.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,19 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NoticeSelectListServlet
+ * Servlet implementation class UpdateUserInformationServlet
  */
-@WebServlet("/admin/notice/list")
-public class NoticeSelectListServlet extends HttpServlet {
+@WebServlet("/update/information/user")
+public class UserUpdateInformationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path = "";
-		path= "/WEB-INF/views/admin/notice/noticeList.jsp";
-		
-		request.getRequestDispatcher(path).forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/user/user-mypage/user-update.jsp").forward(request, response);
 	}
-	
 
 }
