@@ -9,10 +9,10 @@
 </head>
 <body>
 	<div class="wrap">
-        <label for="find_id"></label>
+        <label for="title">아이디 찾기</label>
         <div id="f_phone" class="find">
             <a href="${ pageContext.servletContext.contextPath }/member/user/findid/phone">
-                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phon2.png" alt="전화번호로 찾기">
+                <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/phone2.png" alt="전화번호로 찾기">
                 <p>전화번호로 찾기</p>
             </a>
         </div>
@@ -22,7 +22,7 @@
                 <p>이메일로 찾기</p>
             </a>
         </div>
-        <a href="${ pageContext.servletContext.contextPath }/member/user/login"><button type="button" id="backBtn">뒤로가기</button></a>
+        <a href="${ pageContext.servletContext.contextPath }/member/login/user"><button type="button" id="backBtn">뒤로가기</button></a>
     </div>
 </body>
 </html>

@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+*{
+  font-family: 'Noto Sans KR', sans-serif;
+}
+#wrap{
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  position: absolute;
+  top: 100px;
+}
+header{
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  
+}
+
+.select{
+  background: #D94925 !important;
+  color: #fff !important;
+}
+.select :hover{
+  background: #D94925 !important;
+  color: #fff !important;
+}
+
+nav .flex-column{
+  position: absolute;
+  display: none;
+  text-align: center;
+  z-index: 1;
+
+}
+nav .flex-column a{
+  background-color: #fff;
+  
+}
+.dropmenu:hover .flex-column{
+  display: block;
+  /*margin-top: 0;*/
+}
+nav .flex-column :hover{
+  border: 0;
+  background: #D94925;
+  color: #fff !important;
+}
+footer{
+  background: #D94925;
+  position: relative;
+  bottom: 0;
+ 
+}
+
+
+/*user_matzip_detailstyle*/
+#img {
+  display: block;
+  margin-left: 65px;
+  margin-right: auto;
+  margin-top: 10px;
+  /* width:92%; */
+}
+
+img {
+  border-radius: 8px;
+}
+
+table{
+  margin-left: 50px;
+}
+
+td{
+  width: 500px;
+  height: 40px;
+}
+
+th{
+  font-weight: lighter;
+  color: gray;
+  width: 200px;
+  height: 40px;
+}
+
+.review{
+  border-bottom: 1px solid #6c757d;
+}
+.review_all {
+  margin: 50px;
+  
+  width: auto;
+  height: auto;
+}
+
+
+.review .user {
+ 
+  width: 150px;
+  height: auto;
+  text-align: center;
+  float: left;
+  margin-left: 30px;
+}
+
+.review .user img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  /* width: 50%; */
+  display: block;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.review .content{
+  
+  width: 1200px;
+
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+.review .content .content_header{
+height: 50px;
+}
+
+.review .content .content_header .date{
+  color: gray;
+  float: left;
+}
+
+.review .content .content_header .point{
+  float: right;
+  margin-right: 50px;
+  font-size: 30px;
+  color: #D94925;
+}
+
+.review .content .content_body img{
+  height: 200px; 
+  width: 300px;
+  margin-bottom: 30px;
+  margin-right: 10px;
+}
+
+.more {
+  text-align: center;
+  border: 1px solid #D94925;
+}
+
+/*user_reservation*/
+
+
+/* #datepicker{
+  width: 1274px;
+  margin-left: 32px;
+} */
+
+/* user_reservation_check*/
+.reservation{
+  border: 1px solid #D94925;
+  border-radius: 8px;
+  margin: 50px;
+  padding: 20px;
+}
+
+/*user_review*/
+.review1{
+  border-bottom: 1px solid #6c757d;
+}
+
+.review_write{
+  border: 1px solid #D94925;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+ 
+.star-rating input {
+  display: none;
+}
+ 
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+ 
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+ 
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
+}
+
+/*user_review_delete&update*/
+.review_write .container .content_header{
+  height: 50px;
+}
+
+.review_write .container .content_header .date{
+  color: gray;
+  float: left;
+}
+
+.review_write .container .content_header .point{
+  float: right;
+  margin-right: 50px;
+  font-size: 30px;
+  color: #D94925;
+}
+.review_write .container .content_body{
+  padding: 15px;
+  border: 1px solid #444342;
+  border-radius: 6px;
+}
+
+.review_write .container .content_body img{
+  height: 200px; 
+  width: 300px;
+  margin-bottom: 30px;
+  margin-right: 10px;
+}
+
+
+
+
+
+
