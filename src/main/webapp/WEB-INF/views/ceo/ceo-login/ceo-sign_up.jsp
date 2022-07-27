@@ -3,18 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>웨잇-팅 회원가입</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/user-login/user-sign_up.css">
-
+    <meta charset="UTF-8">
+    <title>웨잇-팅 업주 회원가입</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/ceo/ceo-login/ceo-sign_up.css">
+    <!-- Bootstrap CSS -->
 </head>
 <body>
-	<div class="container">
+    <div class="container">
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
-            <h4 class="mb-3">회원가입</h4>
+            <h4 class="mb-3">업주 회원가입</h4>
             <form class="validation-form" novalidate>
               <div class="row">
                   <div class="form-floating col-md-6 mb-3">
@@ -37,6 +37,7 @@
                     이름을 입력해주세요.
                   </div>
               </div>
+
               <div class="mb-3">
                 <div class="form-floating">
                     <input type="password" class="form-control" id="pw" placeholder="비밀번호 입력" onchange="check_pw();" required>
@@ -53,37 +54,53 @@
               
                 <div class="form-floating mb-3">
                   <input type="tel" class="form-control" id="phone" placeholder="전화번호 입력" required>
-                  <label for="phone">전화번호</p></label>
+                  <label for="phone">업주 전화번호</p></label>
                   <div class="invalid-feedback">
-                    전화번호를 입력해주세요.
+                    업주 전화번호를 입력해주세요.
                   </div>
                 </div>
 
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
-                <label for="email">이메일</label>
-                <div class="invalid-feedback">
-                  이메일을 입력해주세요.
-                </div>
-              </div>
-    
-              <div class="col-md-4 mb-3">
-                  <label for="birth">생년월일</label>
-                  <input type="date" class="form-control" id="birth" placeholder="" required>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                  <label for="email">이메일</label>
                   <div class="invalid-feedback">
-                      생년월일을 입력해주세요.
+                    이메일을 입력해주세요.
+                  </div>
+                </div>
+                
+                <hr class="mb-4">
+                <h5 class="mb-3">업체 정보 추가 입력</h5>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="store_name" placeholder="업체 이름 입력" required>
+                  <label for="store_name">업체 이름</label>
+                  <div class="invalid-feedback">
+                    업체 이름을 입력해주세요.
                   </div>
               </div>
-              <div class="col-md-4 mb-3">
-                  <label for="gender">성별</label>
-              <select class="custom-select d-block w-100" id="gender">
-              <option value="">성별을 선택해주세요</option>
-                  <option>남성</option>
-                  <option>여성</option>
-              </select>
-              <div class="invalid-feedback">
-                  성별을 선택해주세요.
+
+                <div class="form-floating mb-3">
+                  <input type="tel" class="form-control" id="store_phone" placeholder="업체 전화번호 입력" required>
+                  <label for="store_phone">업체 전화번호</p></label>
+                  <div class="invalid-feedback">
+                    업체 전화번호를 입력해주세요.
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="strore_address" placeholder="업체 주소 입력" required>
+                  <label for="strore_address">업체 주소</label>
+                  <div class="invalid-feedback">
+                    업체 주소를 입력해주세요.
+                  </div>
               </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="business">사업자 등록증</label>
+                <input type="file" class="form-control" id="business" accept=".jpg, .jpeg, .png, .pdf" required multiple>
+                <div class="invalid-feedback">
+                  사업자 등록증을 등록해주세요
+                </div>
             </div>
                   
             <hr class="mb-4">
@@ -93,11 +110,11 @@
             </div>
             <div class="col-md-12 mb-4"></div>
             <button class="btn btn-primary btn-lg btn-block" type="submit" id="completion">가입 완료</button>
-            <a href="${ pageContext.servletContext.contextPath }/member/login/user"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
+            <a href="${ pageContext.servletContext.contextPath }/member/login/ceo"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
             </form>
          </div>
         </div>
-        <footer class="my-3 text-center text-small">
+        <footer class="my-4 text-center text-small">
         <p class="mb-1" id="copyright">&copy; 2022 Waeating</p>
         </footer>
     </div>

@@ -26,7 +26,7 @@
         사업자 등록번호 : 111-11-11111 <br>
         고객센터 : 02-1111-1111 <br>
         <br>
-        copyright 2022 Wai-eating Co., Ltd. All rights reserved
+        copyright 2022 Waeating Co., Ltd. All rights reserved
       </div>
     </footer> 
 
