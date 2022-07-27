@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.admin.member.service.MemberService;
+import com.waeating.admin.member.service.AdminMemberService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.member.model.dto.MemberDTO;
@@ -20,12 +20,16 @@ import com.waeating.member.model.dto.MemberDTO;
  * Servlet implementation class AccountSelectListServlet
  */
 @WebServlet("/admin/member/list")
-public class MemberSelectListServlet extends HttpServlet {
+public class AdminMemberSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MemberSelectListServlet() {}
+    public AdminMemberSelectListServlet() {}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("ifUpdate") != null){
+			request.getSession().removeAttribute("ifUpdate");
+		}
 		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
@@ -45,7 +49,7 @@ public class MemberSelectListServlet extends HttpServlet {
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		
-		MemberService memberService = new MemberService();
+		AdminMemberService memberService = new AdminMemberService();
 		int totalCount = memberService.selectTotalCount(searchMap);
 		
 		int limit = 10;
@@ -69,7 +73,7 @@ public class MemberSelectListServlet extends HttpServlet {
 			request.setAttribute("link", "list");
 		}else {
 			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "게시물 목록 조회 실패!");
+			request.setAttribute("message", "회원정보 목록 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
