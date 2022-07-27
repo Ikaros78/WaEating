@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,20 +55,24 @@
                 
                 
                 <br>
-                <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard1 시작-->
-                  
-                   <div class="card col-3" >
+                <div class="container row mt-3  mb-3" style="margin-left:80px;">
+                <c:forEach var="com" items="${ requestScope.selectCom }">
+                  <%-- <c:forEach begin="1" end="3"> --%> 
+                   <div class="card col-3 ms-3 me-3 mb-5 d-flex justify-content-center"  >
                    
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
                     <div class="card-body">
-                      <h4 class="card-title">${ requestScope.selectCom.comName }</h4>
-                      <p class="card-text">영업시간) ${ requestScope.selectCom.workTime } <br> 
-                       휴무일) ${ requestScope.selectCom.holiday }</p>
+                      <h4 class="card-title">${ com.comName }</h4>
+                      <p class="card-text">영업시간) ${ com.workTime } <br> 
+                       휴무일) ${ com.holiday }</p>
                      <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
                       <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
                     </div>
                   </div>
-                  <br>
+                  </c:forEach>
+               <%--  </c:forEach> --%>
+                </div><!--idcard1 끝-->
+                  <%-- <br>
                   
                    <div class="card col-3 ms-5 me-5" >
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
@@ -93,7 +98,6 @@
       
                   
       
-                </div><!--idcard1 끝-->
                 
                 <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard2 시작-->
                   
@@ -171,7 +175,7 @@
       
                   
       
-                </div><!--idcard3 끝-->
+                </div><!--idcard3 끝--> --%>
              
       			
             	

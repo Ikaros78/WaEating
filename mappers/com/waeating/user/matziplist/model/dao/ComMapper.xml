@@ -17,8 +17,17 @@
   	<result property="holiday" column="HOLIDAY"/>
   </resultMap>
   
-  <select id="selectComByCategory" resultMap="comInfoResultMap">
-  	<bind name="categoryName" value="_parameter.get('categoryName')"/>
+  <select id="selectAllCom" resultMap="comInfoResultMap">
+  SELECT
+  		 A.COM_NAME
+  	   , A.WORK_TIME
+  	   , A.HOLIDAY
+  	FROM COM_INFO A
+  	   	 
+  
+  </select>
+  <select id="selectComByCategory" resultMap="comInfoResultMap" parameterType="java.lang.String">
+ 
   	SELECT
   	       A.COM_NAME
   	     , A.WORK_TIME

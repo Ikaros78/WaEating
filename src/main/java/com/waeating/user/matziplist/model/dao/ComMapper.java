@@ -7,10 +7,12 @@ import com.waeating.user.matziplist.model.dto.ComInfoDTO;
 
 public interface ComMapper {
 
-	//int selectTotalCount(Map<String, String> searchMap);
+	
 
 
 
-	ComInfoDTO selectComByCategory(String categoryName);
+	List<ComInfoDTO> selectComByCategory(String categoryName);
+
+	List<ComInfoDTO> selectAllCom();
 
 }

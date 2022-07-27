@@ -14,35 +14,28 @@ public class ComService {
 	
 	private ComMapper comMapper;
 
-//	/**
-//	 * <pre>
-//	 *  페이징 처리를 위한 전체 게시물 조회용 메소드
-//	 * </pre>
-//	 * @param searchMap
-//	 * @return
-//	 */
-//	public int selectTotalCount(Map<String, String> searchMap) {
-//		
-//		SqlSession sqlSession = getSqlSession();
-//		comMapper = sqlSession.getMapper(ComMapper.class);
-//		
-//		int totalCount = comMapper.selectTotalCount(searchMap);
-//		
-//		sqlSession.close();
-//
-//		return totalCount;
-//	}
 
-	public ComInfoDTO selectComByCategory(String categoryName) {
+
+	public List<ComInfoDTO> selectComByCategory(String categoryName) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		comMapper = sqlSession.getMapper(ComMapper.class);
-		ComInfoDTO com = comMapper.selectComByCategory(categoryName);
+		List<ComInfoDTO> com = comMapper.selectComByCategory(categoryName);
 		
 		sqlSession.close();
 		
 		return com;
 	}
+
+//	public List<ComInfoDTO> selectAllCom() {
+//		
+//		SqlSession sqlSession = getSqlSession();
+//		
+//		comMapper = sqlSession.getMapper(ComMapper.class);
+//		List<ComInfoDTO> comInfo = comMapper.selectAllCom();
+//		
+//		return comInfo;
+//	}
 
 }

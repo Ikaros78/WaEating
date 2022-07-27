@@ -55,27 +55,9 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		
 		
 		
-		// 페이징 처리 하던거 일단 나중에 
-//		String currentPage = request.getParameter("currentPage");
-//		int pageNo = 1;
-//		
-//		if(currentPage != null && !"".equals(currentPage)) {
-//			pageNo = Integer.parseInt(currentPage);
-//		}
-//		
-//		if(pageNo <= 0) {
-//			pageNo = 1;
-//		}
-//
-//		Map<String, String> searchMap = new HashMap<>();
-//		
-//		int totalCount = comService.selectTotalCount(searchMap);
-		
-//		SelectCriteria selectCriteria = null;
-		
 		ComService comService = new ComService();	
 		
-		ComInfoDTO selectCom = comService.selectComByCategory(categoryName);
+		List<ComInfoDTO> selectCom = comService.selectComByCategory(categoryName);
 		
 		
 		
@@ -83,7 +65,7 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		String path = "";
 		if(selectCom != null) {
 			
-			path = "/WEB-INF/views/user/usermatzip/user_matziplist_category.jsp";
+			path = "/WEB-INF/views/user/user_matzip/user_matziplist_category.jsp";
 			request.setAttribute("selectCom", selectCom);
 			
 		}else {
