@@ -29,8 +29,6 @@
                 <p>관리자</p>
             </a>
         </div>
-        
-        <a href="${ pageContext.servletContext.contextPath }/ceo/main">업체 메인</a>
     </div>
 
 </body>

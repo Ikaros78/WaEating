@@ -30,7 +30,7 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice" method="post">
+          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_new" method="post">
             <table width="100%">
               <tr>
                 <td><h5>제목</h5></td>

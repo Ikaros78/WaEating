@@ -38,21 +38,21 @@ public class CeoRestNoticeDetailNewServlet extends HttpServlet {
 		
 		System.out.println("insert : " + comNotice);
 		 
-//		ComNoticeService comNoticeService = new ComNoticeService();
-//		int result = comNoticeService.insertComNotice(comNotice);
-//		
-//		String path = "";
-//		
-//		if(result > 0) {
-//			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
-//		
-//		} else {
-//			path = "/WEB-INF/views/common/errorPage.jsp";
-//			request.setAttribute("message", "공지 등록에 실패하셨습니다.");
-//			
-//		}
-//		
-//		request.getRequestDispatcher(path).forward(request, response);
+		ComNoticeService comNoticeService = new ComNoticeService();
+		int result = comNoticeService.insertComNotice(comNotice);
+		
+		String path = "";
+		
+		if(result > 0) {
+			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
+		
+		} else {
+			path = "/WEB-INF/views/common/errorPage.jsp";
+			request.setAttribute("message", "공지 등록에 실패하셨습니다.");
+			
+		}
+		
+		request.getRequestDispatcher(path).forward(request, response);
 		
 		
 	}
