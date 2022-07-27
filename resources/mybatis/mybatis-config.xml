@@ -18,5 +18,6 @@
 	
 	<mappers>
 		<package name="com.waeating.member.model.dao"/>
+		<package name="com.waeating.user.matziplist.dao"/>
 	</mappers>
 </configuration>

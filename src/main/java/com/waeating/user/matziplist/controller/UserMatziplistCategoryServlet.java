@@ -23,12 +23,14 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		HttpSession session = request.getSession();
-		request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matziplist_category.jsp").forward(request, response);
+		//request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matziplist_category.jsp").forward(request, response);
 		
 		String selList = request.getParameter("sellist");
 		System.out.println("selList : " + selList);
 		String categoryName ="";
-		
+		if(selList == null) {
+			selList = "korea";
+		}
 		
 		switch(selList) {
 		case "korea" : categoryName = "한식";
@@ -82,7 +84,7 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		if(selectCom != null) {
 			
 			path = "/WEB-INF/views/user/usermatzip/user_matziplist_category.jsp";
-			request.setAttribute("comInfoList", selectCom);
+			request.setAttribute("selectCom", selectCom);
 			
 		}else {
 			
