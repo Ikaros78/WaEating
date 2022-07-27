@@ -10,13 +10,13 @@
 <body>
 	<div class="wrap">
         <div class="logo">
-            <img src="${ pageContext.servletContext.contextPath }/resources/images/logo_front.png" alt="로고">
+            <img src="${ pageContext.servletContext.contextPath }/resources/images/logo_font.png" alt="로고">
         </div>
         <div class="login">
-            <form action="">
+            <form action="${ pageContext.servletContext.contextPath }/user/main" method="post">
                 <div class="login"></div>
-                <input type="text" class="login_box" id="login_id" placeholder="아이디 입력"> 
-                <input type="password" class="login_box" id="login_pw" placeholder="비밀번호 입력">
+                <input type="text" class="login_box" id="login_id" placeholder="아이디 입력" name="userId"> 
+                <input type="password" class="login_box" id="login_pw" placeholder="비밀번호 입력" name="userPw">
     
                 <button type="submit" id="login_btn">로그인</button>
             </form>
