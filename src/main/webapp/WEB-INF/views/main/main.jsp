@@ -28,6 +28,7 @@
                 <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/settings.png" alt="관리자">
                 <p>관리자</p>
             </a>
+            
         </div>
     </div>
 
