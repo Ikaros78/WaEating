@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.waeating.member.model.dto.MemberDTO;
+
 /**
  * Servlet implementation class UserLoginServlet
  */
@@ -26,6 +28,10 @@ public class UserLoginServlet extends HttpServlet {
 		
 		System.out.println("userId : " + userId);
 		System.out.println("userPw : " + userPw);
+		
+		MemberDTO requestMember = new MemberDTO();
+		requestMember.setId(userId);
+		requestMember.setPwd(userPw);
 		
 		
 		
