@@ -11,7 +11,7 @@ import com.waeating.common.paging.SelectCriteria;
 import com.waeating.member.model.dao.MemberMapper;
 import com.waeating.member.model.dto.MemberDTO;
 
-public class MemberService {
+public class AdminMemberService {
 	
 	private MemberMapper memberMapper;
 
@@ -51,6 +51,18 @@ public class MemberService {
 		sqlSession.close();
 		
 		return memberList;
+	}
+
+	public MemberDTO selectMemberDetail(Map<String, String> searchMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO member = memberMapper.selectMemberDetail(searchMap);
+		
+		sqlSession.close();
+		
+		return member;
 	}
 
 }
