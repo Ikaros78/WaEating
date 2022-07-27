@@ -134,4 +134,18 @@
 			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
 		   WHERE A.MEMBER_ID = #{ memberId }
 	</select>
+	
+	<select id="selectMemberLogin" resultType="generalUserResultMap" >
+		SELECT
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.PHONE
+			  , B.BIRTH
+			  , B.GENDER
+			FROM MEMBER_INFO A
+			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.MEMBER_ID = #{ memberId }
+	</select>
 </mapper>

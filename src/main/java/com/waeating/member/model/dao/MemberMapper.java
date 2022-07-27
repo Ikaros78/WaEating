@@ -19,5 +19,7 @@ public interface MemberMapper {
 
 	MemberDTO selectMemberDetail(Map<String, String> searchMap);
 
+	MemberDTO selectMemberLogin(MemberDTO requestMember);
+
 
 }

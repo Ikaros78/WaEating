@@ -1,13 +1,16 @@
 package com.waeating.user.login.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.user.login.model.service.UserLoginService;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -33,7 +36,22 @@ public class UserLoginServlet extends HttpServlet {
 		requestMember.setId(userId);
 		requestMember.setPwd(userPw);
 		
+		UserLoginService userService = new UserLoginService();
+	
+		MemberDTO loginMember = userService.loginCheck(requestMember);
+		System.out.println(loginMember);
 		
 		
+		if(loginMember != null) {
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember", loginMember);
+			
+			response.sendRedirect("/WEB_INF/views/user/user_main.jsp");
+		} else {
+			
+			request.setAttribute("message", "로그인에 실패하셨습니다. 다시 입력해주세요.");
+			request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(request, response);
+		}
 	}
 }
