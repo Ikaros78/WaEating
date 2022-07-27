@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 메인</title>
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/admin/style.css">
 </head>
 <body>
+	<div id="wrap">
 	<jsp:include page ="./common/menubar.jsp"/>
+	</div>
 </body>
 </html>
