@@ -30,7 +30,6 @@
             </a>
             
         </div>
-        <a href="${ pageContext.servletContext.contextPath }/ceo/main">test</a>
     </div>
 
 </body>

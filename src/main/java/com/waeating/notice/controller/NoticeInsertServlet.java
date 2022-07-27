@@ -29,12 +29,10 @@ public class NoticeInsertServlet extends HttpServlet {
 	
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
-        int writerMemberNo =((MemberDTO) request.getSession().getAttribute("loginMember")).getNo();	
         
         NoticeDTO newNotice = new NoticeDTO();
         newNotice.setTitle(title);
         newNotice.setBody(body);
-        newNotice.setWriterMemberNo(writerMemberNo);
         
         NoticeService noticeService = new NoticeService();
         int result = noticeService.insertNotice(newNotice);
