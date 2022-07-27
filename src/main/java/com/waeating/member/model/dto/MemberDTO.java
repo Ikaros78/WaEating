@@ -110,6 +110,11 @@ public class MemberDTO {
 
 	}
 
+	public int getNo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 	
 	
