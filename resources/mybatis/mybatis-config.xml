@@ -16,9 +16,11 @@
 		</environment>
 	</environments>
 	
-	<mappers>
 
+	<mappers>
 		<package name="com.waeating.member.model.dao"/>
-		
+		<package name="com.waeating.ceo.notice.model.dao"/>
+		<package name="com.waeating.user.matziplist.dao"/>
+
 	</mappers>
 </configuration>

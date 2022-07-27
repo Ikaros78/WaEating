@@ -17,6 +17,7 @@
                 <p>일반회원</p>
             </a>
         </div>
+
         <div id="ceo" class="main">
             <a href="${ pageContext.servletContext.contextPath }/member/login/ceo">
                 <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/shop.png" alt="업주">
@@ -30,6 +31,8 @@
             </a>
             
         </div>
+        
+ 
     </div>
 
 </body>
