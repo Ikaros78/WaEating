@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.waeating.member.model.dto.MemberDTO;
-import com.waeating.user.login.model.service.UserLoginService;
+import com.waeating.user.login.model.service.UserService;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -24,6 +24,7 @@ public class UserLoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-login.jsp").forward(request, response);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId = request.getParameter("userId");
@@ -36,7 +37,7 @@ public class UserLoginServlet extends HttpServlet {
 		requestMember.setId(userId);
 		requestMember.setPwd(userPw);
 		
-		UserLoginService userService = new UserLoginService();
+		UserService userService = new UserService();
 	
 		MemberDTO loginMember = userService.loginCheck(requestMember);
 		System.out.println(loginMember);
