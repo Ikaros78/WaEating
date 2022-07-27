@@ -65,4 +65,44 @@ public class AdminMemberService {
 		return member;
 	}
 
+	public int updateMember(Map<String, String> updateMemberMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		int result = memberMapper.adminUpdateMember(updateMemberMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int updateUser(Map<String, String> updateUserMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		int result = memberMapper.adminUpdateUser(updateUserMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+		
+		return result;
+	}
+
 }

@@ -134,4 +134,38 @@
 			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
 		   WHERE A.MEMBER_ID = #{ memberId }
 	</select>
+	
+	<update id="adminUpdateMember" parameterType="hashmap">
+		UPDATE
+			MEMBER_INFO A
+		<set>
+			<if test="name != null and name != ''">
+				A.NAME = #{ name },
+			</if>
+			<if test="pwd != null and pwd != ''">
+				A.MEMBER_PWD = #{ pwd },
+			</if>
+			<if test="email != null and email != ''">
+				A.EMAIL = #{ email },
+			</if>
+			<if test="phone != null and phone != ''">
+				A.PHONE = #{ phone },
+			</if>
+		</set>
+		WHERE A.MEMBER_ID = #{ id }
+	</update>
+	
+	<update id="adminUpdateUser" parameterType="hashMap">
+		UPDATE
+			USER_INFO A
+		<set>
+			<if test="birth != null and birth != ''">
+				A.BIRTH = #{ birth },
+			</if>
+			<if test="gender != null and gendeer != ''">
+				A.GENDER = #{ gender },
+			</if>
+		</set>
+		WHERE A.MEMBER_ID = #{ id }
+	</update>
 </mapper>

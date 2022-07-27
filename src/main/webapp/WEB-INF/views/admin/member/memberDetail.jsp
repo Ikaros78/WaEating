@@ -42,6 +42,7 @@
                 </table>
             </div>
             <div class="col-md-9">
+            	<form action="${ pageContext.servletContext.contextPath }/admin/member/update" method="post">
                 <table class="table table-bordered">
                 	<thead>
 	                	<tr>
@@ -53,62 +54,64 @@
 	                	</tr>
                 	</thead>
                     <tbody>
-                    	<form>
                         <tr>
                             <td>이름</td>
                             <td><c:out value="${ member.name }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="text" placeholder="이름" name="name"></td>
+                            	<td><input type="text" placeholder="이름" name="updateName"></td>
                             </c:if>
                         </tr>
                         <tr>
                             <td>아이디</td>
                             <td><c:out value="${ member.id }"/></td>
-                            <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="text" placeholder="아이디" name="id"></td>
-                            </c:if>
                         </tr>
                         <tr>
                             <td>비밀번호</td>
                             <td><c:out value="${ member.pwd }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="password" placeholder="이름" name="pwd"></td>
+                            	<td><input type="password" placeholder="비밀번호" name="updatePwd"></td>
                             </c:if>
                         </tr>
                         <tr>
                             <td>이메일</td>
                             <td><c:out value="${ member.email }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="text" placeholder="이메일" name="email"></td>
+                            	<td><input type="text" placeholder="이메일" name="updateEmail"></td>
                             </c:if>
                         </tr>
                         <tr>
                             <td>생년월일</td>
                             <td><c:out value="${ member.userInfo.birth }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="text" placeholder="생일" name="생년월일"></td>
+                            	<td><input type="text" placeholder="생일" name="updateBirth"></td>
                             </c:if>
                         </tr>
                         <tr>
                             <td>성별</td>
                             <td><c:out value="${ member.userInfo.gender }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><select name="gender">
-                            		<option>남</option>
-                            		<option>여</option>
-                            	</select></td>
+                            	<td><select name="updateGender">
+	                            		<option>없음</option>
+	                            		<option>남</option>
+	                            		<option>여</option>
+                            		</select></td>
                             </c:if>
                         </tr>
                         <tr>
                             <td>휴대폰번호</td>
                             <td><c:out value="${ member.phone }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="text" placeholder="휴대폰번호" name="phone"></td>
+                            	<td><input type="text" placeholder="휴대폰번호" name="updatePhone"></td>
                             </c:if>
                         </tr>
-                        </form>
                     </tbody>
                 </table>
+                <c:if test="${ !empty sessionScope.ifUpdate }">
+                <div align="right">
+					<button type="submit" class="btn btn-primary" id="update">수정하기</button>
+				</div>
+                </c:if>
+				</form>
             </div>
         </div>
 	
@@ -126,7 +129,6 @@
         <div id="container">
 
             <div class="col-md-9 col-md-offset-2" align="right">
-                <button type="button" class="btn btn-primary" id="update">수정하기</button>
                 <button type="button" class="btn btn-danger" id="delete">삭제하기</button>
                 <button type="button" class="btn btn-secondary" id="cancle">취소</button>
                 <button type="button" class="btn btn-default" id="backToList">목록으로</button>
