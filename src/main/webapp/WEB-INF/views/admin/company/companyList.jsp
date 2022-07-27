@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>업체관리</th>
+                            <th>업체 관리</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,32 +46,32 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>Numbering</th>
-                        <th>PK</th>
-                        <th>여기에 뭐넣지</th>
+                        <th width="60px">업체번호</th>
+                        <th width="100px">업체명</th>
+                        <th width="100px">아이디</th>
+                        <th width="60px">카테고리</th>
+                        <th width="300px">주소</th>
+                        <th width="80px">승인여부</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
+                    <c:forEach var="com" items="${ requestScope.companyList }">
+                    <tr class="rowClick">
+                        <td class="details"><c:out value="${ com.comNo }"/></td>
+                        <td class="details"><c:out value="${ com.comName }"/></td>
+                        <td class="details"><c:out value="${ com.memberId }"/></td>
+                        <td class="details"><c:out value="${ com.category }"/></td>
+                        <td class="details"><c:out value="${ com.comAddress }"/></td>
+                        <td class="details"><c:out value="${ com.recordList[0].status }"/></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                    </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
 
+		<!-- 검색 폼  -->
+		
         <div id="searchContainer">
             <div class="row">
                 <div class="col-md-offset-7 col-md-4" align="right">
@@ -91,8 +92,38 @@
             <!-- 페이지 처리 -->
             <jsp:include page="../common/paging.jsp"/>
         </div>
-
         
     </div>
+    
+    <!-- 상세 보기 이동 -->
+    <script>
+    const detailLink = "${ pageContext.servletContext.contextPath}/admin/company/detail/session"
+        
+    	if(document.getElementsByTagName("td")) {
+    		
+    		const $tds = document.getElementsByClassName("details");
+    		for(let i = 0; i < $tds.length; i++){
+    			
+    			$tds[i].onmouseenter = function(){
+    				this.parentNode.style.backgroundColor = "lightgrey";
+    				this.parentNode.style.cursor = "pointer";
+    			}
+    			
+    			$tds[i].onmouseout = function(){
+    				this.parentNode.style.backgroundColor = "white";
+    			}
+    		}
+    		const $trs = document.getElementsByClassName("rowClick");
+    		for(let j = 0; j < $trs.length; j++){
+    			
+    			$trs[j].onclick = function(){
+    				var comNo = $(this).children().eq(0).text();
+    				location.href = detailLink + "?comNo=" + comNo; 
+    			}
+    		}
+    		
+    	}
+    </script>
+    
 </body>
 </html>

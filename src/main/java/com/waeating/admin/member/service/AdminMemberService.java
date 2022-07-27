@@ -53,6 +53,13 @@ public class AdminMemberService {
 		return memberList;
 	}
 
+	/**
+	 * <pre>
+	 * 	회원 정보 상세보기용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public MemberDTO selectMemberDetail(Map<String, String> searchMap) {
 
 		SqlSession sqlSession = getSqlSession();
@@ -65,6 +72,13 @@ public class AdminMemberService {
 		return member;
 	}
 
+	/**
+	 * <pre>
+	 * 	회원 정보 수정용 메소드(member범위)
+	 * </pre>
+	 * @param updateMemberMap
+	 * @return
+	 */
 	public int updateMember(Map<String, String> updateMemberMap) {
 
 		SqlSession sqlSession = getSqlSession();
@@ -85,6 +99,13 @@ public class AdminMemberService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 * 	회원 정보 수정용 메소드(user범위)
+	 * </pre>
+	 * @param updateUserMap
+	 * @return
+	 */
 	public int updateUser(Map<String, String> updateUserMap) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -105,6 +126,13 @@ public class AdminMemberService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 * 	회원정보 삭제용 메소드
+	 * </pre>
+	 * @param id
+	 * @return
+	 */
 	public int deleteMember(String id) {
 		
 		SqlSession sqlSession = getSqlSession();
