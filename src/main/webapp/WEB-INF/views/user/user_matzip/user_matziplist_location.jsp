@@ -36,9 +36,9 @@
        
                 <h3>지역별</h3>
                 <br>
-                <div class="container mt-3 row d-flex justify-content-center mb-5"><!--idcard1 시작-->
+                <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard1 시작-->
                   
-                 <div class="card col-3" style="width:290px">
+                 <div class="card col-3">
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
                     <div class="card-body">
                       <h4 class="card-title">또오겠지 분식점</h4>
@@ -49,7 +49,7 @@
                   </div>
                   <br>
                   
-                 <div class="card col-3" style="width:290px">
+                 <div class="card col-3">
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
                     <div class="card-body">
                       <h4 class="card-title">또오겠지 분식점</h4>
@@ -59,7 +59,7 @@
                     </div>
                   </div>
       
-                 <div class="card col-3" style="width:290px">
+                 <div class="card col-3">
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
                     <div class="card-body">
                       <h4 class="card-title">또오겠지 분식점</h4>
@@ -72,6 +72,87 @@
                   
       
                 </div><!--idcard1 끝-->
+                
+                                <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard2 시작-->
+                  
+                   <div class="card col-3" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                    <div class="card-body">
+                      <h4 class="card-title">또오겠지 분식점</h4>
+                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                    </div>
+                  </div>
+                  <br>
+                  
+                   <div class="card col-3" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                    <div class="card-body">
+                      <h4 class="card-title">또오겠지 분식점</h4>
+                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                    </div>
+                  </div>
+                  
+      
+                  <div class="card col-3" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                    <div class="card-body">
+                      <h4 class="card-title">또오겠지 분식점</h4>
+                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                    </div>
+                  </div>
+                  
+      
+                  
+      
+                </div><!--idcard2 끝-->
+      
+      			<div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard3 시작-->
+                  
+                   <div class="card col-3" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                    <div class="card-body">
+                      <h4 class="card-title">또오겠지 분식점</h4>
+                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                    </div>
+                  </div>
+                  <br>
+                  
+                   <div class="card col-3" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                    <div class="card-body">
+                      <h4 class="card-title">또오겠지 분식점</h4>
+                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                    </div>
+                  </div>
+                  
+      
+                   <div class="card col-3" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                    <div class="card-body">
+                      <h4 class="card-title">또오겠지 분식점</h4>
+                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                    </div>
+                  </div>
+                  
+      
+                  
+      
+                </div><!--idcard3 끝-->
+             
+      
+            	<jsp:include page="../paging.jsp"/>
       
              
       

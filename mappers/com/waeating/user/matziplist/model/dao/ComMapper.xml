@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.waeating.user.matziplist.model.dao.ComMapper">
+
+  <resultMap type = "com.waeating.user.matziplist.model.dto.ComInfoDTO" id="comInfoResultMap">
+  	<id property="comNo" column="COM_NO"/>
+  	<result property="memberId" column="MEMBER_ID"/>
+  	<result property="comName" column="COM_NAME"/>
+  	<result property="category" column="CATEGORY"/>
+  	<result property="comAdress" column="COM_ADRESS"/>
+  	<result property="comphone" column="COM_PHONE"/>
+  	<result property="comRegist" column="COM_REGIST"/>
+  	<result property="waitYn" column="WAIT_YN"/>
+  	<result property="workTime" column="WORK_TIME"/>
+  	<result property="holiday" column="HOLIDAY"/>
+  </resultMap>
+  
+  <select id="selectComByCategory" resultMap="comInfoResultMap">
+  	<bind name="categoryName" value="_parameter.get('categoryName')"/>
+  	SELECT
+  	       A.COM_NAME
+  	     , A.WORK_TIME
+  	     , A.HOLIDAY
+  	  FROM COM_INFO A
+  	 WHERE A.CATEGORY = #{ categoryName }    
+  	       
+  </select>
+  
+  </mapper>
+  
+  
