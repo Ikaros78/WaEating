@@ -43,7 +43,7 @@
                 </table>
             </div>
             <div class="col-md-9">
-            	<form action="${ pageContext.servletContext.contextPath }/admin/company/update" method="post">
+            	<form action="${ pageContext.servletContext.contextPath }/admin/company/update" method="post" id="frm">
                 <table class="table table-bordered">
                 	<thead>
 	                	<tr>
@@ -160,7 +160,7 @@
                 </table>
                 <c:if test="${ !empty sessionScope.ifUpdate }">
                 <div align="right">
-					<button type="submit" class="btn btn-primary" id="update">수정하기</button>
+					<button type="button" class="btn btn-primary" id="update">수정하기</button>
 				</div>
                 </c:if>
                 </form>
@@ -173,6 +173,7 @@
             <div class="col-md-9 col-md-offset-2" align="right">
 	            <c:if test="${ com.recordList[0].status eq '승인대기' }">
 	            		<button type="button" class="btn btn-success" id="access">승인</button>
+	            		<button type="button" class="btn btn-danger" id="refuse">거절</button>
 	            </c:if>
                 <button type="button" class="btn btn-primary" id="doUpdate">수정</button>
                 <button type="button" class="btn btn-default" id="backToList">목록으로</button>
@@ -197,7 +198,7 @@
     	if(document.getElementById("doUpdate")){
     		const $doUpdate = document.getElementById("doUpdate");
     		$doUpdate.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/update/session";
+   				location.href = "${ pageContext.servletContext.contextPath }/admin/update/session";
     		}
     	}
     	
@@ -211,14 +212,24 @@
     	if(document.getElementById("update")){
     		const $update = document.getElementById("update");
     		$update.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/company/update";
+    			
+				var chkUpdate = confirm('수정하시겠습니까?');
+    			
+    			if(chkUpdate === true){
+    				document.getElementById('frm').submit();
+    			}
     		}
     	}
     	
     	if(document.getElementById("delete")){
     		const $delete = document.getElementById("delete");
     		$delete.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/company/delete";
+    			
+    			var chkDelete = confirm('삭제하시겠습니까?');
+    			
+    			if(chkDelete === true){
+    				location.href = "${ pageContext.servletContext.contextPath }/admin/company/delete";
+    			}
     		}
     	}
     
@@ -232,7 +243,25 @@
     	if(document.getElementById("access")){
     		const $access = document.getElementById("access");
     		$access.onclick = function(){
-				location.href = "${ pageContext.servletContext.contextPath }/admin/company/access"    			
+    			
+    			var chkAccess = confirm('승인하시겠습니까?');
+    			
+    			if(chkAccess === true){
+					location.href = "${ pageContext.servletContext.contextPath }/admin/company/access";
+    			}
+    		}
+    	}
+    	
+    	if(document.getElementById("refuse")){
+    		const $refuse = document.getElementById("refuse");
+    		$refuse.onclick = function(){
+    			
+    			var chkRefuse = confirm('거절하시겠습니까?');
+    			
+    			if (chkRefuse === true){
+    				var reason = prompt('거절 이유를 작성해주세요');
+    				location.href = "${ pageContext.servletContext.contextPath }/admin/company/refuse" + "?reason=" + reason;
+    			}
     		}
     	}
     </script>
