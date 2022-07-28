@@ -170,7 +170,7 @@
     	if(document.getElementById("backToList")){
     		const $backToList = document.getElementById("backToList");
     		$backToList.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/goBack";
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/list";
     		}
     	}
     </script>

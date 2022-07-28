@@ -53,6 +53,24 @@ public class ComInfoDTO {
 		this.recordList = recordList;
 	}
 
+	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
+			String comRegist, String waitYn, String workTime, String holiday, MemberDTO memberInfo,
+			List<ComRecordDTO> recordList) {
+		super();
+		this.comNo = comNo;
+		this.memberId = memberId;
+		this.comName = comName;
+		this.category = category;
+		this.comAddress = comAddress;
+		this.comPhone = comPhone;
+		this.comRegist = comRegist;
+		this.waitYn = waitYn;
+		this.workTime = workTime;
+		this.holiday = holiday;
+		this.memberInfo = memberInfo;
+		this.recordList = recordList;
+	}
+
 	public int getComNo() {
 		return comNo;
 	}
@@ -141,11 +159,19 @@ public class ComInfoDTO {
 		this.recordList = recordList;
 	}
 
+	public MemberDTO getMemberInfo() {
+		return memberInfo;
+	}
+
+	public void setMemberInfo(MemberDTO memberInfo) {
+		this.memberInfo = memberInfo;
+	}
+
 	@Override
 	public String toString() {
 		return "ComInfoDTO [comNo=" + comNo + ", memberId=" + memberId + ", comName=" + comName + ", category="
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
-				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", recordList="
-				+ recordList + "]";
+				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", memberInfo="
+				+ memberInfo + ", recordList=" + recordList + "]";
 	}
 }

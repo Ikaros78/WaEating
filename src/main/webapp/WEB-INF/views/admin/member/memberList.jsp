@@ -67,7 +67,7 @@
 
 		<!-- 검색 폼 -->
 		
-		<div class="col-md-offset-7 clo-md-4" align="right" id="searchArea">
+		<div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
 			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/member/list" method="get" style="display:inline-block">		
 			    <input type="hidden" name="currentPage" value="1">
 			    <select id="searchCondition" name="searchCondition">

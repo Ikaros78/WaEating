@@ -12,4 +12,8 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> adminSelectCompanyList(SelectCriteria selectCriteria);
 
+	ComInfoDTO adminSelectCompanyDetail(Map<String, String> searchMap);
+
+	int updateCompanyStatus(Map<String, String> searchMap);
+
 }
