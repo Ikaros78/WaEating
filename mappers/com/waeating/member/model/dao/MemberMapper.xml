@@ -134,4 +134,58 @@
 			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
 		   WHERE A.MEMBER_ID = #{ memberId }
 	</select>
+	
+	<select id="selectMemberLogin" resultMap="generalUserResultMap" >
+		SELECT
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.PHONE
+			  , B.BIRTH
+			  , B.GENDER
+			FROM MEMBER_INFO A
+			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.MEMBER_ID = #{ memberId }
+	</select>
+	
+	<insert id="insertUser" parameterType="com.waeating.member.model.dto.UserDTO">
+		INSERT
+		  INTO USER_INFO A
+		(
+		  A.BIRTH
+		, A.GENDER
+		, A.MEMBER_ID
+		)
+		VALUES
+		(
+		  #{ birth }
+		, #{ gender }
+		, #{ userId }
+		)
+	</insert>
+	
+	<insert id="insertMember" parameterType="com.waeating.member.model.dto.MemberDTO">
+		INSERT
+		  INTO MEMBER_INFO A
+		(
+		  A.MEMBER_ID
+		, A.MEMBER_PWD
+		, A.EMAIL
+		, A.NAME
+		, A.MEMBER_TYPE
+		, A.PHONE
+		, A.EMAIL_CHECK
+		)
+		VALUES
+		(
+		  #{ id }
+		, #{ pwd }
+		, #{ email }
+		, #{ name }
+		, 'user'
+		, #{ phone }
+		, null
+		)
+	</insert>
 </mapper>
