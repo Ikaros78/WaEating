@@ -66,11 +66,11 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 			pageNo = 1;
 		}
 		
-		String searchCondition = "categoryName";
-		String searchValue = request.getParameter("searchValue");
+		String searchCondition = request.getParameter("searchCondition");
+		String searchValue = "";
 		
 		Map<String, String> searchMap = new HashMap<>();
-		searchMap.put("categoryName", categoryName);
+//		searchMap.put("categoryName", categoryName);
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		

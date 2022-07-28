@@ -50,8 +50,8 @@
 		  	         , C.HOLIDAY
 	  	  	      FROM COM_INFO C
 	  	  	     <where>
-	  	  	      <if test="searchCondition =='categoryName'">
-	  	  	      	C.CATEGORY = #{ searchValue }
+	  	  	      <if test="searchCondition!=null and !searchCondition.equals('')">
+	  	  	      	C.CATEGORY = #{ searchCondition }
 	  	  	      </if> 
 	  	  	     </where> 
 	  	  	   ) B
@@ -65,11 +65,16 @@
   	       
   </select>
   
-  <select id="selectAllCount" resultType="_int" parameterType="hashmap">
+  <select id="selectAllCount" resultType="_int">
   	SELECT
   	       COUNT(*)
   	  FROM COM_INFO A
-	 WHERE A.CATEGORY = #{ categoryName }	
+  	  <where>
+      <if test="searchCondition!=null and !searchCondition.equals('')">
+      	A.CATEGORY = #{ searchCondition }
+      </if> 
+     </where>
+<!-- 	 WHERE A.CATEGORY = #{ searchCondition }	 -->
   </select>
   </mapper>
   

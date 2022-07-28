@@ -38,9 +38,9 @@
        
                 <h3>종류별</h3>
                 
-    				<form action="${ pageContext.servletContext.contextPath }/user/matziplist/select/category">
+    				<form action="${ pageContext.servletContext.contextPath }/user/matziplist/category">
                   	<div class="input-group mb-3 col-5 float-end" style=" width : 300px; ">
-    				<select class="form-select " id="searchValue" name="searchValue">
+    				<select class="form-select " id="searchCondition" name=searchCondition>
 				      <option id="korea" value="한식" ${ requestScope.selectCriteria.searchCondition eq "한식"? "selected": "" }>한식</option>
 				      <option id="china" value="중식"${ requestScope.selectCriteria.searchCondition eq "중식"? "selected": "" }>중식</option>
 				      <option id="japan" value="일식"${ requestScope.selectCriteria.searchCondition eq "일식"? "selected": "" }>일식</option>
