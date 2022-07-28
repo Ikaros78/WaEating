@@ -20,6 +20,13 @@ public interface MemberMapper {
 
 	MemberDTO selectMemberDetail(Map<String, String> searchMap);
 
+	int adminUpdateMember(Map<String, String> updateMemberMap);
+
+	int adminUpdateUser(Map<String, String> updateUserMap);
+
+	int deleteMember(String id);
+
+
 	/* user-login */
 	MemberDTO selectMemberLogin(MemberDTO requestMember);
 	

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waeating.com.model.dao.ComInfoMapper">
+	<resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="generalCompanyResultMap">
+		<id property="comNo" column="COM_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="comName" column="COM_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="comAddress" column="COM_ADDRESS"/>
+		<result property="comPhone" column="COM_PHONE"/>
+		<result property="comRegist" column="COM_REGIST"/>
+		<result property="waitYn" column="WAIT_YN"/>
+		<result property="workTime" column="WORK_TIME"/>
+		<result property="holiday" column="HOLIDAY"/>
+		
+		<association property="memberInfo" resultMap="memberResultMap"/>
+		<association property="recordList" resultMap="comRecordMap"/>
+	</resultMap>
+
+	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="pwd" column="MEMBER_PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="emailCheck" column="EMAIL_CHECK"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.com.model.dto.ComRecordDTO" id="comRecordMap">
+		<id property="recordNo" column="RECORD_NO"/>
+		<result property="reason" column="REFUSE_REASON"/>
+		<result property="comNo" column="COM_NO"/>
+		<result property="status" column="COM_STATUS"/>
+	</resultMap>
+	
+	<select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+		SELECT
+				COUNT(*)
+			FROM COM_INFO A
+			JOIN COM_RECORD B ON(A.COM_NO = B.COM_NO)
+			<!-- 검색조건문 -->
+		 <where>
+		 	<if test="searchCondition =='id'">
+		 		A.MEMBER_ID = #{ searchValue }
+		 	</if>
+		 	<if test="searchCondition =='name'">
+		 		A.COM_NAME LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 	<if test="searchCondition =='status'">
+		 		B.COM_STATUS LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 </where>
+	</select>
+	
+	<select id="adminSelectCompanyList" resultMap="generalCompanyResultMap">
+		SELECT 
+			   A.RNUM
+			 , A.COM_NO
+		     , A.COM_NAME
+		     , A.MEMBER_ID
+		     , A.CATEGORY
+		     , A.COM_ADDRESS
+		     , A.COM_STATUS			
+		FROM (SELECT ROWNUM RNUM
+				   , B.COM_NO
+			       , B.COM_NAME
+			       , B.MEMBER_ID
+			       , B.CATEGORY
+			       , B.COM_ADDRESS
+			       , B.COM_STATUS
+				FROM (SELECT C.COM_NO
+				     , C.COM_NAME
+				     , C.MEMBER_ID
+				     , C.CATEGORY
+				     , C.COM_ADDRESS
+				     , D.COM_STATUS
+				     FROM COM_INFO C
+				     JOIN COM_RECORD D ON(C.COM_NO = D.COM_NO)
+				     <where>
+					 	<if test="searchCondition =='id'">
+					 		C.MEMBER_ID = #{ searchValue }
+					 	</if>
+					 	<if test="searchCondition =='name'">
+					 		C.COM_NAME LIKE '%' || #{ searchValue } || '%'
+					 	</if>
+					 	<if test="searchCondition =='status'">
+					 		D.COM_STATUS LIKE '%' || #{ searchValue } || '%'
+					 	</if>
+					 	AND C.COM_NO IS NOT NULL
+					 </where>
+					 ORDER BY D.COM_STATUS DESC
+					 ) B
+					 <![CDATA[
+					 WHERE ROWNUM <= #{ endRow }
+					 ]]>
+			)A
+	WHERE A.RNUM >= #{ startRow }
+	</select>
+	
+</mapper>
