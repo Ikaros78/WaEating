@@ -67,6 +67,48 @@ public class AdminCompanyService {
 			sqlSession.rollback();
 		}
 		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int deleteCompany(String comNo) {
+
+		SqlSession sqlSession = getSqlSession();
+		companyMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		int result = companyMapper.deleteCompany(comNo);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int refuseCompanyStatus(Map<String, String> searchMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		companyMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		int result = companyMapper.refuseCompanyStatus(searchMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
 		return result;
 	}
 

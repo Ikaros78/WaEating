@@ -91,7 +91,7 @@
 					 	</if>
 					 	AND C.COM_NO IS NOT NULL
 					 </where>
-					 ORDER BY D.COM_STATUS DESC
+					 ORDER BY D.COM_NO DESC
 					 ) B
 					 <![CDATA[
 					 WHERE ROWNUM <= #{ endRow }
@@ -128,5 +128,20 @@
 		SET COM_STATUS = '승인'
 	  WHERE A.COM_NO = #{ comNo }
 	    AND A.RECORD_NO = #{ recordNo }
+	</update>
+	
+	<delete id="deleteCompany" parameterType="java.lang.String">
+		DELETE
+			FROM COM_INFO A
+		   WHERE A.COM_NO = #{ comNo }
+	</delete>
+	
+	<update id="refuseCompanyStatus" parameterType="hashMap">
+		UPDATE
+			COM_RECORD A
+		SET COM_STATUS = '거절'
+		  , REFUSE_REASON = #{ reason }
+	  WHERE A.COM_NO = #{ comNo }
+	    AND A.RECORD_NO = #{ recordNo }	
 	</update>
 </mapper>

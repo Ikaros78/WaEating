@@ -16,4 +16,8 @@ public interface ComInfoMapper {
 
 	int updateCompanyStatus(Map<String, String> searchMap);
 
+	int deleteCompany(String comNo);
+
+	int refuseCompanyStatus(Map<String, String> searchMap);
+
 }
