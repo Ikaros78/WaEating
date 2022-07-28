@@ -42,7 +42,9 @@
               </tr>
             </table>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>
+            <a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice">
+              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>            
+            </a>
               <button type="button" class="btn btn-primary" value="등록" data-bs-toggle="modal" data-bs-target="#modalSubmit">등록</button>
             </div>
             <!-- Modal -->

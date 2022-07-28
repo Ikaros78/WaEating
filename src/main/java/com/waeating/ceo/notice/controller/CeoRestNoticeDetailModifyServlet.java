@@ -22,4 +22,11 @@ public class CeoRestNoticeDetailModifyServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/ceo/notice/ceo_rest_notice_detail_modify.jsp").forward(request, response);
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	
+
 }
