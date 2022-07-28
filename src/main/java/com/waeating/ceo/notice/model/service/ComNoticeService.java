@@ -2,6 +2,8 @@ package com.waeating.ceo.notice.model.service;
 
 import static com.waeating.common.mybatis.Template.getSqlSession;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.ceo.notice.model.dao.ComNoticeMapper;
@@ -29,6 +31,18 @@ public class ComNoticeService {
 		sqlSession.close();
 		
 		return result;
+	}
+
+	public List<ComNoticeDTO> selectAllNotice() {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);
+		List<ComNoticeDTO> comNoticeList = comNoticeMapper.selectAllNotice();
+		
+		sqlSession.close();
+		
+		return comNoticeList;
 	}
 
 }
