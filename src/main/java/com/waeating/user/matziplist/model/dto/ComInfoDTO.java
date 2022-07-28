@@ -12,11 +12,14 @@ public class ComInfoDTO {
 	private String waitYn;
 	private String workTime;
 	private String holiday;
+	private ComBoardAttachDTO comBoardAttach;
+	private ComMenuDTO comMenu;
 	
 	public ComInfoDTO() {}
 
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAdress, String comPhone,
-			String comRegist, String waitYn, String workTime, String holiday) {
+			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
+			ComMenuDTO comMenu) {
 		this.comNo = comNo;
 		this.memberId = memberId;
 		this.comName = comName;
@@ -27,6 +30,8 @@ public class ComInfoDTO {
 		this.waitYn = waitYn;
 		this.workTime = workTime;
 		this.holiday = holiday;
+		this.comBoardAttach = comBoardAttach;
+		this.comMenu = comMenu;
 	}
 
 	public int getComNo() {
@@ -109,16 +114,34 @@ public class ComInfoDTO {
 		this.holiday = holiday;
 	}
 
+	public ComBoardAttachDTO getComBoardAttach() {
+		return comBoardAttach;
+	}
+
+	public void setComBoardAttach(ComBoardAttachDTO comBoardAttach) {
+		this.comBoardAttach = comBoardAttach;
+	}
+
+	public ComMenuDTO getComMenu() {
+		return comMenu;
+	}
+
+	public void setComMenu(ComMenuDTO comMenu) {
+		this.comMenu = comMenu;
+	}
+
 	@Override
 	public String toString() {
 		return "ComInfoDTO [comNo=" + comNo + ", memberId=" + memberId + ", comName=" + comName + ", category="
 				+ category + ", comAdress=" + comAdress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
-				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + "]";
+				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", comBoardAttach="
+				+ comBoardAttach + ", comMenu=" + comMenu + "]";
 	}
 	
 	
 	
 	
+
 	
 	
 }

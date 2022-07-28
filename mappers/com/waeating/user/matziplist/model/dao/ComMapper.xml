@@ -15,19 +15,67 @@
   	<result property="waitYn" column="WAIT_YN"/>
   	<result property="workTime" column="WORK_TIME"/>
   	<result property="holiday" column="HOLIDAY"/>
+  	<association property="comBoardAttach" resultMap="comBoardAttachMap"/>
   </resultMap>
   
+  <resultMap type="com.waeating.user.matziplist.model.dto.ComBoardAttachDTO" id="comBoardAttachMap">
+    <id property="fileNo" column="FILE_NO"/>
+    <result property="originName" column="ORIGIN_NAME"/>
+    <result property="fileName" column="FILE_NAME"/>
+    <result property="thumbnailName" column="THUMBNAIL_NAME"/>
+    <result property="isDeleted" column="IS_DELETED"/>
+    <result property="regDate" column="REG_DATE"/>
+    <result property="comNo" column="COM_NO"/>
+  </resultMap>
+  
+
+  
   <select id="selectComByCategory" resultMap="comInfoResultMap">
-  	<bind name="categoryName" value="_parameter.get('categoryName')"/>
-  	SELECT
-  	       A.COM_NAME
+ 	SELECT
+ 		   A.RNUM
+ 		 , A.COM_NO
+ 	 	 , A.COM_NAME
   	     , A.WORK_TIME
   	     , A.HOLIDAY
-  	  FROM COM_INFO A
-  	 WHERE A.CATEGORY = #{ categoryName }    
+  	     , D.THUMBNAIL_NAME
+ 	FROM(SELECT ROWNUM RNUM
+ 			  , B.COM_NO
+	  	      , B.COM_NAME
+	  	      , B.WORK_TIME
+	  	      , B.HOLIDAY
+	  	   FROM(SELECT
+	  	   			   C.COM_NO
+		  	         , C.COM_NAME
+		  	         , C.WORK_TIME
+		  	         , C.HOLIDAY
+	  	  	      FROM COM_INFO C
+	  	  	     <where>
+	  	  	      <if test="searchCondition!=null and !searchCondition.equals('')">
+	  	  	      	C.CATEGORY = #{ searchCondition }
+	  	  	      </if> 
+	  	  	     </where> 
+	  	  	   ) B
+	  	  	      <![CDATA[
+				        WHERE ROWNUM <= #{ endRow }
+				  ]]>
+	  	) A
+	  JOIN COM_BOARD_ATTACH D ON(A.COM_NO = D.COM_NO)
+	 WHERE A.RNUM >= #{ startRow } 
+  	    
   	       
   </select>
   
+  <select id="selectAllCount" resultType="_int">
+  	SELECT
+  	       COUNT(*)
+  	  FROM COM_INFO A
+  	  <where>
+      <if test="searchCondition!=null and !searchCondition.equals('')">
+      	A.CATEGORY = #{ searchCondition }
+      </if> 
+     </where>
+<!-- 	 WHERE A.CATEGORY = #{ searchCondition }	 -->
+  </select>
   </mapper>
   
   
