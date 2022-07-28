@@ -1,7 +1,5 @@
 package com.waeating.member.model.dto;
 
-import java.util.List;
-
 public class MemberDTO {
 	private String id;
 	private String pwd;

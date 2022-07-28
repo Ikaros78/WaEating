@@ -24,7 +24,7 @@ public class NoticeSelectListServlet extends HttpServlet {
 	    
 	    String path = "";
 	    if(noticeList != null) {
-	    	path= "WEB-INF/views/notice/ceo_notice.jsp";
+	    	path= "WEB-INF/views/mainNotice/noticeList.jsp";
 	    	request.setAttribute("noticeList", noticeList);
 	    } else {
 	    	path = "/WEB-INF/views/common/failed.jsp";

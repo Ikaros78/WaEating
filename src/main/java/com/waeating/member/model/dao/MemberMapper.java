@@ -1,6 +1,7 @@
 package com.waeating.member.model.dao;
 
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.member.model.dto.UserDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,16 @@ public interface MemberMapper {
 	int adminUpdateUser(Map<String, String> updateUserMap);
 
 	int deleteMember(String id);
+
+
+	/* user-login */
+	MemberDTO selectMemberLogin(MemberDTO requestMember);
+	
+	int insertUser(UserDTO requestUser);
+	
+	int insertMember(MemberDTO requestMember);
+
+	int dubleCkId(String userId);
 
 
 

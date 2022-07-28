@@ -35,6 +35,16 @@
 
        
                 <h3>지역별</h3>
+                
+                <div class="container mt-3">
+                
+				  <div class="input-group mb-3 col-5 float-end" style=" width : 300px; ">
+				    <input type="text" class="form-control" placeholder="지역을 입력해주세요">
+				    <button class="btn btn-outline-dark" type="submit">검색</button> 
+				  </div>
+				  
+				</div>
+				
                 <br>
                 <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard1 시작-->
                   
