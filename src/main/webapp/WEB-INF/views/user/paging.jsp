@@ -44,7 +44,7 @@
 	
 	<script>
 	
-		const link = "${ pageContext.servletContext.contextPath }/board/list";
+		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/category";
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false }) {
