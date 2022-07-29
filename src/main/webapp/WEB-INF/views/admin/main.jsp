@@ -8,8 +8,7 @@
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/admin/style.css">
 </head>
 <body>
-	<div id="wrap">
-	<jsp:include page ="./common/menubar.jsp"/>
-	</div>
+	<jsp:include page ="./common/menubar.jsp"/> 
+	
 </body>
 </html>
