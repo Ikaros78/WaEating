@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.waeating.review.model.dao.ReviewMapper">
+  
+  <resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
+  	<id property="reviewNo" column="REVIEW_NO"/>
+  	<result property="reviewContent" column="REVIEW_CONTENT"/>
+  	<result property="ratings" column="RATINGS"/>
+  	<result property="recordNo" column="RECORD_NO"/>
+  	<result property="comNo" column="COM_NO"/>
+  	
+  	 <association property="reviewAttach" resultMap="reviewAttachMap"/>
+  	 <association property="reviewAns" resultMap="reviewAnsMAp"/>
+  	 <association property="memberInfo" resultMap="memberResultMap"/>
+  	 <association property="waitingRecord" resultMap="waitingRecordMap"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.review.model.dto.ReviewAttachDTO" id="reviewAttachMap">
+  	<id property="fileNo" column="FILE_NO"/>
+  	<result property="reviewNo" column="REVIEW_NO"/>
+  	<result property="originName" column="ORIGIN_NAME"/>
+  	<result property="fileName" column="FILE_NAME"/>
+  	<result property="isDeleted" column="IS_DELETED"/>
+  	<result property="regDate" column="REG_DATE"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.review.model.dto.ReviewAnsDTO" id="reviewAnsMAp">
+  	<id property="ansNo" column="ANS_NO"/>
+  	<result property="ansContent" column="ANS_CONTENT"/>
+  	<result property="regDate" column="REG_DATE"/>
+  	<result property="reviewNo" column="REVIEW_NO"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="pwd" column="MEMBER_PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="emailCheck" column="EMAIL_CHECK"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.reservation.model.dto.WaitingRecordDTO" id="waitingRecordMap">
+  	  <id property="recordNo" column="RECORD_NO"/>
+  	  <result property="comNo" column="COM_NO"/>
+  	  <result property="memberId" column="MEMBER_ID"/>
+  	  <result property="useDate" column="USE_DATE"/>
+  	  <result property="useStatus" column="USE_STATUS"/>
+  	  <result property="waitingNo" column="WAITING_NO"/>
+  	  <result property="memberNum" column="MEMBER_NUM"/>
+  	  <result property="requirement" column="REQUIREMENT"/>
+  	  <result property="memo" column="MEMO"/>
+  </resultMap>
+  
+  </mapper>
