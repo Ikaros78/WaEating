@@ -42,17 +42,17 @@
 		<result property="emailCheck" column="EMAIL_CHECK"/>
 	</resultMap>
   
-    <select id="selectFinishReservationCount" resultType="_int">
+    <select id="selectFinishReservationCount" resultType="_int" parameterType="hashmap">
        SELECT
   	     COUNT(*)
   	FROM WAITING_RECORD A
   	JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-   WHERE B.MEMBER_ID = 'user01'
+   WHERE B.MEMBER_ID = #{ userId }
      AND A.USE_STATUS = 'complete'
   	  
   </select>
   
-  <select id="selectReservationFinish" resultMap="waitingRecordMap">
+  <select id="selectReservationFinish" resultMap="waitingRecordMap" parameterType="hashmap">
   	SELECT
  		   A.RNUM
  		 , A.WAITING_NO
@@ -75,7 +75,7 @@
 				  FROM WAITING_RECORD C
 				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
-				  WHERE C.MEMBER_ID = 'user01'
+				  WHERE C.MEMBER_ID = #{ searchValue }
 				    AND C.USE_STATUS = 'complete'
 	  	  	   ) B
 	  	  	      <![CDATA[
@@ -86,16 +86,16 @@
 	 WHERE A.RNUM >= #{ startRow } 
   </select>
   
-  <select id="selectCancelReservationCount" resultType="_int">
+  <select id="selectCancelReservationCount" resultType="_int" parameterType="hashmap">
     SELECT
   	    COUNT(*)
   	FROM WAITING_RECORD A
     JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-   WHERE B.MEMBER_ID = 'user01'
+   WHERE B.MEMBER_ID = #{ userId }
      AND A.USE_STATUS = 'cancel'
   </select>
   
-  <select id="selectReservationCancel" resultMap="waitingRecordMap">
+  <select id="selectReservationCancel" resultMap="waitingRecordMap" parameterType="hashmap">
   SELECT
  		   A.RNUM
  		 , A.WAITING_NO
@@ -118,7 +118,7 @@
 				  FROM WAITING_RECORD C
 				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
-				  WHERE C.MEMBER_ID = 'user01'
+				  WHERE C.MEMBER_ID = #{ searchValue }
 				    AND C.USE_STATUS = 'cancel'
 	  	  	   ) B
 	  	  	      <![CDATA[
