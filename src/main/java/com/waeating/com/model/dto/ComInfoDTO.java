@@ -47,6 +47,23 @@ public class ComInfoDTO {
 		this.review = review;
 	}
 
+	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
+			String comRegist, String waitYn, String workTime, String holiday, MemberDTO memberInfo,
+			List<ComRecordDTO> recordList) {
+		super();
+		this.comNo = comNo;
+		this.memberId = memberId;
+		this.comName = comName;
+		this.category = category;
+		this.comAddress = comAddress;
+		this.comPhone = comPhone;
+		this.comRegist = comRegist;
+		this.waitYn = waitYn;
+		this.workTime = workTime;
+		this.holiday = holiday;
+		this.memberInfo = memberInfo;
+		this.recordList = recordList;
+	}
 
 
 	public int getComNo() {
@@ -54,11 +71,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComNo(int comNo) {
 		this.comNo = comNo;
 	}
-
 
 
 	public String getMemberId() {
@@ -66,11 +81,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 
 
 	public String getComName() {
@@ -78,11 +91,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComName(String comName) {
 		this.comName = comName;
 	}
-
 
 
 	public String getCategory() {
@@ -90,11 +101,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
 
 
 	public String getComAddress() {
@@ -102,11 +111,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComAddress(String comAddress) {
 		this.comAddress = comAddress;
 	}
-
 
 
 	public String getComPhone() {
@@ -114,11 +121,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComPhone(String comPhone) {
 		this.comPhone = comPhone;
 	}
-
 
 
 	public String getComRegist() {
@@ -126,11 +131,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComRegist(String comRegist) {
 		this.comRegist = comRegist;
 	}
-
 
 
 	public String getWaitYn() {
@@ -138,11 +141,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setWaitYn(String waitYn) {
 		this.waitYn = waitYn;
 	}
-
 
 
 	public String getWorkTime() {
@@ -150,11 +151,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setWorkTime(String workTime) {
 		this.workTime = workTime;
 	}
-
 
 
 	public String getHoliday() {
@@ -162,11 +161,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setHoliday(String holiday) {
 		this.holiday = holiday;
 	}
-
 
 
 	public ComBoardAttachDTO getComBoardAttach() {
@@ -174,11 +171,9 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComBoardAttach(ComBoardAttachDTO comBoardAttach) {
 		this.comBoardAttach = comBoardAttach;
 	}
-
 
 
 	public ComMenuDTO getComMenu() {
@@ -186,17 +181,14 @@ public class ComInfoDTO {
 	}
 
 
-
 	public void setComMenu(ComMenuDTO comMenu) {
 		this.comMenu = comMenu;
 	}
 
 
-
 	public MemberDTO getMemberInfo() {
 		return memberInfo;
 	}
-
 
 
 	public void setMemberInfo(MemberDTO memberInfo) {
@@ -215,7 +207,7 @@ public class ComInfoDTO {
 		this.recordList = recordList;
 	}
 
-
+	
 	public ReviewDTO getReview() {
 		return review;
 	}
@@ -233,11 +225,4 @@ public class ComInfoDTO {
 				+ ", review=" + review + "]";
 	}
 
-
-	
-	
-
-	
-
-	
 }

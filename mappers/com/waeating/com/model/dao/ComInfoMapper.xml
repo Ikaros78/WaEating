@@ -111,7 +111,7 @@
 					 	</if>
 					 	AND C.COM_NO IS NOT NULL
 					 </where>
-					 ORDER BY D.COM_STATUS DESC
+					 ORDER BY D.COM_NO DESC
 					 ) B
 					 <![CDATA[
 					 WHERE ROWNUM <= #{ endRow }
@@ -120,6 +120,50 @@
 	WHERE A.RNUM >= #{ startRow }
 	</select>
 	
+	<select id="adminSelectCompanyDetail" resultMap="generalCompanyResultMap" parameterType="hashMap">
+		SELECT
+				A.COM_NO
+			  , A.COM_NAME
+			  , A.CATEGORY
+			  , A.COM_ADDRESS
+			  , A.COM_PHONE
+			  , A.COM_REGIST
+			  , B.RECORD_NO
+			  , B.REFUSE_REASON
+			  , B.COM_STATUS
+			  , C.MEMBER_ID
+			  , C.MEMBER_PWD
+			  , C.EMAIL
+			  , C.NAME
+			  , C.PHONE
+			FROM COM_INFO A
+			JOIN COM_RECORD B ON(A.COM_NO = B.COM_NO)
+			JOIN MEMBER_INFO C ON(A.MEMBER_ID = C.MEMBER_ID)
+		   WHERE A.COM_NO = #{ comNo }
+	</select>
+	
+	<update id="updateCompanyStatus" parameterType="hashMap">
+		UPDATE
+			COM_RECORD A
+		SET COM_STATUS = '승인'
+	  WHERE A.COM_NO = #{ comNo }
+	    AND A.RECORD_NO = #{ recordNo }
+	</update>
+	
+	<delete id="deleteCompany" parameterType="java.lang.String">
+		DELETE
+			FROM COM_INFO A
+		   WHERE A.COM_NO = #{ comNo }
+	</delete>
+	
+	<update id="refuseCompanyStatus" parameterType="hashMap">
+		UPDATE
+			COM_RECORD A
+		SET COM_STATUS = '거절'
+		  , REFUSE_REASON = #{ reason }
+	  WHERE A.COM_NO = #{ comNo }
+	    AND A.RECORD_NO = #{ recordNo }	
+	</update>
 	
 	<!-- user 쿼리문 -->
 	<select id="selectCom" resultMap="generalCompanyResultMap" >

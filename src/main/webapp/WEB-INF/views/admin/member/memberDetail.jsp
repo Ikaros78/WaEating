@@ -42,7 +42,7 @@
                 </table>
             </div>
             <div class="col-md-9">
-            	<form action="${ pageContext.servletContext.contextPath }/admin/member/update" method="post">
+            	<form action="${ pageContext.servletContext.contextPath }/admin/member/update" method="post" id="frm">
                 <table class="table table-bordered">
                 	<thead>
 	                	<tr>
@@ -108,7 +108,7 @@
                 </table>
                 <c:if test="${ !empty sessionScope.ifUpdate }">
                 <div align="right">
-					<button type="submit" class="btn btn-primary" id="update">수정하기</button>
+					<button type="button" class="btn btn-primary" id="update">수정하기</button>
 				</div>
                 </c:if>
 				</form>
@@ -156,21 +156,30 @@
     	if(document.getElementById("update")){
     		const $update = document.getElementById("update");
     		$update.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/update";
+				
+    			var chkUpdate = confirm('수정하시겠습니까?');
+    			
+    			if(chkUpdate === true){
+    				document.getElementById('frm').submit();
+    			}
     		}
     	}
     	
     	if(document.getElementById("delete")){
     		const $delete = document.getElementById("delete");
     		$delete.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/delete";
+    			var chkDelete = confirm('삭제하시겠습니까?');
+    			
+    			if(chkDelete === true){
+    				location.href = "${ pageContext.servletContext.contextPath }/admin/member/delete";
+    			}
     		}
     	}
     
     	if(document.getElementById("backToList")){
     		const $backToList = document.getElementById("backToList");
     		$backToList.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/goBack";
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/list";
     		}
     	}
     </script>
