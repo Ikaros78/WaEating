@@ -35,7 +35,7 @@ public class AdminCompanyAccessServlet extends HttpServlet {
 		
 		AdminCompanyService companyService = new AdminCompanyService();
 		
-		int result = companyService.updateCompanyStatus(searchMap);
+		int result = companyService.accessCompanyStatus(searchMap);
 		
 		if(result > 0) {
 			response.sendRedirect(request.getContextPath() + "/admin/company/detail");

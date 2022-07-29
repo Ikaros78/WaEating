@@ -32,7 +32,7 @@ public class AdminCompanySelectDetailServlet extends HttpServlet {
 		
 		System.out.println(company);
 		
-		String path="";
+		String path = "";
 		
 		if(company != null) {
 			path = "/WEB-INF/views/admin/company/companyDetail.jsp";

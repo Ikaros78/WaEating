@@ -37,6 +37,7 @@ public class UserSignUpServlet extends HttpServlet {
 		String userId = request.getParameter("id");
 		String userName = request.getParameter("name");
 		String userPw = request.getParameter("pw");
+		String memberType = (String) session.getAttribute("memberType");
 		String userPhone = request.getParameter("phone");
 		String userEmail = request.getParameter("email");
 		String userBirth = request.getParameter("birth");
@@ -51,6 +52,7 @@ public class UserSignUpServlet extends HttpServlet {
 		requestMember.setId(userId);
 		requestMember.setName(userName);
 		requestMember.setPwd(userPw);
+		requestMember.setMemberType(memberType);
 		requestMember.setPhone(userPhone);
 		requestMember.setEmail(userEmail);
 		
@@ -69,7 +71,7 @@ public class UserSignUpServlet extends HttpServlet {
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
-			request.setAttribute("insertMember", "회원가입에 성공하셨습니다.");
+			request.setAttribute("success", "insertMember");
 		} else {
 			
 			page = "/WEB-INF/views/common/failed.jsp";

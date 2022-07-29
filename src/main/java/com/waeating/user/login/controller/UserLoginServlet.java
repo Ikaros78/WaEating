@@ -22,7 +22,7 @@ public class UserLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		
+
 		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-login.jsp").forward(request, response);
 	}
 
@@ -54,7 +54,7 @@ public class UserLoginServlet extends HttpServlet {
 			
 			session.setAttribute("loginMember", loginMember);
 			
-			response.sendRedirect("/WEB_INF/views/user/user_main.jsp");
+			response.sendRedirect(request.getContextPath() + "/user/main");
 		} else {
 			
 			request.setAttribute("message", "로그인에 실패하셨습니다. 다시 입력해주세요.");

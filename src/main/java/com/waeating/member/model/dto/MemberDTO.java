@@ -105,7 +105,6 @@ public class MemberDTO {
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name + ", memberType="
 				+ memberType + ", phone=" + phone + ", emailCheck=" + emailCheck + ", userInfo=" + userInfo + "]";
-
 	}
 
 	

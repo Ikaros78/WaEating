@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.waeating.reservation.model.dao.ReservationMapper">
+  
+  <resultMap type="com.waeating.reservation.model.dto.WaitingRecordDTO" id="waitingRecordMap">
+  	  <id property="recordNo" column="RECORD_NO"/>
+  	  <result property="comNo" column="COM_NO"/>
+  	  <result property="memberId" column="MEMBER_ID"/>
+  	  <result property="useDate" column="USE_DATE"/>
+  	  <result property="useStatus" column="USE_STATUS"/>
+  	  <result property="waitingNo" column="WAITING_NO"/>
+  	  <result property="memberNum" column="MEMBER_NUM"/>
+  	  <result property="requirement" column="REQUIREMENT"/>
+  	  <result property="memo" column="MEMO"/>
+  	  
+  	  <association property="comInfo" resultMap="companyResultMap"/>
+  	  <association property="memberInfo" resultMap="memberResultMap"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="companyResultMap">
+		<id property="comNo" column="COM_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="comName" column="COM_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="comAddress" column="COM_ADDRESS"/>
+		<result property="comPhone" column="COM_PHONE"/>
+		<result property="comRegist" column="COM_REGIST"/>
+		<result property="waitYn" column="WAIT_YN"/>
+		<result property="workTime" column="WORK_TIME"/>
+		<result property="holiday" column="HOLIDAY"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="pwd" column="MEMBER_PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="emailCheck" column="EMAIL_CHECK"/>
+	</resultMap>
+  
+    <select id="selectFinishReservationCount" resultType="_int">
+       SELECT
+  	     COUNT(*)
+  	FROM WAITING_RECORD A
+  	JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+   WHERE B.MEMBER_ID = 'user01'
+     AND A.USE_STATUS = 'complete'
+  	  
+  </select>
+  
+  <select id="selectReservationFinish" resultMap="waitingRecordMap">
+  	SELECT
+ 		   A.RNUM
+ 		 , A.WAITING_NO
+ 	 	 , A.MEMBER_NUM
+  	     , A.USE_DATE
+  	     , A.PHONE
+  	     , A.COM_NAME
+ 	FROM(SELECT ROWNUM RNUM
+ 			  , B.WAITING_NO
+	  	      , B.MEMBER_NUM
+	  	      , B.USE_DATE
+			  , B.PHONE
+			  , B.COM_NAME	
+	  	   FROM(SELECT
+				       C.WAITING_NO
+				     , C.MEMBER_NUM
+				     , C.USE_DATE
+				     , D.PHONE
+				     , E.COM_NAME
+				  FROM WAITING_RECORD C
+				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
+				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
+				  WHERE C.MEMBER_ID = 'user01'
+				    AND C.USE_STATUS = 'complete'
+	  	  	   ) B
+	  	  	      <![CDATA[
+				        WHERE ROWNUM <= #{ endRow }
+				  ]]>
+	  	) A
+	 
+	 WHERE A.RNUM >= #{ startRow } 
+  </select>
+  
+  <select id="selectCancelReservationCount" resultType="_int">
+    SELECT
+  	    COUNT(*)
+  	FROM WAITING_RECORD A
+    JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+   WHERE B.MEMBER_ID = 'user01'
+     AND A.USE_STATUS = 'cancel'
+  </select>
+  
+  <select id="selectReservationCancel" resultMap="waitingRecordMap">
+  SELECT
+ 		   A.RNUM
+ 		 , A.WAITING_NO
+ 	 	 , A.MEMBER_NUM
+  	     , A.USE_DATE
+  	     , A.PHONE
+  	     , A.COM_NAME
+ 	FROM(SELECT ROWNUM RNUM
+ 			  , B.WAITING_NO
+	  	      , B.MEMBER_NUM
+	  	      , B.USE_DATE
+			  , B.PHONE
+			  , B.COM_NAME	
+	  	   FROM(SELECT
+				       C.WAITING_NO
+				     , C.MEMBER_NUM
+				     , C.USE_DATE
+				     , D.PHONE
+				     , E.COM_NAME
+				  FROM WAITING_RECORD C
+				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
+				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
+				  WHERE C.MEMBER_ID = 'user01'
+				    AND C.USE_STATUS = 'cancel'
+	  	  	   ) B
+	  	  	      <![CDATA[
+				        WHERE ROWNUM <= #{ endRow }
+				  ]]>
+	  	) A
+	 
+	 WHERE A.RNUM >= #{ startRow } 
+	 </select>
+  </mapper>

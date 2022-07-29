@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.waeating.ceo.review.model.dao.ComReviewMapper">
+  	<resultMap type="com.waeating.com.model.dto.ReviewDTO" id="comReviewResultMap">
+  		<id property="reviewNo" column="REVIEW_NO"/>
+  		<result property="reviewContent" column="REVIEW_CONTENT"/>
+  		<result property="ratings" column="RATINGS"/>
+  		<result property="recordNo" column="RECORD_NO"/>
+  		<result property="comNo" column="COM_NO"/>
+  		<result property="total" column="TOTAL"/>
+  	</resultMap>
+  	
+  	
+  	<select id="selectAllReview" resultMap="comReviewResultMap">
+  		 SELECT
+  		   		A.RNUM
+  		   	  , A.REVIEW_NO
+  		   	  , A.REVIEW_CONTENT
+  		   	  , A.COM_NO
+  		   FROM (SELECT ROWNUM RNUM
+  		   			  , B.REVIEW_NO
+  		   			  , B.REVIEW_CONTENT
+  		   			  , B.COM_NO
+  		   		  
+  		   		   FROM (SELECT C.REVIEW_NO
+  		   		   			  , C.REVIEW_CONTENT
+  		   		   			  , C.COM_NO
+  		   				   FROM REVIEW C
+  		   				  
+  		   				 <!-- <where>
+  		   				 	<if test="searchCondition == 'noticeTitle'">
+	           				   C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+							</if>
+  		   				 </where> -->
+  		   		   		) B
+  		   		   	<![CDATA[
+	                WHERE ROWNUM <= #{ endRow }
+	                ]]>
+  		   		) A	
+  		   	WHERE A.RNUM >= #{ startRow }
+  		   	  AND A.COM_NO = 1
+  		 <!-- SELECT
+  			    CN.NOTICE_TITLE
+  			  , CN.REG_DATE
+  	 	   FROM COM_NOTICE CN
+  	 	  ORDER BY 2 DESC -->
+  	</select>
+  	
+  	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+               COUNT(*) total
+          FROM REVIEW A
+         WHERE A.COM_NO = 1
+    	<!-- <where>
+			<if test="searchCondition == 'noticeTitle'">
+	           A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+			</if>
+			
+    	</where> -->
+	</select>
+  	
+  </mapper>
+  

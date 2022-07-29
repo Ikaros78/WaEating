@@ -19,6 +19,7 @@
 		<association property="recordList" resultMap="comRecordMap"/>
 		<association property="comBoardAttach" resultMap="comBoardAttachMap"/>
 		<association property="review" resultMap="reviewMap"/>
+		
 	</resultMap>
 
 	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
@@ -39,22 +40,24 @@
 	</resultMap>
 	
 	<resultMap type="com.waeating.com.model.dto.ComBoardAttachDTO" id="comBoardAttachMap">
-    <id property="fileNo" column="FILE_NO"/>
-    <result property="originName" column="ORIGIN_NAME"/>
-    <result property="fileName" column="FILE_NAME"/>
-    <result property="thumbnailName" column="THUMBNAIL_NAME"/>
-    <result property="isDeleted" column="IS_DELETED"/>
-    <result property="regDate" column="REG_DATE"/>
-    <result property="comNo" column="COM_NO"/>
-  </resultMap>
+	    <id property="fileNo" column="FILE_NO"/>
+	    <result property="originName" column="ORIGIN_NAME"/>
+	    <result property="fileName" column="FILE_NAME"/>
+	    <result property="thumbnailName" column="THUMBNAIL_NAME"/>
+	    <result property="isDeleted" column="IS_DELETED"/>
+	    <result property="regDate" column="REG_DATE"/>
+	    <result property="comNo" column="COM_NO"/>
+    </resultMap>
   
   <resultMap type="com.waeating.com.model.dto.ReviewDTO" id="reviewMap">
-  <id property="reviewNo" column="REVIEW_NO"/>
-  <result property="reviewContent" column="REVIEW_CONTENT"/>
-  <result property="ratings" column="RATINGS"/>
-  <result property="recordNo" column="RECORD_NO"/>
-  <result property="comNo" column="COM_NO"/>
+	  <id property="reviewNo" column="REVIEW_NO"/>
+	  <result property="reviewContent" column="REVIEW_CONTENT"/>
+	  <result property="ratings" column="RATINGS"/>
+	  <result property="recordNo" column="RECORD_NO"/>
+	  <result property="comNo" column="COM_NO"/>
   </resultMap>
+  
+  
   
 	<select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
 		SELECT
@@ -142,7 +145,7 @@
 		   WHERE A.COM_NO = #{ comNo }
 	</select>
 	
-	<update id="updateCompanyStatus" parameterType="hashMap">
+	<update id="accessCompanyStatus" parameterType="hashMap">
 		UPDATE
 			COM_RECORD A
 		SET COM_STATUS = '승인'
@@ -163,6 +166,44 @@
 		  , REFUSE_REASON = #{ reason }
 	  WHERE A.COM_NO = #{ comNo }
 	    AND A.RECORD_NO = #{ recordNo }	
+	</update>
+	
+	<update id="updateCompanyStatus" parameterType="hashMap">
+		UPDATE
+			COM_RECORD A
+		<set>
+			<if test="updateStatus != null and updateStatus != ''">
+			A.COM_STATUS = #{ updateStatus },
+			</if>
+			<if test="reason != null and reason != ''">
+			A.REFUSE_REASON = #{ reason },
+			</if>
+		</set>
+	  WHERE A.COM_NO = #{ comNo }
+	    AND A.RECORD_NO = #{ recordNo }
+	</update>
+	
+	<update id="updateCompany" parameterType="hashMap">
+		UPDATE
+			COM_INFO A
+		<set>
+			<if test="comName != null and comName != ''">
+			A.COM_NAME = #{ comName },
+			</if>
+			<if test="category != null and category != ''">
+			A.CATEGORY = #{ category },
+			</if>
+			<if test="address != null and address != ''">
+			A.COM_ADDRESS = #{ address },
+			</if>
+			<if test="comPhone != null and comPhone != ''">
+			A.COM_PHONE = #{ comPhone },
+			</if>
+			<if test="regist != null and regist != ''">
+			A.COM_REGIST = #{ regist },
+			</if>
+		</set>
+		WHERE A.COM_NO = #{ comNo }
 	</update>
 	
 	<!-- user 쿼리문 -->
@@ -210,6 +251,7 @@
   	SELECT
   	       COUNT(*)
   	  FROM COM_INFO A
+  	  JOIN COM_RECORD B ON(A.COM_NO = B.COM_NO)
   	  <where>
       <if test="searchCondition!=null and !searchCondition.equals('')">
       	A.CATEGORY = #{ searchCondition }
@@ -217,6 +259,7 @@
       <if test="searchValue != null and !searchValue.equals('')">
       	A.COM_ADDRESS LIKE '%' || #{ searchValue } || '%'
       </if>
+      AND B.COM_STATUS = '승인' 
      </where>
     
   </select>
@@ -228,12 +271,13 @@
  	 	 , A.COM_NAME
   	     , A.WORK_TIME
   	     , A.HOLIDAY
-  	     , E.THUMBNAIL_NAME
+  	     , A.THUMBNAIL_NAME
  	FROM(SELECT ROWNUM RNUM
  			  , B.COM_NO
 	  	      , B.COM_NAME
 	  	      , B.WORK_TIME
 	  	      , B.HOLIDAY
+	  	      , B.THUMBNAIL_NAME
 	  	   FROM(SELECT
               V.COM_NO
             , V.COM_NAME
@@ -268,9 +312,10 @@
 		]]>
 				 
 	  	) A
-	  JOIN COM_BOARD_ATTACH E ON(A.COM_NO = E.COM_NO)
 	 WHERE A.RNUM >= #{ startRow } 
 	 
   </select>
+  
+
   
 </mapper>
