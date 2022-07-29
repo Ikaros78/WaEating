@@ -52,12 +52,12 @@ public class AdminCompanyService {
 		return company;
 	}
 
-	public int updateCompanyStatus(Map<String, String> searchMap) {
+	public int accessCompanyStatus(Map<String, String> searchMap) {
 
 		SqlSession sqlSession = getSqlSession();
 		companyMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
-		int result = companyMapper.updateCompanyStatus(searchMap);
+		int result = companyMapper.accessCompanyStatus(searchMap);
 		
 		if(result > 0) {
 			
@@ -98,6 +98,46 @@ public class AdminCompanyService {
 		companyMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
 		int result = companyMapper.refuseCompanyStatus(searchMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int updateCompany(Map<String, String> updateCompanyMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		companyMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		int result = companyMapper.updateCompany(updateCompanyMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int updateCompanyStatus(Map<String, String> updateRecordMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		companyMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		int result = companyMapper.updateCompanyStatus(updateRecordMap);
 		
 		if(result > 0) {
 			

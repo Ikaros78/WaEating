@@ -145,6 +145,13 @@
                         <tr>
                         	<td>업체 승인상태</td>
                         	<td><c:out value="${ com.recordList[0].status }"/></td>
+                        	<c:if test="${ !empty sessionScope.ifUpdate }">
+	                            	<td><select name="updateStatus">
+	                            			<option>승인대기</option>
+	                            			<option>승인</option>
+	                            			<option>거절</option>
+	                            		</select></td>
+	                        </c:if>
                         </tr>
                        	<c:if test="${ com.recordList[0].status eq '거절' }">
                         <tr>
