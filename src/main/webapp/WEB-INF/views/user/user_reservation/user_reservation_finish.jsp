@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +25,8 @@
         <h4 class="mb-3 ms-1">나의 예약</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="${ pageContext.servletContext.contextPath }/user/reservation/finish" class="list-group-item list-group-item-action py-3 ">이전 예약</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="${ pageContext.servletContext.contextPath }/user/reservation/now" class="list-group-item list-group-item-action py-3 select">현재 예약</a>
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/finish" class="list-group-item list-group-item-action py-3 select ">이전 예약</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/now" class="list-group-item list-group-item-action py-3 ">현재 예약</a>
           <a href="${ pageContext.servletContext.contextPath }/user/reservation/cancel" class="list-group-item list-group-item-action py-3">취소한 예약</a>
         </div>
        </aside>
@@ -36,14 +37,15 @@
         <br>
         <h2 style="text-indent: 30px;">이전 예약</h2>
         <hr>
+        <c:forEach var="reservation" items="${ requestScope.waitingRecord }">
         <div class="reservation finish">
-            <h5>[또 보겠지 떡볶이집 몽글몽글 청계점]</h5>
-            <p style="color: gray;">2022/07/17</p>
+            <h5>[${ reservation.comInfo.comName }]</h5>
+            <p style="color: gray;">${ reservation.useDate }</p>
             <br>
             <h6><나의 예약 정보></h6>
-            <p>번호 : 6번</p>
-            <p>인원수 : 3명</p>
-            <p>전화번호 : 010-1234-5678</p>
+            <p>번호 : ${ reservation.waitingNo }</p>
+            <p>인원수 : ${ reservation.memberNum }</p>
+            <p>전화번호 : ${ reservation.memberInfo.phone }</p>
             
               <button type="button" class="btn btn-outline-success" disabled>방문 완료</button>
             
@@ -51,8 +53,9 @@
               <button type="button" class="btn btn-success">리뷰 쓰기</button> 
             </a>
         </div>
+        </c:forEach>
 
-        <div class="reservation finish">
+       <%--  <div class="reservation finish">
             <h5>[또 보겠지 떡볶이집 몽글몽글 청계점]</h5>
             <p style="color: gray;">2022/07/17</p>
             <br>
@@ -65,13 +68,13 @@
             <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate">
               <button type="button" class="btn btn-success">내가 쓴 리뷰 보기</button>
             </a>
-        </div>
+        </div> --%>
 
 
 
 
 
-
+	<jsp:include page="../user_paging/paging_reservation_finish.jsp"></jsp:include>
 
 
        </aside>

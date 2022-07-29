@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +43,7 @@
             <P style="color:#D94925 ;">내 앞에 '3팀' 남았어요! 주변에 있어주세요. 곧 호출됩니다.</P>
             <br>
             <h6><나의 예약 정보></h6>
-            <p>번호 : 6번</p>
+            <p>대기번호 : 6번</p>
             <p>인원수 : 3명</p>
             <p>전화번호 : 010-1234-5678</p>
 
@@ -53,7 +54,7 @@
 
 
 
-
+		<jsp:include page="../user_paging/paging_reservation_now.jsp"/>
 
 
 

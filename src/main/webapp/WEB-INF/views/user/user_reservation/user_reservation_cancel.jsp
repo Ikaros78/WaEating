@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,23 +37,24 @@
         <br>
         <h2 style="text-indent: 30px;">취소한 예약</h2>
         <hr>
+        
+		<c:forEach var="reservation" items="${ requestScope.waitingRecord }">
         <div class="reservation cancel">
-            <h5>[또 보겠지 떡볶이집 몽글몽글 청계점]</h5>
-            <p style="color: gray;">2022/07/17</p>
+            <h5>[${ reservation.comInfo.comName }]</h5>
+            <p style="color: gray;">${ reservation.useDate }</p>
             <br>
             <h6><나의 예약 정보></h6>
-            <p>번호 : 6번</p>
-            <p>인원수 : 3명</p>
-            <p>전화번호 : 010-1234-5678</p>
-
-            <button type="button" class="btn btn-outline-dark" disabled>취소 완료</button>
+            <p>번호 : ${ reservation.waitingNo }</p>
+            <p>인원수 : ${ reservation.memberNum }</p>
+            <p>전화번호 : ${ reservation.memberInfo.phone }</p>
             
+               <button type="button" class="btn btn-outline-dark" disabled>취소 완료</button>
         </div>
+        </c:forEach>
 
 
 
-
-
+	<jsp:include page="../user_paging/paging_reservation_cancel.jsp"/>
 
 
 

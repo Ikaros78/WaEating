@@ -8,44 +8,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="pagingArea" align="center">
+		<div class="pagingArea" align="center">
 		<!-- 맨 앞으로 이동 버튼 -->
-	    <button id="startPage"><<</button>
+	    <button type="button" class="btn btn-light" id="startPage"><<</button>
 		
 		<!-- 이전 페이지 버튼 -->
 		<c:if test="${ requestScope.selectCriteria.pageNo <= 1 }">
-			<button disabled><</button>
+			<button type="button" class="btn btn-light" disabled><</button>
 		</c:if>
 		<c:if test="${ requestScope.selectCriteria.pageNo > 1 }">
-			<button id="prevPage"><</button>
+			<button type="button" class="btn btn-light" id="prevPage"><</button>
 		</c:if>
 		
 		<!-- 숫자 버튼 -->
 		<c:forEach var="p" begin="${ requestScope.selectCriteria.startPage }" end="${ requestScope.selectCriteria.endPage }" step="1">
 			<c:if test="${ requestScope.selectCriteria.pageNo eq p }">
-				<button disabled><c:out value="${ p }"/></button>
+				<button type="button" class="btn btn-light" disabled><c:out value="${ p }"/></button>
 			</c:if>
 			<c:if test="${ requestScope.selectCriteria.pageNo ne p }">
-				<button onclick="pageButtonAction(this.innerText);"><c:out value="${ p }"/></button>
+				<button type="button" class="btn btn-light" onclick="pageButtonAction(this.innerText);"><c:out value="${ p }"/></button>
 			</c:if>
 		</c:forEach>
 		
 		<!-- 다음 페이지 버튼 -->
 		<c:if test="${ requestScope.selectCriteria.pageNo >= requestScope.selectCriteria.maxPage }">
-			<button disabled>></button>
+			<button type="button" class="btn btn-light" disabled>></button>
 		</c:if>
 		<c:if test="${ requestScope.selectCriteria.pageNo < requestScope.selectCriteria.maxPage }">
-			<button id="nextPage">></button>
+			<button type="button" class="btn btn-light" id="nextPage">></button>
 		</c:if>
 		
 		<!-- 마지막 페이지로 이동 버튼 -->
-		<button id="maxPage">>></button> 
+		<button type="button" class="btn btn-light" id="maxPage">>></button> 
 	</div>
 	
 	<script>
-		/* category */
 		
-		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/grade";
+		
+		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/category";
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false }) {
