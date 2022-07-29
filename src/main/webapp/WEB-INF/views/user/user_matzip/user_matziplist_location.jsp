@@ -166,7 +166,7 @@
                 </div><!--idcard3 끝-->
               --%>
       
-            	<jsp:include page="../paging_location.jsp"/>
+            	<jsp:include page="../user_paging/paging_location.jsp"/>
       
              
       

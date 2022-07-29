@@ -156,7 +156,7 @@
                 </div><!--idcard3 끝--> --%>
              
       
-            	<jsp:include page="../paging_grade.jsp"/>
+            	<jsp:include page="../user_paging/paging_grade.jsp"/>
              
       
             

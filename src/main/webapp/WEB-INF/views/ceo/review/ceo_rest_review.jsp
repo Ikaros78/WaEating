@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,11 +31,16 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <h3 class="ps-2">리뷰(4)</h3>
+          <h3 class="ps-2">리뷰(${ requestScope.totalCount })</h3>
           <table width="100%" class="table table-borderless">
-           
+           	  <c:forEach var="review" items="${ requestScope.selectAllReview }">
+           	  <tr class="border-bottom">
+                <td class="col-10 pt-3"><c:out value="${ review.reviewContent }"/></td>
+                <td class="d-flex justify-content-end"><button type="button" class="btn btn-primary"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new?reviewNo=${ review.reviewNo }" style="color:#fff; text-decoration: none;">답변 등록</a></button></td>         
+              </tr>
+              </c:forEach>
             
-              <tr class="border-bottom">
+             <%--  <tr class="border-bottom">
                 <td class="col-10 pt-3">웨이팅이 있었지만 금방 들어갔어요. 돈까스도 맛있고 다음에 또 오고싶어요!</td>
                 <td class="d-flex justify-content-end"><button type="button" class="btn btn-primary"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" style="color:#fff; text-decoration: none;">답변 등록</a></button></td>         
               </tr>
@@ -49,16 +55,19 @@
               <tr class="border-bottom">
                 <td class="col-10 pt-3">너무 맛있게 잘 먹고 갑니다.</td>
                 <td class="d-flex justify-content-end"><button type="button" class="btn btn-light"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_modify" style="color: #6c757d; text-decoration: none;">답변 완료</a></button></td>
-              </tr>
+              </tr> --%>
             
           </table>
-          <ul class="pagination justify-content-center">
+          
+          <jsp:include page="../common/paging_review.jsp"/>
+          
+          <!-- <ul class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;"><</a></li>
             <li class="page-item active"><a class="page-link" href="#" style="border:#D94925 1px solid; background-color: #D94925; color: #fff;">1</a></li>
-            <!-- <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">3</a></li> -->
+            <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">3</a></li>
             <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">></a></li>
-          </ul>     
+          </ul> -->     
            
         </div>
        </aside>

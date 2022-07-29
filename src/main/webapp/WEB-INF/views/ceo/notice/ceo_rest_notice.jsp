@@ -63,7 +63,7 @@
               </c:forEach>
             </div>
             
-            <jsp:include page="../common/paging.jsp"/>
+            <jsp:include page="../common/paging_notice.jsp"/>
            
             <!-- <ul class="pagination justify-content-center">
               <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;"><</a></li>
@@ -116,7 +116,7 @@
 					
 					/* alert(this.parentNode.children[1].innerText); */
 					
-					location.href = ""
+					//location.href = ""
 					
 				}
 				

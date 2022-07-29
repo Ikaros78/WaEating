@@ -71,30 +71,7 @@ public class ComNoticeService {
 		return comNotice;
 	}
 
-	public ComNoticeDTO updateNotice() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-//	public int updateNotice() {
-
-//		SqlSession sqlSession = getSqlSession();
-//		
-//		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);
-//		int result = comNoticeMapper.updateNotice(comNotice);
-//		
-//		if(result > 0) {
-//			
-//			sqlSession.commit();
-//		} else {
-//			
-//			sqlSession.rollback();
-//		}
-//		
-//		sqlSession.close();
-//		
-//		return result;
-//	}
+	
 
 	
 

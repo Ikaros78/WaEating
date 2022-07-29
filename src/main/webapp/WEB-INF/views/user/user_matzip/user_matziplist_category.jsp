@@ -179,7 +179,7 @@
              
       			
             	
-				<jsp:include page="../paging.jsp"/>
+				<jsp:include page="../user_paging/paging_category.jsp"/>
 
        </aside>
     </section>

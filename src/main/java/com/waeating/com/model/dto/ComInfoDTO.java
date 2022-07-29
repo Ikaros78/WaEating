@@ -22,13 +22,16 @@ public class ComInfoDTO {
 	private MemberDTO memberInfo;
 	private List<ComRecordDTO> recordList;
 	private ReviewDTO review;
+	private WaitingRecordDTO waitingRecord;
 	
 	
 	public ComInfoDTO() {}
 
+
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
 			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
-			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review) {
+			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review,
+			WaitingRecordDTO waitingRecord) {
 		super();
 		this.comNo = comNo;
 		this.memberId = memberId;
@@ -45,25 +48,9 @@ public class ComInfoDTO {
 		this.memberInfo = memberInfo;
 		this.recordList = recordList;
 		this.review = review;
+		this.waitingRecord = waitingRecord;
 	}
 
-	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
-			String comRegist, String waitYn, String workTime, String holiday, MemberDTO memberInfo,
-			List<ComRecordDTO> recordList) {
-		super();
-		this.comNo = comNo;
-		this.memberId = memberId;
-		this.comName = comName;
-		this.category = category;
-		this.comAddress = comAddress;
-		this.comPhone = comPhone;
-		this.comRegist = comRegist;
-		this.waitYn = waitYn;
-		this.workTime = workTime;
-		this.holiday = holiday;
-		this.memberInfo = memberInfo;
-		this.recordList = recordList;
-	}
 
 
 	public int getComNo() {
@@ -215,6 +202,19 @@ public class ComInfoDTO {
 	public void setReview(ReviewDTO review) {
 		this.review = review;
 	}
+	
+
+
+
+	public WaitingRecordDTO getWaitingRecord() {
+		return waitingRecord;
+	}
+
+
+	public void setWaitingRecord(WaitingRecordDTO waitingRecord) {
+		this.waitingRecord = waitingRecord;
+	}
+
 
 	@Override
 	public String toString() {
@@ -222,7 +222,7 @@ public class ComInfoDTO {
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
 				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", comBoardAttach="
 				+ comBoardAttach + ", comMenu=" + comMenu + ", memberInfo=" + memberInfo + ", recordList=" + recordList
-				+ ", review=" + review + "]";
+				+ ", review=" + review + ", waitingRecord=" + waitingRecord + "]";
 	}
 
 }
