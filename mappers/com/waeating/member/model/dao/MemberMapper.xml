@@ -32,7 +32,7 @@
 		
 	</resultMap>
 	
-	<select id="selectEncryptedPwd" resultType="java.lang.String" resultMap="memberResultMap">
+	<select id="selectEncryptedPwd" resultType="java.lang.String">
 		SELECT
 				A.MEMBER_PWD
 		  FROM MEMBER_INFO A
@@ -186,7 +186,7 @@
 			  , B.GENDER
 			FROM MEMBER_INFO A
 			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-		   WHERE A.MEMBER_ID = #{ memberId }
+		   WHERE A.MEMBER_ID = #{ id }
 	</select>
 	
 	<insert id="insertUser" parameterType="com.waeating.member.model.dto.UserDTO">

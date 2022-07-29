@@ -12,7 +12,7 @@
 	
 	<div class="wrap">
         <div id="user" class="main">
-            <a href="${ pageContext.servletContext.contextPath }/member/user/login">
+            <a href="${ pageContext.servletContext.contextPath }/member/user/login/session">
                 <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/user.png" alt="일반회원">
                 <p>일반회원</p>
             </a>
