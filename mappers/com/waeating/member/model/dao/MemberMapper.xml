@@ -223,7 +223,7 @@
 		, #{ pwd }
 		, #{ email }
 		, #{ name }
-		, 'user'
+		, #{ memberType }
 		, #{ phone }
 		, null
 		)

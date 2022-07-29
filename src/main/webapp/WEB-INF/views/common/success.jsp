@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>성공 메시지</title>
 </head>
 <body>
-<script>
-	(function(){
-		const successCode = "${ requestScope.successCode }";
+ <script>
+		var successCode = "${ requestScope.success }";
 		
 		let successMessage = "";
 		let movePath = "";
@@ -19,7 +18,7 @@
 				successMessage = "회원 가입에 성공하셨습니다!";
 				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
 				break;
-			case "updateMember" : 
+			/* case "updateMember" : 
 				successMessage = "회원 정보 변경에 성공하셨습니다!";
 				movePath = "${ pageContext.servletContext.contextPath };
 				break;
@@ -30,16 +29,13 @@
 			case "insertNotice" : 
 				successMessage = "공지사항 등록에 성공하셨습니다!";
 				movePath = "${ pageContext.servletContext.contextPath }/notice/list";
-				break;
+				break; */
 		
-			
 		}
 
 		alert(successMessage);
 		
 		location.replace(movePath);
-	})();
-	</script>
-
+</script>
 </body>
 </html>
