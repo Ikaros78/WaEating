@@ -54,7 +54,7 @@
             </table>
             <div class="mt-3 d-flex justify-content-center">
               <button type="button" class="btn btn-outline-danger me-2" value="삭제" data-bs-toggle="modal" data-bs-target="#modalDeleteq">삭제</button>
-              <button type="button" class="btn btn-outline-primary" value="수정" data-bs-toggle="modal" data-bs-target="#modalSubmit" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify_update'">수정</button>
+              <button type="button" class="btn btn-outline-primary" value="수정" data-bs-toggle="modal" data-bs-target="#modalSubmit" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify'">수정</button>
             </div>
 
             <!-- Modal (삭제) -->
