@@ -12,14 +12,14 @@
 	
 	<div class="wrap">
         <div id="user" class="main">
-            <a href="${ pageContext.servletContext.contextPath }/member/login/user">
+            <a href="${ pageContext.servletContext.contextPath }/member/user/login">
                 <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/user.png" alt="일반회원">
                 <p>일반회원</p>
             </a>
         </div>
 
         <div id="ceo" class="main">
-            <a href="${ pageContext.servletContext.contextPath }/member/login/ceo">
+            <a href="${ pageContext.servletContext.contextPath }/member/ceo/login">
                 <img src="${ pageContext.servletContext.contextPath }/resources/images/login-img/shop.png" alt="업주">
                 <p>업주</p>
             </a>

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.member.model.dto.UserDTO;
@@ -23,17 +24,20 @@ public class UserSignUpServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-sign_up.jsp").forward(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		String userId = request.getParameter("id");
 		String userName = request.getParameter("name");
 		String userPw = request.getParameter("pw");
-		String userRepw = request.getParameter("re_pw");
-		String userPhone = request.getParameter("phone").replace("-", "");
+		String userPhone = request.getParameter("phone");
 		String userEmail = request.getParameter("email");
 		String userBirth = request.getParameter("birth");
 		String userGender = request.getParameter("gender");
@@ -65,15 +69,15 @@ public class UserSignUpServlet extends HttpServlet {
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
-			request.setAttribute("successCode", "insertMember");
+			request.setAttribute("insertMember", "회원가입에 성공하셨습니다.");
 		} else {
 			
 			page = "/WEB-INF/views/common/failed.jsp";
 			
 			request.setAttribute("message", "회원가입에 실패하셨습니다. 다시 시도해주세요.");
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 }

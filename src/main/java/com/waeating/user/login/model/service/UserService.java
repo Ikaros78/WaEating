@@ -111,7 +111,7 @@ public class UserService {
 		
 		sqlSession.close();
 		
-		return 0;
+		return result;
 	}
 
 }
