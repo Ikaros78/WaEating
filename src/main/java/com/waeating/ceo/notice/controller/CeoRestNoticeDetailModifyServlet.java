@@ -40,21 +40,7 @@ public class CeoRestNoticeDetailModifyServlet extends HttpServlet {
 	@Override
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-			
-			ComNoticeDTO comNotice = new ComNoticeService().updateNotice();
-			
-			String path = "";
-			
-			if(comNotice != null) {
-				path = "/WEB-INF/views/ceo/notice/ceo_rest_notice_detail_modify.jsp";
-				request.setAttribute("updateNotice", comNotice);
-			} else {
-				path = "/WEB-INF/views/common.errorPage.jsp";
-				request.setAttribute("message", "공지 수정 실패");
-			}
-			
-			request.getRequestDispatcher(path).forward(request, response);
+
 		}
 
 
