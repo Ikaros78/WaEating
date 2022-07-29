@@ -32,7 +32,7 @@
 		
 	</resultMap>
 	
-	<select id="selectEncryptedPwd" resultType="java.lang.String" resultMap="memberResultMap">
+	<select id="selectEncryptedPwd" resultType="java.lang.String">
 		SELECT
 				A.MEMBER_PWD
 		  FROM MEMBER_INFO A
@@ -186,7 +186,7 @@
 			  , B.GENDER
 			FROM MEMBER_INFO A
 			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-		   WHERE A.MEMBER_ID = #{ memberId }
+		   WHERE A.MEMBER_ID = #{ id }
 	</select>
 	
 	<insert id="insertUser" parameterType="com.waeating.member.model.dto.UserDTO">
@@ -223,7 +223,7 @@
 		, #{ pwd }
 		, #{ email }
 		, #{ name }
-		, 'user'
+		, #{ memberType }
 		, #{ phone }
 		, null
 		)
@@ -235,4 +235,29 @@
 		  FROM USER_INFO
 		 WHERE MEMBER_ID = #{ dubleCkId }
 	</select>
+	
+	<select id="selectFindIdForEmail" resultMap="generalUserResultMap" >
+		SELECT
+				A.MEMBER_ID
+			FROM MEMBER_INFO A
+			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.NAME = #{ name }
+		     AND A.EMAIL = #{ email }
+		     AND A.MEMBER_TYPE = #{ memberType }
+		     AND B.BIRTH = #{ userInfo.birth }
+		     AND B.GENDER = #{ userInfo.gender }
+	</select>
+	
+	<select id="selectFindIdForPhone" resultMap="generalUserResultMap" >
+		SELECT
+				A.MEMBER_ID
+			FROM MEMBER_INFO A
+			JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.NAME = #{ name }
+		     AND A.PHONE = #{ phone }
+		     AND A.MEMBER_TYPE = #{ memberType }
+		     AND B.BIRTH = #{ userInfo.birth }
+		     AND B.GENDER = #{ userInfo.gender }
+	</select>
+	
 </mapper>

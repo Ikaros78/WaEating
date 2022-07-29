@@ -34,8 +34,6 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/company/list">업체정보 조회</a></li>
-                                    <li role="presentation"><a href="#">업체 승인</a></li>
-                                    <li role="presentation"><a href="#">사업자 등록번호 조회</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -145,6 +143,13 @@
                         <tr>
                         	<td>업체 승인상태</td>
                         	<td><c:out value="${ com.recordList[0].status }"/></td>
+                        	<c:if test="${ !empty sessionScope.ifUpdate }">
+	                            	<td><select name="updateStatus">
+	                            			<option>승인대기</option>
+	                            			<option>승인</option>
+	                            			<option>거절</option>
+	                            		</select></td>
+	                        </c:if>
                         </tr>
                        	<c:if test="${ com.recordList[0].status eq '거절' }">
                         <tr>
