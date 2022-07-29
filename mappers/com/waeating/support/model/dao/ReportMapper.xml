@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waeating.support.model.dao.ReportMapper">
+	<resultMap type="com.waeating.support.model.dto.ReportDTO" id="reportResultMap">
+		<id property="reportNo" column="REPORT_NO"/>
+		<result property="title" column="REPORT_TITLE"/>
+		<result property="content" column="REPORT_CONTENT"/>
+		<result property="id" column="MEMBER_ID"/>
+		<result property="regDate" column="REG_DATE"/>
+		
+		<association property="answer" resultMap="answerResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.support.model.dto.ReportAnswerDTO" id="answerResultMap">
+		<id property="ansNo" column="ANS_NO"/>
+		<result property="ansContent" column="ANS_CONTENT"/>
+		<result property="ansDate" column="REG_DATE"/>
+		<result property="isDeleted" column="IS_DELETED"/>
+		<result property="reportNo" column="REPORT_NO"/>
+	</resultMap>
+	
+	<select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+		SELECT
+				COUNT(*)
+			FROM REPORT A
+			<!-- 검색조건문 -->
+		<where>
+			<if test="searchCondition =='id'">
+				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+			</if>
+			<if test="searchCondition =='title'">
+				A.REPORT_TITLE LIKE '%' || #{ searchValue } || '%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="adminSelectReportList" resultMap="reportResultMap">
+		SELECT
+				A.RNUM
+			  , A.REPORT_NO
+			  , A.REPORT_TITLE
+			  , A.MEMBER_ID
+		  FROM (SELECT ROWNUM RNUM
+		  			 , B.REPORT_NO
+		  			 , B.REPORT_TITLE
+		  			 , B.MEMBER_ID
+		  		  FROM(SELECT C.REPORT_NO
+		  		  			, C.REPORT_TITLE
+		  		  			, C.MEMBER_ID
+		  		  		 FROM REPORT C
+			  		  	 <where>
+							<if test="searchCondition =='id'">
+								C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+							</if>
+							<if test="searchCondition =='title'">
+								C.REPORT_TITLE LIKE '%' || #{ searchValue } || '%'
+							</if>
+						</where>
+						ORDER BY C.REPORT_NO DESC
+		  		  ) B
+		  		  <![CDATA[
+			     WHERE ROWNUM <= #{ endRow }
+			     ]]>
+		  )A
+		WHERE A.RNUM >= #{ startRow } 
+	</select>
+	
+	<select id="adminSelectReportDetail" parameterType="hashmap">
+		SELECT
+				A.REPORT_TITLE
+			  , A.REPORT_CONTENT
+			  , A.MEMBER_ID
+			  , A.REG_DATE
+			  , B.ANS_CONTENT
+			  , B.REG_DATE
+			  , B.IS_DELETED
+			FROM REPORT A
+			JOIN REPORT_ANS B ON (A.REPORT_NO = B.REPORT_NO)
+		   WHERE A.REPORT_NO = #{ reportNo }
+	</select>
+</mapper>

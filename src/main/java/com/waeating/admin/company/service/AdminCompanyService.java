@@ -12,10 +12,21 @@ import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.member.model.dao.MemberMapper;
 
+/**
+ * @author user
+ *
+ */
 public class AdminCompanyService {
 	
 	private ComInfoMapper companyMapper;
 
+	/**
+	 * <pre>
+	 *   페이징 처리를 위한 전체 게시물 수 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public int selectTotalCount(Map<String, String> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -28,6 +39,13 @@ public class AdminCompanyService {
 		return totalCount;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 전체 조회용 메소드
+	 * </pre>
+	 * @param selectCriteria
+	 * @return
+	 */
 	public List<ComInfoDTO> selectCompanyList(SelectCriteria selectCriteria) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -40,6 +58,13 @@ public class AdminCompanyService {
 		return companyList;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 정보 상세보기용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public ComInfoDTO selectCompanyDetail(Map<String, String> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -52,6 +77,13 @@ public class AdminCompanyService {
 		return company;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 가입 승인 처리용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public int accessCompanyStatus(Map<String, String> searchMap) {
 
 		SqlSession sqlSession = getSqlSession();
@@ -72,6 +104,13 @@ public class AdminCompanyService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 정보 삭제용 메소드
+	 * </pre>
+	 * @param comNo
+	 * @return
+	 */
 	public int deleteCompany(String comNo) {
 
 		SqlSession sqlSession = getSqlSession();
@@ -92,6 +131,13 @@ public class AdminCompanyService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 가입 승인 거부용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public int refuseCompanyStatus(Map<String, String> searchMap) {
 
 		SqlSession sqlSession = getSqlSession();
@@ -112,6 +158,13 @@ public class AdminCompanyService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 정보 수정용 메소드(comInfo범위)
+	 * </pre>
+	 * @param updateCompanyMap
+	 * @return
+	 */
 	public int updateCompany(Map<String, String> updateCompanyMap) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -132,6 +185,13 @@ public class AdminCompanyService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   업체 정보 수정용 메소드(comRecord범위)
+	 * </pre>
+	 * @param updateRecordMap
+	 * @return
+	 */
 	public int updateCompanyStatus(Map<String, String> updateRecordMap) {
 		
 		SqlSession sqlSession = getSqlSession();
