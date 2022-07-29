@@ -32,21 +32,11 @@ public class CheckUserIdServlet extends HttpServlet {
 		
 		System.out.println("result : " + result);
 		
-		boolean doubleCk = false;
-		
-		if(result > 0) {
-			
-			doubleCk = false;
-		} else {
-			
-			doubleCk = true;
-		}
-		
 		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
 		
-		out.print(doubleCk);
+		out.print(result);
 		
 		out.flush();
 		out.close();

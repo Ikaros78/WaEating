@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class UserLoginSessionHaandlerServlet
  */
-@WebServlet("/member/user/login/sesssion")
+@WebServlet("/member/user/login/session")
 public class UserLoginSessionHaandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -22,8 +22,6 @@ public class UserLoginSessionHaandlerServlet extends HttpServlet {
 		String memberType = "user";
 		
 		session.setAttribute("memberType", memberType);
-		
-		System.out.println(request.getContextPath());
 		
 		response.sendRedirect(request.getContextPath() + "/member/user/login");
 		
