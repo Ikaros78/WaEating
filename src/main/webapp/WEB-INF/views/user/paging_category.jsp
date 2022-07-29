@@ -6,48 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/ceo/rest_detail_style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 	<div class="pagingArea" align="center">
 		<!-- 맨 앞으로 이동 버튼 -->
-	    <button type="button" class="btn btn-light" id="startPage"><<</button>
+	    <button id="startPage"><<</button>
 		
 		<!-- 이전 페이지 버튼 -->
 		<c:if test="${ requestScope.selectCriteria.pageNo <= 1 }">
-			<button type="button" class="btn btn-light" disabled><</button>
+			<button disabled><</button>
 		</c:if>
 		<c:if test="${ requestScope.selectCriteria.pageNo > 1 }">
-			<button type="button" class="btn btn-light" id="prevPage"><</button>
+			<button id="prevPage"><</button>
 		</c:if>
 		
 		<!-- 숫자 버튼 -->
 		<c:forEach var="p" begin="${ requestScope.selectCriteria.startPage }" end="${ requestScope.selectCriteria.endPage }" step="1">
 			<c:if test="${ requestScope.selectCriteria.pageNo eq p }">
-				<button type="button" class="btn btn-light" disabled><c:out value="${ p }"/></button>
+				<button disabled><c:out value="${ p }"/></button>
 			</c:if>
 			<c:if test="${ requestScope.selectCriteria.pageNo ne p }">
-				<button type="button" class="btn btn-light" onclick="pageButtonAction(this.innerText);"><c:out value="${ p }"/></button>
+				<button onclick="pageButtonAction(this.innerText);"><c:out value="${ p }"/></button>
 			</c:if>
 		</c:forEach>
 		
 		<!-- 다음 페이지 버튼 -->
 		<c:if test="${ requestScope.selectCriteria.pageNo >= requestScope.selectCriteria.maxPage }">
-			<button type="button" class="btn btn-light" disabled>></button>
+			<button disabled>></button>
 		</c:if>
 		<c:if test="${ requestScope.selectCriteria.pageNo < requestScope.selectCriteria.maxPage }">
-			<button type="button" class="btn btn-light" id="nextPage">></button>
+			<button id="nextPage">></button>
 		</c:if>
 		
 		<!-- 마지막 페이지로 이동 버튼 -->
-		<button type="button" class="btn btn-light" id="maxPage">>></button> 
+		<button id="maxPage">>></button> 
 	</div>
 	
 	<script>
-	
-		const link = "${ pageContext.servletContext.contextPath }/ceo/rest_notice";
+		/* category */
+		
+		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/category";
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false }) {

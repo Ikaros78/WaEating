@@ -6,7 +6,7 @@ import com.waeating.notice.model.dto.NoticeDTO;
 
 public interface NoticeMapper {
 	
-	List<NoticeDTO> selectALLNoticeList();
+	List<NoticeDTO> selectAllNoticeList();
 	
 	int insertNotice(NoticeDTO newNotice);
 	

@@ -1,4 +1,4 @@
-package com.waeating.user.matziplist.controller;
+package com.waeating.ceo.notice.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,22 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.ceo.notice.model.dto.ComNoticeDTO;
+import com.waeating.ceo.notice.model.service.ComNoticeService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.user.matziplist.model.service.ComService;
 
 /**
- * Servlet implementation class UserMatziplistLocationServlet
+ * Servlet implementation class CeoRestNotice
  */
-@WebServlet("/user/matziplist/location")
-public class UserMatziplistLocationServlet extends HttpServlet {
+@WebServlet("/ceo/rest_notice")
+public class CeoRestNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		/* 페이징 처리 */
+		
+//		HttpSession session = request.getSession();
+//		
+//		request.getRequestDispatcher("/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp").forward(request, response);
+		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
@@ -38,26 +40,24 @@ public class UserMatziplistLocationServlet extends HttpServlet {
 			pageNo = 1;
 		}
 		
-		String searchCondition = "";
+		String searchCondition = request.getParameter("searchCondition");
 		String searchValue = request.getParameter("searchValue");
 		
 		Map<String, String> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		
-		ComService comService = new ComService();
+		ComNoticeService noticeService = new ComNoticeService();
+		int totalCount = noticeService.selectTotalCount(searchMap);
 		
-		int totalCount = comService.selectTotalCount(searchMap);
-		System.out.println("totalCount : " + totalCount);
+		System.out.println("totalBoardCount : " + totalCount);
 		
-		/* 한 페이지에 보여줄 게시물 수*/
-		int limit = 9;
-		/* 한 번에 보여줄 버튼 개수*/
-		int buttonAmount = 5;
+		int limit = 10;
+		int buttonAmount = 3;
 		
 		SelectCriteria selectCriteria = null;
 		
-		if(searchValue != null && !"".equals(searchValue)) {
+		if(searchCondition != null && !"".equals(searchCondition)) {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, searchValue);
 		} else {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
@@ -65,29 +65,22 @@ public class UserMatziplistLocationServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		/* 조회 */
-		List<ComInfoDTO> selectCom = comService.selectComByLocation(selectCriteria);
+		List<ComNoticeDTO> comNoticeList = noticeService.selectAllNotice(selectCriteria);
 		
-		System.out.println("selectCom : " + selectCom);
+		System.out.println(comNoticeList);
 		
-		/* 조회 결과에 따라 성공 결과 뷰 결정*/
 		String path = "";
-		if(selectCom != null) {
-			path = "/WEB-INF/views/user/user_matzip/user_matziplist_location.jsp";
-			request.setAttribute("selectCom", selectCom);
+		if(comNoticeList != null) {
+			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
+			request.setAttribute("selectAllNotice", comNoticeList);
 			request.setAttribute("selectCriteria", selectCriteria);
-			
-			
-		}else {
-			
-			path = "/WEB-INF/views/common/erroePage.jsp";
-			request.setAttribute("message", "종류별 맛집 리스트 조회 실패!");
+		} else {
+			path = "/WEB-INF/views/common.errorPage.jsp";
+			request.setAttribute("message", "공지 리스트 조회 실패");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
-		
 	}
-
 
 
 }

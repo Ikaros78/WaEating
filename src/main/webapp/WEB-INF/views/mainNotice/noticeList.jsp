@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
@@ -81,11 +81,13 @@
                 <div>
                     <p><div class="list_n_menu"><span class="disabled"><  이전</span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">20</a><a href="#?page=200">21</a><a href="#?page=2">다음  ></a></div></p>
                 </div>
+                
             </div>
+            
           </section>
         
         </div>
-<jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/>
+<jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
   </div>
 
 </body>

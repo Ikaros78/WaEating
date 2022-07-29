@@ -15,11 +15,13 @@ import com.waeating.user.login.model.service.UserService;
 /**
  * Servlet implementation class UserLoginServlet
  */
-@WebServlet("/member/login/user")
+@WebServlet("/member/user/login")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
 		
 		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-login.jsp").forward(request, response);
 	}
@@ -27,15 +29,20 @@ public class UserLoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
+		String memberType = (String) session.getAttribute("memberType");
 		
 		System.out.println("userId : " + userId);
 		System.out.println("userPw : " + userPw);
+		System.out.println("memberType : " + memberType);
 		
 		MemberDTO requestMember = new MemberDTO();
 		requestMember.setId(userId);
 		requestMember.setPwd(userPw);
+		requestMember.setMemberType(memberType);
 		
 		UserService userService = new UserService();
 	
@@ -45,7 +52,6 @@ public class UserLoginServlet extends HttpServlet {
 		
 		if(loginMember != null) {
 			
-			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
 			
 			response.sendRedirect("/WEB_INF/views/user/user_main.jsp");
