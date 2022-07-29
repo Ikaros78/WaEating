@@ -28,19 +28,19 @@ public class CeoRestNoticeDetailModifyUpdateServlet extends HttpServlet {
 		comNotice.setNoticeTitle(noticeTitle);
 		comNotice.setNoticeContent(noticeContent);
 		
-		int result = new ComNoticeService().updateNotice(comNotice);
+//		int result = new ComNoticeService().updateNotice(comNotice);
 		
-		String path = "";
+//		String path = "";
+//		
+//		if(result > 0) {
+//			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice_detail_modify.jsp";
+////			request.setAttribute("updateNotice", comNotice);
+//		} else {
+//			path = "/WEB-INF/views/common.errorPage.jsp";
+//			request.setAttribute("message", "공지 수정 실패");
+//		}
 		
-		if(result > 0) {
-			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice_detail_modify.jsp";
-//			request.setAttribute("updateNotice", comNotice);
-		} else {
-			path = "/WEB-INF/views/common.errorPage.jsp";
-			request.setAttribute("message", "공지 수정 실패");
-		}
-		
-		request.getRequestDispatcher(path).forward(request, response);
+//		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 
