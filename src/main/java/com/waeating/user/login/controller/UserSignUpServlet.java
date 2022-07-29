@@ -69,7 +69,7 @@ public class UserSignUpServlet extends HttpServlet {
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
-			request.setAttribute("insertMember", "회원가입에 성공하셨습니다.");
+			request.setAttribute("successCode", "insertMember");
 		} else {
 			
 			page = "/WEB-INF/views/common/failed.jsp";

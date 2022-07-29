@@ -31,8 +31,8 @@ public class UserLoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		String userId = request.getParameter("userId");
-		String userPw = request.getParameter("userPw");
+		String userId = request.getParameter("id");
+		String userPw = request.getParameter("pw");
 		String memberType = (String) session.getAttribute("memberType");
 		
 		System.out.println("userId : " + userId);
