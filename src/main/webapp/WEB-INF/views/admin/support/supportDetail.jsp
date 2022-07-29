@@ -16,6 +16,13 @@
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- summernote -->
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote-lite.js"></script>
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/summernote/summernote-lite.css">
+<!-- summernote script -->
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -41,7 +48,22 @@
                     </tbody>
                 </table>
             </div>
-            
+            <div class="col-md-9">
+            	
+            </div>
+            <div class="col-md-9">
+            	<table width="100%">
+		            <tr>
+		            	<td><h5>제목</h5></td>
+		                <td style="width: 95%;"><input type="text" class="form-control mb-2" placeholder="제목을 입력해주세요." name="noticeTitle" id="title"></td>
+		            </tr>
+		            <tr>
+		                <td class="d-flex align-content-start mt-2"><h5>내용</h5></td>
+		                <td><textarea id="summernote" name="noticeContent"></textarea></td>
+		            </tr>
+           		</table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

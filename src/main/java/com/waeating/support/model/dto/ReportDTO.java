@@ -1,12 +1,14 @@
 package com.waeating.support.model.dto;
 
+import java.sql.Date;
+
 public class ReportDTO {
 
 	private int reportNo;
 	private String title;
 	private String content;
 	private String id;
-	private String regDate; 
+	private java.sql.Date regDate; 
 	private ReportAnswerDTO answer;
 	
 	public ReportDTO() {}
@@ -19,7 +21,7 @@ public class ReportDTO {
 		this.id = id;
 	}
 
-	public ReportDTO(int reportNo, String title, String content, String id, String regDate, ReportAnswerDTO answer) {
+	public ReportDTO(int reportNo, String title, String content, String id, Date regDate, ReportAnswerDTO answer) {
 		super();
 		this.reportNo = reportNo;
 		this.title = title;
@@ -60,12 +62,12 @@ public class ReportDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public String getRegDate() {
+
+	public java.sql.Date getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(String regDate) {
+	public void setRegDate(java.sql.Date regDate) {
 		this.regDate = regDate;
 	}
 

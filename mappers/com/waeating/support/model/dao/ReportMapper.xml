@@ -16,7 +16,7 @@
 	<resultMap type="com.waeating.support.model.dto.ReportAnswerDTO" id="answerResultMap">
 		<id property="ansNo" column="ANS_NO"/>
 		<result property="ansContent" column="ANS_CONTENT"/>
-		<result property="ansDate" column="REG_DATE"/>
+		<result property="ansDate" column="ANS_DATE"/>
 		<result property="isDeleted" column="IS_DELETED"/>
 		<result property="reportNo" column="REPORT_NO"/>
 	</resultMap>
@@ -67,17 +67,17 @@
 		WHERE A.RNUM >= #{ startRow } 
 	</select>
 	
-	<select id="adminSelectReportDetail" parameterType="hashmap">
+	<select id="adminSelectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
 		SELECT
 				A.REPORT_TITLE
 			  , A.REPORT_CONTENT
 			  , A.MEMBER_ID
 			  , A.REG_DATE
 			  , B.ANS_CONTENT
-			  , B.REG_DATE
+			  , B.ANS_DATE
 			  , B.IS_DELETED
 			FROM REPORT A
-			JOIN REPORT_ANS B ON (A.REPORT_NO = B.REPORT_NO)
+			LEFT JOIN REPORT_ANS B ON (A.REPORT_NO = B.REPORT_NO)
 		   WHERE A.REPORT_NO = #{ reportNo }
 	</select>
 </mapper>

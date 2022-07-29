@@ -30,6 +30,8 @@ public class AdminSupportSelectDetailServlet extends HttpServlet {
 		AdminSupportService supportService = new AdminSupportService();
 		ReportDTO report = supportService.selectReportDetail(searchMap);
 		
+		System.out.println(report);
+		
 		String path = "";
 		
 		if(report != null) {
