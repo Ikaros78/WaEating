@@ -9,6 +9,7 @@
   		<result property="noticeContent" column="NOTICE_CONTENT"/>
   		<result property="regDate" column="REG_DATE"/>
   		<result property="comNo" column="COM_NO"/>
+  		<result property="rNum" column="RNUM"/>
   		<association property="comNoticeAttach" resultMap="comNoticeAttachResultMap"/>
   	</resultMap>
   	
@@ -38,38 +39,64 @@
   	
   	<select id="selectAllNotice" resultMap="comNoticeResultMap">
   		 SELECT
+  		   		A.RNUM
+  		   	  , A.NOTICE_NO 
+  		   	  , A.NOTICE_TITLE
+  		   	  , A.REG_DATE
+  		   FROM (SELECT ROWNUM RNUM
+  		   			  , B.NOTICE_NO 
+  		   			  , B.NOTICE_TITLE
+  		   			  , B.REG_DATE
+  		   		   FROM (SELECT C.NOTICE_NO 
+  		   		   			  , C.NOTICE_TITLE
+  		   					  , C.REG_DATE
+  		   				   FROM COM_NOTICE C
+  		   				 <where>
+  		   				 	<if test="searchCondition == 'noticeTitle'">
+	           				   C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+							</if>
+  		   				 </where>
+  		   				 ORDER BY C.REG_DATE DESC
+  		   		   		) B
+  		   		   	<![CDATA[
+	                WHERE ROWNUM <= #{ endRow }
+	                ]]>
+  		   		) A
+  		   	WHERE A.RNUM >= #{ startRow }     
+  		 <!-- SELECT
   			    CN.NOTICE_TITLE
   			  , CN.REG_DATE
   	 	   FROM COM_NOTICE CN
-  	 	  ORDER BY 2 DESC
+  	 	  ORDER BY 2 DESC -->
   	</select>
   	
   	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
         SELECT
                COUNT(*)
           FROM COM_NOTICE CN
-    	<if test="searchCondition == 'category'">
-	      JOIN TBL_CATEGORY B ON(A.CATEGORY_CODE = B.CATEGORY_CODE)
-    	</if>
-    	<if test="searchCondition == 'writer'">
-	      JOIN TBL_MEMBER B ON(A.BOARD_WRITER_MEMBER_NO = B.MEMBER_NO)
-    	</if>
     	<where>
-			<if test="searchCondition == 'category'">
-	           B.CATEGORY_NAME = #{ searchValue }
+			<if test="searchCondition == 'noticeTitle'">
+	           CN.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
 			</if>
-			<if test="searchCondition == 'writer'">
-	           B.NICKNAME LIKE '%' || #{ searchValue } || '%'	
-			</if>
-			<if test="searchCondition == 'title'">
-	           A.BOARD_TITLE LIKE '%' || #{ searchValue } || '%' 	
-			</if>
-			<if test="searchCondition == 'content'">
-	           A.BOARD_BODY LIKE '%' || #{ searchValue } || '%' 	
-			</if>
-	       AND A.BOARD_STATUS = 'Y'
+			
     	</where>
+    	ORDER BY 1 DESC
 	</select>
   	
+  	<select id="selectOneNotice" resultMap="comNoticeResultMap">
+  		SELECT
+ 		       CN.NOTICE_TITLE
+ 		     , CN.NOTICE_CONTENT
+ 		  FROM COM_NOTICE CN
+ 		 WHERE CN.NOTICE_NO = #{ noticeNo }
+  	</select>
+  	
+  	<update id="updateNotice" parameterType="com.waeating.ceo.notice.model.dto.ComNoticeDTO">
+  		UPDATE 
+  			   COM_NOTICE CN
+  		   SET CN.NOTICE_TITLE = #{ noticeTitle }
+  		     , CN.NOTICE_CONTENT = #{ noticeContent }
+  		 WHERE CN.NOTICE_NO = #{ noticeNo }
+  	</update>
   	
   </mapper>

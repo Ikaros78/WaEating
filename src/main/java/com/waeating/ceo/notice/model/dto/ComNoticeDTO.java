@@ -9,16 +9,20 @@ public class ComNoticeDTO {
 	private String noticeContent;
 	private java.sql.Date regDate;
 	private int comNo;
+	private int rNum;
 	private ComNoticeAttachDTO comNoticeAttach;
 	
 	public ComNoticeDTO() {}
 
-	public ComNoticeDTO(int noticeNo, String noticeTitle, String noticeContent, Date regDate, int comNo) {
+	public ComNoticeDTO(int noticeNo, String noticeTitle, String noticeContent, Date regDate, int comNo, int rNum,
+			ComNoticeAttachDTO comNoticeAttach) {
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.regDate = regDate;
 		this.comNo = comNo;
+		this.rNum = rNum;
+		this.comNoticeAttach = comNoticeAttach;
 	}
 
 	public int getNoticeNo() {
@@ -61,11 +65,28 @@ public class ComNoticeDTO {
 		this.comNo = comNo;
 	}
 
+	public int getrNum() {
+		return rNum;
+	}
+
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
+	}
+
+	public ComNoticeAttachDTO getComNoticeAttach() {
+		return comNoticeAttach;
+	}
+
+	public void setComNoticeAttach(ComNoticeAttachDTO comNoticeAttach) {
+		this.comNoticeAttach = comNoticeAttach;
+	}
+
 	@Override
 	public String toString() {
 		return "ComNoticeDTO [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent="
-				+ noticeContent + ", regDate=" + regDate + ", comNo=" + comNo + "]";
+				+ noticeContent + ", regDate=" + regDate + ", comNo=" + comNo + ", rNum=" + rNum + ", comNoticeAttach="
+				+ comNoticeAttach + "]";
 	}
-	
+
 	
 }
