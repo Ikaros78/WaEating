@@ -44,15 +44,14 @@ public class CeoRestNoticeDetailNewServlet extends HttpServlet {
 		String path = "";
 		
 		if(result > 0) {
-			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
+			response.sendRedirect(request.getContextPath() + "/ceo/rest_notice");
 		
 		} else {
 			path = "/WEB-INF/views/common/errorPage.jsp";
 			request.setAttribute("message", "공지 등록에 실패하셨습니다.");
-			
+			request.getRequestDispatcher(path).forward(request, response);
 		}
 		
-		request.getRequestDispatcher(path).forward(request, response);
 		
 		
 	}
