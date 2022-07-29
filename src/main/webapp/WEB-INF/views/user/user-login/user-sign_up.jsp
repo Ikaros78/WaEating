@@ -119,10 +119,10 @@
     		data: {
     			userId : userId
     		}, 
-    		success: function(data) {
+    		success: function(result) {
     			
-    			console.log(data);
-    			if(data == true){
+    			console.log(result);
+    			if(result == 0){
     				alert("중복된 아이디가 없습니다.");
     				$("#hdCheckId").val("check");
     			} else {

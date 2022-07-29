@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,10 +75,10 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-2 my-1 ms-5" href="#">로그인</a>
+	            <a class="nav-link px-2 my-1 ms-5" href="#"><c:out value="${sessionScope.loginMember.name }"/>님</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-2 my-1 me-3" href="#">회원가입</a>
+                <a class="nav-link px-2 my-1 me-3" href="${ pageContext.servletContext.contextPath }/WEB-INF/views/main/main.jsp">로그아웃</a>
               </li>
             </ul>
           </div>

@@ -37,7 +37,7 @@
 
 		alert(successMessage);
 		
-		location.href(movePath);
+		location.replace(movePath);
 	})();
 	</script>
 
