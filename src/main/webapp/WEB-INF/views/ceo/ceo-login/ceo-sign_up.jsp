@@ -110,7 +110,7 @@
             </div>
             <div class="col-md-12 mb-4"></div>
             <button class="btn btn-primary btn-lg btn-block" type="submit" id="completion">가입 완료</button>
-            <a href="${ pageContext.servletContext.contextPath }/member/login/ceo"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
+            <a href="${ pageContext.servletContext.contextPath }/member/ceo/login"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
             </form>
          </div>
         </div>
