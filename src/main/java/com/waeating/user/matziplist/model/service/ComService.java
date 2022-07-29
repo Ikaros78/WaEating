@@ -7,14 +7,14 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.waeating.com.model.dao.ComInfoMapper;
+import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.user.matziplist.model.dao.ComMapper;
-import com.waeating.user.matziplist.model.dto.ComBoardAttachDTO;
-import com.waeating.user.matziplist.model.dto.ComInfoDTO;
+
 
 public class ComService {
 	
-	private ComMapper comMapper;
+	private ComInfoMapper comInfoMapper;
 
 
 
@@ -29,8 +29,8 @@ public class ComService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		comMapper = sqlSession.getMapper(ComMapper.class);
-		List<ComInfoDTO> com = comMapper.selectComByCategory(selectCriteria);
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		List<ComInfoDTO> com = comInfoMapper.selectCom(selectCriteria);
 		
 		sqlSession.close();
 		
@@ -50,14 +50,54 @@ public class ComService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		comMapper = sqlSession.getMapper(ComMapper.class);
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
-		int totalCount = comMapper.selectAllCount(searchMap);
+		int totalCount = comInfoMapper.selectAllCount(searchMap);
 		
 		sqlSession.close();
 		
 		
 		return totalCount;
+	}
+
+
+	/**
+	 * <pre>
+	 *  location별 맛집 리스트 조회
+	 * </pre>
+	 * @param selectCriteria
+	 * @return
+	 */
+	public List<ComInfoDTO> selectComByLocation(SelectCriteria selectCriteria) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		List<ComInfoDTO> com = comInfoMapper.selectCom(selectCriteria);
+		
+		sqlSession.close();
+		
+		return com;
+	}
+
+
+	/**
+	 * <pre>
+	 *  평점별로 정렬된 맛집 리스트 조회
+	 * </pre>
+	 * @param selectCriteria
+	 * @return
+	 */
+	public List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		List<ComInfoDTO> com = comInfoMapper.selectComByGrade(selectCriteria);
+		
+		sqlSession.close();
+		
+		return com;
 	}
 
 
