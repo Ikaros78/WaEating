@@ -114,4 +114,48 @@ public class UserService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 * 	 이메일로 아이디 찾는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return finUserId
+	 */
+	public MemberDTO findIdEmail(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO findUserId = null;
+		findUserId = memberMapper.selectFindIdForEmail(requestMember);
+		
+		sqlSession.close();
+		
+		return findUserId;
+	}
+
+	/**
+	 * <pre>
+	 * 	 전화번호로 아이디 찾는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO findIdPhone(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO findUserId = null;
+		findUserId = memberMapper.selectFindIdForPhone(requestMember);
+		
+		sqlSession.close();
+		
+		return findUserId;
+	}
+
+
+
 }

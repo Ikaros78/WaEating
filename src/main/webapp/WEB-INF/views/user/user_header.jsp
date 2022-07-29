@@ -75,7 +75,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-	            <a class="nav-link px-2 my-1 ms-5" href="#"><c:out value="${sessionScope.loginMember.name }"/>님</a>
+	            <a class="nav-link px-2 my-1 ms-5" href="#"><c:out value="${ sessionScope.loginMember.name }"/>님</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link px-2 my-1 me-3" href="${ pageContext.servletContext.contextPath }/member/user/login">로그아웃</a>

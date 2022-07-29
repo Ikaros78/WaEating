@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,19 +19,10 @@
 				successMessage = "회원 가입에 성공하셨습니다!";
 				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
 				break;
-			/* case "updateMember" : 
-				successMessage = "회원 정보 변경에 성공하셨습니다!";
-				movePath = "${ pageContext.servletContext.contextPath };
+			case "findId" :
+				successMessage = "아이디는 " + ${ requestScope.userId } + "입니다.";
+				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
 				break;
-			case "deleteMember" : 
-				successMessage = "회원 탈퇴에 성공하셨습니다!";
-				movePath = "${ pageContext.servletContext.contextPath };
-				break;
-			case "insertNotice" : 
-				successMessage = "공지사항 등록에 성공하셨습니다!";
-				movePath = "${ pageContext.servletContext.contextPath }/notice/list";
-				break; */
-		
 		}
 
 		alert(successMessage);
