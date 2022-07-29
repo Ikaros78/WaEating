@@ -6,13 +6,22 @@
 <meta charset="UTF-8">
 <title>업체</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/ceo/rest_detail_style.css">
+<!-- bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- summernote -->
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote-lite.js"></script>
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/summernote/summernote-lite.css">
+<!-- summernote script -->
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote.js"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <jsp:include page="../common/ceo_header.jsp"/>
 
-  <div id="wrap">
+  <div id="wrap" >
     <!-- 왼쪽 (메뉴) -->
     <section class="row container-fluid px-5">
       <aside class="float-start col-2 mt-4 ms-5 px-3">
@@ -34,14 +43,14 @@
             <table width="100%">
               <tr>
                 <td><h5>제목</h5></td>
-                <td style="width: 95%;"><input type="text" class="form-control mb-2 ms-1" placeholder="제목을 입력해주세요." name="noticeTitle" id="title"></td>
+                <td style="width: 95%;"><input type="text" class="form-control mb-2" placeholder="제목을 입력해주세요." name="noticeTitle" id="title"></td>
               </tr>
               <tr>
                 <td class="d-flex align-content-start mt-2"><h5>내용</h5></td>
-                <td><textarea class="form-control mb-2 ms-1" rows="10" name="noticeContent" id="content" placeholder="가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요."></textarea></td>
+                <td><textarea id="summernote" name="noticeContent"></textarea></td>
               </tr>
             </table>
-            <div class="d-flex justify-content-center">
+            <div class="mt-3 d-flex justify-content-center">
             <a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice">
               <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>            
             </a>

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="wrap">
-	<jsp:include page ="./common/menubar.jsp"/>
+	<jsp:include page ="./common/menubar.jsp"/> 
 	</div>
 </body>
 </html>

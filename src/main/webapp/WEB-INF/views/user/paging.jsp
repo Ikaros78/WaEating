@@ -43,7 +43,8 @@
 	</div>
 	
 	<script>
-	
+		/* category */
+		
 		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/category";
 		let searchText = "";
 		

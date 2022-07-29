@@ -36,14 +36,14 @@ public class AdminMemberSelectDetailServlet extends HttpServlet {
 		
 		String path ="";
 		if(member != null) {
-			path= "/WEB-INF/views/admin/member/memberDetail.jsp";
+			path = "/WEB-INF/views/admin/member/memberDetail.jsp";
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("path", path);
 			session.setAttribute("member", member);
 			
 		} else {
-			path= "/WEB-INF/views/common/failed.jsp";
+			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "회원정보 조회 실패!");
 		}
 		

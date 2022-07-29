@@ -14,28 +14,33 @@ import com.waeating.notice.model.service.NoticeService;
 /**
  * Servlet implementation class NoticeInsertServlet
  */
+@SuppressWarnings("unused")
 @WebServlet("/notice/insert")
 public class NoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	  String path ="/WEB-INF/views/notice/ceo_notice.jsp";
+	  String path ="/WEB-INF/views/mainNotice/noticeList.jsp";
+	  
+	  System.out.println(path);
 	  
 	  request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String title = request.getParameter("title");
-		String body = request.getParameter("body");
+		String noticeTitle = request.getParameter("noticeTitle");
+		String noticeContent = request.getParameter("noticeContent");
         
         NoticeDTO newNotice = new NoticeDTO();
-        newNotice.setTitle(title);
-        newNotice.setBody(body);
+        newNotice.setNoticeTitle(noticeTitle);
+        newNotice.setNoticeContent(noticeContent);
         
         NoticeService noticeService = new NoticeService();
         int result = noticeService.insertNotice(newNotice);
+        
+        System.out.println(result);
         
         String path = "";
         if(result > 0) {
