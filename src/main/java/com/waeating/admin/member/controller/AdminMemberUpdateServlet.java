@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.admin.member.service.AdminMemberService;
+import com.waeating.member.model.dto.MemberDTO;
 
 /**
  * Servlet implementation class AdminMemberUpdateServlet
@@ -21,6 +22,8 @@ public class AdminMemberUpdateServlet extends HttpServlet {
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+		
 		String id = (String) request.getSession().getAttribute("memberId");
 		String name = request.getParameter("updateName");
 		String pwd = request.getParameter("updatePwd");
@@ -28,18 +31,20 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 		String birth = request.getParameter("updateBirth");
 		String gender = request.getParameter("updateGender");
 		String phone = request.getParameter("updatePhone");
-
+		String originGender = member.getUserInfo().getGender();
+		
 		System.out.println(id);
 		System.out.println(name);
 		System.out.println(birth);
 		System.out.println(gender);
+		System.out.println(originGender);
 		
 		AdminMemberService memberService = new AdminMemberService();
 		
 		String path = "";
 		
-		if(name.length() == 0 && pwd.length() ==0 && email.length() == 0 && birth.length() == 0 && phone.length() == 0 || gender.length() == 2) {
-			/* 아무런 입력값이 없거나 성별이 없음인 경우 */
+		if(name.length() == 0 && pwd.length() ==0 && email.length() == 0 && birth.length() == 0 && phone.length() == 0 && gender.equals(originGender)) {
+			/* 아무런 입력값이 없고 성별이 같은 경우 */
 			response.sendRedirect(request.getContextPath() + "/admin/cancle/session");
 			
 		}else if(name.length() == 0 && pwd.length() ==0 && email.length() == 0 && phone.length() == 0){
@@ -61,7 +66,7 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 				request.getRequestDispatcher(path).forward(request, response);
 			}
 			
-		}else if(gender.length() == 2 && birth.length() == 0) {
+		}else if(gender.equals(originGender) && birth.length() == 0) {
 			/* user 영역 입력값이 없는 경우 */
 			
 			Map<String, String> updateMemberMap = new HashMap<>();
