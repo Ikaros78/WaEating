@@ -12,4 +12,10 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> adminSelectCompanyList(SelectCriteria selectCriteria);
 
+	List<ComInfoDTO> selectCom(SelectCriteria selectCriteria);
+
+	int selectAllCount(Map<String, String> searchMap);
+
+	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
+
 }
