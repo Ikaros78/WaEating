@@ -13,18 +13,6 @@ public class NoticeService {
 	
 	private NoticeMapper noticeMapper;
 	
-	public List<NoticeDTO> selectAllNoticeList() {
-		
-		SqlSession sqlSession = getSqlSession();
-		noticeMapper = sqlSession.getMapper(NoticeMapper.class);
-		List<NoticeDTO> noticeList = noticeMapper.selectALLNoticeList();
-		
-		sqlSession.close();
-		
-		return noticeList;
-		
-		
-	}
 
 	public int insertNotice(NoticeDTO newNotice) {
 	
@@ -68,11 +56,19 @@ public class NoticeService {
 		
 	}
 
+	public List<NoticeDTO> selectAllNoticeList() {
+		
 
-
-	public List<NoticeDTO> selelctAllNoticeList() {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession sqlSession = getSqlSession();
+		noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		List<NoticeDTO> noticeList = noticeMapper.selectAllNoticeList();
+		
+		sqlSession.close();
+		
+		return noticeList;
 	}
+
+
+
 
 }
