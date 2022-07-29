@@ -36,6 +36,11 @@ public interface MemberMapper {
 
 	int dubleCkId(String userId);
 
+	MemberDTO selectFindIdForEmail(MemberDTO requestMember);
+
+	MemberDTO selectFindIdForPhone(MemberDTO requestMember);
+
+
 
 
 }

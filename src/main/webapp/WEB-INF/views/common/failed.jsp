@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>실패 메시지</title>
 </head>
 <body>
 	<h1 align="center">${ requestScope.message }</h1>
