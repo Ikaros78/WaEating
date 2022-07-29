@@ -16,12 +16,15 @@ public interface ComInfoMapper {
 
 	ComInfoDTO adminSelectCompanyDetail(Map<String, String> searchMap);
 
-	int updateCompanyStatus(Map<String, String> searchMap);
+	int updateCompanyStatus(Map<String, String> updateRecordMap);
 
 	int deleteCompany(String comNo);
 
 	int refuseCompanyStatus(Map<String, String> searchMap);
 	
+	int accessCompanyStatus(Map<String, String> searchMap);
+	
+	int updateCompany(Map<String, String> updateCompanyMap);
 	
 	/* 회원 정보 찾기 용도 */
 	List<ComInfoDTO> selectCom(SelectCriteria selectCriteria);

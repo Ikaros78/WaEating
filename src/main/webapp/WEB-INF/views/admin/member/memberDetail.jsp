@@ -91,9 +91,8 @@
                             <td><c:out value="${ member.userInfo.gender }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
                             	<td><select name="updateGender">
-	                            		<option>없음</option>
-	                            		<option>남</option>
-	                            		<option>여</option>
+	                            		<option>남성</option>
+	                            		<option>여성</option>
                             		</select></td>
                             </c:if>
                         </tr>

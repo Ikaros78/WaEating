@@ -34,8 +34,6 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="#">업체정보 조회</a></li>
-                                    <li role="presentation"><a href="#">업체 승인</a></li>
-                                    <li role="presentation"><a href="#">사업자 등록번호 조회</a></li>
                                 </ul>
                             </td>
                         </tr>

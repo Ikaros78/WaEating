@@ -145,7 +145,7 @@
 		   WHERE A.COM_NO = #{ comNo }
 	</select>
 	
-	<update id="updateCompanyStatus" parameterType="hashMap">
+	<update id="accessCompanyStatus" parameterType="hashMap">
 		UPDATE
 			COM_RECORD A
 		SET COM_STATUS = '승인'
@@ -166,6 +166,44 @@
 		  , REFUSE_REASON = #{ reason }
 	  WHERE A.COM_NO = #{ comNo }
 	    AND A.RECORD_NO = #{ recordNo }	
+	</update>
+	
+	<update id="updateCompanyStatus" parameterType="hashMap">
+		UPDATE
+			COM_RECORD A
+		<set>
+			<if test="updateStatus != null and updateStatus != ''">
+			A.COM_STATUS = #{ updateStatus },
+			</if>
+			<if test="reason != null and reason != ''">
+			A.REFUSE_REASON = #{ reason },
+			</if>
+		</set>
+	  WHERE A.COM_NO = #{ comNo }
+	    AND A.RECORD_NO = #{ recordNo }
+	</update>
+	
+	<update id="updateCompany" parameterType="hashMap">
+		UPDATE
+			COM_INFO A
+		<set>
+			<if test="comName != null and comName != ''">
+			A.COM_NAME = #{ comName },
+			</if>
+			<if test="category != null and category != ''">
+			A.CATEGORY = #{ category },
+			</if>
+			<if test="address != null and address != ''">
+			A.COM_ADDRESS = #{ address },
+			</if>
+			<if test="comPhone != null and comPhone != ''">
+			A.COM_PHONE = #{ comPhone },
+			</if>
+			<if test="regist != null and regist != ''">
+			A.COM_REGIST = #{ regist },
+			</if>
+		</set>
+		WHERE A.COM_NO = #{ comNo }
 	</update>
 	
 	<!-- user 쿼리문 -->
