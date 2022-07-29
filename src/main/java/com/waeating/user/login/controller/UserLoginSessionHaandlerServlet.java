@@ -9,17 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class UserFindIdServlet
+ * Servlet implementation class UserLoginSessionHaandlerServlet
  */
-@WebServlet("/member/user/findid")
-public class UserFindIdServlet extends HttpServlet {
+@WebServlet("/member/user/login/sesssion")
+public class UserLoginSessionHaandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
 		
-		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-find_id.jsp").forward(request, response);
+		String memberType = "user";
+		
+		session.setAttribute("memberType", memberType);
+		
+		System.out.println(request.getContextPath());
+		
+		response.sendRedirect(request.getContextPath() + "/member/user/login");
+		
 	}
 
 }
