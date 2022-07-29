@@ -21,8 +21,9 @@
 		<package name="com.waeating.member.model.dao"/>
 		<package name="com.waeating.ceo.notice.model.dao"/>
 		<package name="com.waeating.com.model.dao"/>
-		<package name="com.waeating.user.matziplist.model.dao"/>
 	    <package name="com.waeating.notice.model.dao"/>
+	    <package name="com.waeating.reservation.model.dao"/>
 	    <package name="com.waeating.ceo.review.model.dao"/>
+
 	</mappers>
 </configuration>
