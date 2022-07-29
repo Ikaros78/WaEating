@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.user.matziplist.model.dto.ComBoardAttachDTO;
-import com.waeating.user.matziplist.model.dto.ComInfoDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 
 /**
@@ -31,7 +30,7 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		/* 조회 */
 //		String selList = request.getParameter("sellist");
 //		System.out.println("selList : " + selList);
-		String categoryName ="";
+//		String categoryName ="";
 //		if(selList == null) {
 //			selList = "korea";
 //		}
@@ -68,6 +67,7 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		
 		String searchCondition = request.getParameter("searchCondition");
 		String searchValue = "";
+		System.out.println(searchCondition);
 		
 		Map<String, String> searchMap = new HashMap<>();
 //		searchMap.put("categoryName", categoryName);

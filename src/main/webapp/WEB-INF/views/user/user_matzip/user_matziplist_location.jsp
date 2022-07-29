@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,29 +38,32 @@
                 <h3>지역별</h3>
                 
                 <div class="container mt-3">
-                
+                <form action=" ${ pageContext.servletContext.contextPath }/user/matziplist/location" method="get">
 				  <div class="input-group mb-3 col-5 float-end" style=" width : 300px; ">
-				    <input type="text" class="form-control" placeholder="지역을 입력해주세요">
+				    <input type="search" placeholder="지역을 입력해주세요." id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
 				    <button class="btn btn-outline-dark" type="submit">검색</button> 
 				  </div>
+                </form>
 				  
 				</div>
 				
                 <br>
-                <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard1 시작-->
-                  
-                 <div class="card col-3">
-                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
+                <div class="container row mt-3  mb-3" style="margin-left:80px;"><!--idcard1 시작-->
+                  <c:forEach var="com" items="${ requestScope.selectCom }">
+                 <div class="card col-3 ms-3 me-3 mb-5 d-flex justify-content-center" >
+                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ com.comBoardAttach.thumbnailName }" alt="Card image" style="width:100%;">
                     <div class="card-body">
-                      <h4 class="card-title">또오겠지 분식점</h4>
-                      <p class="card-text">영업시간) 10:00~ 21:00 <br> 휴무일) 월</p>
+                      <h4 class="card-title">${ com.comName }</h4>
+                      <p class="card-text">영업시간) ${ com.workTime } <br>
+                       휴무일) ${ com.holiday }</p>
                      <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
                       <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
                     </div>
                   </div>
+                  </c:forEach>
                   <br>
                   
-                 <div class="card col-3">
+                 <%-- <div class="card col-3">
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
                     <div class="card-body">
                       <h4 class="card-title">또오겠지 분식점</h4>
@@ -77,13 +81,13 @@
                      <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
                       <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
                     </div>
-                  </div>
+                  </div> --%>
       
                   
       
                 </div><!--idcard1 끝-->
                 
-                                <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard2 시작-->
+               <%--  <div class="container mt-3 row d-flex justify-content-center mb-5 ms-3"><!--idcard2 시작-->
                   
                    <div class="card col-3" >
                     <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok.png" alt="Card image" style="width:100%;">
@@ -156,13 +160,13 @@
                     </div>
                   </div>
                   
-      
+
                   
       
                 </div><!--idcard3 끝-->
-             
+              --%>
       
-            	<jsp:include page="../paging.jsp"/>
+            	<jsp:include page="../paging_location.jsp"/>
       
              
       

@@ -1,4 +1,4 @@
-package com.waeating.user.matziplist.model.dto;
+package com.waeating.com.model.dto;
 
 public class ComMenuDTO {
 
@@ -53,6 +53,5 @@ public class ComMenuDTO {
 		return "ComMenuDTO [menuNo=" + menuNo + ", menuName=" + menuName + ", price=" + price + ", comNo=" + comNo
 				+ "]";
 	}
-	
 	
 }

@@ -43,9 +43,9 @@
 	</div>
 	
 	<script>
-		/* category */
+		/* if(  ) */
 		
-		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/category";
+		const link = "${ pageContext.servletContext.contextPath }/user/matziplist/location";
 		let searchText = "";
 		
 		if(${ !empty requestScope.selectCriteria.searchCondition? true: false }) {

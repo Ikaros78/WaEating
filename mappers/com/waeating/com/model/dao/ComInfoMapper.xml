@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waeating.com.model.dao.ComInfoMapper">
+	<resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="generalCompanyResultMap">
+		<id property="comNo" column="COM_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="comName" column="COM_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="comAddress" column="COM_ADDRESS"/>
+		<result property="comPhone" column="COM_PHONE"/>
+		<result property="comRegist" column="COM_REGIST"/>
+		<result property="waitYn" column="WAIT_YN"/>
+		<result property="workTime" column="WORK_TIME"/>
+		<result property="holiday" column="HOLIDAY"/>
+		
+		<association property="memberInfo" resultMap="memberResultMap"/>
+		<association property="recordList" resultMap="comRecordMap"/>
+		<association property="comBoardAttach" resultMap="comBoardAttachMap"/>
+		<association property="review" resultMap="reviewMap"/>
+	</resultMap>
+
+	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="pwd" column="MEMBER_PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="emailCheck" column="EMAIL_CHECK"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.com.model.dto.ComRecordDTO" id="comRecordMap">
+		<id property="recordNo" column="RECORD_NO"/>
+		<result property="reason" column="REFUSE_REASON"/>
+		<result property="comNo" column="COM_NO"/>
+		<result property="status" column="COM_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.com.model.dto.ComBoardAttachDTO" id="comBoardAttachMap">
+    <id property="fileNo" column="FILE_NO"/>
+    <result property="originName" column="ORIGIN_NAME"/>
+    <result property="fileName" column="FILE_NAME"/>
+    <result property="thumbnailName" column="THUMBNAIL_NAME"/>
+    <result property="isDeleted" column="IS_DELETED"/>
+    <result property="regDate" column="REG_DATE"/>
+    <result property="comNo" column="COM_NO"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.com.model.dto.ReviewDTO" id="reviewMap">
+  <id property="reviewNo" column="REVIEW_NO"/>
+  <result property="reviewContent" column="REVIEW_CONTENT"/>
+  <result property="ratings" column="RATINGS"/>
+  <result property="recordNo" column="RECORD_NO"/>
+  <result property="comNo" column="COM_NO"/>
+  </resultMap>
+  
+	<select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+		SELECT
+				COUNT(*)
+			FROM COM_INFO A
+			JOIN COM_RECORD B ON(A.COM_NO = B.COM_NO)
+			<!-- 검색조건문 -->
+		 <where>
+		 	<if test="searchCondition =='id'">
+		 		A.MEMBER_ID = #{ searchValue }
+		 	</if>
+		 	<if test="searchCondition =='name'">
+		 		A.COM_NAME LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 	<if test="searchCondition =='status'">
+		 		B.COM_STATUS LIKE '%' || #{ searchValue } || '%'
+		 	</if>
+		 </where>
+	</select>
+	
+	<select id="adminSelectCompanyList" resultMap="generalCompanyResultMap">
+		SELECT 
+			   A.RNUM
+			 , A.COM_NO
+		     , A.COM_NAME
+		     , A.MEMBER_ID
+		     , A.CATEGORY
+		     , A.COM_ADDRESS
+		     , A.COM_STATUS			
+		FROM (SELECT ROWNUM RNUM
+				   , B.COM_NO
+			       , B.COM_NAME
+			       , B.MEMBER_ID
+			       , B.CATEGORY
+			       , B.COM_ADDRESS
+			       , B.COM_STATUS
+				FROM (SELECT C.COM_NO
+				     , C.COM_NAME
+				     , C.MEMBER_ID
+				     , C.CATEGORY
+				     , C.COM_ADDRESS
+				     , D.COM_STATUS
+				     FROM COM_INFO C
+				     JOIN COM_RECORD D ON(C.COM_NO = D.COM_NO)
+				     <where>
+					 	<if test="searchCondition =='id'">
+					 		C.MEMBER_ID = #{ searchValue }
+					 	</if>
+					 	<if test="searchCondition =='name'">
+					 		C.COM_NAME LIKE '%' || #{ searchValue } || '%'
+					 	</if>
+					 	<if test="searchCondition =='status'">
+					 		D.COM_STATUS LIKE '%' || #{ searchValue } || '%'
+					 	</if>
+					 	AND C.COM_NO IS NOT NULL
+					 </where>
+					 ORDER BY D.COM_STATUS DESC
+					 ) B
+					 <![CDATA[
+					 WHERE ROWNUM <= #{ endRow }
+					 ]]>
+			)A
+	WHERE A.RNUM >= #{ startRow }
+	</select>
+	
+	
+	<!-- user 쿼리문 -->
+	<select id="selectCom" resultMap="generalCompanyResultMap" >
+ 	SELECT
+ 		   A.RNUM
+ 		 , A.COM_NO
+ 	 	 , A.COM_NAME
+  	     , A.WORK_TIME
+  	     , A.HOLIDAY
+  	     , E.THUMBNAIL_NAME
+ 	FROM(SELECT ROWNUM RNUM
+ 			  , B.COM_NO
+	  	      , B.COM_NAME
+	  	      , B.WORK_TIME
+	  	      , B.HOLIDAY
+	  	   FROM(SELECT
+	  	   			   C.COM_NO
+		  	         , C.COM_NAME
+		  	         , C.WORK_TIME
+		  	         , C.HOLIDAY
+	  	  	      FROM COM_INFO C
+	  	  	      JOIN COM_RECORD D ON(C.COM_NO = D.COM_NO)
+	  	  	     <where>
+	  	  	      <if test="searchCondition!=null and !searchCondition.equals('')">
+	  	  	      	C.CATEGORY = #{ searchCondition }
+	  	  	      </if> 
+	  	  	      <if test="searchValue != null and !searchValue.equals('')">
+      				C.COM_ADDRESS LIKE '%' || #{ searchValue } || '%'      			   
+     			  </if>
+     			   AND D.COM_STATUS = '승인'
+	  	  	     </where> 
+	  	  	   ) B
+	  	  	      <![CDATA[
+				        WHERE ROWNUM <= #{ endRow }
+				  ]]>
+	  	) A
+	  JOIN COM_BOARD_ATTACH E ON(A.COM_NO = E.COM_NO)
+	 WHERE A.RNUM >= #{ startRow } 
+  	    
+  	       
+  </select>
+  
+  <select id="selectAllCount" resultType="_int">
+  	SELECT
+  	       COUNT(*)
+  	  FROM COM_INFO A
+  	  <where>
+      <if test="searchCondition!=null and !searchCondition.equals('')">
+      	A.CATEGORY = #{ searchCondition }
+      </if> 
+      <if test="searchValue != null and !searchValue.equals('')">
+      	A.COM_ADDRESS LIKE '%' || #{ searchValue } || '%'
+      </if>
+     </where>
+    
+  </select>
+  
+  <select id="selectComByGrade" resultMap="generalCompanyResultMap" >
+     SELECT
+ 		   A.RNUM
+ 		 , A.COM_NO
+ 	 	 , A.COM_NAME
+  	     , A.WORK_TIME
+  	     , A.HOLIDAY
+  	     , E.THUMBNAIL_NAME
+ 	FROM(SELECT ROWNUM RNUM
+ 			  , B.COM_NO
+	  	      , B.COM_NAME
+	  	      , B.WORK_TIME
+	  	      , B.HOLIDAY
+	  	   FROM(SELECT
+              V.COM_NO
+            , V.COM_NAME
+            , V.WORK_TIME
+            , V.HOLIDAY
+            , V.THUMBNAIL_NAME
+
+       FROM 
+       (SELECT
+               K.COM_NO
+             , K.COM_NAME
+             , K.WORK_TIME
+             , K.HOLIDAY
+             , U.THUMBNAIL_NAME
+             , T.RATINGS
+          FROM COM_INFO K
+          JOIN COM_BOARD_ATTACH U ON(K.COM_NO = U.COM_NO)
+          JOIN REVIEW T ON(K.COM_NO = T.COM_NO)
+          JOIN COM_RECORD D ON(K.COM_NO = D.COM_NO)
+		 WHERE  D.COM_STATUS = '승인'
+         ) V
+        GROUP BY
+                V.COM_NO
+              , V.COM_NAME
+              , V.WORK_TIME
+              , V.HOLIDAY
+              , V.THUMBNAIL_NAME
+         ORDER BY ROUND(AVG(V.RATINGS),1)DESC) B
+	  	  	     
+	      <![CDATA[
+				        WHERE ROWNUM <= #{ endRow }
+		]]>
+				 
+	  	) A
+	  JOIN COM_BOARD_ATTACH E ON(A.COM_NO = E.COM_NO)
+	 WHERE A.RNUM >= #{ startRow } 
+	 
+  </select>
+  
+</mapper>

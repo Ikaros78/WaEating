@@ -11,13 +11,15 @@
 <!-- 파일 -->
 <script src="${ pageContext.servletContext.contextPath }/resources/js/user/user-sign_up.js" ></script>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/user-login/user-sign_up.css">
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
 	<div class="container">
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
             <h4 class="mb-3">회원가입</h4>
-            <form class="validation-form" novalidate method="post" onsubmit="return ck_infor();">
+            <form action="${ pageContext.servletContext.contextPath }/member/user/signup" class="validation-form"  method="post" onsubmit="return ck_infor();">
               <div class="row">
                   <div class="form-floating col-md-6 mb-3">
                       <input type="text" class="form-control" id="id" name = "id" placeholder="아이디 입력" required>
@@ -27,7 +29,8 @@
                       </div>
                   </div>
                   <div class="form-floating col-md-4 mb-3">
-                      <button id="db_check">중복 확인</button>
+                      <input id="db_check" type="button" value="중복 확인"></input>
+                      <input type="hidden" id="hdCheckId">
                   </div>
                   
               </div>
@@ -41,14 +44,14 @@
               </div>
               <div class="mb-3">
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호 입력" onchange="check_pw();" required>
+                    <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호 입력" required>
                     <label for="pwd">비밀번호</label>
                     <div class="invalid-feedback">
                       비밀번호를 입력해주세요.
                     </div>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="re_pw" name="re_pw" placeholder="비밀번호 재입력"style="margin-top : 5px" onchange="check_pw();" required>
+                    <input type="password" class="form-control" id="re_pw" name="re_pw" placeholder="비밀번호 재입력" style="margin-top : 5px" required>
                      <label for="pw">비밀번호 재입력</label>
                 </div>
                 </div>
@@ -94,8 +97,8 @@
                 <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
             </div>
             <div class="col-md-12 mb-4"></div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit" id="completion">가입 완료</button>
-            <a href="${ pageContext.servletContext.contextPath }/member/login/user"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" id="completion"  value="가입 완료"></input>
+            <a href="${ pageContext.servletContext.contextPath }/member/user/login"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
             </form>
          </div>
         </div>
@@ -103,5 +106,37 @@
         <p class="mb-1" id="copyright">&copy; 2022 Waeating</p>
         </footer>
     </div>
+    
+    <!-- 아이디 중복확인 -->
+    <script>
+    $("#db_check").click(function(){
+    	
+    	const userId = $("#id").val();
+    	
+    	$.ajax({
+    		url: "${ pageContext.servletContext.contextPath }/member/user/ckeckId",
+    		type: "get",
+    		data: {
+    			userId : userId
+    		}, 
+    		success: function(data) {
+    			
+    			console.log(data);
+    			if(data == true){
+    				alert("중복된 아이디가 없습니다.");
+    				$("#hdCheckId").val("check");
+    			} else {
+    				alert("중복된 아이디가 있습니다.");
+    				$("#userId").select();
+    				$("#hdCheckId").val("uncheck");
+    			}
+    		},
+    		error: function(error) {
+    			
+    			console.log(error);
+    		}
+    	});
+    });
+    </script>
 </body>
 </html>
