@@ -17,7 +17,7 @@
 		switch(successCode){
 			case "insertMember" : 
 				successMessage = "회원 가입에 성공하셨습니다!";
-				movePath = "${ pageContext.servletContext.contextPath }/member/login/user";
+				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
 				break;
 			case "updateMember" : 
 				successMessage = "회원 정보 변경에 성공하셨습니다!";
@@ -37,7 +37,7 @@
 
 		alert(successMessage);
 		
-		location.replace(movePath);
+		location.href(movePath);
 	})();
 	</script>
 

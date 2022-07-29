@@ -16,6 +16,8 @@ import com.waeating.notice.model.service.NoticeService;
 @WebServlet("/notice/detail")
 public class NoticeSelectDetailServlet extends HttpServlet {
        
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int no = Integer.parseInt(request.getParameter("no"));

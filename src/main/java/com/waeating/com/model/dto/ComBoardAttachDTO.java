@@ -1,4 +1,4 @@
-package com.waeating.user.matziplist.model.dto;
+package com.waeating.com.model.dto;
 
 import java.sql.Date;
 

@@ -14,6 +14,7 @@ import com.waeating.notice.model.service.NoticeService;
 
 @WebServlet("/notice/update")
 public class NoticeUpdateServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
@@ -24,7 +25,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 		
 		String path = "";
 		if(notice != null) {
-			path = "WEB-INF/views/mainNotice/";
+			path = "WEB-INF/views/mainNotice/noticeList.jsp";
 			request.setAttribute("notice", notice);
 		} else {
 			path = "WEB-INF/views/common/failed.jsp";
