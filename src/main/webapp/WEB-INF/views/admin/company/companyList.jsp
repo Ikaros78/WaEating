@@ -33,7 +33,7 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="#">업체 조회</a></li>
+                                    <li role="presentation"><a href="#">업체정보 조회</a></li>
                                     <li role="presentation"><a href="#">업체 승인</a></li>
                                     <li role="presentation"><a href="#">사업자 등록번호 조회</a></li>
                                 </ul>
@@ -72,21 +72,19 @@
 
 		<!-- 검색 폼  -->
 		
-        <div id="searchContainer">
-            <div class="row">
-                <div class="col-md-offset-7 col-md-4" align="right">
-                        <select class="form-select" id="option">
-                            <option value="이름">이름</option>
-                            <option value="나이">나이</option>
-                            <option value="휴대폰">휴대폰</option>
-                            <option value="아이디">아이디</option>
-                            <option value="옵션5">옵션5</option>
-                        </select>
-                        <input type="text">
-                        <input type="submit" value="검색">
-                </div>
-            </div>
-        </div>
+        <div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/company/list" method="get" style="display:inline-block">		
+			    <input type="hidden" name="currentPage" value="1">
+			    <select id="searchCondition" name="searchCondition">
+					<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>아이디</option>
+					<option value="name" ${ requestScope.selectCriteria.searchCondition eq "name"? "selected": "" }>업체명</option>
+					<option value="status" ${ requestScope.selectCriteria.searchCondition eq "status"? "selected": "" }>승인여부</option>
+				</select>
+		        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+
+				<button type="submit">검색하기</button>
+			</form>
+		</div>
 
         <div id="container">
             <!-- 페이지 처리 -->

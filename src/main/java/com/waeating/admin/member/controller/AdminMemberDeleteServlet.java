@@ -25,12 +25,10 @@ public class AdminMemberDeleteServlet extends HttpServlet {
 		
 		int result = memberService.deleteMember(id);
 		
-			String path = "";
 		if(result > 0) {
-			path = "WEB-INF/views/admin/member/memberList.jsp";
 			response.sendRedirect(request.getContextPath() + "/admin/member/list");
 		} else {
-			path = "WEB-INF/views/common/failed.jsp";
+			String path = "WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "회원정보 삭제 실패!");
 			request.getRequestDispatcher(path).forward(request, response);
 		}
