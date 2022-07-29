@@ -22,7 +22,7 @@
                 <p>이메일로 찾기</p>
             </a>
         </div>
-        <a href="${ pageContext.servletContext.contextPath }/member/login/user"><button type="button" id="backBtn">뒤로가기</button></a>
+        <a href="${ pageContext.servletContext.contextPath }/member/user/login"><button type="button" id="backBtn">뒤로가기</button></a>
     </div>
 </body>
 </html>
