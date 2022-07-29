@@ -14,7 +14,6 @@ import com.waeating.notice.model.service.NoticeService;
 /**
  * Servlet implementation class NoticeInsertServlet
  */
-@SuppressWarnings("unused")
 @WebServlet("/notice/insert")
 public class NoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
