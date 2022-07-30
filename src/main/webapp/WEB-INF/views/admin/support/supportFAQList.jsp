@@ -33,7 +33,7 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/support/list">문의사항 조회</a></li>
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/supportFAQ/list">자주 하는 질문</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/faq/list">자주 하는 질문</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -67,7 +67,7 @@
             <!-- 검색 폼 -->
 		
 			<div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
-				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/supportFAQ/list" method="get" style="display:inline-block">		
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/faq/list" method="get" style="display:inline-block">		
 				    <input type="hidden" name="currentPage" value="1">
 				    <select id="searchCondition" name="searchCondition">
 						<option value="title" ${ requestScope.selectCriteria.searchCondition eq "title"? "selected": "" }>제목</option>
@@ -86,13 +86,14 @@
 	            <div class="col-md-2" align="right">
                 <br>
                 <button type="button" class="btn btn-default" id="insert">등록하기</button>
+	        	</div>
 	        </div>
 	</div>
 	
 	<!-- 상세 보기 이동 -->
     <script>
     	
-    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/faq/detail/session"
+    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/faq/detail/session";
     
     	if(document.getElementsByTagName("td")) {
     		
@@ -113,7 +114,7 @@
     			
     			$trs[j].onclick = function(){
     				/* alert($(this).children().eq(0).text()); */
-    				var reportNo = $(this).children().eq(0).text();
+    				var faqNo = $(this).children().eq(0).text();
     				location.href = detailLink + "?faqNo=" + faqNo; 
     			}
     		}
@@ -122,7 +123,7 @@
     	if(document.getElementById("insert")){
     		const $insert = document.getElementById("insert");
     		$insert.onclick = function(){
-    			location.href = {"${ pageContext.servletContext.contextPath }/admin/faq/insertForm"};
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/faq/insertForm";
     		}
     	}
     </script>

@@ -19,7 +19,7 @@ import com.waeating.support.model.dto.FAQDTO;
 /**
  * Servlet implementation class AdminFAQSelectListServlet
  */
-@WebServlet("/admin/supportFAQ/list")
+@WebServlet("/admin/faq/list")
 public class AdminFAQSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

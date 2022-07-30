@@ -21,8 +21,6 @@
 <script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote-lite.js"></script>
 <script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/summernote/summernote-lite.css">
-<!-- summernote script -->
-<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -41,7 +39,7 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/support/list">문의사항 조회</a></li>
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/supportFAQ/list">자주 하는 질문</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/faq/list">자주 하는 질문</a></li>
                                 </ul>
                             </td>
                         </tr>

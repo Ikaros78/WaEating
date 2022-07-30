@@ -58,5 +58,15 @@
 			     ]]>
 		  )A
 		WHERE A.RNUM >= #{ startRow } 
-	</select>	
+	</select>
+	
+	<select id="adminSelectFAQDetail" parameterType="hashmap" resultMap="FAQResultMap">
+		SELECT
+				A.FAQ_TITLE
+			  , A.FAQ_CONTENT
+			  , A.MEMBER_ID
+			  , A.REG_DATE
+			FROM TBL_FAQ A
+		   WHERE A.FAQ_NO = #{ faqNo }
+	</select>
 </mapper>

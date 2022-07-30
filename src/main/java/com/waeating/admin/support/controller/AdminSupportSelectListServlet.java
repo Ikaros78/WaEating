@@ -65,7 +65,7 @@ public class AdminSupportSelectListServlet extends HttpServlet {
 		
 		String path = "";
 		if(reportList != null) {
-			path= "/WEB-INF/views/admin/support/supportList.jsp";
+			path = "/WEB-INF/views/admin/support/supportList.jsp";
 			request.setAttribute("reportList", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("link", "list");

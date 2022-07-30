@@ -113,4 +113,23 @@ public class AdminSupportService {
 		return FAQList;
 	}
 
+	/**
+	 * <pre>
+	 * 	자주 묻는 질문 상세 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
+	public FAQDTO selectFAQDetail(Map<String, String> searchMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		FAQMapper = sqlSession.getMapper(FAQMapper.class);
+		
+		FAQDTO faq = FAQMapper.adminSelectFAQDetail(searchMap);
+		
+		sqlSession.close();
+		
+		return faq;
+	}
+
 }

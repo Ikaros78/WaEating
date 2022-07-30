@@ -11,5 +11,7 @@ public interface FAQMapper {
 	int adminSelectTotalFAQCount(Map<String, String> searchMap);
 
 	List<FAQDTO> adminSelectFAQList(SelectCriteria selectCriteria);
+
+	FAQDTO adminSelectFAQDetail(Map<String, String> searchMap);
 	
 }
