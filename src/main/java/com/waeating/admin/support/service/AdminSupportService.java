@@ -8,12 +8,15 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.support.model.dao.FAQMapper;
 import com.waeating.support.model.dao.ReportMapper;
+import com.waeating.support.model.dto.FAQDTO;
 import com.waeating.support.model.dto.ReportDTO;
 
 public class AdminSupportService {
 	
 	private ReportMapper reportMapper;
+	private FAQMapper FAQMapper;
 
 	/**
 	 * <pre>
@@ -53,6 +56,13 @@ public class AdminSupportService {
 		return reportList;
 	}
 
+	/**
+	 * <pre>
+	 *   문의 상세 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public ReportDTO selectReportDetail(Map<String, String> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -63,6 +73,44 @@ public class AdminSupportService {
 		sqlSession.close();
 		
 		return report;
+	}
+
+	/**
+	 * <pre>
+	 *   페이징 처리를 위한 전체 자주 묻는 질문 수 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
+	public int selectTotalFAQCount(Map<String, String> searchMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		FAQMapper = sqlSession.getMapper(FAQMapper.class);
+		
+		int totalCount = FAQMapper.adminSelectTotalFAQCount(searchMap);
+		
+		sqlSession.close();
+		
+		return totalCount;
+	}
+
+	/**
+	 * <pre>
+	 * 	자주 묻는 질문 전체 조회용 메소드
+	 * </pre>
+	 * @param selectCriteria
+	 * @return
+	 */
+	public List<FAQDTO> selectFAQList(SelectCriteria selectCriteria) {
+		
+		SqlSession sqlSession = getSqlSession();
+		FAQMapper = sqlSession.getMapper(FAQMapper.class);
+		
+		List<FAQDTO> FAQList = FAQMapper.adminSelectFAQList(selectCriteria);
+		
+		sqlSession.close();
+		
+		return FAQList;
 	}
 
 }
