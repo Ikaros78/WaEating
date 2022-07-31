@@ -159,6 +159,13 @@ public class AdminSupportService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   자주 묻는 질문 삭제용 메소드
+	 * </pre>
+	 * @param faqNo
+	 * @return
+	 */
 	public int deleteFAQ(String faqNo) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -179,6 +186,13 @@ public class AdminSupportService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   자주 묻는 질문 등록용 메소드
+	 * </pre>
+	 * @param insertFAQMap
+	 * @return
+	 */
 	public int insertFAQ(Map<String, String> insertFAQMap) {
 
 		SqlSession sqlSession = getSqlSession();

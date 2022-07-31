@@ -1,4 +1,4 @@
-package com.waeating.admin.support.controller;
+package com.waeating.admin.notice.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,25 +12,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.admin.support.service.AdminSupportService;
+import com.waeating.admin.notice.service.AdminNoticeService;
 import com.waeating.member.model.dto.MemberDTO;
 
 /**
- * Servlet implementation class AdminFAQInsertServlet
+ * Servlet implementation class AdminNoticeInsertServlet
  */
-@WebServlet("/admin/faq/insert")
-public class AdminFAQInsertServlet extends HttpServlet {
+@WebServlet("/admin/notice/insert")
+public class AdminNoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String path = "/WEB-INF/views/admin/support/supportFAQInsert.jsp";
+	
+		String path = "/WEB-INF/views/admin/notice/noticeInsert.jsp";
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		MemberDTO admin = (MemberDTO) request.getSession().getAttribute("loginMember");
 		
 		String id = admin.getId();
@@ -38,13 +39,13 @@ public class AdminFAQInsertServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		String date = new SimpleDateFormat("yy-MM-dd").format(new java.sql.Date(System.currentTimeMillis()));
 		
-		Map<String, String> insertFAQMap = new HashMap<>();
-		insertFAQMap.put("id", id);
-		insertFAQMap.put("title", title);
-		insertFAQMap.put("content", content);
-		insertFAQMap.put("date", date);
+		Map<String, String> insertNoticeMap = new HashMap<>();
+		insertNoticeMap.put("id", id);
+		insertNoticeMap.put("title", title);
+		insertNoticeMap.put("content", content);
+		insertNoticeMap.put("date", date);
 		
-		AdminSupportService supportService = new AdminSupportService();
+		AdminNoticeService noticeService = new AdminNoticeService();
 		
 		if(title.length() == 0 || content.length() == 0) {
 			
@@ -57,19 +58,16 @@ public class AdminFAQInsertServlet extends HttpServlet {
 			out.close();
 		} else {
 			
-			int result = supportService.insertFAQ(insertFAQMap);
+			int result = noticeService.insertNotice(insertNoticeMap);
 			
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/admin/faq/list");
+				response.sendRedirect(request.getContextPath() + "/admin/notice/list");
 			} else {
 				String path = "WEB-INF/views/common/failed.jsp";
-				request.setAttribute("message", "자주 묻는 질문 정보 등록 실패!");
+				request.setAttribute("message", "공지사항 정보 등록 실패!");
 				request.getRequestDispatcher(path).forward(request, response);
 			}
 		}
-		
 	}
-	
-	
 
 }

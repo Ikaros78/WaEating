@@ -43,19 +43,19 @@
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
-                        <th width="100px">문의번호</th>
-                        <th width="400px">제목</th>
-                        <th width="200px">작성자</th>
-                    </tr>
+	                    <tr>
+	                        <th width="100px">문의번호</th>
+	                        <th width="400px">제목</th>
+	                        <th width="200px">작성자</th>
+	                    </tr>
                     </thead>
                     <tbody>
                     <c:forEach var ="report" items="${ requestScope.reportList }">
-                    <tr class="rowClick">
-                        <td class=details><c:out value="${ report.reportNo }"/></td>
-                        <td class=details><c:out value="${ report.title }"/></td>
-                        <td class=details><c:out value="${ report.id }"/></td>
-                    </tr>
+	                    <tr class="rowClick">
+	                        <td class=details><c:out value="${ report.reportNo }"/></td>
+	                        <td class=details><c:out value="${ report.title }"/></td>
+	                        <td class=details><c:out value="${ report.id }"/></td>
+	                    </tr>
                     </c:forEach>
                     </tbody>
                 </table>

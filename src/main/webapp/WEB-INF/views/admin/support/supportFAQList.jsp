@@ -64,30 +64,30 @@
             </div>
 		</div>
             
-            <!-- 검색 폼 -->
+        <!-- 검색 폼 -->
 		
-			<div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
-				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/faq/list" method="get" style="display:inline-block">		
-				    <input type="hidden" name="currentPage" value="1">
-				    <select id="searchCondition" name="searchCondition">
-						<option value="title" ${ requestScope.selectCriteria.searchCondition eq "title"? "selected": "" }>제목</option>
-						<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>작성자</option>
-					</select>
-			        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
-	
-					<button type="submit">검색하기</button>
-				</form>
-			</div>
+		<div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/faq/list" method="get" style="display:inline-block">		
+			    <input type="hidden" name="currentPage" value="1">
+			    <select id="searchCondition" name="searchCondition">
+					<option value="title" ${ requestScope.selectCriteria.searchCondition eq "title"? "selected": "" }>제목</option>
+					<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>작성자</option>
+				</select>
+		        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+		
+				<button type="submit">검색하기</button>
+			</form>
+		</div>
+		
+		<div id="container">
+			<!-- 페이지 처리 -->
+			<jsp:include page="../common/paging.jsp"/>
 			
-			<div id="container">
-	            <!-- 페이지 처리 -->
-	            <jsp:include page="../common/paging.jsp"/>
-	            
-	            <div class="col-md-2" align="right">
-                <br>
-                <button type="button" class="btn btn-default" id="insert">등록하기</button>
-	        	</div>
-	        </div>
+			<div class="col-md-2" align="right">
+			    <br>
+			    <button type="button" class="btn btn-default" id="insert">등록하기</button>
+			</div>
+		</div>
 	</div>
 	
 	<!-- 상세 보기 이동 -->
