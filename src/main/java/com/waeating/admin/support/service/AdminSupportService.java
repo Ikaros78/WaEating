@@ -132,4 +132,51 @@ public class AdminSupportService {
 		return faq;
 	}
 
+	/**
+	 * <pre>
+	 *   자주 묻는 질문 수정용 메소드
+	 * </pre>
+	 * @param updateFAQMap
+	 * @return
+	 */
+	public int updateFAQ(Map<String, String> updateFAQMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		FAQMapper = sqlSession.getMapper(FAQMapper.class);
+		
+		int result = FAQMapper.updateFAQ(updateFAQMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int deleteFAQ(String faqNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		FAQMapper = sqlSession.getMapper(FAQMapper.class);
+		
+		int result = FAQMapper.deleteFAQ(faqNo);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 }

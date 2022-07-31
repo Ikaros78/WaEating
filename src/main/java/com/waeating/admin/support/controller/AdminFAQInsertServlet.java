@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.waeating.member.model.dto.MemberDTO;
+
 /**
  * Servlet implementation class AdminFAQInsertServlet
  */
@@ -15,6 +17,13 @@ public class AdminFAQInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		MemberDTO admin = (MemberDTO) request.getSession().getAttribute("loginMember"); 
+		
+		String adminId = admin.getId();
+		
+		System.out.println(adminId);
+		
 		
 		String path = "/WEB-INF/views/admin/support/supportFAQInsert.jsp";
 		

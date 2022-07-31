@@ -69,4 +69,31 @@
 			FROM TBL_FAQ A
 		   WHERE A.FAQ_NO = #{ faqNo }
 	</select>
+	
+	<update id="updateFAQ" parameterType="hashmap">
+		UPDATE
+				TBL_FAQ A
+		<set>
+			<if test="title != null and title !=''">
+			A.FAQ_TITLE = #{ title },
+			</if>
+			<if test="content != null and content != ''">
+			A.FAQ_CONTENT = #{ content },
+			</if> 
+			<if test="date != null and date!= ''">
+			A.REG_DATE = #{ date },
+			</if>
+			<if test="id != null and id != ''">
+			A.MEMBER_ID = #{ id },
+			</if>
+		</set>
+		WHERE A.FAQ_NO = #{ faqNo }
+	</update>
+	
+	<delete id="deleteFAQ" parameterType="java.lang.String">
+		DELETE
+			FROM TBL_FAQ A
+		   WHERE A.FAQ_NO = #{ faqNo }
+	</delete>
+	
 </mapper>

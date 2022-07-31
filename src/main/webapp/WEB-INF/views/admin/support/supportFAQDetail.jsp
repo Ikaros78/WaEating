@@ -165,7 +165,7 @@
     			var chkDelete = confirm('삭제하시겠습니까?');
     			
     			if(chkDelete === true){
-    				location.href = "${ pageContext.servletContext.contextPath }/admin/member/delete";
+    				location.href = "${ pageContext.servletContext.contextPath }/admin/faq/delete";
     			}
     		}
     	}
@@ -173,7 +173,7 @@
     	if(document.getElementById("backToList")){
     		const $backToList = document.getElementById("backToList");
     		$backToList.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/list";
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/faq/list";
     		}
     	}
     	
