@@ -123,7 +123,7 @@
     	if(document.getElementById("insert")){
     		const $insert = document.getElementById("insert");
     		$insert.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/faq/insertForm";
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/faq/insert";
     		}
     	}
     </script>

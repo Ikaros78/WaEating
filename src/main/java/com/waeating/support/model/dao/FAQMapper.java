@@ -17,5 +17,7 @@ public interface FAQMapper {
 	int updateFAQ(Map<String, String> updateFAQMap);
 
 	int deleteFAQ(String faqNo);
+
+	int insertFAQ(Map<String, String> insertFAQMap);
 	
 }

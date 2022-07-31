@@ -96,4 +96,23 @@
 		   WHERE A.FAQ_NO = #{ faqNo }
 	</delete>
 	
+	<insert id="insertFAQ" parameterType="hashmap">
+		INSERT
+			INTO TBL_FAQ A
+			(  
+				A.FAQ_NO
+			  , A.FAQ_TITLE
+			  , A.FAQ_CONTENT
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+			)
+			VALUES
+			(
+				SEQ_FAQNO.NEXTVAL
+			  , #{ title }
+			  , #{ content }
+			  , #{ date }
+			  , #{ id }
+			)
+	</insert>
 </mapper>

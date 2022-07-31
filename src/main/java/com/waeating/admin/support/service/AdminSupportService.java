@@ -179,4 +179,24 @@ public class AdminSupportService {
 		return result;
 	}
 
+	public int insertFAQ(Map<String, String> insertFAQMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		FAQMapper = sqlSession.getMapper(FAQMapper.class);
+		
+		int result = FAQMapper.insertFAQ(insertFAQMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 }
