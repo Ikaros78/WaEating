@@ -11,21 +11,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <result property="memberId" column="MEMBER_ID"/>
   </resultMap> 
   	
-	
+<insert id="insertNotice" parameterType="com.waeating.notice.model.dto.NoticeDTO">
+   INSERT
+      INTO ADMIN_NOTICE AN
+        (
+          AN.NOTICE_NO, AN.NOTICE_TITLE, AN.NOTICE_CONTENT,
+          AN.REG_DATE, AN.MEMBER_ID
+         )
+         VALUES
+         (
+            SEQ_NOTICE.NEXTVAL, #{ noticeTitle }, #{ noticeContent},
+            SYSDATE, memberId
+         )
+</insert>	
  <select id="selectAllNoticeList" resultMap="noticeResultMap">
 		
-		 SELECT
-		     
-		    	NOTICE_NO
-		   ,	NOTICE_TITLE
-		   ,	NOTICE_CONTENT
-		   ,	REG_DATE
-		   ,	MEMBER_ID
-		   FROM ADMIN_NOTICE 
-		   
-   
- </select>
+	  SELECT
+		     A.RNUM 
+		   , A.NOTICE_NO
+		   , A.NOTICE_TITLE
+		   , A.NOTICE_CONTENT
+		   , A.REG_DATE
+		   , A.MEMBER_ID
+        FROM (SELECT ROWNUM RNUM
+                   , B.NOTICE_NO
+				   , B.NOTICE_TITLE
+				   , B.NOTICE_CONTENT
+				   , B.REG_DATE
+				   , B.MEMBER_ID
+               FROM(SELECT C.NOTICE_NO
+						 , C.NOTICE_TITLE
+						 , C.NOTICE_CONTENT
+						 , C.REG_DATE
+						 , C.MEMBER_ID
+                      FROM ADMIN_NOTICE C
+                      <where>
+                         <if test="searchCondition == 'noticeTitle'">
+                            C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+                         </if>
+                      </where>
+                         ORDER BY C.REG_DATE DESC
+                     )B 
+                    <![CDATA[
+	                WHERE ROWNUM <= #{ endRow }
+	                ]]>
+	                ) A
+	            <![CDATA[    
+	            WHERE A.RNUM >= #{ startRow }    
+	            ]]>
+     </select>
 
+   <select id="selectTotalCount" resultType="_int" parameterType="hashMap">
+     SELECT
+          COUNT(*)
+     FROM ADMIN_NOTICE AN
+     <where>
+        <if test="searchCondition == 'noticeTitle'">
+          AN.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%' 
+        </if>
+     </where>      
+      ORDER BY 1 DESC
+   </select>
+   
+   <select id="selectOneNotic" resultMap="noticeResultMap">
+     SELECT
+         AN.NOTICE_TITLE
+        ,AN.NOTICE_CONTENT
+       FROM ADMIN_NOTICE AN
+      WHERE AN.NOTUCE_N0 = #{ noticeNo }     
+   
+   </select>
  
 
 </mapper>

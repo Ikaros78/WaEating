@@ -40,9 +40,7 @@
                       </div>
                   </div>
               </div>
-             
-            <!-- board list area -->
-              <div id="board-list">
+             <div id="board-list">
                   <div class="container">
                       <table class="board-table">
                           <thead>
@@ -53,42 +51,72 @@
                           </tr>
                           </thead>
                           <tbody>
+                          <c:forEach var="notice" items="${ requestScope.noticeList }" varStatus="status">
                           <tr>
-                              <td>3</td>
+                              <td><c:out value="${ notice.noticeNo }"/></td>
                               <th>
-                                <a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
+                                <a href="${ pageContext.servletContext.contextPath }/mainNotice/notice_detail?noticeNo=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
                                 
                               </th>
-                              <td>2022.07.25</td>
+                              <td><c:out value="${ notice.regDate }"/></td>
                           </tr>
-          
-                          <tr>
-                              <td>2</td>
-                              <th><a href="#!">이벤트관련 공지사항</a></th>
-                              <td>2022.07.20</td>
-                          </tr>
-          
-                          <tr>
-                              <td>1</td>
-                              <th><a href="#!">수수료 변경 공지사항</a></th>
-                              <td>2022.07.13</td>
-                          </tr>
+           				</c:forEach>
+            
+                         
                           </tbody>
                       </table>
                   </div>
-              </div>
-              <div class="list_number">
-                <div>
-                    <p><div class="list_n_menu"><span class="disabled"><  이전</span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">20</a><a href="#?page=200">21</a><a href="#?page=2">다음  ></a></div></p>
-                </div>
-                
-            </div>
             
-          </section>
-        
+            <jsp:include page="./common/paging.jsp"/>
+             
+            
+            <div class="mt-3"></div>
+            <!-- 검색 폼 -->
+			<div class="search-area" align="center">
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/noticelist" method="get" style="display:inline-block">
+				<div class="input-group mb-3">
+				<input type="hidden" class="form-control" name="currentPage" value="1">
+				    <select id="searchCondition" name="searchCondition" class="form-control">
+						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "noticeTitle"? "selected": "" }>제목</option>
+					</select>
+			        <input type="text" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+					<button type="submit" class="btn btn-primary">검색하기</button>
+				</div>		
+				    
+				</form>
+				
+			</div>
+             
         </div>
+       </aside>
+    </section>
+                         
 <jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
   </div>
-
+  <script>
+		
+		if(document.getElementsByClassName('td')) {
+			
+			const $tds = document.getElementsByClassName('td');
+			for(let i = 0; i < $tds.length; i++) {
+				
+				$tds[i].onmouseenter = function() {
+					this.parentNode.style.cursor = "pointer";
+				}
+				
+				$tds[i].onclick = function() {
+					/* 게시물 번호까지 알아왔으니 이제 상세보기는 할 수 있습니다. */
+					
+					/* alert(this.parentNode.children[1].innerText); */
+					
+					location.href = ""
+					
+				}
+				
+			}
+			
+		}
+		
+	</script>
 </body>
 </html>
