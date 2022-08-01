@@ -19,7 +19,7 @@ import com.waeating.support.model.dto.ReportDTO;
 /**
  * Servlet implementation class SupportSelectListServlet
  */
-@WebServlet("/admin/support/list")
+@WebServlet("/admin/report/list")
 public class AdminSupportSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -65,7 +65,7 @@ public class AdminSupportSelectListServlet extends HttpServlet {
 		
 		String path = "";
 		if(reportList != null) {
-			path = "/WEB-INF/views/admin/support/supportList.jsp";
+			path = "/WEB-INF/views/admin/support/reportList.jsp";
 			request.setAttribute("reportList", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("link", "list");

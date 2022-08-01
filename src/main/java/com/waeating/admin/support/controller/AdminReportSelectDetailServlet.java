@@ -16,8 +16,8 @@ import com.waeating.support.model.dto.ReportDTO;
 /**
  * Servlet implementation class AdminSupportSelectDetailServlet
  */
-@WebServlet("/admin/support/detail")
-public class AdminSupportSelectDetailServlet extends HttpServlet {
+@WebServlet("/admin/report/detail")
+public class AdminReportSelectDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class AdminSupportSelectDetailServlet extends HttpServlet {
 		String path = "";
 		
 		if(report != null) {
-			path = "/WEB-INF/views/admin/support/supportDetail.jsp";
+			path = "/WEB-INF/views/admin/support/reportDetail.jsp";
 			
 			request.getSession().setAttribute("path", path);
 			request.getSession().setAttribute("report", report);

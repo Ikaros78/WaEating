@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세보기</title>
+<title>문의사항 상세보기</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/admin/style.css">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -25,53 +25,47 @@
 <body>
 	<div id="wrap">
         <jsp:include page="../common/menubar.jsp"/>
+        
         <div id="body">
             <div class="col-md-2">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>공지사항</th>
+                            <th>고객센터</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/list">공지사항 조회</a></li>
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/insert">공지사항 등록</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/report/list">문의사항 조회</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/faq/list">자주 하는 질문</a></li>
                                 </ul>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-			<div class="col-md-9">
-	           	<form action="${ pageContext.servletContext.contextPath }/admin/notice/update" method="post" id="frm">
-	            <table class="table table-bordered">
+            <div class="col-md-9">
+            <table class="table table-bordered">
 	            	<thead>
 		            	<tr>
-		            		<td class="col-md-2">기본정보</td>
+		            		<td class="col-md-2">문의 기본정보</td>
 		            		<td>상세정보</td>
-		            		<c:if test="${ !empty sessionScope.ifUpdate }">
-	                        	<td>수정할 정보</td>
-	                        </c:if>
 		            	</tr>
 	            	</thead>
 	                <tbody>
 	                    <tr>
 	                        <td>제목</td>
-	                        <td><c:out value="${ notice.noticeTitle }"/></td>
-	                        <c:if test="${ !empty sessionScope.ifUpdate }">
-	                        	<td><input type="text" placeholder="제목" name="updateTitle"></td>
-	                        </c:if>
+	                        <td><c:out value="${ report.title }"/></td>
 	                    </tr>
 	                    <tr>
 	                        <td>작성자</td>
-	                        <td><c:out value="${ notice.memberId }"/></td>
+	                        <td><c:out value="${ report.id }"/></td>
 	                    </tr>
 	                    <tr>
 	                        <td>작성일자</td>
-	                        <td><c:out value="${ notice.regDate }"/></td>
+	                        <td><c:out value="${ report.regDate }"/></td>
 	                    </tr>
 	                </tbody>
 	            </table>
@@ -83,15 +77,45 @@
 	            	</thead>
 	            	<tbody>
 	            		<tr>
-	            			<td><c:out value="${ notice.noticeContent }"/></td>
+	            			<td><c:out value="${ report.content }"/></td>
+	            		</tr>
+	            	</tbody>
+	            </table>	
+            </div>
+            <c:if test="${ !empty sessionScope.report.answer }">
+            <div class="col-md-9 col-md-offset-2">
+            <table class="table table-bordered">
+	            	<thead>
+		            	<tr>
+		            		<td class="col-md-2">답변 기본정보</td>
+		            		<td>상세정보</td>
+		            	</tr>
+	            	</thead>
+	                <tbody>
+	                    <tr>
+	                        <td>작성일자</td>
+	                        <td><c:out value="${ report.answer.ansDate }"/></td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	            <table class="table table-bordered">
+	            	<thead>
+	            		<tr>
+	            			<td>답변 내용</td>
+	            		</tr>
+	            	</thead>
+	            	<tbody>
+	            		<tr>
+	            			<td><c:out value="${ report.answer.ansContent }"/></td>
 	            		</tr>
 	            	</tbody>
 	            </table>
+	            <form action="${ pageContext.servletContext.contextPath }/admin/reportAns/update" method="post" id="updateFrm">
 	            <c:if test="${ !empty sessionScope.ifUpdate }">
 		            <table class="table table-bordered">
 		            	<thead>
 		            		<tr>
-		            			<td>수정할 내용</td>
+		            			<td>수정할 답변 내용</td>
 		            		</tr>
 		            	</thead>
 		            	<tbody>
@@ -106,31 +130,79 @@
 	            </c:if>
 	            </form>
             </div>
-        </div>         
+	        </c:if>
+	        <c:if test="${ empty sessionScope.report.answer }">
+	        <form action="${ pageContext.servletContext.contextPath }/admin/reportAns/regist" method="post" id="registFrm">
+	            <c:if test="${ !empty sessionScope.ifUpdate }">
+	            <div class="col-md-9 col-md-offset-2">
+		            <table class="table table-bordered">
+		            	<thead>
+		            		<tr>
+		            			<td>답변 내용</td>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<tr>
+		            			<td><textarea id="summernote" name="registContent" placeholder="내용"></textarea>
+		            		</tr>
+		            	</tbody>
+		            </table>
+		            <div align="right">
+					<button type="button" class="btn btn-primary" id="regist">등록하기</button>
+					</div>
+				</div>
+	            </c:if>
+	            </form>
+	        </c:if>
+        </div>
         
         <c:if test="${ empty sessionScope.ifUpdate }">
-		<div id="container">
+        	<c:if test="${ empty sessionScope.report.answer }">
+			<div id="container">
+			
+			    <div class="col-md-9 col-md-offset-2" align="right">
+			        <button type="button" class="btn btn-primary" id="doUpdate">답변작성</button>
+			        <button type="button" class="btn btn-default" id="backToList">목록으로</button>
+			    </div>
+			</div>
+			</c:if>
+			
+			<c:if test="${ !empty sessionScope.report.answer }">
+			<div id="container">
 		
-		    <div class="col-md-9 col-md-offset-2" align="right">
-		        <button type="button" class="btn btn-primary" id="doUpdate">수정</button>
-		        <button type="button" class="btn btn-default" id="backToList">목록으로</button>
-		    </div>
-		</div>
+			    <div class="col-md-9 col-md-offset-2" align="right">
+			        <button type="button" class="btn btn-primary" id="doUpdate">답변수정</button>
+			        <button type="button" class="btn btn-default" id="backToList">목록으로</button>
+			    </div>
+			</div>
+			</c:if>
 		</c:if>
 		
 		<c:if test="${ !empty sessionScope.ifUpdate }">
-		<div id="container">
+			<c:if test="${ empty sessionScope.report.answer }">
+				<div id="container">
 		
-		    <div class="col-md-9 col-md-offset-2" align="right">
-		        <button type="button" class="btn btn-danger" id="delete">삭제하기</button>
-		        <button type="button" class="btn btn-secondary" id="cancle">취소</button>
-		        <button type="button" class="btn btn-default" id="backToList">목록으로</button>
-		    </div>
-		</div>
+				    <div class="col-md-9 col-md-offset-2" align="right">
+				        <button type="button" class="btn btn-secondary" id="cancle">취소</button>
+				        <button type="button" class="btn btn-default" id="backToList">목록으로</button>
+				    </div>
+				</div>
+			
+			</c:if>
+			
+			<c:if test="${ !empty sessionScope.report.answer }">
+				<div id="container">
+			
+				    <div class="col-md-9 col-md-offset-2" align="right">
+				        <button type="button" class="btn btn-danger" id="delete">삭제하기</button>
+				        <button type="button" class="btn btn-secondary" id="cancle">취소</button>
+				        <button type="button" class="btn btn-default" id="backToList">목록으로</button>
+				    </div>
+				</div>
+			</c:if>
 	    </c:if>
-
-	</div>
-	<script>
+    </div>
+    <script>
     	
     	if(document.getElementById("doUpdate")){
     		const $doUpdate = document.getElementById("doUpdate");
@@ -146,6 +218,18 @@
     		}
     	}
     
+    	if(document.getElementById("regist")){
+    		const $regist = document.getElementById("regist");
+    		$regist.onclick = function(){
+				
+    			var chkUpdate = confirm('답변 등록하시겠습니까?');
+    			
+    			if(chkUpdate === true){
+    				document.getElementById('registFrm').submit();
+    			}
+    		}
+    	}
+    	
     	if(document.getElementById("update")){
     		const $update = document.getElementById("update");
     		$update.onclick = function(){
@@ -153,7 +237,7 @@
     			var chkUpdate = confirm('수정하시겠습니까?');
     			
     			if(chkUpdate === true){
-    				document.getElementById('frm').submit();
+    				document.getElementById('updateFrm').submit();
     			}
     		}
     	}
@@ -164,7 +248,7 @@
     			var chkDelete = confirm('삭제하시겠습니까?');
     			
     			if(chkDelete === true){
-    				location.href = "${ pageContext.servletContext.contextPath }/admin/notice/delete";
+    				location.href = "${ pageContext.servletContext.contextPath }/admin/report/delete";
     			}
     		}
     	}
@@ -172,7 +256,7 @@
     	if(document.getElementById("backToList")){
     		const $backToList = document.getElementById("backToList");
     		$backToList.onclick = function(){
-    			location.href = "${ pageContext.servletContext.contextPath }/admin/notice/list";
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/report/list";
     		}
     	}
     	

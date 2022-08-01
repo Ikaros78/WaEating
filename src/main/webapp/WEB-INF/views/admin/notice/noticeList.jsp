@@ -35,7 +35,6 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/list">공지사항 조회</a></li>
-                                    <li role="presentation"><a href="#">공지사항 수정</a></li>
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/insert">공지사항 등록</a></li>
                                 </ul>
                             </td>
