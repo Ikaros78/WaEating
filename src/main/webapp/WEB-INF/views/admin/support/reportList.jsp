@@ -46,8 +46,9 @@
 	                    <tr>
 	                        <th width="100px">문의번호</th>
 	                       	<th width="300px">제목</th>
-	                        <th width="200px">작성자</th>
+	                        <th width="100px">작성자</th>
 	                        <th width="100px">작성일자</th>
+	                        <th width="100px">답변작성일자</th>
 	                    </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,7 @@
 	                        <td class=details><c:out value="${ report.title }"/></td>
 	                        <td class=details><c:out value="${ report.id }"/></td>
 	                        <td class=details><c:out value="${ report.regDate }"/></td>
+	                        <td class=details><c:out value="${ report.answer.ansDate }"/></td>
 	                    </tr>
                     </c:forEach>
                     </tbody>

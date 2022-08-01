@@ -41,7 +41,7 @@ public class AdminFAQUpdateServlet extends HttpServlet {
 		
 		AdminSupportService supportService = new AdminSupportService();
 		
-		if(title.length() == 0 && content.length() == 0) {
+		if(title.length() == 0 || content.length() == 0) {
 			response.sendRedirect(request.getContextPath() + "/admin/cancle/session");
 		}else {
 			

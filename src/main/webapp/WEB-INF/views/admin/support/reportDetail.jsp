@@ -132,7 +132,7 @@
             </div>
 	        </c:if>
 	        <c:if test="${ empty sessionScope.report.answer }">
-	        <form action="${ pageContext.servletContext.contextPath }/admin/reportAns/regist" method="post" id="registFrm">
+	        <form action="${ pageContext.servletContext.contextPath }/admin/reportAns/insert" method="post" id="insertFrm">
 	            <c:if test="${ !empty sessionScope.ifUpdate }">
 	            <div class="col-md-9 col-md-offset-2">
 		            <table class="table table-bordered">
@@ -143,12 +143,12 @@
 		            	</thead>
 		            	<tbody>
 		            		<tr>
-		            			<td><textarea id="summernote" name="registContent" placeholder="내용"></textarea>
+		            			<td><textarea id="summernote" name="insertContent" placeholder="내용"></textarea>
 		            		</tr>
 		            	</tbody>
 		            </table>
 		            <div align="right">
-					<button type="button" class="btn btn-primary" id="regist">등록하기</button>
+					<button type="button" class="btn btn-primary" id="insert">등록하기</button>
 					</div>
 				</div>
 	            </c:if>
@@ -218,14 +218,14 @@
     		}
     	}
     
-    	if(document.getElementById("regist")){
-    		const $regist = document.getElementById("regist");
-    		$regist.onclick = function(){
+    	if(document.getElementById("insert")){
+    		const $insert = document.getElementById("insert");
+    		$insert.onclick = function(){
 				
     			var chkUpdate = confirm('답변 등록하시겠습니까?');
     			
     			if(chkUpdate === true){
-    				document.getElementById('registFrm').submit();
+    				document.getElementById('insertFrm').submit();
     			}
     		}
     	}
@@ -248,7 +248,7 @@
     			var chkDelete = confirm('삭제하시겠습니까?');
     			
     			if(chkDelete === true){
-    				location.href = "${ pageContext.servletContext.contextPath }/admin/report/delete";
+    				location.href = "${ pageContext.servletContext.contextPath }/admin/reportAns/delete";
     			}
     		}
     	}

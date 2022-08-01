@@ -15,4 +15,10 @@ public interface ReportMapper {
 
 	ReportDTO adminSelectReportDetail(Map<String, String> searchMap);
 
+	int insertAns(Map<String, String> insertAnsMap);
+
+	int deleteAns(String ansNo);
+
+	int updateAns(Map<String, String> updateAnsMap);
+
 }

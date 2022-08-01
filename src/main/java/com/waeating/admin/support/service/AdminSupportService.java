@@ -213,4 +213,85 @@ public class AdminSupportService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 *   문의 답변 등록용 메소드
+	 * </pre>
+	 * @param insertAnsMap
+	 * @return 
+	 */
+	public int insertAns(Map<String, String> insertAnsMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		
+		int result = reportMapper.insertAns(insertAnsMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	/**
+	 * <pre>
+	 *   문의 답변 삭제용 메소드
+	 * </pre>
+	 * @param ansNo
+	 * @return
+	 */
+	public int deleteAns(String ansNo) {
+
+		SqlSession sqlSession = getSqlSession();
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		
+		int result = reportMapper.deleteAns(ansNo);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	/**
+	 * <pre>
+	 *   문의 답변 수정용 메소드
+	 * </pre>
+	 * @param updateAnsMap
+	 * @return
+	 */
+	public int updateAns(Map<String, String> updateAnsMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		
+		int result = reportMapper.updateAns(updateAnsMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 }
