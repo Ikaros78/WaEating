@@ -16,8 +16,11 @@ public class UserMatzipDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		
+//		HttpSession session = request.getSession();
+//		
 		request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matzip_detail.jsp").forward(request, response);
+		
+		
+		
 	}	
 }

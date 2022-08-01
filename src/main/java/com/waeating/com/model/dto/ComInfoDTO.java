@@ -3,6 +3,7 @@ package com.waeating.com.model.dto;
 import java.util.List;
 
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.review.model.dto.ReviewAttachDTO;
 
 public class ComInfoDTO {
 
@@ -23,6 +24,8 @@ public class ComInfoDTO {
 	private List<ComRecordDTO> recordList;
 	private ReviewDTO review;
 	private WaitingRecordDTO waitingRecord;
+	private ReviewAttachDTO reviewAttach;
+	private ReviewAnsDTO reviewAns;
 	
 	
 	public ComInfoDTO() {}
@@ -51,6 +54,32 @@ public class ComInfoDTO {
 		this.waitingRecord = waitingRecord;
 	}
 
+	
+
+	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
+			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
+			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review,
+			WaitingRecordDTO waitingRecord, ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
+		super();
+		this.comNo = comNo;
+		this.memberId = memberId;
+		this.comName = comName;
+		this.category = category;
+		this.comAddress = comAddress;
+		this.comPhone = comPhone;
+		this.comRegist = comRegist;
+		this.waitYn = waitYn;
+		this.workTime = workTime;
+		this.holiday = holiday;
+		this.comBoardAttach = comBoardAttach;
+		this.comMenu = comMenu;
+		this.memberInfo = memberInfo;
+		this.recordList = recordList;
+		this.review = review;
+		this.waitingRecord = waitingRecord;
+		this.reviewAttach = reviewAttach;
+		this.reviewAns = reviewAns;
+	}
 
 
 	public int getComNo() {
@@ -215,6 +244,27 @@ public class ComInfoDTO {
 		this.waitingRecord = waitingRecord;
 	}
 
+	
+
+	public ReviewAttachDTO getReviewAttach() {
+		return reviewAttach;
+	}
+
+
+	public void setReviewAttach(ReviewAttachDTO reviewAttach) {
+		this.reviewAttach = reviewAttach;
+	}
+
+
+	public ReviewAnsDTO getReviewAns() {
+		return reviewAns;
+	}
+
+
+	public void setReviewAns(ReviewAnsDTO reviewAns) {
+		this.reviewAns = reviewAns;
+	}
+
 
 	@Override
 	public String toString() {
@@ -222,7 +272,8 @@ public class ComInfoDTO {
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
 				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", comBoardAttach="
 				+ comBoardAttach + ", comMenu=" + comMenu + ", memberInfo=" + memberInfo + ", recordList=" + recordList
-				+ ", review=" + review + ", waitingRecord=" + waitingRecord + "]";
+				+ ", review=" + review + ", waitingRecord=" + waitingRecord + ", reviewAttach=" + reviewAttach
+				+ ", reviewAns=" + reviewAns + "]";
 	}
 
 }

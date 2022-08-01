@@ -279,25 +279,24 @@
 	  	      , B.HOLIDAY
 	  	      , B.THUMBNAIL_NAME
 	  	   FROM(SELECT
-              V.COM_NO
-            , V.COM_NAME
-            , V.WORK_TIME
-            , V.HOLIDAY
-            , V.THUMBNAIL_NAME
+			           V.COM_NO
+			         , V.COM_NAME
+			         , V.WORK_TIME
+			         , V.HOLIDAY
+			         , V.THUMBNAIL_NAME
 
-       FROM 
-       (SELECT
-               K.COM_NO
-             , K.COM_NAME
-             , K.WORK_TIME
-             , K.HOLIDAY
-             , U.THUMBNAIL_NAME
-             , T.RATINGS
-          FROM COM_INFO K
-          JOIN COM_BOARD_ATTACH U ON(K.COM_NO = U.COM_NO)
-          JOIN REVIEW T ON(K.COM_NO = T.COM_NO)
-          JOIN COM_RECORD D ON(K.COM_NO = D.COM_NO)
-		 WHERE  D.COM_STATUS = '승인'
+		          FROM (SELECT
+				               K.COM_NO
+				             , K.COM_NAME
+				             , K.WORK_TIME
+				             , K.HOLIDAY
+				             , U.THUMBNAIL_NAME
+				             , T.RATINGS
+				          FROM COM_INFO K
+				          JOIN COM_BOARD_ATTACH U ON(K.COM_NO = U.COM_NO)
+				          JOIN REVIEW T ON(K.COM_NO = T.COM_NO)
+				          JOIN COM_RECORD D ON(K.COM_NO = D.COM_NO)
+						 WHERE  D.COM_STATUS = '승인'
          ) V
         GROUP BY
                 V.COM_NO

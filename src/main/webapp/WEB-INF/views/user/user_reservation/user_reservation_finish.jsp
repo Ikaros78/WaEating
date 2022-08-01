@@ -48,10 +48,19 @@
             <p>전화번호 : ${ reservation.memberInfo.phone }</p>
             
               <button type="button" class="btn btn-outline-success" disabled>방문 완료</button>
-            
-            <a href="${ pageContext.servletContext.contextPath }/user/review">
-              <button type="button" class="btn btn-success">리뷰 쓰기</button> 
-            </a>
+              
+              <c:choose>
+              	<c:when test="${ reservation.review.reviewNo eq null }">
+              		 <a href="${ pageContext.servletContext.contextPath }/user/review">
+              			<button type="button" class="btn btn-success">리뷰 쓰기</button> 
+           			 </a>
+              	</c:when>
+              	<c:otherwise>
+		            <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate">
+		              <button type="button" class="btn btn-success">내가 쓴 리뷰 보기</button>
+		            </a>
+              	</c:otherwise>
+              </c:choose>
         </div>
         </c:forEach>
 
