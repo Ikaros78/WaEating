@@ -85,18 +85,26 @@
   	
   	<select id="selectOneNotice" resultMap="comNoticeResultMap">
   		SELECT
- 		       CN.NOTICE_TITLE
+  			   CN.NOTICE_NO 
+ 		     , CN.NOTICE_TITLE
  		     , CN.NOTICE_CONTENT
+ 		     , CN.REG_DATE
  		  FROM COM_NOTICE CN
  		 WHERE CN.NOTICE_NO = #{ noticeNo }
   	</select>
   	
-  	<update id="updateNotice" parameterType="com.waeating.ceo.notice.model.dto.ComNoticeDTO">
+  	<update id="updateNotice">
   		UPDATE 
   			   COM_NOTICE CN
   		   SET CN.NOTICE_TITLE = #{ noticeTitle }
   		     , CN.NOTICE_CONTENT = #{ noticeContent }
   		 WHERE CN.NOTICE_NO = #{ noticeNo }
   	</update>
+  	
+  	<delete id="deleteNotice" parameterType="com.waeating.ceo.notice.model.dto.ComNoticeDTO">
+  		DELETE
+  			   COM_NOTICE CN
+  		 WHERE CN.NOTICE_NO = #{ noticeNo }
+  	</delete>
   	
   </mapper>

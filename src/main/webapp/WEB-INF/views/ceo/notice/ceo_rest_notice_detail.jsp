@@ -36,32 +36,23 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 650px">
+       <aside class="float-end col-9 mt-4 ms-3">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">	
-        	
-
-        	<form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail?noticeNo=${ requestScope.selectOneNotice.noticeNo }" method="get">
-            <table width="100%">
-              <tr>
-                <td><h5>제목</h5></td>
-                <td style="width: 95%;"><input type="text" class="form-control mb-2" placeholder="제목을 입력해주세요." name="noticeTitle" id="noticeTitle" value="${ requestScope.selectOneNotice.noticeTitle }"></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-content-start mt-2"><h5>내용</h5></td>
-                <td><textarea id="summernote" name="noticeContent"><c:out value="${ requestScope.selectOneNotice.noticeContent }"/></textarea></td>
-                <!-- <td><textarea class="form-control mb-2 ms-1" rows="10" name="content" id="content" placeholder="가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요."></textarea></td> -->
-              </tr>
-            </table>
-            </form>
-			<form method="post">
-            <div class="mt-3 d-flex justify-content-center">
-              <a><button type="button" class="btn btn-outline-danger me-2" value="삭제">삭제</button></a>
-              <button type="submit" class="btn btn-outline-primary" value="수정">수정</button>
+        	<h1>${ requestScope.selectOneNotice.noticeTitle }</h1>
+            <h6 class="text-end">${ requestScope.selectOneNotice.regDate }</h6>
+            <hr>
+            <div class="py-3" style="min-height: 450px">
+              ${ requestScope.selectOneNotice.noticeContent }
             </div>
-
-            <!-- <div class="modal fade" id="modalDeleteq">
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-outline-danger me-2" value="삭제" data-bs-toggle="modal" data-bs-target="#modalDeleteq">삭제</button>
+              <button type="button" class="btn btn-outline-primary" value="수정" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify?noticeNo=${ requestScope.selectOneNotice.noticeNo }'">수정</button>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="modalDeleteq">
               <div class="modal-dialog">
                 <div class="modal-content">
             
@@ -91,40 +82,15 @@
                   </div>
             
                   <div class="modal-body">
-                    공지가 삭제되었습니다.
+                    공지를 삭제합니다.
                   </div>
             
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_delete?noticeNo=${ requestScope.selectOneNotice.noticeNo }'">확인</button>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="modal fade" id="modalSubmit">
-              <div class="modal-dialog">
-                <div class="modal-content">
-            
-                  <div class="modal-header">
-                    <h4 class="modal-title">공지 수정</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-            
-                  <div class="modal-body">
-                    공지 수정이 완료되었습니다.
-                  </div>
-            
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
-                  </div>
-            
-                </div>
-              </div>
-            </div> -->
-          </form>
-         
-          
-        </div>
        </aside>
     </section>
    

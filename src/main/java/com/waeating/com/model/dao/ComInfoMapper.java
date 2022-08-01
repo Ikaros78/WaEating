@@ -34,7 +34,10 @@ public interface ComInfoMapper {
 	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
 
 	/* 예약 찾기 용도*/
-
+	
+	
+	/* 업체 용도 */
+	
 
 	
 
