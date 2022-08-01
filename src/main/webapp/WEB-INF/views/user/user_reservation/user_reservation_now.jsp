@@ -35,7 +35,7 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
        
         <br>
-        <h2 style="text-indent: 30px;">현재예약</h2>
+        <h2 style="text-indent: 30px;">현재 예약</h2>
         <hr>
         <c:forEach var="reservation" items="${ requestScope.waitingRecord }">
         <div class="reservation now">

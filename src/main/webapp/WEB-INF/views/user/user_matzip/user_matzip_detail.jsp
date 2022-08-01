@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,57 +45,47 @@
         <br>
         <br>
         <br>
-        <h2 style="text-indent: 50px;">또 보겠지 떡볶이집 몽글몽글 청계점 &nbsp&nbsp&nbsp&nbsp <a style="text-indent: 20px; color:rgb(228, 106, 35);">4.5</a> </h2> 
+        <h2 style="text-indent: 50px;">${ requestScope.selectCom.comName } &nbsp&nbsp&nbsp&nbsp <a style="text-indent: 20px; color:rgb(228, 106, 35);">${ requestScope.selectAvgRatings.avgRatings }</a> </h2> 
         <br>
         <hr>
 
-   s
+   
         
         <table>
            <tr>
                 <th>주소</th>
-                <td>서울특별시 종로구 관철동 6-4 2층</td>
+                <td>${ requestScope.selectCom.comAddress }</td>
             </tr>
             <tr>
                  <th>전화번호</th>
-                 <td>0507-1402-4103</td>
+                 <td>${ requestScope.selectCom.comPhone }</td>
             </tr>
            <tr>
                 <th>영업시간</th>
-                <td>11:00 - 21:00   (라스트오더 20:00)</td>
+                <td>${ requestScope.selectCom.workTime }</td>
            </tr>
            <tr>
                 <th>휴무</th>
-                <td>매주 일요일</td>
+                <td>${ requestScope.selectCom.holiday }</td>
            </tr>
            <tr>
                 <th>카테고리</th>
-                <td>분식</td>
+                <td>${ requestScope.selectCom.category }</td>
            </tr>
            <tr>
-                <th>메뉴</th>
-                <td>깻잎떡볶이(1인분) : 7,500원</td>
+                <th	valign="top">메뉴</th>
+                
+                <td>
+                	<c:forEach var="com" items="${ requestScope.selectComMenu }">
+                	<div class="mb-2">${ com.comMenu.menuName } : ${ com.comMenu.price } 원<br></div>
+                		
+                	</c:forEach>
+                </td> 
+                
            </tr>
-           <tr>
-                <th></th>            
-                <td>깻잎떡볶이(2인분) : 14,000원</td>
-           </tr>
-           <tr>
-                <th></th>
-                <td>깻잎떡볶이(3인분) : 24,000원</td>
-           </tr>
-           <tr>
-                <th></th>
-                <td>버터갈릭 감자튀김 : 6,500원</td>
-           </tr>
-           <tr>
-                <th></th>
-                <td>날치알 볶음밥 : 3,500원</td>
-           </tr>
-           
         </table>
 
-        <br><br>
+        
         <hr>
 
        <div class="container mt-3">
@@ -102,7 +93,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#home" style="text-indent: 20px; color: gray;">리뷰(n)</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#home" style="text-indent: 20px; color: gray;">리뷰</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" href="#menu1">공지사항</a>
@@ -112,24 +103,40 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div id="home" class="container tab-pane active"><br>
+            <c:forEach var="review" items="${ requestScope.selectReview }">
               <div class="review_all m-5">
 
                 <div class="review my-2 ">
       
                   <div class="user">
-                    <img src="../1_front/images/panda.jpg" alt="panda" >
-                    <p>맛집판다</p>
+                 
+                    <img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ review.userInfoAttach.fileName }" alt="user_profile" >
+                    <p>${ review.memberInfo.id }</p>
                   </div>
                   <div class="content ">
                     
                     <div class="content_header">
-                      <p class="date">2022-07-17</p>
+                      <p class="date">${ review.waitingRecord.useDate }</p>
+                      <c:if test="${ review.ratings eq 1 }">                      
+                      <p class="point text-warning">★☆☆☆☆</p>
+                      </c:if>
+                      <c:if test="${ review.ratings eq 2 }">                      
+                      <p class="point text-warning">★★☆☆☆</p>
+                      </c:if>
+                      <c:if test="${ review.ratings eq 3 }">                      
+                      <p class="point text-warning">★★★☆☆</p>
+                      </c:if>
+                      <c:if test="${ review.ratings eq 4 }">                      
                       <p class="point text-warning">★★★★☆</p>
+                      </c:if>
+                      <c:if test="${ review.ratings eq  5 }">                      
+                      <p class="point text-warning">★★★★★</p>
+                      </c:if>
+                      
                     </div>
                     <div class="content_body">
                       <p>
-                        떡볶이 짱 맛있었어요!! <br>
-                        감자튀김도 꼭 드세요! 소스가 진해서 최고예여!! 
+                        ${ review.reviewContent }
                       </p>
                       <img src="../1_front/images/ddok1.png" alt="">
                       <img src="../1_front/images/ddok1.png" alt="">
@@ -137,18 +144,21 @@
                     </div>
                     
                   </div><!--content-->
-                  <div class="reply my-2  mx-5" style="border-radius: 8px; background-color: rgb(221, 220, 220); height: auto;">
-                    <img src="../1_front/images/right-arrow.png" alt="right-arrow" style="width:30px; height:30px; margin-left: 50px; float: left;">
-                    <p style="text-indent: 20px;">
-                      방문해주셔서 감사합니다. 오오오오 헬로헬로헬로헤롤레호ㅔ오란어리마ㅓ이;라ㅓㅁ이라ㅓㅁ;ㅣㅏㄹ엄;ㅣㅏㅓㄹ미;ㅏㅓㄹㅇ미ㅏㅓㅇ리;마ㅓ리ㅏ멍;ㅣ럼나얾;ㅣㅏㅓㅇ;ㅣㅏㅓ
-                    </p>
-                  </div><!--reply-->
+                    <c:if test="${ review.reviewAns.ansContent ne null}">
+	                  <div class="reply my-2  mx-5" style="border-radius: 8px; background-color: rgb(221, 220, 220); height: auto;">
+	                    <img src="${ pageContext.servletContext.contextPath }/resources/images/user/right-arrow.png" alt="right-arrow" style="width:30px; height:30px; margin-left: 50px; float: left;">
+	                    <p style="text-indent: 20px;">
+	                     ${ review.reviewAns.ansContent }
+	                    </p>
+	                  </div><!--reply-->
+                    </c:if>
                 </div><!--review-->
               </div> <!--review_all-->
+            </c:forEach>
             </div>
             <div id="menu1" class="container tab-pane fade"><br>
-              <h3>Menu 1</h3>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              <h5 style="float:left;">공지사항 테스트입니다. </h5>   <p style="color: gray; float: right;">2022/07/29</p>
+              <p style="clear:both;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
           </div>
         </div>
@@ -156,7 +166,7 @@
         
        
         
-        <p class="more">더보기</p>
+       <!--  <p class="more">더보기</p> -->
 
         
       </aside>

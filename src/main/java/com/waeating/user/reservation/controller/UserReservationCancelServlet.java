@@ -67,7 +67,7 @@ public class UserReservationCancelServlet extends HttpServlet {
 		String path = "";
 		if(waitingRecord != null) {
 			
-			path = "/WEB-INF/views/user/user_reservation/user_reservation_finish.jsp";
+			path = "/WEB-INF/views/user/user_reservation/user_reservation_cancel.jsp";
 			request.setAttribute("waitingRecord", waitingRecord);
 			request.setAttribute("selectCriteria", selectCriteria);
 			

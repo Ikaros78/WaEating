@@ -3,7 +3,9 @@ package com.waeating.com.model.dto;
 import java.util.List;
 
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.review.model.dto.ReviewAnsDTO;
 import com.waeating.review.model.dto.ReviewAttachDTO;
+import com.waeating.review.model.dto.ReviewDTO;
 
 public class ComInfoDTO {
 
@@ -31,30 +33,8 @@ public class ComInfoDTO {
 	public ComInfoDTO() {}
 
 
-	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
-			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
-			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review,
-			WaitingRecordDTO waitingRecord) {
-		super();
-		this.comNo = comNo;
-		this.memberId = memberId;
-		this.comName = comName;
-		this.category = category;
-		this.comAddress = comAddress;
-		this.comPhone = comPhone;
-		this.comRegist = comRegist;
-		this.waitYn = waitYn;
-		this.workTime = workTime;
-		this.holiday = holiday;
-		this.comBoardAttach = comBoardAttach;
-		this.comMenu = comMenu;
-		this.memberInfo = memberInfo;
-		this.recordList = recordList;
-		this.review = review;
-		this.waitingRecord = waitingRecord;
-	}
-
 	
+
 
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
 			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
@@ -80,6 +60,9 @@ public class ComInfoDTO {
 		this.reviewAttach = reviewAttach;
 		this.reviewAns = reviewAns;
 	}
+
+
+
 
 
 	public int getComNo() {

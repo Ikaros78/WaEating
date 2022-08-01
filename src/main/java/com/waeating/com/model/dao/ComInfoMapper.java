@@ -32,6 +32,10 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
 
+	ComInfoDTO selectComDetail();
+
+	List<ComInfoDTO> selectComMenu();
+
 	
 
 
