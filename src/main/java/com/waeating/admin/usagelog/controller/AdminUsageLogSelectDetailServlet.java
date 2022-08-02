@@ -30,10 +30,18 @@ public class AdminUsageLogSelectDetailServlet extends HttpServlet {
 		AdminUsageLogService logService = new AdminUsageLogService();
 		WaitingRecordDTO log = logService.adminSelectLogDetail(searchMap);
 		
+		
+		
 		String path = "";
 		
 		if(log != null) {
 			path = "/WEB-INF/views/admin/usageLog/usageLogDetail.jsp";
+			
+			String status = log.getUseStatus();
+			if(status.equals("cancel")) {
+				String reason = logService.adminSelectRefuseLogDetail(searchMap);
+				request.getSession().setAttribute("reason", reason);
+			}
 			
 			request.getSession().setAttribute("path", path);
 			request.getSession().setAttribute("log", log);

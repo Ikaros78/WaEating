@@ -100,6 +100,13 @@ public class AdminUsageLogService {
 		
 	}
 
+	/**
+	 * <pre>
+	 *   이용이력 수정용 메소드
+	 * </pre>
+	 * @param updateLogMap
+	 * @return
+	 */
 	public int adminUpdateLog(Map<String, String> updateLogMap) {
 
 		SqlSession sqlSession = getSqlSession();
@@ -118,6 +125,25 @@ public class AdminUsageLogService {
 		sqlSession.close();
 		
 		return result;
+	}
+
+	/**
+	 * <pre>
+	 *   취소사유 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
+	public String adminSelectRefuseLogDetail(Map<String, String> searchMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		logMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		String reason = logMapper.adminSelectRefuseLogDetail(searchMap);
+		
+		sqlSession.close();
+		
+		return reason;
 	}
 
 }

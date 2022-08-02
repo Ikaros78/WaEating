@@ -18,6 +18,7 @@
   	  <association property="comInfo" resultMap="companyResultMap"/>
   	  <association property="memberInfo" resultMap="memberResultMap"/>
   	  <association property="review" resultMap="reviewMap"/>
+  	  <association property="refuseReason" resultMap="waitingRefuseMap"/>
   </resultMap>
   
   <resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="companyResultMap">
@@ -43,13 +44,18 @@
 		<result property="emailCheck" column="EMAIL_CHECK"/>
 	</resultMap>
 	
-	 <resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
-  	<id property="reviewNo" column="REVIEW_NO"/>
-  	<result property="reviewContent" column="REVIEW_CONTENT"/>
-  	<result property="ratings" column="RATINGS"/>
-  	<result property="recordNo" column="RECORD_NO"/>
-  	<result property="comNo" column="COM_NO"/>
-  </resultMap>
+	<resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
+	  	<id property="reviewNo" column="REVIEW_NO"/>
+	  	<result property="reviewContent" column="REVIEW_CONTENT"/>
+	  	<result property="ratings" column="RATINGS"/>
+	  	<result property="recordNo" column="RECORD_NO"/>
+	  	<result property="comNo" column="COM_NO"/>
+  	</resultMap>
+  
+  	<resultMap type="com.waeating.waitingRecord.model.dto.WaitingRefuseDTO" id="waitingRefuseMap">
+  		<id property="recordNo" column="RECORD_NO"/>
+  		<result property="refuseReason" column="REFUSE_REASON"/>
+  	</resultMap>
   
     <select id="selectFinishReservationCount" resultType="_int" parameterType="hashmap">
        SELECT
@@ -288,4 +294,12 @@
 	 	</set>
 	 	WHERE A.RECORD_NO = #{ recordNo }
 	 </update>
+	 
+	 <select id="adminSelectRefuseLogDetail" parameterType="hashmap" resultType="java.lang.String">
+	 	SELECT
+	 			A.REFUSE_REASON
+	 	  FROM WAITING_REFUSE A
+	 	  JOIN WAITING_RECORD B ON(A.RECORD_NO = B.RECORD_NO)
+	 	 WHERE A.RECORD_NO = #{ recordNo }
+	 </select>
   </mapper>

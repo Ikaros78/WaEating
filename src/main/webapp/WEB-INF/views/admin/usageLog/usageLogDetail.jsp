@@ -53,7 +53,7 @@
 	                	</tr>
                 	</thead>
                     <tbody>
-                        <tr>
+                        <tr class="comNo">
                         	<td>업체번호</td>
                         	<td><c:out value="${ log.comNo }"/></td>
                         </tr>
@@ -61,7 +61,7 @@
                         	<td>업체명</td>
                         	<td><c:out value="${ log.comInfo.comName }"/></td>
                         </tr>
-                        <tr>
+                        <tr class="memberId">
                         	<td>이용아이디</td>
                         	<td><c:out value="${ log.memberId }"/></td>
                         </tr>
@@ -76,6 +76,12 @@
                             	<td><input type="text" placeholder="이용여부" name="updateStatus"></td>
                             </c:if>
                         </tr>
+                        <c:if test="${ log.useStatus eq 'cancel' }"> 
+                        <tr>
+                        	<td>취소사유</td>
+                        	<td><c:out value="${ reason }"/></td>
+                        </tr>
+                        </c:if>
                         <tr>
                         	<td>인원수</td>
                         	<td><c:out value="${ log.memberNum }"/></td>
@@ -172,6 +178,46 @@
     		const $backToList = document.getElementById("backToList");
     		$backToList.onclick = function(){
     			location.href = "${ pageContext.servletContext.contextPath }/admin/usageLog/list";
+    		}
+    	}
+    	
+    	if(document.getElementsByClassName("comNo")){
+    		const $comtr = document.getElementsByClassName("comNo");
+    		for(let i = 0; i < $comtr.length; i++){
+    			
+    			$comtr[i].onmouseenter = function(){
+    				this.style.backgroundColor = "lightgrey";
+    				this.style.cursor = "pointer";
+    			}
+    			
+    			$comtr[i].onmouseout = function(){
+    				this.style.backgroundColor = "white";
+    			}
+    			
+	    		$comtr[i].onclick = function(){
+	    			var comNo = $(this).children().eq(1).text();
+	    			location.href = "${ pageContext.servletContext.contextPath }/admin/company/detail/session?comNo=" + comNo;
+    			}
+    		}
+    	}
+    	
+    	if(document.getElementsByClassName("memberId")){
+    		const $idtr = document.getElementsByClassName("memberId");
+    		for(let i = 0; i < $idtr.length; i++){
+    			
+    			$idtr[i].onmouseenter = function(){
+    				this.style.backgroundColor = "lightgrey";
+    				this.style.cursor = "pointer";
+    			}
+    			
+    			$idtr[i].onmouseout = function(){
+    				this.style.backgroundColor = "white";
+    			}
+    			
+	    		$idtr[i].onclick = function(){
+	    			var memberId = $(this).children().eq(1).text();
+	    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/detail/session?memberId=" + memberId;
+    			}
     		}
     	}
     </script>
