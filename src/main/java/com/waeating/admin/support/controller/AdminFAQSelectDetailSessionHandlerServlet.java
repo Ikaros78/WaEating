@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AdminSupportSelectDetailSessionHandlerServlet
+ * Servlet implementation class AdminFAQSelectDetailSessionHandlerServlet
  */
-@WebServlet("/admin/support/detail/session")
-public class AdminSupportSelectDetailSessionHandlerServlet extends HttpServlet {
+@WebServlet("/admin/faq/detail/session")
+public class AdminFAQSelectDetailSessionHandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String reportNo = request.getParameter("reportNo");
+		String faqNo = request.getParameter("faqNo");
 		
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("reportNo", reportNo);
+		session.setAttribute("faqNo", faqNo);
 		
-		response.sendRedirect(request.getContextPath() + "/admin/support/detail");
+		response.sendRedirect(request.getContextPath() + "/admin/faq/detail");
 	}
 
 }

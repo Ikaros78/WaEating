@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.user.reservation.model.service.ReservationService;
 
 /**
@@ -35,7 +36,12 @@ public class UserReservationFinishServlet extends HttpServlet {
 			pageNo = 1;
 		}
 		
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		String userId = member.getId();
+		
 		Map<String, String> searchMap = new HashMap<>();
+		
+		searchMap.put("userId", userId);
 		
 		ReservationService reservationService = new ReservationService();
 		
@@ -45,9 +51,12 @@ public class UserReservationFinishServlet extends HttpServlet {
 		int limit = 4;
 		int buttonAmount = 5;
 		
+		String searchCondition = "";
+		String searchValue = userId;
+		
 		SelectCriteria selectCriteria = null;
 		
-		selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
+		selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, searchValue);
 		
 		System.out.println(selectCriteria);
 		

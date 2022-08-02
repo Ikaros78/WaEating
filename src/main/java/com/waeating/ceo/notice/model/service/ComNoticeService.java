@@ -71,6 +71,49 @@ public class ComNoticeService {
 		return comNotice;
 	}
 
+	public int updateNotice(ComNoticeDTO comNotice) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);
+		int result = comNoticeMapper.updateNotice(comNotice);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+		
+	}
+
+	public int deleteNotice(int noticeNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);
+		int result = comNoticeMapper.deleteNotice(noticeNo);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	
+
 	
 
 	

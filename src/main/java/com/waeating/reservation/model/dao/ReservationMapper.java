@@ -18,4 +18,8 @@ public interface ReservationMapper {
 
 	List<ComInfoDTO> selectReservationCancel(SelectCriteria selectCriteria);
 
+	int selectNowReservationCount(Map<String, String> searchMap);
+
+	List<ComInfoDTO> selectReservationNow(SelectCriteria selectCriteria);
+
 }

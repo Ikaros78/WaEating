@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waeating.ceo.restInfo.model.dao.ComInfoMapper">
+	<resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="comInfoResultMap">
+		<id property="comNo" column="COM_NO"/>
+		<result property="comName" column="COM_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="comAddress" column="COM_ADDRESS"/>
+		<result property="comPhone" column="COM_PHONE"/>
+		<result property="waitYn" column="WAIT_YN"/>
+		<result property="workTime" column="WORK_TIME"/>
+		<result property="holiday" column="HOLIDAY"/>
+		<association property="comMenu" resultMap="comMenuResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.com.model.dto.ComMenuDTO" id="comMenuResultMap">
+		<id property="menuNo" column="MENU_NO"/>
+		<result property="menuName" column="MENU_NAME"/>
+		<result property="price" column="PRICE"/>
+		<result property="comNo" column="COM_NO"/>
+	</resultMap>
+	
+	<select id="comSelectOneComInfo" resultMap="comInfoResultMap">
+		SELECT
+			   CI.COM_NO
+		     , CI.COM_NAME
+		     , CI.CATEGORY
+		     , CI.COM_ADDRESS
+		     , CI.COM_PHONE
+		     , CI.WAIT_YN
+		     , CI.WORK_TIME
+		     , CI.HOLIDAY
+		  FROM COM_INFO CI
+		 WHERE CI.COM_NO = 1
+	</select>
+	
+	<select id="comSelectOneComMenu" resultMap="comInfoResultMap">
+		SELECT
+		       CM.MENU_NAME
+		     , CM.PRICE
+		  FROM COM_INFO CI
+		  JOIN COM_MENU CM ON (CI.COM_NO = CM.COM_NO)
+		 WHERE CI.COM_NO = 1
+	</select>
+
+</mapper>

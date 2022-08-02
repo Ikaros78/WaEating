@@ -32,8 +32,8 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/support/list">문의사항 조회</a></li>
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/supportFAQ/list">자주 하는 질문</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/report/list">문의사항 조회</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/faq/list">자주 하는 질문</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -43,19 +43,23 @@
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
-                        <th width="100px">문의번호</th>
-                        <th width="400px">제목</th>
-                        <th width="200px">작성자</th>
-                    </tr>
+	                    <tr>
+	                        <th width="100px">문의번호</th>
+	                       	<th width="300px">제목</th>
+	                        <th width="100px">작성자</th>
+	                        <th width="100px">작성일자</th>
+	                        <th width="100px">답변작성일자</th>
+	                    </tr>
                     </thead>
                     <tbody>
                     <c:forEach var ="report" items="${ requestScope.reportList }">
-                    <tr class="rowClick">
-                        <td class=details><c:out value="${ report.reportNo }"/></td>
-                        <td class=details><c:out value="${ report.title }"/></td>
-                        <td class=details><c:out value="${ report.id }"/></td>
-                    </tr>
+	                    <tr class="rowClick">
+	                        <td class=details><c:out value="${ report.reportNo }"/></td>
+	                        <td class=details><c:out value="${ report.title }"/></td>
+	                        <td class=details><c:out value="${ report.id }"/></td>
+	                        <td class=details><c:out value="${ report.regDate }"/></td>
+	                        <td class=details><c:out value="${ report.answer.ansDate }"/></td>
+	                    </tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -65,7 +69,7 @@
 		<!-- 검색 폼 -->
 		
 		<div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
-			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/support/list" method="get" style="display:inline-block">		
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/report/list" method="get" style="display:inline-block">		
 			    <input type="hidden" name="currentPage" value="1">
 			    <select id="searchCondition" name="searchCondition">
 					<option value="title" ${ requestScope.selectCriteria.searchCondition eq "title"? "selected": "" }>제목</option>
@@ -87,7 +91,7 @@
 	<!-- 상세 보기 이동 -->
     <script>
     	
-    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/support/detail/session"
+    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/report/detail/session"
     
     	if(document.getElementsByTagName("td")) {
     		
