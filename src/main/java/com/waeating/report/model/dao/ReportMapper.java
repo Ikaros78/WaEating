@@ -8,13 +8,13 @@ import com.waeating.support.model.dto.ReportDTO;
 
 public interface ReportMapper {
 
-  List<com.waeating.report.model.dto.ReportDTO> selectReportList (SelectCriteria selectCriteria);
+  List<ReportDTO> selectReportList (SelectCriteria selectCriteria);
    
   int SelectTotalCount(Map<String, String> searchMap);
   
-  com.waeating.report.model.dto.ReportDTO SelectReportDetail(Map<String, String> searchMap);
+  ReportDTO SelectReportDetail(Map<String, String> searchMap);
 
-static int insertReport(com.waeating.report.model.dto.ReportDTO report) {
+static int insertReport(ReportDTO report) {
 	// TODO Auto-generated method stub
 	return 0;
 }

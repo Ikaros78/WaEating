@@ -1,4 +1,4 @@
-package com.waeating.reservation.model.dto;
+package com.waeating.waitingRecord.model.dto;
 
 import java.sql.Date;
 
