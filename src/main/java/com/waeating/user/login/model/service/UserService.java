@@ -156,6 +156,43 @@ public class UserService {
 		return findUserId;
 	}
 
+	/**
+	 * <pre>
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public int checkPwd(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		int checkPwd = memberMapper.checkFindPwForEmail(requestMember);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
+
+	/**
+	 * <pre>
+	 * 	 새로운 비밀번호 입력 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO updatePwd(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO updatePwd = memberMapper.updateNewPwd(requestMember);
+		return null;
+	}
+
 
 
 }
