@@ -31,12 +31,12 @@ public interface ComInfoMapper {
 	int selectAllCount(Map<String, String> searchMap);
 
 	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
-
+	
 	ComInfoDTO selectComDetail(String comNo);
 
 	List<ComInfoDTO> selectComMenu(String comNo);
 
-	
+	/* 업체 용도 */
 
 
 	

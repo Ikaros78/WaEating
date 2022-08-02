@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,21 +27,37 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 700px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
           <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review" method="post">
             <table width="100%">
                 <tr>
-                  <td class="ps-3 col-1 text-center d-flex justify-content-start h5">abc12***</td>
-                  <td class="px-3 col-1 text-warning text-center h4" rowspan="2">★★★★☆</td>
+                  <td class="ps-3 col-1 text-center d-flex justify-content-start h5">${ requestScope.selectOneReview.waitingRecord.memberId }</td>
+                  <td class="px-3 col-1 text-warning text-center h4" rowspan="2">
+                	<c:if test="${ requestScope.selectOneReview.ratings eq 1 }">
+                		★☆☆☆☆
+                	</c:if>
+                	<c:if test="${ requestScope.selectOneReview.ratings eq 2 }">
+                		★★☆☆☆
+                	</c:if>
+                	<c:if test="${ requestScope.selectOneReview.ratings eq 3 }">
+                		★★★☆☆
+                	</c:if>
+                	<c:if test="${ requestScope.selectOneReview.ratings eq 4 }">
+                		★★★★☆
+                	</c:if>
+                	<c:if test="${ requestScope.selectOneReview.ratings eq 5 }">
+                		★★★★★
+                	</c:if>
+                  </td>
                 </tr>
                 <tr>
-                  <td class="ps-3 text-center d-flex justify-content-start pb-3">2022.07.01</td>
+                  <td class="ps-3 text-center d-flex justify-content-start pb-3">${ requestScope.selectOneReview.waitingRecord.useDate }</td>
                 </tr>
                 <tr>
-                  <td class="ps-3" colspan="2">입맛 없을 땐 여기가 제일 먼저 생각나요! 알싸하게 매콤한 게 입맛돌게 해주거든요. 너무 맛있게 잘 먹었습니다.</td>
+                  <td class="ps-3" colspan="2">${ requestScope.selectOneReview.reviewContent }</td>
                 </tr>
                 <tr>
                   <td class="ps-3 py-3" colspan="2">
@@ -54,7 +71,7 @@
                 </tr>
               </table>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소" onclick="history.go(-1)">취소</button>
+              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>
               <button type="button" class="btn btn-primary" value="등록" data-bs-toggle="modal" data-bs-target="#modalSubmit">등록</button>
             </div>
             <!-- Modal -->
@@ -75,7 +92,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="history.go(-1)">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
             
                 </div>

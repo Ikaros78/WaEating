@@ -27,7 +27,7 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 700px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
@@ -36,7 +36,14 @@
            	  <c:forEach var="review" items="${ requestScope.selectAllReview }">
            	  <tr class="border-bottom">
                 <td class="col-10 pt-3"><c:out value="${ review.reviewContent }"/></td>
-                <td class="d-flex justify-content-end"><button type="button" class="btn btn-primary"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new?reviewNo=${ review.reviewNo }" style="color:#fff; text-decoration: none;">답변 등록</a></button></td>         
+                <td class="d-flex justify-content-end">
+                	<c:if test="${ review.reviewAns.ansContent ne null }">
+                	<button type="button" class="btn btn-light"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_modify?reviewNo=${ review.reviewNo }" style="color:#6c757d; text-decoration: none;">답변 완료</a></button>
+                	</c:if>
+                	<c:if test="${ review.reviewAns.ansContent eq null }">
+                	<button type="button" class="btn btn-primary"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new?reviewNo=${ review.reviewNo }" style="color:#fff; text-decoration: none;">답변 등록</a></button>
+                	</c:if>
+                </td>         
               </tr>
               </c:forEach>
             

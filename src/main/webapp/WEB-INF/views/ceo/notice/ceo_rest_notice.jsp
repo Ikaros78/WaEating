@@ -57,7 +57,7 @@
               <c:forEach var="notice" items="${ requestScope.selectAllNotice }" varStatus="status">
 	              <div class="tr">
 	                <div class="td col-1 text-center"><c:out value="${ notice.rNum }"/></div>
-	                <div class="td fs-5"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify?noticeNo=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a></div>
+	                <div class="td fs-5"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail?noticeNo=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a></div>
 	                <div class="td col-2 text-center"><c:out value="${ notice.regDate }"/></div>
 	              </div>
               </c:forEach>

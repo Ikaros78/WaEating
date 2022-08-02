@@ -16,6 +16,10 @@ public interface ComNoticeMapper {
 
 	ComNoticeDTO selectOneNotice(int noticeNo);
 
+	int updateNotice(ComNoticeDTO comNotice);
+
+	int deleteNotice(int noticeNo);
+
 
 
 
