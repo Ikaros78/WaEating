@@ -280,19 +280,21 @@
   	     , A.WORK_TIME
   	     , A.HOLIDAY
   	     , A.THUMBNAIL_NAME
+  	     , A.WAIT_YN
  	FROM(SELECT ROWNUM RNUM
  			  , B.COM_NO
 	  	      , B.COM_NAME
 	  	      , B.WORK_TIME
 	  	      , B.HOLIDAY
 	  	      , B.THUMBNAIL_NAME
+	  	      , B.WAIT_YN
 	  	   FROM(SELECT
 			           V.COM_NO
 			         , V.COM_NAME
 			         , V.WORK_TIME
 			         , V.HOLIDAY
 			         , V.THUMBNAIL_NAME
-
+					 , V.WAIT_YN
 		          FROM (SELECT
 				               K.COM_NO
 				             , K.COM_NAME
@@ -300,11 +302,13 @@
 				             , K.HOLIDAY
 				             , U.THUMBNAIL_NAME
 				             , T.RATINGS
+				             , K.WAIT_YN
 				          FROM COM_INFO K
 				          JOIN COM_BOARD_ATTACH U ON(K.COM_NO = U.COM_NO)
 				          JOIN REVIEW T ON(K.COM_NO = T.COM_NO)
 				          JOIN COM_RECORD D ON(K.COM_NO = D.COM_NO)
-						 WHERE  D.COM_STATUS = '승인'
+						 WHERE D.COM_STATUS = '승인'
+						   
          ) V
         GROUP BY
                 V.COM_NO
@@ -312,6 +316,7 @@
               , V.WORK_TIME
               , V.HOLIDAY
               , V.THUMBNAIL_NAME
+              , V.WAIT_YN
          ORDER BY ROUND(AVG(V.RATINGS),1)DESC) B
 	  	  	     
 	      <![CDATA[
@@ -346,12 +351,10 @@
   	       
   </select>
   
-  <select id="selectComImg" resultMap="generalCompanyResultMap">
-  	       SELECT
-              A.COM_NO
-            , B.FILE_NAME
-         FROM COM_INFO A
-         LEFT JOIN COM_BOARD_ATTACH B ON(A.COM_NO = B.COM_NO)
+  <select id="selectComImg" resultMap="comBoardAttachMap">
+  	 SELECT
+            A.FILE_NAME
+         FROM COM_BOARD_ATTACH A
          WHERE A.COM_NO = #{ comNo }
   </select>
 

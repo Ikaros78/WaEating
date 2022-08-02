@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,8 +37,8 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
 
         <div class="img mx-4">
-        <c:forEach var="image" items="${ requestScope.selectComImg }">        
-            <img src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ image.comBoardAttach.fileName }" width="250" height="300">
+        <c:forEach var="image" items="${ requestScope.selectComImg }" >        
+            <img src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ image.fileName }" width="250" height="300">
         </c:forEach>
             <%-- <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok2.jpg" width="250" height="300">
             <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok3.png" width="250" height="300">
@@ -131,7 +132,7 @@
                       <c:if test="${ review.ratings eq 4 }">                      
                       <p class="point text-warning">★★★★☆</p>
                       </c:if>
-                      <c:if test="${ review.ratings eq  5 }">                      
+                      <c:if test="${ review.ratings eq 5 }">                      
                       <p class="point text-warning">★★★★★</p>
                       </c:if>
                       
@@ -140,9 +141,13 @@
                       <p>
                         ${ review.reviewContent }
                       </p>
-                      <img src="../1_front/images/ddok1.png" alt="">
-                      <img src="../1_front/images/ddok1.png" alt="">
-                      <img src="../1_front/images/ddok1.png" alt="">          
+                      <c:forEach var="reviewImg" items="${ review.reviewAttach }">
+                        <c:if test="${ reviewImg.fileName ne null  }">
+                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/${ reviewImg.fileName }" alt="">
+                      	</c:if>
+                      </c:forEach>
+                      <!-- <img src="../1_front/images/ddok1.png" alt="">
+                      <img src="../1_front/images/ddok1.png" alt="">     -->      
                     </div>
                     
                   </div><!--content-->

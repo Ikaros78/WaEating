@@ -10,7 +10,6 @@
   	  <result property="memberId" column="MEMBER_ID"/>
   	  <result property="useDate" column="USE_DATE"/>
   	  <result property="useStatus" column="USE_STATUS"/>
-  	  <result property="waitingNo" column="WAITING_NO"/>
   	  <result property="memberNum" column="MEMBER_NUM"/>
   	  <result property="requirement" column="REQUIREMENT"/>
   	  <result property="memo" column="MEMO"/>
@@ -64,22 +63,19 @@
   <select id="selectReservationFinish" resultMap="waitingRecordMap" parameterType="hashmap">
   	SELECT
  		   A.RNUM
- 		 , A.WAITING_NO
  	 	 , A.MEMBER_NUM
   	     , A.USE_DATE
   	     , A.PHONE
   	     , A.COM_NAME
   	     , A.REVIEW_NO
  	FROM(SELECT ROWNUM RNUM
- 			  , B.WAITING_NO
 	  	      , B.MEMBER_NUM
 	  	      , B.USE_DATE
 			  , B.PHONE
 			  , B.COM_NAME
 			  , B.REVIEW_NO	
 	  	   FROM(SELECT
-				       C.WAITING_NO
-				     , C.MEMBER_NUM
+				       C.MEMBER_NUM
 				     , C.USE_DATE
 				     , D.PHONE
 				     , E.COM_NAME
@@ -111,20 +107,17 @@
   <select id="selectReservationCancel" resultMap="waitingRecordMap" parameterType="hashmap">
   SELECT
  		   A.RNUM
- 		 , A.WAITING_NO
  	 	 , A.MEMBER_NUM
   	     , A.USE_DATE
   	     , A.PHONE
   	     , A.COM_NAME
  	FROM(SELECT ROWNUM RNUM
- 			  , B.WAITING_NO
 	  	      , B.MEMBER_NUM
 	  	      , B.USE_DATE
 			  , B.PHONE
 			  , B.COM_NAME	
 	  	   FROM(SELECT
-				       C.WAITING_NO
-				     , C.MEMBER_NUM
+				       C.MEMBER_NUM
 				     , C.USE_DATE
 				     , D.PHONE
 				     , E.COM_NAME
@@ -156,20 +149,17 @@
 	<select id="selectReservationNow" resultMap="waitingRecordMap" parameterType="hashmap">
   SELECT
  		   A.RNUM
- 		 , A.WAITING_NO
  	 	 , A.MEMBER_NUM
   	     , A.USE_DATE
   	     , A.PHONE
   	     , A.COM_NAME
  	FROM(SELECT ROWNUM RNUM
- 			  , B.WAITING_NO
 	  	      , B.MEMBER_NUM
 	  	      , B.USE_DATE
 			  , B.PHONE
 			  , B.COM_NAME	
 	  	   FROM(SELECT
-				       C.WAITING_NO
-				     , C.MEMBER_NUM
+				       C.MEMBER_NUM
 				     , C.USE_DATE
 				     , D.PHONE
 				     , E.COM_NAME

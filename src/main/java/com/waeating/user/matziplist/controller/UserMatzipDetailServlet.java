@@ -1,7 +1,10 @@
 package com.waeating.user.matziplist.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 import com.waeating.user.review.model.service.ReviewService;
@@ -23,7 +28,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		String comNo = request.getParameter("comNo");
+		int comNo = Integer.parseInt(request.getParameter("comNo"));
 		
 		ComService comService = new ComService();
 		ReviewService reviewService = new ReviewService();
@@ -31,9 +36,10 @@ public class UserMatzipDetailServlet extends HttpServlet {
 		ComInfoDTO selectCom = comService.selctComDetail(comNo);
 		List<ComInfoDTO> selectComMenu = comService.selectComMenu(comNo);
 		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
+		
+		
 		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
-		List<ComInfoDTO> selectComImg = comService.selectComImg(comNo);
-//		List<ReviewDTO> selectReviewImg = reviewService.selectReviewImg(comNo)
+		List<ComBoardAttachDTO> selectComImg = comService.selectComImg(comNo);
 		
 		
 		System.out.println("selectReview : " + selectReview);

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.com.model.dao.ComInfoMapper;
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.com.model.dto.ComMenuDTO;
 import com.waeating.common.paging.SelectCriteria;
@@ -110,7 +111,7 @@ public class ComService {
 	 * @param comInfo 
 	 * @return
 	 */
-	public ComInfoDTO selctComDetail(String comNo) {
+	public ComInfoDTO selctComDetail(int comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
@@ -130,7 +131,7 @@ public class ComService {
 	 * @param comInfo 
 	 * @return
 	 */
-	public List<ComInfoDTO> selectComMenu(String comNo) {
+	public List<ComInfoDTO> selectComMenu(int comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
@@ -151,13 +152,13 @@ public class ComService {
 	 * @param comNo
 	 * @return
 	 */
-	public List<ComInfoDTO> selectComImg(String comNo) {
+	public List<ComBoardAttachDTO> selectComImg(int comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
-		List<ComInfoDTO> com = comInfoMapper.selectComImg(comNo);
+		List<ComBoardAttachDTO> com = comInfoMapper.selectComImg(comNo);
 		
 		sqlSession.close();
 		

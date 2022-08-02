@@ -44,7 +44,6 @@
             <P style="color:#D94925 ;">내 앞에 '3팀' 남았어요! 주변에 있어주세요. 곧 호출됩니다.</P>
             <br>
             <h6><나의 예약 정보></h6>
-            <p>번호 : ${ reservation.waitingNo }</p>
             <p>인원수 : ${ reservation.memberNum }</p>
             <p>전화번호 : ${ reservation.memberInfo.phone }</p>
 

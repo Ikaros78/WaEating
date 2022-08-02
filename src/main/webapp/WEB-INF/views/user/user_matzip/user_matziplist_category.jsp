@@ -60,13 +60,17 @@
                   <%-- <c:forEach begin="1" end="3"> --%> 
                    <div class="card col-3 ms-3 me-3 mb-5 d-flex justify-content-center"  >
                    
-                    <img class="card-img-aside" src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ com.comBoardAttach.thumbnailName }" alt="Card image" style="width:100%;">
+                    <img class="card-img-aside ms-1 mt-3" src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ com.comBoardAttach[0].thumbnailName }" alt="Card image" style="width:284px; height:300px;">
                     <div class="card-body">
                       <h4 class="card-title">${ com.comName }</h4>
                       <p class="card-text">영업시간) ${ com.workTime } <br> 
                        휴무일) ${ com.holiday }</p>
-                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail?comNo=${ com.comNo }" class="btn btn-outline-dark">상세보기</a>
+                     <c:if test="${ com.waitYn eq 'Y' }">
                       <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                     </c:if>
+                     <c:if test="${ com.waitYn eq 'N' }">
+                     <button type="button" class="btn btn-outline-success" disabled>예약 준비중</button>
+                     </c:if>
                     </div>
                   </div>
                   </c:forEach>

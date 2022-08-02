@@ -13,7 +13,6 @@ public class WaitingRecordDTO {
 	private String memberId;
 	private java.sql.Date useDate;
 	private String useStatus;
-	private int waitingNo;
 	private int memberNum;
 	private String requirement;
 	private String memo;
@@ -24,34 +23,14 @@ public class WaitingRecordDTO {
 	
 	public WaitingRecordDTO() {}
 
-	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int waitingNo,
-			int memberNum, String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo) {
+	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int memberNum,
+			String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo, ReviewDTO review) {
 		super();
 		this.recordNo = recordNo;
 		this.comNo = comNo;
 		this.memberId = memberId;
 		this.useDate = useDate;
 		this.useStatus = useStatus;
-		this.waitingNo = waitingNo;
-		this.memberNum = memberNum;
-		this.requirement = requirement;
-		this.memo = memo;
-		this.comInfo = comInfo;
-		this.memberInfo = memberInfo;
-	}
-	
-	
-
-	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int waitingNo,
-			int memberNum, String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo,
-			ReviewDTO review) {
-		super();
-		this.recordNo = recordNo;
-		this.comNo = comNo;
-		this.memberId = memberId;
-		this.useDate = useDate;
-		this.useStatus = useStatus;
-		this.waitingNo = waitingNo;
 		this.memberNum = memberNum;
 		this.requirement = requirement;
 		this.memo = memo;
@@ -59,6 +38,7 @@ public class WaitingRecordDTO {
 		this.memberInfo = memberInfo;
 		this.review = review;
 	}
+
 
 	public int getRecordNo() {
 		return recordNo;
@@ -98,14 +78,6 @@ public class WaitingRecordDTO {
 
 	public void setUseStatus(String useStatus) {
 		this.useStatus = useStatus;
-	}
-
-	public int getWaitingNo() {
-		return waitingNo;
-	}
-
-	public void setWaitingNo(int waitingNo) {
-		this.waitingNo = waitingNo;
 	}
 
 	public int getMemberNum() {
@@ -160,9 +132,8 @@ public class WaitingRecordDTO {
 	@Override
 	public String toString() {
 		return "WaitingRecordDTO [recordNo=" + recordNo + ", comNo=" + comNo + ", memberId=" + memberId + ", useDate="
-				+ useDate + ", useStatus=" + useStatus + ", waitingNo=" + waitingNo + ", memberNum=" + memberNum
-				+ ", requirement=" + requirement + ", memo=" + memo + ", comInfo=" + comInfo + ", memberInfo="
-				+ memberInfo + ", review=" + review + "]";
+				+ useDate + ", useStatus=" + useStatus + ", memberNum=" + memberNum + ", requirement=" + requirement
+				+ ", memo=" + memo + ", comInfo=" + comInfo + ", memberInfo=" + memberInfo + ", review=" + review + "]";
 	}
 
 	
