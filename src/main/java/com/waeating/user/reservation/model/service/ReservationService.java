@@ -107,6 +107,36 @@ public class ReservationService {
 	}
 
 
+	public int selectNowTotalCount(Map<String, String> searchMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		
+		int totalCount = reservationMapper.selectNowReservationCount(searchMap);
+		
+		sqlSession.close();
+		
+		
+		return totalCount;
+	}
+
+
+	public List<ComInfoDTO> selectNowReservation(SelectCriteria selectCriteria) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		
+		List<ComInfoDTO> waiting = reservationMapper.selectReservationNow(selectCriteria);
+		
+		sqlSession.close();
+		
+		
+		return waiting;
+	}
+
+
 
 
 }

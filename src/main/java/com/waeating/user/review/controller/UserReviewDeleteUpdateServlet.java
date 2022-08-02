@@ -20,6 +20,8 @@ public class UserReviewDeleteUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		request.getRequestDispatcher("/WEB-INF/views/user/user_review/user_review_deleteupdate.jsp").forward(request, response);
+		
+		
 	}
 
 }

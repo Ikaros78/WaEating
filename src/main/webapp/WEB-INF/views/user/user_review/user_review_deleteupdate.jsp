@@ -19,7 +19,7 @@
   <div id="wrap">
     <!-- 왼쪽 (메뉴) -->
     <section class="row container-fluid px-5">
-      <aside class="float-start col-2 mt-4 ms-5 px-3">
+      <aside class="float-start col-2 mt-4 ms-5 px-3" style="min-height:700px;">
         <!-- 메뉴 제목 -->
         <h4 class="mb-3 ms-1">맛집리스트</h4>
         <div class="list-group list-group-flush border-top border-bottom">

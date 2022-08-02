@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.com.model.dto.WaitingRecordDTO;
 import com.waeating.common.paging.SelectCriteria;
 
 public interface ComInfoMapper {
@@ -33,7 +32,11 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
 
-	/* 예약 찾기 용도*/
+	ComInfoDTO selectComDetail(String comNo);
+
+	List<ComInfoDTO> selectComMenu(String comNo);
+
+	
 
 
 	

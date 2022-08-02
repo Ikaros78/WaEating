@@ -19,6 +19,7 @@
 		<association property="recordList" resultMap="comRecordMap"/>
 		<association property="comBoardAttach" resultMap="comBoardAttachMap"/>
 		<association property="review" resultMap="reviewMap"/>
+		<association property="comMenu" resultMap="comMenuMap"/>
 		
 	</resultMap>
 
@@ -49,12 +50,19 @@
 	    <result property="comNo" column="COM_NO"/>
     </resultMap>
   
-  <resultMap type="com.waeating.com.model.dto.ReviewDTO" id="reviewMap">
+  <resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
 	  <id property="reviewNo" column="REVIEW_NO"/>
 	  <result property="reviewContent" column="REVIEW_CONTENT"/>
 	  <result property="ratings" column="RATINGS"/>
 	  <result property="recordNo" column="RECORD_NO"/>
 	  <result property="comNo" column="COM_NO"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.com.model.dto.ComMenuDTO" id="comMenuMap">
+  	<id property="menuNo" column="MENU_NO"/>
+  	<result property="menuName" column="MENU_NAME"/>
+  	<result property="price" column="PRICE"/>
+  	<result property="comNo" column="COM_NO"/>
   </resultMap>
   
   
@@ -279,25 +287,24 @@
 	  	      , B.HOLIDAY
 	  	      , B.THUMBNAIL_NAME
 	  	   FROM(SELECT
-              V.COM_NO
-            , V.COM_NAME
-            , V.WORK_TIME
-            , V.HOLIDAY
-            , V.THUMBNAIL_NAME
+			           V.COM_NO
+			         , V.COM_NAME
+			         , V.WORK_TIME
+			         , V.HOLIDAY
+			         , V.THUMBNAIL_NAME
 
-       FROM 
-       (SELECT
-               K.COM_NO
-             , K.COM_NAME
-             , K.WORK_TIME
-             , K.HOLIDAY
-             , U.THUMBNAIL_NAME
-             , T.RATINGS
-          FROM COM_INFO K
-          JOIN COM_BOARD_ATTACH U ON(K.COM_NO = U.COM_NO)
-          JOIN REVIEW T ON(K.COM_NO = T.COM_NO)
-          JOIN COM_RECORD D ON(K.COM_NO = D.COM_NO)
-		 WHERE  D.COM_STATUS = '승인'
+		          FROM (SELECT
+				               K.COM_NO
+				             , K.COM_NAME
+				             , K.WORK_TIME
+				             , K.HOLIDAY
+				             , U.THUMBNAIL_NAME
+				             , T.RATINGS
+				          FROM COM_INFO K
+				          JOIN COM_BOARD_ATTACH U ON(K.COM_NO = U.COM_NO)
+				          JOIN REVIEW T ON(K.COM_NO = T.COM_NO)
+				          JOIN COM_RECORD D ON(K.COM_NO = D.COM_NO)
+						 WHERE  D.COM_STATUS = '승인'
          ) V
         GROUP BY
                 V.COM_NO
@@ -314,6 +321,29 @@
 	  	) A
 	 WHERE A.RNUM >= #{ startRow } 
 	 
+  </select>
+  
+  <select id="selectComDetail"  resultMap="generalCompanyResultMap">
+  	SELECT
+           A.COM_NAME
+         , A.CATEGORY
+         , A.COM_ADDRESS
+         , A.COM_PHONE
+         , A.WORK_TIME
+         , A.HOLIDAY 
+     FROM COM_INFO A
+     WHERE A.COM_NO= #{ comNo }
+  
+  </select>
+  
+  <select id="selectComMenu" resultMap="generalCompanyResultMap">
+  	SELECT
+  	       A.MENU_NAME
+  	     , A.PRICE
+  	 FROM COM_INFO B
+  	 JOIN COM_MENU A ON(A.COM_NO = B.COM_NO)
+  	 WHERE A.COM_NO = #{ comNo }    
+  	       
   </select>
   
 

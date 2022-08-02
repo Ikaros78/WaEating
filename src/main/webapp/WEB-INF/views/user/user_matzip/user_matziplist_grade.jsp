@@ -46,7 +46,7 @@
                     <div class="card-body">
                       <h4 class="card-title">${ com.comName }</h4>
                       <p class="card-text">영업시간) ${ com.workTime }<br> 휴무일) ${ com.holiday }</p>
-                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail" class="btn btn-outline-dark">상세보기</a>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail?comNo=${ com.comNo }" class="btn btn-outline-dark">상세보기</a>
                       <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
                     </div>
                   </div>

@@ -1,7 +1,9 @@
 package com.waeating.review.model.dto;
 
+import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.com.model.dto.WaitingRecordDTO;
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.member.model.dto.UserInfoAttachDTO;
 
 public class ReviewDTO {
 
@@ -11,27 +13,37 @@ public class ReviewDTO {
 	private int recordNo;
 	private int comNo;
 	
+	private double avgRatings;
+	
 	private ReviewAttachDTO reviewAttach;
 	private MemberDTO memberInfo;
 	private WaitingRecordDTO waitingRecord;
 	private ReviewAnsDTO reviewAns;
+	private ComInfoDTO comInfo;
+	private UserInfoAttachDTO userInfoAttach;
 	
 	public ReviewDTO() {}
 
-	public ReviewDTO(int reviewNo, String reviewContent, int ratings, int recordNo, int comNo,
-			ReviewAttachDTO reviewAttach, MemberDTO memberInfo, WaitingRecordDTO waitingRecord,
-			ReviewAnsDTO reviewAns) {
+
+	public ReviewDTO(int reviewNo, String reviewContent, int ratings, int recordNo, int comNo, double avgRatings,
+			ReviewAttachDTO reviewAttach, MemberDTO memberInfo, WaitingRecordDTO waitingRecord, ReviewAnsDTO reviewAns,
+			ComInfoDTO comInfo, UserInfoAttachDTO userInfoAttach) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewContent = reviewContent;
 		this.ratings = ratings;
 		this.recordNo = recordNo;
 		this.comNo = comNo;
+		this.avgRatings = avgRatings;
 		this.reviewAttach = reviewAttach;
 		this.memberInfo = memberInfo;
 		this.waitingRecord = waitingRecord;
 		this.reviewAns = reviewAns;
+		this.comInfo = comInfo;
+		this.userInfoAttach = userInfoAttach;
 	}
+
+
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -89,13 +101,18 @@ public class ReviewDTO {
 		this.memberInfo = memberInfo;
 	}
 
+
 	public WaitingRecordDTO getWaitingRecord() {
 		return waitingRecord;
 	}
 
+
+
 	public void setWaitingRecord(WaitingRecordDTO waitingRecord) {
 		this.waitingRecord = waitingRecord;
 	}
+
+
 
 	public ReviewAnsDTO getReviewAns() {
 		return reviewAns;
@@ -104,12 +121,45 @@ public class ReviewDTO {
 	public void setReviewAns(ReviewAnsDTO reviewAns) {
 		this.reviewAns = reviewAns;
 	}
+	
+	
+
+	public ComInfoDTO getComInfo() {
+		return comInfo;
+	}
+
+	public void setComInfo(ComInfoDTO comInfo) {
+		this.comInfo = comInfo;
+	}
+
+	
+	public UserInfoAttachDTO getUserInfoAttach() {
+		return userInfoAttach;
+	}
+
+
+	public void setUserInfoAttach(UserInfoAttachDTO userInfoAttach) {
+		this.userInfoAttach = userInfoAttach;
+	}
+
+
+	public double getAvgRatings() {
+		return avgRatings;
+	}
+
+
+	public void setAvgRatings(double avgRatings) {
+		this.avgRatings = avgRatings;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "ReviewDTO [reviewNo=" + reviewNo + ", reviewContent=" + reviewContent + ", ratings=" + ratings
-				+ ", recordNo=" + recordNo + ", comNo=" + comNo + ", reviewAttach=" + reviewAttach + ", memberInfo="
-				+ memberInfo + ", waitingRecord=" + waitingRecord + ", reviewAns=" + reviewAns + "]";
+				+ ", recordNo=" + recordNo + ", comNo=" + comNo + ", avgRatings=" + avgRatings + ", reviewAttach="
+				+ reviewAttach + ", memberInfo=" + memberInfo + ", waitingRecord=" + waitingRecord + ", reviewAns="
+				+ reviewAns + ", comInfo=" + comInfo + ", userInfoAttach=" + userInfoAttach + "]";
 	}
 	
 	
