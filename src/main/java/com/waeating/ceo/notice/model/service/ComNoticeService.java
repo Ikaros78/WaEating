@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.ceo.notice.model.dao.ComNoticeMapper;
-import com.waeating.ceo.notice.model.dto.ComNoticeDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.SelectCriteria;
 
 public class ComNoticeService {

@@ -46,7 +46,7 @@
 		<result property="emailCheck" column="EMAIL_CHECK"/>
 	</resultMap>
 	
-	<resultMap type="com.waeating.com.model.dto.WaitingRecordDTO" id="waitingRecordMap">
+	<resultMap type="com.waeating.waitingRecord.model.dto.WaitingRecordDTO" id="waitingRecordMap">
   	  <id property="recordNo" column="RECORD_NO"/>
   	  <result property="comNo" column="COM_NO"/>
   	  <result property="memberId" column="MEMBER_ID"/>
