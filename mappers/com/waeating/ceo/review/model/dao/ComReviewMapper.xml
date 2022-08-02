@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.waeating.ceo.review.model.dao.ComReviewMapper">
-  	<resultMap type="com.waeating.com.model.dto.ReviewDTO" id="comReviewResultMap">
+  	<resultMap type="com.waeating.review.model.dto.ReviewDTO" id="comReviewResultMap">
   		<id property="reviewNo" column="REVIEW_NO"/>
   		<result property="reviewContent" column="REVIEW_CONTENT"/>
   		<result property="ratings" column="RATINGS"/>

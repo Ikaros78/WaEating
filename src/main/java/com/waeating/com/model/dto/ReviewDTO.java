@@ -1,5 +1,7 @@
 package com.waeating.com.model.dto;
 
+import com.waeating.review.model.dto.ReviewAnsDTO;
+
 public class ReviewDTO {
 
 	private int reviewNo;
