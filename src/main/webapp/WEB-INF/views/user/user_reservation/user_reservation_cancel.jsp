@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
- <jsp:include page="../user_header.jsp"/>
+ <jsp:include page="/WEB-INF/views/user/user_header.jsp">
 
   <div id="wrap">
     <!-- 왼쪽 (메뉴) -->

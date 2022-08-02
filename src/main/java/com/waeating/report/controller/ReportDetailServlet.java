@@ -1,4 +1,4 @@
-package com.waeating.ceo.notice.controller;
+package com.waeating.report.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,40 +11,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.ceo.notice.model.service.ComNoticeService;
-import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.report.model.service.ReportService;
+import com.waeating.support.model.dto.ReportDTO;
+
 
 /**
- * Servlet implementation class CeoRestNotice
+ * Servlet implementation class CsDetailServlet
  */
-@WebServlet("/ceo/rest_notice")
-public class CeoRestNoticeServlet extends HttpServlet {
+@WebServlet("/report/detail")
+public class ReportDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		String currentPage = request.getParameter("currentPage");
-		int pageNo = 1;
+
+       String currentPage = request.getParameter("currentPage");
+       int pageNo = 1;
+       
+       if(currentPage != null && ! "".equals(currentPage)) {
+    	   pageNo = Integer.parseInt(currentPage);
+       }
+       
+       if(pageNo <= 0) {
+    	   pageNo = 1;
+       }
+       
+       String searchCondition = request.getParameter("searchCondition");
+       String searchValue = request.getParameter("searchValue");
+       
+       Map<String, String> searchMap = new HashMap<>();
+       searchMap.put("searchCondition", searchCondition);
+	   searchMap.put("searchValue", searchValue);
 		
-		if(currentPage != null && !"".equals(currentPage)) {
-			pageNo = Integer.parseInt(currentPage);
-		}
-		
-		if(pageNo <= 0) {
-			pageNo = 1;
-		}
-		
-		String searchCondition = request.getParameter("searchCondition");
-		String searchValue = request.getParameter("searchValue");
-		
-		Map<String, String> searchMap = new HashMap<>();
-		searchMap.put("searchCondition", searchCondition);
-		searchMap.put("searchValue", searchValue);
-		
-		ComNoticeService noticeService = new ComNoticeService();
-		int totalCount = noticeService.selectTotalCount(searchMap);
+	    ReportService ReportService = new ReportService();
+		int totalCount = ReportService.selectTotalCount(searchMap);
 		
 		System.out.println("totalBoardCount : " + totalCount);
 		
@@ -61,14 +63,14 @@ public class CeoRestNoticeServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<ComNoticeDTO> comNoticeList = noticeService.selectAllNotice(selectCriteria);
+		List<ReportDTO> reportList = ReportService.selectAllReport(selectCriteria);
 		
-		System.out.println(comNoticeList);
+		System.out.println(reportList);
 		
 		String path = "";
-		if(comNoticeList != null) {
-			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
-			request.setAttribute("selectAllNotice", comNoticeList);
+		if(reportList != null) {
+			path = "/WEB-INF/views/report/reportList.jsp";
+			request.setAttribute("selectAllNotice", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
@@ -77,6 +79,6 @@ public class CeoRestNoticeServlet extends HttpServlet {
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}
-
+	
 
 }

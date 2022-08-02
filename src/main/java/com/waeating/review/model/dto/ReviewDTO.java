@@ -1,9 +1,9 @@
 package com.waeating.review.model.dto;
 
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.com.model.dto.WaitingRecordDTO;
 import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.member.model.dto.UserInfoAttachDTO;
+import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 
 public class ReviewDTO {
 

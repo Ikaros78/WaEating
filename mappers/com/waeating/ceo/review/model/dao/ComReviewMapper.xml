@@ -21,7 +21,7 @@
   		<result property="reviewNo" column="REVIEW_NO"/>
   	</resultMap>
   	
-  	<resultMap type="com.waeating.com.model.dto.WaitingRecordDTO" id="waitingRecordResultMap">
+  	<resultMap type="com.waeating.waitingRecord.model.dto.WaitingRecordDTO" id="waitingRecordResultMap">
   		<id property="recordNo" column="ANS_NO"/>
   		<result property="comNo" column="COM_NO"/>
   		<result property="memberId" column="MEMBER_ID"/>

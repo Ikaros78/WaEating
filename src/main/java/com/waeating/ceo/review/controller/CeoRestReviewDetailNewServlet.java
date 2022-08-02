@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.ceo.review.model.service.ComReviewService;
-import com.waeating.com.model.dto.ReviewDTO;
+import com.waeating.review.model.dto.ReviewDTO;
 
 /**
  * Servlet implementation class CeoRestReviewDetailNewServlet

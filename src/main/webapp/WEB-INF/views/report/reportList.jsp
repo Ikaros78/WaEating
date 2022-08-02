@@ -13,16 +13,16 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
+<jsp:include page="/WEB-INF/views/user/user_header.jsp">
 
-  <div id="wrap">
+  
    
  <div class="container">
         <section class="notice">
             <div class="page-title">
                   <div class="container">
                     
-                      <h3>공지사항</h3>
+                      <h3>고객센터</h3>
                   </div>
               </div>
           
@@ -32,7 +32,7 @@
                       <div class="search-window">
                           <form action="">
                               <div class="search-wrap">
-                                  <label for="search" class="blind">공지사항 내용 검색</label>
+                                  <label for="search" class="blind">고객센터 내용 검색</label>
                                   <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
                                   <button type="submit" class="btn btn-dark">검색</button>
                               </div>
@@ -47,27 +47,24 @@
                           <tr>
                               <th scope="col" class="th-num">번호</th>
                               <th scope="col" class="th-title">제목</th>
-                              <th scope="col" class="th-date">등록일</th>
+                              <th scope="col" class="th-date">작성자</th>
                           </tr>
                           </thead>
                           <tbody>
-                          <c:forEach var="notice" items="${ requestScope.noticeList }" varStatus="status">
-                          <tr>
-                              <td><c:out value="${ notice.noticeNo }"/></td>
-                              <th>
-                                <a href="${ pageContext.servletContext.contextPath }/mainNotice/notice_detail?noticeNo=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
-                                
-                              </th>
-                              <td><c:out value="${ notice.regDate }"/></td>
-                          </tr>
-           				</c:forEach>
+                    <c:forEach var ="report" items="${ requestScope.reportList }">
+                    <tr class="rowClick">
+                        <td class=details><c:out value="${ report.reportNo }"/></td>
+                        <td class=details><c:out value="${ report.title }"/></td>
+                        <td class=details><c:out value="${ report.id }"/></td>
+                    </tr>
+                    </c:forEach>
             
                          
                           </tbody>
                       </table>
                   </div>
             
-            <jsp:include page="./common/paging.jsp"/>
+            <jsp:include page="./paging.jsp"/>
              
             
             <div class="mt-3"></div>
@@ -78,6 +75,7 @@
 				<input type="hidden" class="form-control" name="currentPage" value="1">
 				    <select id="searchCondition" name="searchCondition" class="form-control">
 						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "noticeTitle"? "selected": "" }>제목</option>
+						<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>작성자</option>
 					</select>
 			        <input type="text" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
 					<button type="submit" class="btn btn-primary">검색하기</button>
@@ -88,10 +86,10 @@
 			</div>
              
         </div>
-       </aside>
+      
     </section>
                          
-<jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
+<jsp:include page="/WEB-INF/views/user/user_footer.jsp"> 
   </div>
   <script>
 		

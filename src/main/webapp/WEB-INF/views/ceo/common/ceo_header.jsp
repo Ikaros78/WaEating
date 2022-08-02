@@ -18,7 +18,7 @@
         </a>
         <ul class="navbar-nav main align-content-end">
           <li class="nav-item dropmenu mt-4">
-            <a class="nav-link px-5 fs-5" href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a>
+            <a class="nav-link px-5 fs-5" href="#">공지사항</a>
             <ul class="nav flex-column text-center pt-3" style="width:170px;">
               <li class="nav-item">
                 <a class="nav-link" href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a>
