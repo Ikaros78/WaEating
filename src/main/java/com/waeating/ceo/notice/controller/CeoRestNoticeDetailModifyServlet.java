@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.ceo.notice.model.dto.ComNoticeDTO;
 import com.waeating.ceo.notice.model.service.ComNoticeService;
+import com.waeating.com.model.dto.ComNoticeDTO;
 
 /**
  * Servlet implementation class CeoRestNoticeDetailModifyServlet
