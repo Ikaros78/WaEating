@@ -8,8 +8,8 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.ceo.review.model.dao.ComReviewMapper;
+import com.waeating.com.model.dto.ReviewDTO;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.review.model.dto.ReviewDTO;
 
 public class ComReviewService {
 	
