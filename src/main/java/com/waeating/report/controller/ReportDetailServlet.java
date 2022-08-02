@@ -15,6 +15,8 @@ import com.waeating.ceo.notice.model.dto.ComNoticeDTO;
 import com.waeating.ceo.notice.model.service.ComNoticeService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.notice.model.dto.NoticeDTO;
+import com.waeating.notice.model.service.NoticeService;
 import com.waeating.report.model.dto.ReportDTO;
 import com.waeating.report.model.service.ReportService;
 
@@ -28,58 +30,24 @@ public class ReportDetailServlet extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-       String currentPage = request.getParameter("currentPage");
-       int pageNo = 1;
-       
-       if(currentPage != null && ! "".equals(currentPage)) {
-    	   pageNo = Integer.parseInt(currentPage);
-       }
-       
-       if(pageNo <= 0) {
-    	   pageNo = 1;
-       }
-       
-       String searchCondition = request.getParameter("searchCondition");
-       String searchValue = request.getParameter("searchValue");
-       
-       Map<String, String> searchMap = new HashMap<>();
-       searchMap.put("searchCondition", searchCondition);
-	   searchMap.put("searchValue", searchValue);
+     
+       int no = Integer.parseInt(request.getParameter("no"));
 		
-	    ReportService ReportService = new ReportService();
-		int totalCount = ReportService.selectTotalCount(searchMap);
-		
-		System.out.println("totalBoardCount : " + totalCount);
-		
-		int limit = 10;
-		int buttonAmount = 3;
-		
-		SelectCriteria selectCriteria = null;
-		
-		if(searchCondition != null && !"".equals(searchCondition)) {
-			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, searchValue);
-		} else {
-			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
-		}
-		
-		System.out.println(selectCriteria);
-		
-		List<ReportDTO> reportList = ReportService.selectAllReport(selectCriteria);
-		
-		System.out.println(reportList);
+		ReportService reportService = new ReportService();
+		ReportDTO reportDetail = reportService.selectReportDetail(no);
+	    
+		System.out.println("noticeDetail : " + reportDetail);
 		
 		String path = "";
-		if(reportList != null) {
-			path = "/WEB-INF/views/report/reportList.jsp";
-			request.setAttribute("selectAllNotice", reportList);
-			request.setAttribute("selectCriteria", selectCriteria);
+		if(reportDetail != null) {
+			path = "/WEB-INF/views/report/reportDetail.jsp";
+			request.setAttribute("notice", reportDetail);
 		} else {
-			path = "/WEB-INF/views/common.errorPage.jsp";
-			request.setAttribute("message", "공지 리스트 조회 실패");
+			path = "WEB-INF/views/common/failed.jsp";
+			request.setAttribute("message", "공지사항 상세보기에 실패하셨습니다");
 		}
-		
-		request.getRequestDispatcher(path).forward(request, response);
+		 request.getRequestDispatcher(path).forward(request, response);
+      
 	}
 	
 

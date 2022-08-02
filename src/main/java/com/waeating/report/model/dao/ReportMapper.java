@@ -12,7 +12,7 @@ public interface ReportMapper {
    
   int SelectTotalCount(Map<String, String> searchMap);
   
-  com.waeating.report.model.dto.ReportDTO SelectReportDetail(Map<String, String> searchMap);
+  com.waeating.report.model.dto.ReportDTO SelectReportDetail(int no);
 
 static int insertReport(com.waeating.report.model.dto.ReportDTO report) {
 	// TODO Auto-generated method stub

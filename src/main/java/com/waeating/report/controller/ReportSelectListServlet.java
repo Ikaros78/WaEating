@@ -19,8 +19,8 @@ import com.waeating.report.model.dto.ReportDTO;
 /**
  * Servlet implementation class SupportSelectListServlet
  */
-@WebServlet("/report/main")
-public class ReportmainServlet extends HttpServlet {
+@WebServlet("/report/list")
+public class ReportSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

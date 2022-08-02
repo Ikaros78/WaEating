@@ -62,12 +62,12 @@ public class ReportService {
 		return reportList;
 	}
 	
-    public ReportDTO selectReportDetail(Map<String, String> searchMap) {
+    public ReportDTO selectReportDetail(int no) {
 		
 		SqlSession sqlSession = getSqlSession();
 		reportMapper = sqlSession.getMapper(ReportMapper.class);
 		
-		ReportDTO report = reportMapper.SelectReportDetail(searchMap);
+		ReportDTO report = reportMapper.SelectReportDetail(no);
 		
 		sqlSession.close();
 		
