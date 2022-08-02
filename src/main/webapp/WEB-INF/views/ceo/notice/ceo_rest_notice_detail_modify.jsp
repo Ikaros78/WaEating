@@ -36,13 +36,14 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 650px">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 700px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">	
         	
 
-        	<form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail?noticeNo=${ requestScope.selectOneNotice.noticeNo }" method="get">
+        	<form action="${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify" method="POST">
+            	<input type="hidden" name="noticeNo" value="${ requestScope.selectOneNotice.noticeNo }"/>
             <table width="100%">
               <tr>
                 <td><h5>제목</h5></td>
@@ -54,54 +55,15 @@
                 <!-- <td><textarea class="form-control mb-2 ms-1" rows="10" name="content" id="content" placeholder="가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요."></textarea></td> -->
               </tr>
             </table>
-            </form>
-			<form method="post">
+			
             <div class="mt-3 d-flex justify-content-center">
-              <a><button type="button" class="btn btn-outline-danger me-2" value="삭제">삭제</button></a>
-              <button type="submit" class="btn btn-outline-primary" value="수정">수정</button>
+              <button type="button" class="btn btn-outline-primary me-2" value="취소" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice'">취소</button>
+              <button type="button" class="btn btn-primary" value="수정" data-bs-toggle="modal" data-bs-target="#modalSubmit">수정</button>
             </div>
+            
 
-            <!-- <div class="modal fade" id="modalDeleteq">
-              <div class="modal-dialog">
-                <div class="modal-content">
             
-                  <div class="modal-header">
-                    <h4 class="modal-title">공지 삭제</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-            
-                  <div class="modal-body">
-                    공지를 삭제하시겠습니까?
-                  </div>
-            
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDelete">확인</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal fade" id="modalDelete">
-              <div class="modal-dialog">
-                <div class="modal-content">
-            
-                  <div class="modal-header">
-                    <h4 class="modal-title">공지 삭제</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-            
-                  <div class="modal-body">
-                    공지가 삭제되었습니다.
-                  </div>
-            
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >확인</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal fade" id="modalSubmit">
+			<div class="modal fade" id="modalSubmit">
               <div class="modal-dialog">
                 <div class="modal-content">
             
@@ -115,15 +77,13 @@
                   </div>
             
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice'">확인</button>
                   </div>
             
                 </div>
               </div>
-            </div> -->
-          </form>
-         
-          
+            </div> 
+           </form>
         </div>
        </aside>
     </section>

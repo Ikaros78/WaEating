@@ -36,7 +36,7 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height: 700px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">	
@@ -48,7 +48,7 @@
             </div>
             <div class="d-flex justify-content-center">
               <button type="button" class="btn btn-outline-danger me-2" value="삭제" data-bs-toggle="modal" data-bs-target="#modalDeleteq">삭제</button>
-              <button type="button" class="btn btn-outline-primary" value="수정" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify?noticeNo=${ requestScope.selectOneNotice.noticeNo }'">수정</button>
+              <button type="submit" class="btn btn-outline-primary" value="수정" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_modify?noticeNo=${ requestScope.selectOneNotice.noticeNo }'">수정</button>
             </div>
         </div>
         
@@ -82,15 +82,18 @@
                   </div>
             
                   <div class="modal-body">
-                    공지를 삭제합니다.
+                    공지가 삭제되었습니다.
                   </div>
             
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_delete?noticeNo=${ requestScope.selectOneNotice.noticeNo }'">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice_detail_delete?noticeNo=${ requestScope.selectOneNotice.noticeNo }'">확인</button>
                   </div>
                 </div>
               </div>
             </div>
+            
+             
+            
        </aside>
     </section>
    

@@ -55,22 +55,24 @@ public class CeoRestNoticeDetailModifyServlet extends HttpServlet {
 		
 		System.out.println(comNotice);
 		
-//		ComNoticeService comNoticeService = new ComNoticeService();
-//		int result = comNoticeService.updateNotice(comNotice);
-//		
-//		System.out.println(result);
-//		
-//		String path = "";
-//		
-//		if(result > 0) {
-//			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice_detail.jsp";
-//		} else {
-//			
-//			path = "/WEB-INF/views/common.errorPage.jsp";
-//			request.setAttribute("message", "공지 수정 실패");
-//		}
-//		
-//		request.getRequestDispatcher(path).forward(request, response);
+		ComNoticeService comNoticeService = new ComNoticeService();
+		int result = comNoticeService.updateNotice(comNotice);
+		
+		System.out.println(result);
+		
+		String path = "";
+		
+		if(result > 0) {
+			path = "rest_notice";
+			response.sendRedirect(path);
+			
+		} else {
+			
+			path = "/WEB-INF/views/common.errorPage.jsp";
+			request.setAttribute("message", "공지 수정 실패");
+			request.getRequestDispatcher(path).forward(request, response);
+		}
+		
 			
 			
 

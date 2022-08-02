@@ -30,9 +30,19 @@ public class CeoRestNoticeDetailDeleteServlet extends HttpServlet {
 		
 		String path = "";
 		
+//		if(result > 0) {
+//			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
+//			
+//		} else {
+//			path = "/WEB-INF/views/common.errorPage.jsp";
+//			request.setAttribute("message", "공지 삭제 실패");
+//		}
+//		request.getRequestDispatcher(path).forward(request, response);
+		
 		if(result > 0) {
-			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
+			path = "rest_notice";
 			response.sendRedirect(path);
+			
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
 			request.setAttribute("message", "공지 삭제 실패");

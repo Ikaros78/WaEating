@@ -12,4 +12,6 @@ public interface ComReviewMapper {
 
 	List<ReviewDTO> selectAllReview(SelectCriteria selectCriteria);
 
+	ReviewDTO selectOneReview(String reviewNo);
+
 }
