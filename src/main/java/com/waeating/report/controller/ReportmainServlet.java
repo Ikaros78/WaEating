@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.report.model.service.ReportService;
-import com.waeating.report.model.dto.ReportDTO;
+import com.waeating.support.model.dto.ReportDTO;
 
 /**
  * Servlet implementation class SupportSelectListServlet
