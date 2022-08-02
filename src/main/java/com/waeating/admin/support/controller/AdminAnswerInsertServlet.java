@@ -37,7 +37,8 @@ public class AdminAnswerInsertServlet extends HttpServlet {
 		
 		if(content.length() == 0) {
 			
-			/* 수정 필요 */
+			response.setCharacterEncoding("utf-8");
+
 			response.setContentType("text/html; charset=UTF-8");
 			
 			PrintWriter out = response.getWriter();

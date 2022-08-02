@@ -49,10 +49,12 @@ public class AdminNoticeInsertServlet extends HttpServlet {
 		
 		if(title.length() == 0 || content.length() == 0) {
 			
+			response.setCharacterEncoding("utf-8");
+			
 			response.setContentType("text/html; charset=UTF-8");
 			
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('제목과 내용을 다시 입력해주세요.'); location.href='list';</script>");
+			out.println("<script>alert('제목과 내용을 다시 입력하세요.'); location.href='list';</script>");
 			
 			out.flush();
 			out.close();
