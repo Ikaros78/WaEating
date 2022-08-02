@@ -24,7 +24,7 @@
                 <a class="nav-link" href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/faq">자주 묻는 질문</a>
+                <a class="nav-link" href="#">자주 묻는 질문</a>
               </li>
             </ul>
           </li>
