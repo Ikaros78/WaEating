@@ -233,13 +233,14 @@
                       	<div id="menugroup">
                       	<c:forEach items="${ requestScope.comMenuList }" var="menu">
                           <div class="input-group my-3" id="menu">
-                              <input type="text" name="menuName" class="form-control" placeholder="${ menu.comMenu.menuName }">
-                              <input type="text" name="price" class="form-control" placeholder="${ menu.comMenu.price }">
+                              <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }">
+                              <input type="text" name="price" id="menuPrice" class="form-control" value="${ menu.comMenu.price }">
                               <button class="btn btn-light border minus" type="button" id="minus">-</button>
                               <button class="btn btn-primary plus" type="button" id="plus">+</button>
                           </div>
+                          </c:forEach>
                         </div>
-                      	</c:forEach>
+                      	
                         <%-- <div id="menugroup">
                           <div class="input-group my-3" id="menu">
                               <input type="text" name="menuName" class="form-control" placeholder="${ requestScope.comMenu.menuName }">

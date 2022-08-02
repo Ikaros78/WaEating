@@ -21,10 +21,7 @@ public class CeoRestReviewDetailModifyServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		HttpSession session = request.getSession();
-//		
-		
-		String reviewNo = request.getParameter("reviewNo");
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		
 		System.out.println(reviewNo);
 		
@@ -45,6 +42,12 @@ public class CeoRestReviewDetailModifyServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		
 	}
 

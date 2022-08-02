@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.ceo.review.model.dao.ComReviewMapper;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.review.model.dto.ReviewAnsDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
 public class ComReviewService {
@@ -39,7 +40,7 @@ public class ComReviewService {
 		return comReviewList;
 	}
 
-	public ReviewDTO selectOneReview(String reviewNo) {
+	public ReviewDTO selectOneReview(int reviewNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
@@ -48,6 +49,26 @@ public class ComReviewService {
 		
 		sqlSession.close();
 		return review;
+	}
+
+	public int insertReviewAns(ReviewAnsDTO reviewAns) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comReviewMapper = sqlSession.getMapper(ComReviewMapper.class);
+		int result = comReviewMapper.insertReviewAns(reviewAns);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
 	}
 
 }

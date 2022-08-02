@@ -117,7 +117,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="history.go(-1)">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
                 </div>
               </div>
@@ -141,7 +141,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="history.go(-1)">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
             
                 </div>
