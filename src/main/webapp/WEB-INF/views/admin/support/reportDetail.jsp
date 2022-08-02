@@ -106,7 +106,7 @@
 	            	</thead>
 	            	<tbody>
 	            		<tr>
-	            			<td><c:out value="${ report.answer.ansContent }"/></td>
+	            			<td><c:out value="${ report.answer.ansContent }" escapeXml="false"/></td>
 	            		</tr>
 	            	</tbody>
 	            </table>

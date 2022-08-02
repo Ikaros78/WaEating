@@ -83,7 +83,7 @@
 	            	</thead>
 	            	<tbody>
 	            		<tr>
-	            			<td><c:out value="${ notice.noticeContent }"/></td>
+	            			<td><c:out value="${ notice.noticeContent }" escapeXml="false"/></td>
 	            		</tr>
 	            	</tbody>
 	            </table>

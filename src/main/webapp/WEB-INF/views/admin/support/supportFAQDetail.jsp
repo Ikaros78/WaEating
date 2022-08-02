@@ -84,7 +84,7 @@
 	            	</thead>
 	            	<tbody>
 	            		<tr>
-	            			<td><c:out value="${ faq.content }"/></td>
+	            			<td><c:out value="${ faq.content }" escapeXml="false"/></td>
 	            		</tr>
 	            	</tbody>
 	            </table>
