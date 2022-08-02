@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 import com.waeating.user.review.model.service.ReviewService;
@@ -23,12 +22,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-		
-//		request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matzip_detail.jsp").forward(request, response);
-		
-//		ComInfoDTO comInfo = (ComInfoDTO) request.getSession().getAttribute("loginMember");
-		
+				
 		String comNo = request.getParameter("comNo");
 		
 		ComService comService = new ComService();
@@ -38,9 +32,13 @@ public class UserMatzipDetailServlet extends HttpServlet {
 		List<ComInfoDTO> selectComMenu = comService.selectComMenu(comNo);
 		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
 		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
+		List<ComInfoDTO> selectComImg = comService.selectComImg(comNo);
+//		List<ReviewDTO> selectReviewImg = reviewService.selectReviewImg(comNo)
+		
 		
 		System.out.println("selectReview : " + selectReview);
 		System.out.println("selectCom : " + selectCom);
+		System.out.println("selectimg : " + selectComImg);
 		
 		String path = "";
 		
@@ -51,6 +49,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
 			request.setAttribute("selectComMenu", selectComMenu);
 			request.setAttribute("selectReview", selectReview);
 			request.setAttribute("selectAvgRatings", selectAvgRatings);
+			request.setAttribute("selectComImg", selectComImg);
 			
 		}else {
 			path = "/WEB-INF/views/common/erroePage.jsp";

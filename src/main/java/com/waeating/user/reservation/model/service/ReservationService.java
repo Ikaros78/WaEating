@@ -7,14 +7,13 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.waeating.com.model.dao.ComInfoMapper;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.reservation.model.dao.ReservationMapper;
+import com.waeating.waitingRecord.model.dao.WaitingRecordMapper;
 
 public class ReservationService {
 	
-	private ReservationMapper reservationMapper;
+	private WaitingRecordMapper reservationMapper;
     
 	
 	/**
@@ -29,7 +28,7 @@ public class ReservationService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		int totalCount = reservationMapper.selectFinishReservationCount(searchMap);
 		
@@ -52,7 +51,7 @@ public class ReservationService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		List<ComInfoDTO> waiting = reservationMapper.selectReservationFinish(selectCriteria);
 		
@@ -74,7 +73,7 @@ public class ReservationService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		int totalCount = reservationMapper.selectCancelReservationCount(searchMap);
 		
@@ -96,7 +95,7 @@ public class ReservationService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		List<ComInfoDTO> waiting = reservationMapper.selectReservationCancel(selectCriteria);
 		
@@ -111,7 +110,7 @@ public class ReservationService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		int totalCount = reservationMapper.selectNowReservationCount(searchMap);
 		
@@ -126,7 +125,7 @@ public class ReservationService {
 		
 		SqlSession sqlSession = getSqlSession();
 		
-		reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		List<ComInfoDTO> waiting = reservationMapper.selectReservationNow(selectCriteria);
 		
