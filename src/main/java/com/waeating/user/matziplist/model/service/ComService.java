@@ -144,6 +144,28 @@ public class ComService {
 	}
 
 
+	/**
+	 * <pre>
+	 *  업체 메뉴 디테일 화면 업체사진 불러오기
+	 * </pre>
+	 * @param comNo
+	 * @return
+	 */
+	public List<ComInfoDTO> selectComImg(String comNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		List<ComInfoDTO> com = comInfoMapper.selectComImg(comNo);
+		
+		sqlSession.close();
+		
+		return com;
+	}
+	
+
+
 
 
 

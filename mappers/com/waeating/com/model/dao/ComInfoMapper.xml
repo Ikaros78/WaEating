@@ -346,6 +346,14 @@
   	       
   </select>
   
+  <select id="selectComImg" resultMap="generalCompanyResultMap">
+  	       SELECT
+              A.COM_NO
+            , B.FILE_NAME
+         FROM COM_INFO A
+         LEFT JOIN COM_BOARD_ATTACH B ON(A.COM_NO = B.COM_NO)
+         WHERE A.COM_NO = #{ comNo }
+  </select>
 
   
 </mapper>

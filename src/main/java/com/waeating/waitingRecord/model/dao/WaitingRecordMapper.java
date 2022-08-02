@@ -1,4 +1,4 @@
-package com.waeating.reservation.model.dao;
+package com.waeating.waitingRecord.model.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.SelectCriteria;
 
-public interface ReservationMapper {
+public interface WaitingRecordMapper {
 	
 	int selectFinishReservationCount(Map<String, String> searchMap);
 

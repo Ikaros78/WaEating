@@ -36,10 +36,12 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
 
         <div class="img mx-4">
-            <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok1.png" width="250" height="300">
-            <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok2.jpg" width="250" height="300">
+        <c:forEach var="image" items="${ requestScope.selectComImg }">        
+            <img src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ image.comBoardAttach.fileName }" width="250" height="300">
+        </c:forEach>
+            <%-- <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok2.jpg" width="250" height="300">
             <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok3.png" width="250" height="300">
-            <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok4.jpg" width="250" height="300">
+            <img src="${ pageContext.servletContext.contextPath }/resources/images/user/ddok4.jpg" width="250" height="300"> --%>
         </div><!--img-->
         
         <br>
