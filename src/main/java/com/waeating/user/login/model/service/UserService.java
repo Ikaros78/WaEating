@@ -183,7 +183,7 @@ public class UserService {
 	 * @param requestMember
 	 * @return
 	 */
-	public MemberDTO updatePwd(MemberDTO requestMember) {
+	public MemberDTO updateNewPwd(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		

@@ -278,7 +278,5 @@
 			   MEMBER_INFO A
 		   SET A.MEMBER_PWD = #{ pwd }
 		 WHERE A.MEMBER_ID = #{ id }
-		   AND A.NAME = #{ name }
-		   AND A.EMAIL = #{ email }
 	</update>
 </mapper>

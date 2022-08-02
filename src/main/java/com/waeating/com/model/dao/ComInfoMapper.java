@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.member.model.dto.MemberDTO;
 
 public interface ComInfoMapper {
 
@@ -42,12 +41,5 @@ public interface ComInfoMapper {
 
 	/* 업체 용도 */
 
-
-	/* 업주 로그인 */
-	int insertMember(MemberDTO requestMember);
-
-	int insertComInfo(ComInfoDTO requestCom);
-
-	int dubleCkId(String ceoId);
 
 }

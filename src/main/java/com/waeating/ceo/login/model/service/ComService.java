@@ -3,15 +3,15 @@ package com.waeating.ceo.login.model.service;
 import static com.waeating.common.mybatis.Template.getSqlSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.waeating.com.model.dao.ComInfoMapper;
+import com.waeating.com.model.dao.CeoMapper;
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.member.model.dao.MemberMapper;
 import com.waeating.member.model.dto.MemberDTO;
 
 public class ComService {
 
-	private ComInfoMapper comInfoMapper;
+	private CeoMapper ceoMapper;
 
 	/**
 	 * <pre>
@@ -23,9 +23,9 @@ public class ComService {
 	public int registMember(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
-		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		int resultMember = comInfoMapper.insertMember(requestMember);
+		int resultMember = ceoMapper.insertMember(requestMember);
 		
 		if(resultMember > 0) {
 			
@@ -50,9 +50,9 @@ public class ComService {
 	public int registCom(ComInfoDTO requestCom) {
 		
 		SqlSession sqlSession = getSqlSession();
-		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		int registCom = comInfoMapper.insertComInfo(requestCom);
+		int registCom = ceoMapper.insertComInfo(requestCom);
 		
 		if(registCom > 0) {
 			
@@ -78,12 +78,39 @@ public class ComService {
 
 		SqlSession sqlSession = getSqlSession();
 		
-		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		int result = comInfoMapper.dubleCkId(ceoId);
+		int result = ceoMapper.dubleCkId(ceoId);
 		
 		sqlSession.close();
 		
 		return result;
+	}
+
+	/**
+	 * <pre>
+	 * 	 로그인 처리 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return loginMember
+	 */
+	public MemberDTO loginCheck(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO loginMember = null;
+		
+		String encPwd = ceoMapper.selectEncryptedPwd(requestMember);
+		System.out.println("encPwd 확인 : " + encPwd);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if(passwordEncoder.matches(requestMember.getPwd(), encPwd)) {
+			
+			loginMember = ceoMapper.selectMemberLogin(requestMember);
+		}
+		
+		sqlSession.close();
+		
+		return loginMember;
 	}
 }

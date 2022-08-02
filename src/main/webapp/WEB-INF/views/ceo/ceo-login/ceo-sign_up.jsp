@@ -21,7 +21,7 @@
             <form class="validation-form" method="post">
               <div class="row">
                   <div class="form-floating col-md-6 mb-3">
-                      <input type="text" class="form-control" id="id" name="name" placeholder="아이디 입력" required>
+                      <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" required>
                       <label for="id" style="margin-left:10px">아이디</label>
                       <div class="invalid-feedback">
                         아이디를 입력해주세요.

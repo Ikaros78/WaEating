@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.waeating.ceo.login.model.service.ComService;
 import com.waeating.member.model.dto.MemberDTO;
 
 /**
@@ -43,6 +44,21 @@ public class CeoLoginServlet extends HttpServlet {
 		requestMember.setPwd(ceoPw);
 		requestMember.setMemberType(memberType);
 		
+		ComService comService = new ComService();
+		
+		MemberDTO loginMember = comService.loginCheck(requestMember);
+		System.out.println("loginMember : " + loginMember);
+		
+		if(loginMember != null) {
+			
+			session.setAttribute("loginMember", loginMember);
+			
+			response.sendRedirect(request.getContextPath() + "/ceo/main");
+		} else {
+			
+			request.setAttribute("message", "로그인에 실패하셨습니다. 다시 입력해주세요.");
+			request.getRequestDispatcher("/WEB-INF/views/common/failed.jsp").forward(request, response);
+		}
 		
 	}
 
