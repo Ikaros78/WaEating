@@ -31,15 +31,19 @@
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
           <div class="container mt-3">
-            <div class="row pb-3 pe-1">
-              <div class="col">
-                
-              </div>
-              <div class="container col fs-5 text-end">
+            <div class="row pb-4 pe-1">
+              
+              <div class="container col fs-5 text-start mb-1">
                   <span id="clock1"></span>
                   <span id="clock2"></span>
+              </div><!-- 시간-->
+              <div class="col fs-5">
+                <div class="col form-check form-switch d-flex justify-content-end">
+				  <label class="form-check-label" for="waitYn">예약 가능</label>
+				  <input class="form-check-input ms-3" type="checkbox" id="waitYn" name="waitYn" value="yes" checked>
+				</div>
               </div>
-            </div><!-- 시간-->
+            </div>
             <div id="accordion">
               <div class="card">
                 <div class="card-header">

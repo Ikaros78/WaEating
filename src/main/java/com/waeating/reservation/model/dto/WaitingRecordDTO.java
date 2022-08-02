@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.review.model.dto.ReviewDTO;
 
 public class WaitingRecordDTO {
 
@@ -19,6 +20,7 @@ public class WaitingRecordDTO {
 	
 	private ComInfoDTO comInfo;
 	private MemberDTO memberInfo;
+	private ReviewDTO review;
 	
 	public WaitingRecordDTO() {}
 
@@ -36,6 +38,26 @@ public class WaitingRecordDTO {
 		this.memo = memo;
 		this.comInfo = comInfo;
 		this.memberInfo = memberInfo;
+	}
+	
+	
+
+	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int waitingNo,
+			int memberNum, String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo,
+			ReviewDTO review) {
+		super();
+		this.recordNo = recordNo;
+		this.comNo = comNo;
+		this.memberId = memberId;
+		this.useDate = useDate;
+		this.useStatus = useStatus;
+		this.waitingNo = waitingNo;
+		this.memberNum = memberNum;
+		this.requirement = requirement;
+		this.memo = memo;
+		this.comInfo = comInfo;
+		this.memberInfo = memberInfo;
+		this.review = review;
 	}
 
 	public int getRecordNo() {
@@ -126,12 +148,21 @@ public class WaitingRecordDTO {
 		this.memberInfo = memberInfo;
 	}
 
+	
+	public ReviewDTO getReview() {
+		return review;
+	}
+
+	public void setReview(ReviewDTO review) {
+		this.review = review;
+	}
+
 	@Override
 	public String toString() {
 		return "WaitingRecordDTO [recordNo=" + recordNo + ", comNo=" + comNo + ", memberId=" + memberId + ", useDate="
 				+ useDate + ", useStatus=" + useStatus + ", waitingNo=" + waitingNo + ", memberNum=" + memberNum
 				+ ", requirement=" + requirement + ", memo=" + memo + ", comInfo=" + comInfo + ", memberInfo="
-				+ memberInfo + "]";
+				+ memberInfo + ", review=" + review + "]";
 	}
 
 	

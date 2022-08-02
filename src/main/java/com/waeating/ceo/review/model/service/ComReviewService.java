@@ -39,4 +39,15 @@ public class ComReviewService {
 		return comReviewList;
 	}
 
+	public ReviewDTO selectOneReview(String reviewNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comReviewMapper  = sqlSession.getMapper(ComReviewMapper.class);
+		ReviewDTO review = comReviewMapper.selectOneReview(reviewNo);
+		
+		sqlSession.close();
+		return review;
+	}
+
 }
