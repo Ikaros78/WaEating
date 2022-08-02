@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/>
+<jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
 
   <div id="wrap">
    
@@ -73,7 +73,7 @@
             <div class="mt-3"></div>
             <!-- 검색 폼 -->
 			<div class="search-area" align="center">
-				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/noticelist" method="get" style="display:inline-block">
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/notice/list" method="get" style="display:inline-block">
 				<div class="input-group mb-3">
 				<input type="hidden" class="form-control" name="currentPage" value="1">
 				    <select id="searchCondition" name="searchCondition" class="form-control">
@@ -91,7 +91,7 @@
        </aside>
     </section>
                          
-<jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
+<jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
   </div>
   <script>
 		

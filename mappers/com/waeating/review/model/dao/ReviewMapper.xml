@@ -10,11 +10,14 @@
   	<result property="ratings" column="RATINGS"/>
   	<result property="recordNo" column="RECORD_NO"/>
   	<result property="comNo" column="COM_NO"/>
+  	<result property="avgRatings" column="AVG_RATINSG"/>
   	
   	 <association property="reviewAttach" resultMap="reviewAttachMap"/>
   	 <association property="reviewAns" resultMap="reviewAnsMAp"/>
   	 <association property="memberInfo" resultMap="memberResultMap"/>
   	 <association property="waitingRecord" resultMap="waitingRecordMap"/>
+  	 <association property="comInfo" resultMap="CompanyResultMap"/>
+  	 <association property="userInfoAttach" resultMap="UserInfoAttachMap"/>
   </resultMap>
   
   <resultMap type="com.waeating.review.model.dto.ReviewAttachDTO" id="reviewAttachMap">
@@ -43,7 +46,7 @@
 		<result property="emailCheck" column="EMAIL_CHECK"/>
 	</resultMap>
 	
-	<resultMap type="com.waeating.reservation.model.dto.WaitingRecordDTO" id="waitingRecordMap">
+	<resultMap type="com.waeating.waitingRecord.model.dto.WaitingRecordDTO" id="waitingRecordMap">
   	  <id property="recordNo" column="RECORD_NO"/>
   	  <result property="comNo" column="COM_NO"/>
   	  <result property="memberId" column="MEMBER_ID"/>
@@ -55,4 +58,49 @@
   	  <result property="memo" column="MEMO"/>
   </resultMap>
   
+  <resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="CompanyResultMap">
+		<id property="comNo" column="COM_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="comName" column="COM_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="comAddress" column="COM_ADDRESS"/>
+		<result property="comPhone" column="COM_PHONE"/>
+		<result property="comRegist" column="COM_REGIST"/>
+		<result property="waitYn" column="WAIT_YN"/>
+		<result property="workTime" column="WORK_TIME"/>
+		<result property="holiday" column="HOLIDAY"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.member.model.dto.UserInfoAttachDTO" id="UserInfoAttachMap">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="originName" column="ORIGIN_NAME"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="isDeleted" column="IS_DELETED"/>
+		<result property="regDate" column="REG_DATE"/>
+	</resultMap>
+  
+  <select id="selctReview" resultMap="reviewMap" >
+      SELECT
+            A.REVIEW_CONTENT
+          , A.RATINGS
+          , B.ANS_CONTENT
+          , E.MEMBER_ID
+          , C.USE_DATE
+          , F.FILE_NAME
+      FROM REVIEW A
+      LEFT JOIN REVIEW_ANS B ON(A.REVIEW_NO = B.REVIEW_NO)
+      LEFT JOIN WAITING_RECORD C ON(A.RECORD_NO = C.RECORD_NO)
+      LEFT JOIN COM_INFO D ON(C.COM_NO = D.COM_NO)
+      LEFT JOIN MEMBER_INFO E ON(E.MEMBER_ID = C.MEMBER_ID)
+      LEFT JOIN USER_INFO_ATTACH F ON(F.MEMBER_ID = E.MEMBER_ID)
+      WHERE D.COM_NO = #{ comNo } 
+  </select>
+  
+  <select id="selectAvgRatings" resultMap="reviewMap">
+  	SELECT
+            TRUNC(AVG(RATINGS),1) AVG_RATINSG
+       FROM REVIEW 
+       WHERE COM_NO = #{ comNo } 
+  </select>
   </mapper>

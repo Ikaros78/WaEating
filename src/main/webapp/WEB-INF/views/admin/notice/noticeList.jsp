@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +34,8 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="#">공지사항 조회</a></li>
-                                    <li role="presentation"><a href="#">공지사항 수정</a></li>
-                                    <li role="presentation"><a href="#">공지사항 등록</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/list">공지사항 조회</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/insert">공지사항 등록</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -45,68 +45,90 @@
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
-                        <th>Numbering</th>
-                        <th>PK</th>
-                        <th>여기에 뭐넣지</th>
-                    </tr>
+	                    <tr>
+	                        <th width="100px">공지번호</th>
+	                        <th width="300px">제목</th>
+	                        <th width="200px">작성자</th>
+	                        <th width="100px">작성일자</th>
+	                    </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="#">이름</a></td>
-                        <td>john@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="#">이름</a></td>
-                        <td>mary@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="#">이름</a></td>
-                        <td>july@example.com</td>
-                    </tr>
+                    <c:forEach var ="notice" items="${ requestScope.noticeList }">
+	                    <tr class="rowClick">
+	                        <td class=details><c:out value="${ notice.noticeNo }"/></td>
+	                        <td class=details><c:out value="${ notice.noticeTitle }"/></td>
+	                        <td class=details><c:out value="${ notice.memberId }"/></td>
+	                        <td class=details><c:out value="${ notice.regDate }"/></td>
+	                    </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div id="searchContainer">
-            <div class="row">
-                <div class="col-md-offset-7 col-md-4" align="right">
-                        <select class="form-select" id="option">
-                            <option value="이름">이름</option>
-                            <option value="나이">나이</option>
-                            <option value="휴대폰">휴대폰</option>
-                            <option value="아이디">아이디</option>
-                            <option value="옵션5">옵션5</option>
-                        </select>
-                        <input type="text">
-                        <input type="submit" value="검색">
-                </div>
-            </div>
-        </div>
-        
-        <div id="container">
-
-            <div class="col-md-offset-2 col-md-7">
-                <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                  </ul>
-            </div>
-
-            <div class="col-md-2" align="right">
-                <br>
-                <button type="button" class="btn btn-default">등록하기</button>
-            </div>
-        </div>
-
+       	<!-- 검색 폼 -->
+		
+		<div class="col-md-offset-7 col-md-4" align="right" id="searchArea">
+			<form id="loginForm" action="${ pageContext.servletContext.contextPath }/admin/notice/list" method="get" style="display:inline-block">		
+			    <input type="hidden" name="currentPage" value="1">
+			    <select id="searchCondition" name="searchCondition">
+					<option value="title" ${ requestScope.selectCriteria.searchCondition eq "title"? "selected": "" }>제목</option>
+					<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>작성자</option>
+				</select>
+		        <input type="search" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+		
+				<button type="submit">검색하기</button>
+			</form>
+		</div>
+		
+		<div id="container">
+			<!-- 페이지 처리 -->
+			<jsp:include page="../common/paging.jsp"/>
+			
+			<div class="col-md-2" align="right">
+			    <br>
+			    <button type="button" class="btn btn-default" id="insert">등록하기</button>
+			</div>
+		</div>
         
     </div>
+ 
+	<!-- 상세 보기 이동 -->
+    <script>
+    	
+    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/notice/detail/session";
+    
+    	if(document.getElementsByTagName("td")) {
+    		
+    		const $tds = document.getElementsByClassName("details");
+    		for(let i = 0; i < $tds.length; i++){
+    			
+    			$tds[i].onmouseenter = function(){
+    				this.parentNode.style.backgroundColor = "lightgrey";
+    				this.parentNode.style.cursor = "pointer";
+    			}
+    			
+    			$tds[i].onmouseout = function(){
+    				this.parentNode.style.backgroundColor = "white";
+    			}
+    		}
+    		const $trs = document.getElementsByClassName("rowClick");
+    		for(let j = 0; j < $trs.length; j++){
+    			
+    			$trs[j].onclick = function(){
+    				/* alert($(this).children().eq(0).text()); */
+    				var noticeNo = $(this).children().eq(0).text();
+    				location.href = detailLink + "?noticeNo=" + noticeNo; 
+    			}
+    		}
+    	}
+	
+    	if(document.getElementById("insert")){
+    		const $insert = document.getElementById("insert");
+    		$insert.onclick = function(){
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/notice/insert";
+    		}
+    	}
+    </script>
 </body>
 </html>

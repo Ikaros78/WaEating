@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.ceo.review.model.service.ComReviewService;
-import com.waeating.com.model.dto.ReviewDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.review.model.dto.ReviewDTO;
 
 /**
  * Servlet implementation class CeoRestReview
@@ -61,22 +61,22 @@ public class CeoRestReviewServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<ReviewDTO> comReviewList = reviewService.selectAllReview(selectCriteria);
-		
-		System.out.println(comReviewList);
-		
-		String path = "";
-		if(comReviewList != null) {
-			path = "/WEB-INF/views/ceo/review/ceo_rest_review.jsp";
-			request.setAttribute("selectAllReview", comReviewList);
-			request.setAttribute("selectCriteria", selectCriteria);
-			request.setAttribute("totalCount", totalCount);
-		} else {
-			path = "/WEB-INF/views/common.errorPage.jsp";
-			request.setAttribute("message", "리뷰 리스트 조회 실패");
-		}
-		
-		request.getRequestDispatcher(path).forward(request, response);
+//		List<ReviewDTO> comReviewList = reviewService.selectAllReview(selectCriteria);
+//		
+//		System.out.println(comReviewList);
+//		
+//		String path = "";
+//		if(comReviewList != null) {
+//			path = "/WEB-INF/views/ceo/review/ceo_rest_review.jsp";
+//			request.setAttribute("selectAllReview", comReviewList);
+//			request.setAttribute("selectCriteria", selectCriteria);
+//			request.setAttribute("totalCount", totalCount);
+//		} else {
+//			path = "/WEB-INF/views/common.errorPage.jsp";
+//			request.setAttribute("message", "리뷰 리스트 조회 실패");
+//		}
+//		
+//		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	

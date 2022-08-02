@@ -15,7 +15,6 @@
 
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div id="header">
@@ -25,7 +24,7 @@
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/list">회원 관리</a></li>
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/company/list">업체 관리</a></li>
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/content/list">게시글 관리</a></li>
-                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/support/list">고객센터 관리</a></li>
+                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/report/list">고객센터 관리</a></li>
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/list">공지사항 관리</a></li>
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/usageLog/list">사용이력 관리</a></li>
                 </ul>

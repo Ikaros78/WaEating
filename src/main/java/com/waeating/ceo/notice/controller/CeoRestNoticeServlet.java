@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.ceo.notice.model.dto.ComNoticeDTO;
 import com.waeating.ceo.notice.model.service.ComNoticeService;
+import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
 
@@ -24,11 +24,7 @@ public class CeoRestNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		HttpSession session = request.getSession();
-//		
-//		request.getRequestDispatcher("/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp").forward(request, response);
-		
+				
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		

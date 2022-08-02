@@ -9,7 +9,7 @@ public class NoticeDTO {
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
-	private Date regDate;
+	private java.sql.Date regDate;
 	private String memberId;
 	
 	

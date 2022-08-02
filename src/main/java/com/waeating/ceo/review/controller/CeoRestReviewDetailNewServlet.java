@@ -1,12 +1,15 @@
 package com.waeating.ceo.review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.waeating.ceo.review.model.service.ComReviewService;
+import com.waeating.review.model.dto.ReviewDTO;
 
 /**
  * Servlet implementation class CeoRestReviewDetailNewServlet
@@ -17,9 +20,27 @@ public class CeoRestReviewDetailNewServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
+		String reviewNo = request.getParameter("reviewNo");
 		
-		request.getRequestDispatcher("/WEB-INF/views/ceo/review/ceo_rest_review_detail_new.jsp").forward(request, response);
+		System.out.println(reviewNo);
+		
+		ComReviewService reviewService = new ComReviewService();
+		ReviewDTO selectReview = reviewService.selectOneReview(reviewNo);
+		
+		System.out.println(selectReview);
+		
+		String path = "";
+		if(selectReview != null) {
+			path = "/WEB-INF/views/ceo/review/ceo_rest_review_detail_new.jsp";
+			request.setAttribute("selectOneReview", selectReview);
+			request.setAttribute("reviewNo", reviewNo);
+			
+		} else{
+			path = "/WEB-INF/views/common/errorPage.jsp";
+			request.setAttribute("message", "리뷰 조회 실패");
+		}
+		
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 }

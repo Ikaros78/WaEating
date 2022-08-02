@@ -38,7 +38,7 @@
               <div class="container col-3 fs-5 text-end">
                   <!-- <span id="clock1"></span>
                   <span id="clock2"></span> -->
-                  <div class="input-group mb-3">
+                  <div class="input-group mb-2">
                     <input type="date" class="form-control" placeholder="Search">
                     <button class="btn btn-primary" type="submit">검색</button>
                   </div>
