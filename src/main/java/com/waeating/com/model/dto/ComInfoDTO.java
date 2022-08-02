@@ -3,6 +3,9 @@ package com.waeating.com.model.dto;
 import java.util.List;
 
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.review.model.dto.ReviewAnsDTO;
+import com.waeating.review.model.dto.ReviewAttachDTO;
+import com.waeating.review.model.dto.ReviewDTO;
 
 public class ComInfoDTO {
 
@@ -23,15 +26,20 @@ public class ComInfoDTO {
 	private List<ComRecordDTO> recordList;
 	private ReviewDTO review;
 	private WaitingRecordDTO waitingRecord;
+	private ReviewAttachDTO reviewAttach;
+	private ReviewAnsDTO reviewAns;
 	
 	
 	public ComInfoDTO() {}
 
 
+	
+
+
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
 			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
 			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review,
-			WaitingRecordDTO waitingRecord) {
+			WaitingRecordDTO waitingRecord, ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
 		super();
 		this.comNo = comNo;
 		this.memberId = memberId;
@@ -49,7 +57,11 @@ public class ComInfoDTO {
 		this.recordList = recordList;
 		this.review = review;
 		this.waitingRecord = waitingRecord;
+		this.reviewAttach = reviewAttach;
+		this.reviewAns = reviewAns;
 	}
+
+
 
 
 
@@ -215,6 +227,27 @@ public class ComInfoDTO {
 		this.waitingRecord = waitingRecord;
 	}
 
+	
+
+	public ReviewAttachDTO getReviewAttach() {
+		return reviewAttach;
+	}
+
+
+	public void setReviewAttach(ReviewAttachDTO reviewAttach) {
+		this.reviewAttach = reviewAttach;
+	}
+
+
+	public ReviewAnsDTO getReviewAns() {
+		return reviewAns;
+	}
+
+
+	public void setReviewAns(ReviewAnsDTO reviewAns) {
+		this.reviewAns = reviewAns;
+	}
+
 
 	@Override
 	public String toString() {
@@ -222,7 +255,8 @@ public class ComInfoDTO {
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
 				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", comBoardAttach="
 				+ comBoardAttach + ", comMenu=" + comMenu + ", memberInfo=" + memberInfo + ", recordList=" + recordList
-				+ ", review=" + review + ", waitingRecord=" + waitingRecord + "]";
+				+ ", review=" + review + ", waitingRecord=" + waitingRecord + ", reviewAttach=" + reviewAttach
+				+ ", reviewAns=" + reviewAns + "]";
 	}
 
 }

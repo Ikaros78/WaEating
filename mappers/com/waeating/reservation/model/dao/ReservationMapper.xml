@@ -17,6 +17,7 @@
   	  
   	  <association property="comInfo" resultMap="companyResultMap"/>
   	  <association property="memberInfo" resultMap="memberResultMap"/>
+  	  <association property="review" resultMap="reviewMap"/>
   </resultMap>
   
   <resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="companyResultMap">
@@ -41,18 +42,26 @@
 		<result property="phone" column="PHONE"/>
 		<result property="emailCheck" column="EMAIL_CHECK"/>
 	</resultMap>
+	
+	 <resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
+  	<id property="reviewNo" column="REVIEW_NO"/>
+  	<result property="reviewContent" column="REVIEW_CONTENT"/>
+  	<result property="ratings" column="RATINGS"/>
+  	<result property="recordNo" column="RECORD_NO"/>
+  	<result property="comNo" column="COM_NO"/>
+  </resultMap>
   
-    <select id="selectFinishReservationCount" resultType="_int">
+    <select id="selectFinishReservationCount" resultType="_int" parameterType="hashmap">
        SELECT
   	     COUNT(*)
   	FROM WAITING_RECORD A
   	JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-   WHERE B.MEMBER_ID = 'user01'
+   WHERE B.MEMBER_ID = #{ userId }
      AND A.USE_STATUS = 'complete'
   	  
   </select>
   
-  <select id="selectReservationFinish" resultMap="waitingRecordMap">
+  <select id="selectReservationFinish" resultMap="waitingRecordMap" parameterType="hashmap">
   	SELECT
  		   A.RNUM
  		 , A.WAITING_NO
@@ -60,22 +69,26 @@
   	     , A.USE_DATE
   	     , A.PHONE
   	     , A.COM_NAME
+  	     , A.REVIEW_NO
  	FROM(SELECT ROWNUM RNUM
  			  , B.WAITING_NO
 	  	      , B.MEMBER_NUM
 	  	      , B.USE_DATE
 			  , B.PHONE
-			  , B.COM_NAME	
+			  , B.COM_NAME
+			  , B.REVIEW_NO	
 	  	   FROM(SELECT
 				       C.WAITING_NO
 				     , C.MEMBER_NUM
 				     , C.USE_DATE
 				     , D.PHONE
 				     , E.COM_NAME
+				     , R.REVIEW_NO
 				  FROM WAITING_RECORD C
 				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
-				  WHERE C.MEMBER_ID = 'user01'
+				  LEFT JOIN REVIEW R ON (C.RECORD_NO = R.RECORD_NO)
+				  WHERE C.MEMBER_ID = #{ searchValue }
 				    AND C.USE_STATUS = 'complete'
 	  	  	   ) B
 	  	  	      <![CDATA[
@@ -86,16 +99,16 @@
 	 WHERE A.RNUM >= #{ startRow } 
   </select>
   
-  <select id="selectCancelReservationCount" resultType="_int">
+  <select id="selectCancelReservationCount" resultType="_int" parameterType="hashmap">
     SELECT
   	    COUNT(*)
   	FROM WAITING_RECORD A
     JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-   WHERE B.MEMBER_ID = 'user01'
+   WHERE B.MEMBER_ID = #{ userId }
      AND A.USE_STATUS = 'cancel'
   </select>
   
-  <select id="selectReservationCancel" resultMap="waitingRecordMap">
+  <select id="selectReservationCancel" resultMap="waitingRecordMap" parameterType="hashmap">
   SELECT
  		   A.RNUM
  		 , A.WAITING_NO
@@ -118,8 +131,54 @@
 				  FROM WAITING_RECORD C
 				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
-				  WHERE C.MEMBER_ID = 'user01'
+				  WHERE C.MEMBER_ID = #{ searchValue }
 				    AND C.USE_STATUS = 'cancel'
+	  	  	   ) B
+	  	  	      <![CDATA[
+				        WHERE ROWNUM <= #{ endRow }
+				  ]]>
+	  	) A
+	 
+	 WHERE A.RNUM >= #{ startRow } 
+	 </select>
+	 
+	 
+	 <select id="selectNowReservationCount" resultType="_int" parameterType="hashmap">
+	 SELECT
+	  	     COUNT(*)
+	  	FROM WAITING_RECORD A
+	    JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+	   WHERE B.MEMBER_ID = #{ userId }
+	     AND A.USE_STATUS = 'waiting'
+	     AND A.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	 </select>
+	 
+	<select id="selectReservationNow" resultMap="waitingRecordMap" parameterType="hashmap">
+  SELECT
+ 		   A.RNUM
+ 		 , A.WAITING_NO
+ 	 	 , A.MEMBER_NUM
+  	     , A.USE_DATE
+  	     , A.PHONE
+  	     , A.COM_NAME
+ 	FROM(SELECT ROWNUM RNUM
+ 			  , B.WAITING_NO
+	  	      , B.MEMBER_NUM
+	  	      , B.USE_DATE
+			  , B.PHONE
+			  , B.COM_NAME	
+	  	   FROM(SELECT
+				       C.WAITING_NO
+				     , C.MEMBER_NUM
+				     , C.USE_DATE
+				     , D.PHONE
+				     , E.COM_NAME
+				  FROM WAITING_RECORD C
+				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
+				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
+				  WHERE C.MEMBER_ID = #{ searchValue }
+				    AND C.USE_STATUS = 'waiting'
+				    AND C.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
 	  	  	   ) B
 	  	  	      <![CDATA[
 				        WHERE ROWNUM <= #{ endRow }
