@@ -52,7 +52,7 @@
 	                    </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var ="log" items="${ requestScope.usageLogList }">
+                    <c:forEach var ="log" items="${ requestScope.logList }">
 	                    <tr class="rowClick">
 	                        <td class=details><c:out value="${ log.recordNo }"/></td>
 	                        <td class=details><c:out value="${ log.comInfo.comName }"/></td>

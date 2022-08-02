@@ -61,10 +61,18 @@ public class AdminUsageLogSelectListServlet extends HttpServlet {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
 		}
 		
-		List<WaitingRecordDTO> logList = logservice.AdminSelectLogList(selectCriteria);
+		List<WaitingRecordDTO> logList = logservice.adminSelectLogList(selectCriteria);
 		
 		String path = "";
-		path= "/WEB-INF/views/admin/usageLog/usageLogList.jsp";
+		if(logList != null) {
+			path= "/WEB-INF/views/admin/usageLog/usageLogList.jsp";
+			request.setAttribute("logList", logList);
+			request.setAttribute("selectCriteria", selectCriteria);
+			request.setAttribute("link", "list");
+		} else {
+			path = "/WEB-INF/views/common/failed.jsp";
+			request.setAttribute("message", "이용이력정보 목록 조회 실패!");
+		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}
