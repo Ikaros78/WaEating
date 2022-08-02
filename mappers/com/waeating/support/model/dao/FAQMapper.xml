@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waeating.support.model.dao.FAQMapper">
+	<resultMap type="com.waeating.support.model.dto.FAQDTO" id="FAQResultMap">
+		<id property="faqNo" column="FAQ_NO"/>
+		<result property="title" column="FAQ_TITLE"/>
+		<result property="content" column="FAQ_CONTENT"/>
+		<result property="id" column="MEMBER_ID"/>
+		<result property="regDate" column="REG_DATE"/>
+	</resultMap>
+
+	<select id="adminSelectTotalFAQCount" resultType="_int" parameterType="hashmap">
+		SELECT
+				COUNT(*)
+			FROM TBL_FAQ A
+			<!-- 검색조건문 -->
+		<where>
+			<if test="searchCondition =='id'">
+				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+			</if>
+			<if test="searchCondition =='title'">
+				A.FAQ_TITLE LIKE '%' || #{ searchValue } || '%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="adminSelectFAQList" resultMap="FAQResultMap">
+		SELECT
+				A.RNUM
+			  , A.FAQ_NO
+			  , A.FAQ_TITLE
+			  , A.MEMBER_ID
+			  , A.REG_DATE
+		  FROM (SELECT ROWNUM RNUM
+		  			 , B.FAQ_NO
+		  			 , B.FAQ_TITLE
+		  			 , B.MEMBER_ID
+		  			 , B.REG_DATE
+		  		  FROM(SELECT C.FAQ_NO
+		  		  			, C.FAQ_TITLE
+		  		  			, C.MEMBER_ID
+		  		  			, C.REG_DATE
+		  		  		 FROM TBL_FAQ C
+			  		  	 <where>
+							<if test="searchCondition =='id'">
+								C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+							</if>
+							<if test="searchCondition =='title'">
+								C.FAQ_TITLE LIKE '%' || #{ searchValue } || '%'
+							</if>
+						</where>
+						ORDER BY C.FAQ_NO DESC
+		  		  ) B
+		  		  <![CDATA[
+			     WHERE ROWNUM <= #{ endRow }
+			     ]]>
+		  )A
+		WHERE A.RNUM >= #{ startRow } 
+	</select>
+	
+	<select id="adminSelectFAQDetail" parameterType="hashmap" resultMap="FAQResultMap">
+		SELECT
+				A.FAQ_TITLE
+			  , A.FAQ_CONTENT
+			  , A.MEMBER_ID
+			  , A.REG_DATE
+			FROM TBL_FAQ A
+		   WHERE A.FAQ_NO = #{ faqNo }
+	</select>
+	
+	<update id="updateFAQ" parameterType="hashmap">
+		UPDATE
+				TBL_FAQ A
+		<set>
+			<if test="title != null and title !=''">
+			A.FAQ_TITLE = #{ title },
+			</if>
+			<if test="content != null and content != ''">
+			A.FAQ_CONTENT = #{ content },
+			</if> 
+			<if test="date != null and date!= ''">
+			A.REG_DATE = #{ date },
+			</if>
+			<if test="id != null and id != ''">
+			A.MEMBER_ID = #{ id },
+			</if>
+		</set>
+		WHERE A.FAQ_NO = #{ faqNo }
+	</update>
+	
+	<delete id="deleteFAQ" parameterType="java.lang.String">
+		DELETE
+			FROM TBL_FAQ A
+		   WHERE A.FAQ_NO = #{ faqNo }
+	</delete>
+	
+	<insert id="insertFAQ" parameterType="hashmap">
+		INSERT
+			INTO TBL_FAQ A
+			(  
+				A.FAQ_NO
+			  , A.FAQ_TITLE
+			  , A.FAQ_CONTENT
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+			)
+			VALUES
+			(
+				SEQ_FAQNO.NEXTVAL
+			  , #{ title }
+			  , #{ content }
+			  , #{ date }
+			  , #{ id }
+			)
+	</insert>
+</mapper>

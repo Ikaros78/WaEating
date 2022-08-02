@@ -14,27 +14,6 @@ import com.waeating.notice.model.dto.NoticeDTO;
 public class NoticeService {
 	
 	private NoticeMapper noticeMapper;
-	
-
-	public int insertNotice(NoticeDTO newNotice) {
-	
-    SqlSession sqlSession = getSqlSession();
-    noticeMapper = sqlSession.getMapper(NoticeMapper.class);
-    int result = noticeMapper.insertNotice(newNotice);
-    
-    if(result > 0) {
-    	sqlSession.commit();
-    } else {
-    	sqlSession.rollback();
-    }
-    
-    sqlSession.close();
-    
-    return result;
-    
-    
-	
-	}
 
 	public NoticeDTO selectNoticeDetail(int no) { 
 		

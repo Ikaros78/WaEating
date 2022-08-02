@@ -14,17 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.waeating.admin.support.service.AdminSupportService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.support.model.dto.ReportDTO;
+import com.waeating.support.model.dto.FAQDTO;
 
 /**
- * Servlet implementation class SupportSelectListServlet
+ * Servlet implementation class AdminFAQSelectListServlet
  */
-@WebServlet("/admin/support/list")
-public class AdminSupportSelectListServlet extends HttpServlet {
+@WebServlet("/admin/faq/list")
+public class AdminFAQSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			
 		if(request.getSession().getAttribute("ifUpdate") != null){
 			request.getSession().removeAttribute("ifUpdate");
 		}
@@ -48,7 +48,7 @@ public class AdminSupportSelectListServlet extends HttpServlet {
 		searchMap.put("searchValue", searchValue);
 		
 		AdminSupportService supportService = new AdminSupportService();
-		int totalCount = supportService.selectTotalCount(searchMap);
+		int totalCount = supportService.selectTotalFAQCount(searchMap);
 		
 		int limit = 10;
 		int buttonAmount = 5;
@@ -61,12 +61,14 @@ public class AdminSupportSelectListServlet extends HttpServlet {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
 		}
 		
-		List<ReportDTO> reportList = supportService.selectReportList(selectCriteria);
+		List<FAQDTO> FAQList = supportService.selectFAQList(selectCriteria);
+		
+		System.out.println(FAQList);
 		
 		String path = "";
-		if(reportList != null) {
-			path= "/WEB-INF/views/admin/support/supportList.jsp";
-			request.setAttribute("reportList", reportList);
+		if(FAQList != null) {
+			path= "/WEB-INF/views/admin/support/supportFAQList.jsp";
+			request.setAttribute("FAQList", FAQList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("link", "list");
 		}else {
@@ -75,6 +77,7 @@ public class AdminSupportSelectListServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+		
 	}
 
 }

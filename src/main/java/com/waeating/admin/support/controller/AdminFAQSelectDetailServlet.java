@@ -11,37 +11,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.admin.support.service.AdminSupportService;
-import com.waeating.support.model.dto.ReportDTO;
+import com.waeating.support.model.dto.FAQDTO;
 
 /**
- * Servlet implementation class AdminSupportSelectDetailServlet
+ * Servlet implementation class AdminFAQSelectDetailServlet
  */
-@WebServlet("/admin/support/detail")
-public class AdminSupportSelectDetailServlet extends HttpServlet {
+@WebServlet("/admin/faq/detail")
+public class AdminFAQSelectDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String reportNo = (String) request.getSession().getAttribute("reportNo");
+		String faqNo = (String) request.getSession().getAttribute("faqNo");
 		
 		Map<String, String> searchMap = new HashMap<>();
-		searchMap.put("reportNo", reportNo);
+		searchMap.put("faqNo", faqNo);
 		
 		AdminSupportService supportService = new AdminSupportService();
-		ReportDTO report = supportService.selectReportDetail(searchMap);
-		
-		System.out.println(report);
+		FAQDTO faq = supportService.selectFAQDetail(searchMap);
 		
 		String path = "";
 		
-		if(report != null) {
-			path = "/WEB-INF/views/admin/support/supportDetail.jsp";
+		if(faq != null) {
+			path = "/WEB-INF/views/admin/support/supportFAQDetail.jsp";
 			
 			request.getSession().setAttribute("path", path);
-			request.getSession().setAttribute("report", report);
+			request.getSession().setAttribute("faq", faq);
 		} else {
 			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "문의정보 조회 실패!");
+			request.setAttribute("message", "자주 묻는 질문 정보 조회 실패");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
