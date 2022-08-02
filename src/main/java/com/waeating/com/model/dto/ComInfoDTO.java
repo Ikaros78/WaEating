@@ -21,7 +21,7 @@ public class ComInfoDTO {
 	private String workTime;
 	private String holiday;
 	
-	private ComBoardAttachDTO comBoardAttach;
+	private List<ComBoardAttachDTO> comBoardAttach;
 	private ComMenuDTO comMenu;
 	private MemberDTO memberInfo;
 	private List<ComRecordDTO> recordList;
@@ -34,11 +34,8 @@ public class ComInfoDTO {
 	public ComInfoDTO() {}
 
 
-	
-
-
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
-			String comRegist, String waitYn, String workTime, String holiday, ComBoardAttachDTO comBoardAttach,
+			String comRegist, String waitYn, String workTime, String holiday, List<ComBoardAttachDTO> comBoardAttach,
 			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review,
 			WaitingRecordDTO waitingRecord, ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
 		super();
@@ -61,7 +58,6 @@ public class ComInfoDTO {
 		this.reviewAttach = reviewAttach;
 		this.reviewAns = reviewAns;
 	}
-
 
 
 
@@ -166,12 +162,12 @@ public class ComInfoDTO {
 	}
 
 
-	public ComBoardAttachDTO getComBoardAttach() {
+	public List<ComBoardAttachDTO> getComBoardAttach() {
 		return comBoardAttach;
 	}
 
 
-	public void setComBoardAttach(ComBoardAttachDTO comBoardAttach) {
+	public void setComBoardAttach(List<ComBoardAttachDTO> comBoardAttach) {
 		this.comBoardAttach = comBoardAttach;
 	}
 
