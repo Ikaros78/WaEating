@@ -36,6 +36,8 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> selectComMenu(String comNo);
 
+	List<ComInfoDTO> selectComImg(String comNo);
+
 	/* 업체 용도 */
 
 
