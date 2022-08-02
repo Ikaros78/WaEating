@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.waeating.notice.model.dao.ComNoticeMapper">
+  <mapper namespace="com.waeating.ceo.notice.model.dao.ComNoticeMapper">
   	<resultMap type="com.waeating.com.model.dto.ComNoticeDTO" id="comNoticeResultMap">
   		<id property="noticeNo" column="NOTICE_NO"/>
   		<result property="noticeTitle" column="NOTICE_TITLE"/>
