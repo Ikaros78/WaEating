@@ -38,7 +38,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	String searchValue = request.getParameter("searchValue");
 	
 	Map<String, String> searchMap = new HashMap<>();
-	searchMap.put("searchConditiom", searchCondition);
+	searchMap.put("searchCondition", searchCondition);
 	searchMap.put("searchValue", searchValue);
 	
 	NoticeService NoticeService = new NoticeService();
