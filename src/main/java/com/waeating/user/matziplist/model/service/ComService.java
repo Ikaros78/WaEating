@@ -107,15 +107,16 @@ public class ComService {
 	 * <pre>
 	 *  업체 정보 디테일 화면 조회
 	 * </pre>
+	 * @param comInfo 
 	 * @return
 	 */
-	public ComInfoDTO selctComDetail() {
+	public ComInfoDTO selctComDetail(String comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
-		ComInfoDTO com = comInfoMapper.selectComDetail();
+		ComInfoDTO com = comInfoMapper.selectComDetail(comNo);
 		
 		sqlSession.close();
 		
@@ -126,15 +127,16 @@ public class ComService {
 	 * <pre>
 	 *  업체 메뉴 디테일 화면 조회
 	 * </pre>
+	 * @param comInfo 
 	 * @return
 	 */
-	public List<ComInfoDTO> selectComMenu() {
+	public List<ComInfoDTO> selectComMenu(String comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
-		List<ComInfoDTO> com = comInfoMapper.selectComMenu();
+		List<ComInfoDTO> com = comInfoMapper.selectComMenu(comNo);
 		
 		sqlSession.close();
 		

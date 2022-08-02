@@ -18,28 +18,29 @@ public class ReviewService {
 	 * <pre>
 	 *  디테일 화면 리뷰 조회
 	 * </pre>
+	 * @param comInfo 
 	 * @return
 	 */
-	public List<ReviewDTO> selectComReview() {
+	public List<ReviewDTO> selectComReview(String comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		reviewMapper = sqlSession.getMapper(ReviewMapper.class);
 		
-		List<ReviewDTO> review = reviewMapper.selctReview();
+		List<ReviewDTO> review = reviewMapper.selctReview(comNo);
 		
 		sqlSession.close();
 		
 		return review;
 	}
 
-	public ReviewDTO selectAvgRatings() {
+	public ReviewDTO selectAvgRatings(String comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		reviewMapper = sqlSession.getMapper(ReviewMapper.class);
 		
-		ReviewDTO totalCount = reviewMapper.selectAvgRatings();
+		ReviewDTO totalCount = reviewMapper.selectAvgRatings(comNo);
 		
 		sqlSession.close();
 		

@@ -32,9 +32,9 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
 
-	ComInfoDTO selectComDetail();
+	ComInfoDTO selectComDetail(String comNo);
 
-	List<ComInfoDTO> selectComMenu();
+	List<ComInfoDTO> selectComMenu(String comNo);
 
 	
 

@@ -332,7 +332,7 @@
          , A.WORK_TIME
          , A.HOLIDAY 
      FROM COM_INFO A
-     WHERE A.COM_NO= 1
+     WHERE A.COM_NO= #{ comNo }
   
   </select>
   
@@ -342,7 +342,7 @@
   	     , A.PRICE
   	 FROM COM_INFO B
   	 JOIN COM_MENU A ON(A.COM_NO = B.COM_NO)
-  	 WHERE A.COM_NO = 1    
+  	 WHERE A.COM_NO = #{ comNo }    
   	       
   </select>
   

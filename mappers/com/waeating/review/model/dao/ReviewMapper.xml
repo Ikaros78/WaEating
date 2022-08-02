@@ -94,13 +94,13 @@
       LEFT JOIN COM_INFO D ON(C.COM_NO = D.COM_NO)
       LEFT JOIN MEMBER_INFO E ON(E.MEMBER_ID = C.MEMBER_ID)
       LEFT JOIN USER_INFO_ATTACH F ON(F.MEMBER_ID = E.MEMBER_ID)
-      WHERE D.COM_NO = 1
+      WHERE D.COM_NO = #{ comNo } 
   </select>
   
   <select id="selectAvgRatings" resultMap="reviewMap">
   	SELECT
             TRUNC(AVG(RATINGS),1) AVG_RATINSG
        FROM REVIEW 
-       WHERE COM_NO = 1
+       WHERE COM_NO = #{ comNo } 
   </select>
   </mapper>

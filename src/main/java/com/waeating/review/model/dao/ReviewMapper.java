@@ -6,8 +6,8 @@ import com.waeating.review.model.dto.ReviewDTO;
 
 public interface ReviewMapper {
 
-	List<ReviewDTO> selctReview();
+	List<ReviewDTO> selctReview(String comNo);
 
-	ReviewDTO selectAvgRatings();
+	ReviewDTO selectAvgRatings(String comNo);
 
 }

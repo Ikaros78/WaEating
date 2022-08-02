@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 import com.waeating.user.review.model.service.ReviewService;
@@ -25,14 +26,18 @@ public class UserMatzipDetailServlet extends HttpServlet {
 //		HttpSession session = request.getSession();
 		
 //		request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matzip_detail.jsp").forward(request, response);
-	
+		
+//		ComInfoDTO comInfo = (ComInfoDTO) request.getSession().getAttribute("loginMember");
+		
+		String comNo = request.getParameter("comNo");
+		
 		ComService comService = new ComService();
 		ReviewService reviewService = new ReviewService();
 		
-		ComInfoDTO selectCom = comService.selctComDetail();
-		List<ComInfoDTO> selectComMenu = comService.selectComMenu();
-		List<ReviewDTO> selectReview = reviewService.selectComReview();
-		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings();
+		ComInfoDTO selectCom = comService.selctComDetail(comNo);
+		List<ComInfoDTO> selectComMenu = comService.selectComMenu(comNo);
+		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
+		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
 		
 		System.out.println("selectReview : " + selectReview);
 		System.out.println("selectCom : " + selectCom);
