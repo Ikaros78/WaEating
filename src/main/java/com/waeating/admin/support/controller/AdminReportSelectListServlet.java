@@ -1,4 +1,4 @@
-package com.waeating.admin.notice.controller;
+package com.waeating.admin.support.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.waeating.admin.notice.service.AdminNoticeService;
+import com.waeating.admin.support.service.AdminSupportService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.notice.model.dto.NoticeDTO;
+import com.waeating.support.model.dto.ReportDTO;
 
 /**
- * Servlet implementation class NoticeSelectListServlet
+ * Servlet implementation class SupportSelectListServlet
  */
-@WebServlet("/admin/notice/list")
-public class AdminNoticeSelectListServlet extends HttpServlet {
+@WebServlet("/admin/report/list")
+public class AdminReportSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,8 +47,8 @@ public class AdminNoticeSelectListServlet extends HttpServlet {
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		
-		AdminNoticeService noticeService = new AdminNoticeService();
-		int totalCount = noticeService.selectTotalNoticeCount(searchMap);
+		AdminSupportService supportService = new AdminSupportService();
+		int totalCount = supportService.selectTotalCount(searchMap);
 		
 		int limit = 10;
 		int buttonAmount = 5;
@@ -61,21 +61,20 @@ public class AdminNoticeSelectListServlet extends HttpServlet {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
 		}
 		
-		List<NoticeDTO> noticeList = noticeService.AdminSelectNoticeList(selectCriteria); 
+		List<ReportDTO> reportList = supportService.selectReportList(selectCriteria);
 		
 		String path = "";
-		if(noticeList != null) {
-			path= "/WEB-INF/views/admin/notice/noticeList.jsp";
-			request.setAttribute("noticeList", noticeList);
+		if(reportList != null) {
+			path = "/WEB-INF/views/admin/support/reportList.jsp";
+			request.setAttribute("reportList", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("link", "list");
-		} else {
+		}else {
 			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "공지사항 목록 조회 실패!");
+			request.setAttribute("message", "문의정보 목록 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}
-	
 
 }

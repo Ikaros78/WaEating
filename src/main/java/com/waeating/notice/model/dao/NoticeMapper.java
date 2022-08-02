@@ -10,13 +10,25 @@ public interface NoticeMapper {
 	
 	List<NoticeDTO> selectAllNoticeList(SelectCriteria selectCriteria);
 	
-	int insertNotice(NoticeDTO newNotice);
-	
 	int selectTotalCount(Map<String, String> searchMap);
 	
 	int incrementNoticeCCount(int no);
 	
 	NoticeDTO selectNoticeDeatail(int no);
+
+	
+	/* 관리자 용도 */
+	int adminSelectTotalCount(Map<String, String> searchMap);
+
+	List<NoticeDTO> adminSelectNoticeList(SelectCriteria selectCriteria);
+
+	NoticeDTO adminSelectNoticeDetail(Map<String, String> searchMap);
+
+	int updateNotice(Map<String, String> updateNoticeMap);
+
+	int deleteNotice(String noticeNo);
+
+	int insertNotice(Map<String, String> insertNoticeMap);
 
 
 

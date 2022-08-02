@@ -11,19 +11,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <result property="memberId" column="MEMBER_ID"/>
   </resultMap> 
   	
-<insert id="insertNotice" parameterType="com.waeating.notice.model.dto.NoticeDTO">
-   INSERT
-      INTO ADMIN_NOTICE AN
-        (
-          AN.NOTICE_NO, AN.NOTICE_TITLE, AN.NOTICE_CONTENT,
-          AN.REG_DATE, AN.MEMBER_ID
-         )
-         VALUES
-         (
-            SEQ_NOTICE.NEXTVAL, #{ noticeTitle }, #{ noticeContent},
-            SYSDATE, memberId
-         )
-</insert>	
  <select id="selectAllNoticeList" resultMap="noticeResultMap">
 		
 	  SELECT
@@ -82,5 +69,108 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    </select>
  
+	<select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+		SELECT
+				COUNT(*)
+			FROM ADMIN_NOTICE A
+			<!-- 검색조건문 -->
+		<where>
+			<if test="searchCondition =='id'">
+				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+			</if>
+			<if test="searchCondition =='title'">
+				A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="adminSelectNoticeList" resultMap="noticeResultMap">
+		SELECT
+				A.RNUM
+			  , A.NOTICE_NO
+			  , A.NOTICE_TITLE
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+		  FROM(SELECT ROWNUM RNUM
+		  			 , B.NOTICE_NO
+		  			 , B.NOTICE_TITLE
+		  			 , B.REG_DATE
+		  			 , B.MEMBER_ID
+		  		 FROM(SELECT C.NOTICE_NO
+		  		 		   , C.NOTICE_TITLE
+		  		 		   , C.REG_DATE
+		  		 		   , C.MEMBER_ID
+		  		 		FROM ADMIN_NOTICE C
+		  		 		<where>
+		  		 			<if test="searchCondition =='id'">
+								C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+							</if>
+							<if test="searchCondition =='title'">
+								C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+							</if>
+		  		 		</where>
+		  		 		ORDER BY C.NOTICE_NO DESC
+		  		     ) B
+		  		       <![CDATA[
+			     WHERE ROWNUM <= #{ endRow }
+			     ]]>
+		  	  )A
+		WHERE A.RNUM >= #{ startRow } 
+	</select>
 
+	<select id="adminSelectNoticeDetail" resultMap="noticeResultMap">
+		SELECT
+				A.NOTICE_TITLE
+			  , A.NOTICE_CONTENT
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+		  FROM ADMIN_NOTICE A
+		 WHERE A.NOTICE_NO = #{ noticeNo }			
+	</select>
+	
+	<update id="updateNotice" parameterType="hashmap">
+		UPDATE
+				ADMIN_NOTICE A
+		<set>
+			<if test="title != null and title !=''">
+			A.NOTICE_TITLE = #{ title },
+			</if>
+			<if test="content != null and content != ''">
+			A.NOTICE_CONTENT = #{ content },
+			</if> 
+			<if test="date != null and date!= ''">
+			A.REG_DATE = #{ date },
+			</if>
+			<if test="id != null and id != ''">
+			A.MEMBER_ID = #{ id },
+			</if>
+		</set>
+		WHERE A.NOTICE_NO = #{ noticeNo }
+	</update>
+	
+	<delete id="deleteNotice" parameterType="java.lang.String">
+		DELETE
+			FROM ADMIN_NOTICE A
+		   WHERE A.NOTICE_NO = #{ noticeNo }
+	</delete>
+	
+	<insert id="insertNotice" parameterType="hashmap">
+		INSERT
+			INTO ADMIN_NOTICE A
+			(
+				A.NOTICE_NO
+			  , A.NOTICE_TITLE
+			  , A.NOTICE_CONTENT
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+			)
+			VALUES
+			(
+				SEQ_ADMINNOTICENO.NEXTVAL
+			  , #{ title }
+			  , #{ content }
+			  , #{ date }
+			  , #{ id }
+			)
+	</insert>
 </mapper>
