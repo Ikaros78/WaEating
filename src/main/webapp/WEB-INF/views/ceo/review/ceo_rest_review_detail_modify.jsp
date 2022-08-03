@@ -31,7 +31,8 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review" method="post">
+          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_modify" method="post">
+          	<input type="hidden" name="reviewNo" value="${ requestScope.selectOneReview.reviewNo }">
             <table width="100%">
               <tr>
                 <td class="ps-3 col-1 text-center d-flex justify-content-start h5">${ requestScope.selectOneReview.waitingRecord.memberId }</td>
@@ -67,7 +68,7 @@
                 </td>
               </tr>  
               <tr>
-                <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5"name="review" id="review" placeholder="답변을 등록해주세요."></textarea></td>
+                <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" id="review">${ requestScope.selectOneReview.reviewAns.ansContent }</textarea></td>
               </tr>
             </table>
             <div class="d-flex justify-content-center">
@@ -141,7 +142,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_review'">확인</button>
                   </div>
             
                 </div>

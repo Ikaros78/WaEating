@@ -71,4 +71,45 @@ public class ComReviewService {
 		return result;
 	}
 
+	public int deleteReviewAns(int reviewNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comReviewMapper = sqlSession.getMapper(ComReviewMapper.class);
+		int result = comReviewMapper.deleteReviewAns(reviewNo);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public int updateReviewAns(ReviewAnsDTO reviewAns) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comReviewMapper = sqlSession.getMapper(ComReviewMapper.class);
+		int result = comReviewMapper.updateReviewAns(reviewAns);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+		
+	}
+
 }

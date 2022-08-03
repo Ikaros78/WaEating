@@ -51,7 +51,7 @@
   		   		   FROM (SELECT C.REVIEW_NO
   		   		   			  , C.REVIEW_CONTENT
   		   		   			  , C.COM_NO
-  		   		   			  , RA.ANS_CONTENT
+  		   		   			  , RA.ANS_CONTENT	
   		   				   FROM REVIEW C
   		   				   LEFT JOIN REVIEW_ANS RA ON (C.REVIEW_NO = RA.REVIEW_NO)
   		   				  WHERE C.COM_NO = 1	
@@ -92,12 +92,14 @@
 		     , R.RATINGS
 		     , W.MEMBER_ID
 		     , W.USE_DATE
+             , RA.ANS_CONTENT
 		  FROM WAITING_RECORD W
 		  JOIN REVIEW R ON (R.RECORD_NO = W.RECORD_NO)
+		  LEFT JOIN REVIEW_ANS RA ON (RA.REVIEW_NO = R.REVIEW_NO)
 		 WHERE R.REVIEW_NO = #{ reviewNo } 
 	</select>
 	
-	<insert id="insertReviewAns" parameterType="com.waeating.review.model.dto.ReviewAnsDTO">
+	<insert id="insertReviewAns">
 		INSERT
 		  INTO REVIEW_ANS R
   		(
@@ -110,6 +112,20 @@
   			#{ reviewNo }
   		)
 	</insert>
+	
+	<delete id="deleteReviewAns">
+		DELETE
+		  FROM REVIEW_ANS R
+		 WHERE R.REVIEW_NO = #{ reviewNo }
+	</delete>
+	
+	<update id="updateReviewAns">
+		UPDATE
+			   REVIEW_ANS RA 
+		   SET RA.ANS_CONTENT = #{ ansContent }
+		 WHERE RA.REVIEW_NO = #{ reviewNo }
+	</update>
+	
   	
   </mapper>
   

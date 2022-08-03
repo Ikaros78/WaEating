@@ -31,7 +31,7 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" method="post">
+          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" method="POST">
           <input type="hidden" value="${ requestScope.reviewNo }" name="reviewNo">
             <table width="100%">
                 <tr>
@@ -72,7 +72,7 @@
                 </tr>
               </table>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_notice'">취소</button>
+              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_review'">취소</button>
               <button type="button" class="btn btn-primary" value="등록" data-bs-toggle="modal" data-bs-target="#modalSubmit">등록</button>
             </div>
             <!-- Modal -->

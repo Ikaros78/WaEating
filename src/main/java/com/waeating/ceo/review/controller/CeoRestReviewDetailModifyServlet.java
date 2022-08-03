@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.ceo.review.model.service.ComReviewService;
+import com.waeating.review.model.dto.ReviewAnsDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
 
@@ -48,7 +49,30 @@ public class CeoRestReviewDetailModifyServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		String ansContent = request.getParameter("ansContent");
 		
+		ReviewAnsDTO reviewAns = new ReviewAnsDTO();
+		reviewAns.setReviewNo(reviewNo);
+		reviewAns.setAnsContent(ansContent);
+		
+		System.out.println(reviewAns);
+		
+		ComReviewService reviewService = new ComReviewService();
+		int result = reviewService.updateReviewAns(reviewAns);
+		
+		System.out.println("result : " + result);
+		
+		String path = "";
+		
+		if(result > 0) {
+			response.sendRedirect("rest_review");
+		
+		} else {
+			path = "/WEB-INF/views/common/errorPage.jsp";
+			request.setAttribute("message", "리뷰 수정에 실패하셨습니다.");
+			request.getRequestDispatcher(path).forward(request, response);
+		}
 	}
 
 }

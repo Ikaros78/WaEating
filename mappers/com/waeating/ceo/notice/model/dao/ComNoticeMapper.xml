@@ -101,7 +101,7 @@
   		 WHERE CN.NOTICE_NO = #{ noticeNo }
   	</update>
   	
-  	<delete id="deleteNotice" parameterType="com.waeating.com.model.dto.ComNoticeDTO">
+  	<delete id="deleteNotice">
   		DELETE
   			   COM_NOTICE CN
   		 WHERE CN.NOTICE_NO = #{ noticeNo }

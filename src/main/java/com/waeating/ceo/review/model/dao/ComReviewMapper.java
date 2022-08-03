@@ -17,4 +17,8 @@ public interface ComReviewMapper {
 
 	int insertReviewAns(ReviewAnsDTO reviewAns);
 
+	int deleteReviewAns(int reviewNo);
+
+	int updateReviewAns(ReviewAnsDTO reviewAns);
+
 }

@@ -23,14 +23,6 @@ public class CeoRestReviewDetailNewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-//		String ansContent = request.getParameter("ansContent");
-//		
-//		ReviewAnsDTO reviewAns = new ReviewAnsDTO();
-//		reviewAns.setReviewNo(reviewNo);
-//		reviewAns.setAnsContent(ansContent);
-//		
-//		System.out.println(reviewNo);
-//		System.out.println(reviewAns);
 		
 		ComReviewService reviewService = new ComReviewService();
 		ReviewDTO selectReview = reviewService.selectOneReview(reviewNo);
@@ -55,7 +47,6 @@ public class CeoRestReviewDetailNewServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		System.out.println(reviewNo);
 		String ansContent = request.getParameter("ansContent");
 		
 		ReviewAnsDTO reviewAns = new ReviewAnsDTO();
