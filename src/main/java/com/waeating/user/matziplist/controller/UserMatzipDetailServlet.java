@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
+import com.waeating.notice.model.service.NoticeService;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 import com.waeating.user.review.model.service.ReviewService;
@@ -23,13 +25,8 @@ public class UserMatzipDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-		
-//		request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matzip_detail.jsp").forward(request, response);
-		
-//		ComInfoDTO comInfo = (ComInfoDTO) request.getSession().getAttribute("loginMember");
-		
-		String comNo = request.getParameter("comNo");
+				
+		int comNo = Integer.parseInt(request.getParameter("comNo"));
 		
 		ComService comService = new ComService();
 		ReviewService reviewService = new ReviewService();
@@ -37,10 +34,16 @@ public class UserMatzipDetailServlet extends HttpServlet {
 		ComInfoDTO selectCom = comService.selctComDetail(comNo);
 		List<ComInfoDTO> selectComMenu = comService.selectComMenu(comNo);
 		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
+		
+		
 		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
+		List<ComBoardAttachDTO> selectComImg = comService.selectComImg(comNo);
+		
+		List<ComNoticeDTO> selectComNotice = comService.selectComNotice(comNo);
 		
 		System.out.println("selectReview : " + selectReview);
 		System.out.println("selectCom : " + selectCom);
+		System.out.println("selectimg : " + selectComImg);
 		
 		String path = "";
 		
@@ -51,6 +54,8 @@ public class UserMatzipDetailServlet extends HttpServlet {
 			request.setAttribute("selectComMenu", selectComMenu);
 			request.setAttribute("selectReview", selectReview);
 			request.setAttribute("selectAvgRatings", selectAvgRatings);
+			request.setAttribute("selectComImg", selectComImg);
+			request.setAttribute("selectComNotice", selectComNotice);
 			
 		}else {
 			path = "/WEB-INF/views/common/erroePage.jsp";
