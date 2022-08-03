@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ORDER BY 1 DESC
    </select>
    
-   <select id="selectOneNotic" resultMap="noticeResultMap">
+   <select id="selectOneNotice" resultMap="noticeResultMap">
      SELECT
          AN.NOTICE_TITLE
         ,AN.NOTICE_CONTENT

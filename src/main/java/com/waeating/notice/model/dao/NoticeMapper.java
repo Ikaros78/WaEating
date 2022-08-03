@@ -12,9 +12,9 @@ public interface NoticeMapper {
 	
 	int selectTotalCount(Map<String, String> searchMap);
 	
-	int incrementNoticeCCount(int no);
-	
 	NoticeDTO selectNoticeDeatail(int no);
+	
+//	int incrementNoticeCount(int no);
 
 	
 	/* 관리자 용도 */
@@ -29,6 +29,8 @@ public interface NoticeMapper {
 	int deleteNotice(String noticeNo);
 
 	int insertNotice(Map<String, String> insertNoticeMap);
+
+	
 
 
 

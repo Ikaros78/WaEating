@@ -55,7 +55,7 @@
                           <tr>
                               <td><c:out value="${ notice.noticeNo }"/></td>
                               <th>
-                                <a href="${ pageContext.servletContext.contextPath }/mainNotice/notice_detail?no=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
+                                <a href="${ pageContext.servletContext.contextPath }/notice/detail?no=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
                                 
                               </th>
                               <td><c:out value="${ notice.regDate }"/></td>
