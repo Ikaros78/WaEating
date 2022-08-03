@@ -1,5 +1,7 @@
 package com.waeating.review.model.dto;
 
+import java.util.List;
+
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.member.model.dto.UserInfoAttachDTO;
@@ -15,7 +17,7 @@ public class ReviewDTO {
 	
 	private double avgRatings;
 	
-	private ReviewAttachDTO reviewAttach;
+	private List<ReviewAttachDTO> reviewAttach;
 	private MemberDTO memberInfo;
 	private WaitingRecordDTO waitingRecord;
 	private ReviewAnsDTO reviewAns;
@@ -26,8 +28,8 @@ public class ReviewDTO {
 
 
 	public ReviewDTO(int reviewNo, String reviewContent, int ratings, int recordNo, int comNo, double avgRatings,
-			ReviewAttachDTO reviewAttach, MemberDTO memberInfo, WaitingRecordDTO waitingRecord, ReviewAnsDTO reviewAns,
-			ComInfoDTO comInfo, UserInfoAttachDTO userInfoAttach) {
+			List<ReviewAttachDTO> reviewAttach, MemberDTO memberInfo, WaitingRecordDTO waitingRecord,
+			ReviewAnsDTO reviewAns, ComInfoDTO comInfo, UserInfoAttachDTO userInfoAttach) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewContent = reviewContent;
@@ -42,6 +44,9 @@ public class ReviewDTO {
 		this.comInfo = comInfo;
 		this.userInfoAttach = userInfoAttach;
 	}
+
+
+
 
 
 
@@ -85,13 +90,25 @@ public class ReviewDTO {
 		this.comNo = comNo;
 	}
 
-	public ReviewAttachDTO getReviewAttach() {
+	
+
+	public List<ReviewAttachDTO> getReviewAttach() {
 		return reviewAttach;
 	}
 
-	public void setReviewAttach(ReviewAttachDTO reviewAttach) {
+
+
+
+
+
+	public void setReviewAttach(List<ReviewAttachDTO> reviewAttach) {
 		this.reviewAttach = reviewAttach;
 	}
+
+
+
+
+
 
 	public MemberDTO getMemberInfo() {
 		return memberInfo;

@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <result property="noticeContent" column="NOTICE_CONTENT"/>
   <result property="regDate" column="REG_DATE"/>
   <result property="memberId" column="MEMBER_ID"/>
+  
   </resultMap> 
   	
  <select id="selectAllNoticeList" resultMap="noticeResultMap">

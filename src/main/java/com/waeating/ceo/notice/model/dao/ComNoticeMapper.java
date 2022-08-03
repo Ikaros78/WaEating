@@ -19,6 +19,9 @@ public interface ComNoticeMapper {
 	int updateNotice(ComNoticeDTO comNotice);
 
 	int deleteNotice(int noticeNo);
+	
+	/* 맛집리스트 상세보기 공지사항*/
+	List<ComNoticeDTO> selectMatziplistComNotice(int comNo);
 
 
 
