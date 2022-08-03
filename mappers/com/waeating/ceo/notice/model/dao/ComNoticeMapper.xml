@@ -107,4 +107,15 @@
   		 WHERE CN.NOTICE_NO = #{ noticeNo }
   	</delete>
   	
+     <select id="selectMatziplistComNotice" resultMap="comNoticeResultMap">
+     	 SELECT
+		          A.NOTICE_TITLE
+		        , A.NOTICE_CONTENT
+		        , A.REG_DATE
+		   	 FROM COM_NOTICE A
+		    WHERE A.COM_NO = #{ comNo }
+		    ORDER BY A.REG_DATE DESC
+     
+     </select>
+  	
   </mapper>

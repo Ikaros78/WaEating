@@ -37,13 +37,11 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         
         <br>
-        <h2 style="text-indent: 30px;">또 보겠지 떡볶이집 몽글몽글 청계점</h2> 
+        <h2 style="text-indent: 30px;">${ requestScope.selectCom.comName }</h2> 
         <hr>
 
-        <form action="" name="reservation">
+        <form action="${ pageContext.servletContext.contextPath }/user/reservation"  method="post" name="reservation">
 
-          <p style="text-indent: 30px;">현재 대기중</p>
-          <p style="text-indent: 30px; color: #D94925;">5팀</p>
 
             <!-- <p style="margin-left: 32px;">예약날짜</p>
             <input id ="datepicker" placeholder="날짜를 선택하세요." type="text" style="border: 1px solid gray; border-radius: 2px;">
@@ -86,8 +84,8 @@
             </div> -->
 
             <div class="container mt-3">
-                <label for="sel1" class="form-label col-11" >성인</label>
-                <select class="form-select" id="sel1" name="sellist1">
+                <label for="sel1" class="form-label col-11" >인원수(10명 이상은 요청사항에 적어주세요.)</label>
+                <select class="form-select" id="memberNum" name="memberNum">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -99,18 +97,18 @@
                     <option>9</option>
                     <option>10</option>
                 </select>
-                <br>
+                <!-- <br>
                 <label for="sel1" class="form-label" >유아</label>
-                <select class="form-select  col-11" id="sel1" name="sellist1">
+                <select class="form-select  col-11" id="sel1" name="baby">
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
-                </select>
+                </select> -->
                 <br>
-                <label for="phone" style="margin-bottom: 7px;">전화번호</label>
-                <input type="phone" class="form-control" id="phone" placeholder="전화번호를 입력하세요." name="phone" style="margin-bottom: 15px;">
+                <label for="requirement" style="margin-bottom: 7px;">요청사항</label>
+                <input type="text" class="form-control" id="requirement" placeholder="요청사항을 입력하세요." name="requirement" style="margin-bottom: 15px;">
             </div>
 
             <!-- <div class="mb-3 mt-3 ms-4 col-11"  >

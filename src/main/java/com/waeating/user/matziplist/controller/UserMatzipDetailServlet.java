@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
+import com.waeating.notice.model.service.NoticeService;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 import com.waeating.user.review.model.service.ReviewService;
@@ -23,7 +26,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		String comNo = request.getParameter("comNo");
+		int comNo = Integer.parseInt(request.getParameter("comNo"));
 		
 		ComService comService = new ComService();
 		ReviewService reviewService = new ReviewService();
@@ -31,10 +34,12 @@ public class UserMatzipDetailServlet extends HttpServlet {
 		ComInfoDTO selectCom = comService.selctComDetail(comNo);
 		List<ComInfoDTO> selectComMenu = comService.selectComMenu(comNo);
 		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
-		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
-		List<ComInfoDTO> selectComImg = comService.selectComImg(comNo);
-//		List<ReviewDTO> selectReviewImg = reviewService.selectReviewImg(comNo)
 		
+		
+		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
+		List<ComBoardAttachDTO> selectComImg = comService.selectComImg(comNo);
+		
+		List<ComNoticeDTO> selectComNotice = comService.selectComNotice(comNo);
 		
 		System.out.println("selectReview : " + selectReview);
 		System.out.println("selectCom : " + selectCom);
@@ -50,6 +55,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
 			request.setAttribute("selectReview", selectReview);
 			request.setAttribute("selectAvgRatings", selectAvgRatings);
 			request.setAttribute("selectComImg", selectComImg);
+			request.setAttribute("selectComNotice", selectComNotice);
 			
 		}else {
 			path = "/WEB-INF/views/common/erroePage.jsp";
