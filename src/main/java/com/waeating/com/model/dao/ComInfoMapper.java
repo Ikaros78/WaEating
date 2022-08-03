@@ -38,9 +38,8 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> selectComImg(String comNo);
 
+
 	/* 업체 용도 */
 
-
-	
 
 }

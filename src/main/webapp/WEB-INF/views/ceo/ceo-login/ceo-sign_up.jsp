@@ -18,17 +18,18 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
             <h4 class="mb-3">업주 회원가입</h4>
-            <form class="validation-form" novalidate>
+            <form class="validation-form" method="post">
               <div class="row">
                   <div class="form-floating col-md-6 mb-3">
-                      <input type="text" class="form-control" id="id" placeholder="아이디 입력" required>
+                      <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" required>
                       <label for="id" style="margin-left:10px">아이디</label>
                       <div class="invalid-feedback">
                         아이디를 입력해주세요.
                       </div>
                   </div>
                   <div class="form-floating col-md-4 mb-3">
-                      <button type="submit" id="db_check">중복 확인</button>
+                      <input id="db_check" type="button" value="중복 확인"></input>
+                      <input type="hidden" id="hdCheckId">
                   </div>
                   
               </div>
@@ -99,7 +100,7 @@
               </div>
               
               <div class="col-md-4 mb-3">
-                  <label for="category">캌테고리</label>
+                  <label for="category">카테고리</label>
               <select class="custom-select d-block w-100" id="category" name="category">
               <option value="">카테고리를 선택해주세요</option>
                   <option>한식</option>
@@ -111,7 +112,7 @@
                   <option>기타</option>
               </select>
               <div class="invalid-feedback">
-                  성별을 선택해주세요.
+                  카테고리를 선택해주세요.
               </div>
             </div>
 
@@ -142,13 +143,13 @@
     <script>
     $("#db_check").click(function(){
     	
-    	const userId = $("#id").val();
+    	const ceoId = $("#id").val();
     	
     	$.ajax({
-    		url: "${ pageContext.servletContext.contextPath }/member/user/ckeckId",
+    		url: "${ pageContext.servletContext.contextPath }/member/ceo/ckeckId",
     		type: "get",
     		data: {
-    			userId : userId
+    			ceoId : ceoId
     		}, 
     		success: function(result) {
     			
