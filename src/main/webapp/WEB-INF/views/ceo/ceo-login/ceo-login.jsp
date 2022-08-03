@@ -13,7 +13,7 @@
             <img src="${ pageContext.servletContext.contextPath }/resources/images/logo_font.png" alt="로고">
         </div>
         <div class="login">
-            <form action="${ pageContext.servletContext.contextPath }/ceo/main" method="post">
+            <form action="${ pageContext.servletContext.contextPath }/member/ceo/login" method="post">
                 <div class="login"></div>
                 <input type="text" class="login_box" id="login_id" name="ceoId" placeholder="아이디 입력"> 
                 <input type="password" class="login_box" id="login_pw" name="ceoPw" placeholder="비밀번호 입력">

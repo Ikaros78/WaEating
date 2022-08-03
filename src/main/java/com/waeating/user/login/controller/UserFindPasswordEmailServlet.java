@@ -56,15 +56,17 @@ public class UserFindPasswordEmailServlet extends HttpServlet {
 		
 		UserService userService = new UserService();
 		
-		int checkPwd =  userService.checkPwd(requestMember);
-		System.out.println("ckeckPew : " + checkPwd);
+		MemberDTO checkPwd =  userService.checkPwd(requestMember);
+		System.out.println("checkPwd: " + checkPwd);
+		String pwd = checkPwd.getPwd();
+		System.out.println("pwd: " + pwd);
 		
 		String page = "";
 		
-		if(checkPwd == 1) {
+		if(pwd != null) {
 			
-			MemberDTO updatePwd = userService.updatePwd(requestMember);
-			System.out.println("updatePwd : " + updatePwd);
+			MemberDTO updateNewPwd = userService.updateNewPwd(requestMember);
+			System.out.println("updatePwd : " + updateNewPwd);
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			

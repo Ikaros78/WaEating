@@ -163,13 +163,13 @@ public class UserService {
 	 * @param requestMember
 	 * @return
 	 */
-	public int checkPwd(MemberDTO requestMember) {
+	public MemberDTO checkPwd(MemberDTO requestMember) {
 
 		SqlSession sqlSession = getSqlSession();
 		
 		memberMapper = sqlSession.getMapper(MemberMapper.class);
 		
-		int checkPwd = memberMapper.checkFindPwForEmail(requestMember);
+		MemberDTO checkPwd = memberMapper.checkFindPwForEmail(requestMember);
 		
 		sqlSession.close();
 		
@@ -183,14 +183,17 @@ public class UserService {
 	 * @param requestMember
 	 * @return
 	 */
-	public MemberDTO updatePwd(MemberDTO requestMember) {
+	public MemberDTO updateNewPwd(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		memberMapper = sqlSession.getMapper(MemberMapper.class);
 		
 		MemberDTO updatePwd = memberMapper.updateNewPwd(requestMember);
-		return null;
+		
+		sqlSession.close();
+		
+		return updatePwd;
 	}
 
 
