@@ -41,7 +41,8 @@
         <div class="reservation now">
             <h5>[${ reservation.comInfo.comName }]</h5>
             <p style="color: gray;">${ reservation.useDate }</p>
-            <P style="color:#D94925 ;">내 앞에 '${ requestScope.countWaitingRecord.countRecordNo }' 남았어요! 주변에 있어주세요. 곧 호출됩니다.</P>
+            <div style="color:#D94925 ;" id="waitingNo"  > </div>
+            <button id="show">대기 현황 확인</button>
             <br>
             <h6><나의 예약 정보></h6>
             <p>인원수 : ${ reservation.memberNum }</p>
@@ -50,12 +51,22 @@
             <button type="button" class="btn btn-danger">예약 취소</button>
             
         </div>
+	<script>
+		let show = document.getElementById("show");
+		
+		show.onclick = function() {
+			
+			let waitingNo = document.getElementById("waitingNo");
+			
+			waitingNo.innerHTML = "내 앞에 3팀 남았어요!";
+		}
+	
+	</script>
         </c:forEach>
 
 
 
-
-		<jsp:include page="../user_paging/paging_reservation_now.jsp"/>
+	
 
 
 

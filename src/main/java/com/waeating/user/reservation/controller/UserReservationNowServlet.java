@@ -29,16 +29,16 @@ public class UserReservationNowServlet extends HttpServlet {
 		
 		
 		
-		String currentPage = request.getParameter("currentPage");
-		int pageNo = 1;
-		
-		if(currentPage != null && !"".equals(currentPage)) {
-			pageNo = Integer.parseInt(currentPage);
-		}
-		
-		if(pageNo <= 0) {
-			pageNo = 1;
-		}
+//		String currentPage = request.getParameter("currentPage");
+//		int pageNo = 1;
+//		
+//		if(currentPage != null && !"".equals(currentPage)) {
+//			pageNo = Integer.parseInt(currentPage);
+//		}
+//		
+//		if(pageNo <= 0) {
+//			pageNo = 1;
+//		}
 		
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
 		String userId = member.getId();
@@ -50,26 +50,26 @@ public class UserReservationNowServlet extends HttpServlet {
 		
 		ReservationService reservationService = new ReservationService();
 		/* 페이징용 */
-		int totalCount = reservationService.selectNowTotalCount(searchMap);
+//		int totalCount = reservationService.selectNowTotalCount(searchMap);
 		
 		/* 웨이팅 정보 불러오기 용 */
 		List<WaitingRecordDTO> waitingRecordAll = reservationService.selectWaitingRecordAll(searchMap);
 		
-		System.out.println("totalreservationCount : " + totalCount);
+//		System.out.println("totalreservationCount : " + totalCount);
 		
-		int limit = 4;
-		int buttonAmount = 5;
+//		int limit = 4;
+//		int buttonAmount = 5;
 		
-		String searchCondition = "";
-		String searchValue = userId;
+//		String searchCondition = "";
+//		String searchValue = userId;
+//		
+//		SelectCriteria selectCriteria = null;
+//		
+//		selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount,searchCondition, searchValue);
+//		
+//		System.out.println(selectCriteria);
 		
-		SelectCriteria selectCriteria = null;
-		
-		selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount,searchCondition, searchValue);
-		
-		System.out.println(selectCriteria);
-		
-		List<ComInfoDTO> waitingRecord = reservationService.selectNowReservation(selectCriteria);
+		List<ComInfoDTO> waitingRecord = reservationService.selectNowReservation(searchMap);
 		
 		
 //		for(WaitingRecordDTO waiting : waitingRecordAll ) {
@@ -80,19 +80,19 @@ public class UserReservationNowServlet extends HttpServlet {
 //			waitingMap.put("recordNo", recordNo);
 //				
 //			
-////			int countWaitingRecord = reservationService.selectCountRecord();
+//			int countWaitingRecord = reservationService.selectCountRecord();
 //		}
 //		List<Map<String, String> > waitingList =  
 		
 		
-		System.out.println("waitingRecord : " + waitingRecord);
+//		System.out.println("waitingRecord : " + waitingRecord);
 		
 		String path = "";
 		if(waitingRecord != null) {
 			
 			path = "/WEB-INF/views/user/user_reservation/user_reservation_now.jsp";
 			request.setAttribute("waitingRecord", waitingRecord);
-			request.setAttribute("selectCriteria", selectCriteria);
+//			request.setAttribute("selectCriteria", selectCriteria);
 //			request.setAttribute("countWaitingRecord", countWaitingRecord);
 			
 		}else {

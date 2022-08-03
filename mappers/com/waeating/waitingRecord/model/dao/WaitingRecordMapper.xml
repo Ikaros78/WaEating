@@ -148,22 +148,8 @@
 	 </select>
 	 
 	<select id="selectReservationNow" resultMap="waitingRecordMap" parameterType="hashmap">
-  SELECT
- 		   A.RNUM
- 	 	 , A.MEMBER_NUM
-  	     , A.USE_DATE
-  	     , A.PHONE
-  	     , A.COM_NAME
-  	     , A.COM_NO
-  	     , A.RECORD_NO
- 	FROM(SELECT ROWNUM RNUM
-	  	      , B.MEMBER_NUM
-	  	      , B.USE_DATE
-			  , B.PHONE
-			  , B.COM_NAME
-			  , B.COM_NO	
-			  , B.RECORD_NO
-	  	   FROM(SELECT
+ 
+	  	   SELECT
 				       C.MEMBER_NUM
 				     , C.USE_DATE
 				     , C.COM_NO
@@ -173,16 +159,10 @@
 				  FROM WAITING_RECORD C
 				  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
-				  WHERE C.MEMBER_ID = #{ searchValue }
+				  WHERE C.MEMBER_ID = #{ userId }
 				    AND C.USE_STATUS = 'waiting'
-				    AND C.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
-	  	  	   ) B
-	  	  	      <![CDATA[
-				        WHERE ROWNUM <= #{ endRow }
-				  ]]>
-	  	) A
-	 
-	 WHERE A.RNUM >= #{ startRow } 
+				   
+	  	  	   
 	 </select>
 	 
 	 <select id="selectWaitingRecordAll" resultMap="waitingRecordMap">
@@ -193,6 +173,7 @@
 	  WHERE A.MEMBER_ID = #{ userId }
 	    AND A.USE_STATUS = 'waiting'     
 	 </select>
+	 
 	 <select id="selectCountRecord" resultType="_int">
 	  SELECT 
            COUNT(A.RECORD_NO) COUNT_RECORD_NO
@@ -205,7 +186,7 @@
 	 
 	 </select>
 	 
-	 <insert id="insertReservation" parameterType="com.waeating.waitingRecord.model.dto.WaitingRecordDTO">
+	 <insert id="insertReservation" parameterType="hashmap">
 	 	INSERT
 	 	  INTO WAITING_RECORD WR
 	 	(
@@ -218,4 +199,5 @@
 	 		, 'waiting', #{ memberNum }, #{ requirement }
 	 	)   
 	 </insert>
+	 
   </mapper>
