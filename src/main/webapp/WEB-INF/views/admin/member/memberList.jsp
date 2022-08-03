@@ -34,7 +34,7 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/list">회원정보 조회</a></li>
-                                    <li role="presentation"><a href="#">회원정보 등록</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/insert">회원정보 등록</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -85,6 +85,11 @@
         <div id="container">
             <!-- 페이지 처리 -->
             <jsp:include page="../common/paging.jsp"/>
+            
+            <div class="col-md-2" align="right">
+			    <br>
+			    <button type="button" class="btn btn-default" id="insert">등록하기</button>
+			</div>
         </div>
         
     </div>
@@ -117,7 +122,13 @@
     				location.href = detailLink + "?memberId=" + memberId; 
     			}
     		}
-    		
+    	}
+    	
+    	if(document.getElementById("insert")){
+    		const $insert = document.getElementById("insert");
+    		$insert.onclick = function(){
+    			location.href = "${ pageContext.servletContext.contextPath }/admin/member/insert";
+    		}
     	}
 
     </script>

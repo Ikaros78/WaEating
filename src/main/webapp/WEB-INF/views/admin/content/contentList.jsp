@@ -32,8 +32,8 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="adminContentControl.html">게시글 조회</a></li>
-                                    <li role="presentation"><a href="adminReviewControl.html">리뷰글 조회</a></li>
+                                    <li role="presentation"><a href="">게시글 첨부 파일 조회</a></li>
+                                    <li role="presentation"><a href="">리뷰글 조회</a></li>
                                 </ul>
                             </td>
                         </tr>
