@@ -276,4 +276,24 @@
 		 WHERE A.MEMBER_ID = #{ memberId }
 		   AND A.IS_DELETED = 'N'
 	</select>
+
+	<select id="checkFindPwForEmail" resultMap="generalUserResultMap" >
+		SELECT
+			   A.MEMBER_PWD
+		  FROM MEMBER_INFO A
+		  JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		 WHERE A.MEMBER_ID = #{ id }
+		   AND A.NAME = #{ name }
+		   AND A.EMAIL = #{ email }
+		   AND A.MEMBER_TYPE = #{ memberType }
+		   AND B.BIRTH = #{ userInfo.birth }
+		   AND B.GENDER = #{ userInfo.gender }
+	</select>
+	
+	<update id="updateNewPwd" parameterType="com.waeating.member.model.dto.MemberDTO">
+		UPDATE 
+			   MEMBER_INFO A
+		   SET A.MEMBER_PWD = #{ pwd }
+		 WHERE A.MEMBER_ID = #{ id }
+	</update>
 </mapper>

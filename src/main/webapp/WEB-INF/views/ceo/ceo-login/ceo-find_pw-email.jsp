@@ -18,7 +18,7 @@
             <form class="validation-form" novalidate>
               
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="id" placeholder="아이디 입력" required>
+                <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" required>
                 <label for="id" style="margin-left:10px">아이디</label>
                 <div class="invalid-feedback">
                   아이디를 입력해주세요.
@@ -26,7 +26,7 @@
             </div>
 
               <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="name" placeholder="이름 입력" required>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="이름 입력" required>
                   <label for="name">이름</label>
                   <div class="invalid-feedback">
                     이름을 입력해주세요.
@@ -34,7 +34,7 @@
               </div>
 
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
               <label for="email">이메일</label>
               <div class="invalid-feedback">
                 이메일을 입력해주세요.
@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="store_name" placeholder="업체 이름 입력" required>
+              <input type="text" class="form-control" id="store_name" name="store_name" placeholder="업체 이름 입력" required>
               <label for="store_name">업체 이름</label>
               <div class="invalid-feedback">
                 업체 이름을 입력해주세요.

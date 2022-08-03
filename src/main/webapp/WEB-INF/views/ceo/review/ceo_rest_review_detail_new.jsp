@@ -31,7 +31,8 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review" method="post">
+          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" method="POST">
+          <input type="hidden" value="${ requestScope.reviewNo }" name="reviewNo">
             <table width="100%">
                 <tr>
                   <td class="ps-3 col-1 text-center d-flex justify-content-start h5">${ requestScope.selectOneReview.waitingRecord.memberId }</td>
@@ -67,11 +68,11 @@
                   </td>
                 </tr>  
                 <tr>
-                  <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5"name="review" id="review" placeholder="답변을 등록해주세요."></textarea></td>
+                  <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" placeholder="답변을 등록해주세요."></textarea></td>
                 </tr>
               </table>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>
+              <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_review'">취소</button>
               <button type="button" class="btn btn-primary" value="등록" data-bs-toggle="modal" data-bs-target="#modalSubmit">등록</button>
             </div>
             <!-- Modal -->

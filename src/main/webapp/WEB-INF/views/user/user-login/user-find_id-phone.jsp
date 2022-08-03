@@ -15,11 +15,11 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
             <h4 class="mb-3">전화번호로 찾기</h4>
-            <form class="validation-form" novalidate>
+            <form class="validation-form" method="post">
               
               
               <div class="form-floating mb-3">
-                  <input type="name" class="form-control" id="name" placeholder="이름 입력" required>
+                  <input type="name" class="form-control" id="name" name="name" placeholder="이름 입력" required>
                   <label for="name">이름</label>
                   <div class="invalid-feedback">
                     이름을 입력해주세요.
@@ -28,7 +28,7 @@
 
               <div class="col-md-4 mb-3">
                   <label for="birth">생년월일</label>
-                  <input type="date" class="form-control" id="birth" placeholder="" required>
+                  <input type="date" class="form-control" id="birth" name="birth" placeholder="" required>
                   <div class="invalid-feedback">
                       생년월일을 입력해주세요.
                   </div>
@@ -36,7 +36,7 @@
 
               <div class="col-md-4 mb-3">
                   <label for="gender">성별</label>
-              <select class="custom-select d-block w-100" id="gender">
+              <select class="custom-select d-block w-100" id="gender" name="gender">
               <option value="">성별을 선택해주세요</option>
                   <option>남성</option>
                   <option>여성</option>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="tel" class="form-control" id="phone" placeholder="전화번호 입력" required>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="전화번호 입력" required>
                 <label for="phone">전화번호</p></label>
                 <div class="invalid-feedback">
                   전화번호를 입력해주세요.

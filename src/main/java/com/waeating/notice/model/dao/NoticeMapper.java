@@ -34,6 +34,8 @@ public interface NoticeMapper {
 	int insertAttach(NoticeAttachDTO noticeAttachDTO);
 
 	List<NoticeAttachDTO> selectNoticeAttachList(Map<String, String> searchMap);
+	
+	
 
 
 

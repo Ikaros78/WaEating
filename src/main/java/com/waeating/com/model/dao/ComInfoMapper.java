@@ -3,7 +3,9 @@ package com.waeating.com.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.SelectCriteria;
 
 public interface ComInfoMapper {
@@ -32,15 +34,17 @@ public interface ComInfoMapper {
 
 	List<ComInfoDTO> selectComByGrade(SelectCriteria selectCriteria);
 	
-	ComInfoDTO selectComDetail(String comNo);
+	ComInfoDTO selectComDetail(int comNo);
 
-	List<ComInfoDTO> selectComMenu(String comNo);
+	List<ComInfoDTO> selectComMenu(int comNo);
 
-	List<ComInfoDTO> selectComImg(String comNo);
+	List<ComBoardAttachDTO> selectComImg(int comNo);
+
+	ComInfoDTO selectComName(String comNo);
+
+
 
 	/* 업체 용도 */
 
-
-	
 
 }

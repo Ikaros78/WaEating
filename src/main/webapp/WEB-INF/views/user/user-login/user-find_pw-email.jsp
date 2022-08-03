@@ -15,10 +15,10 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
             <h4 class="mb-3">이메일로 찾기</h4>
-            <form class="validation-form" novalidate>
+            <form class="validation-form" method="post">
               
               <div class="form-floating mb-3">
-                <input type="id" class="form-control" id="id" placeholder="아이디 입력" required>
+                <input type="id" class="form-control" id="id" name="id" placeholder="아이디 입력" required>
                 <label for="id" style="margin-left:10px">아이디</label>
                 <div class="invalid-feedback">
                   아이디를 입력해주세요.
@@ -26,7 +26,7 @@
             </div>
 
               <div class="form-floating mb-3">
-                  <input type="name" class="form-control" id="name" placeholder="이름 입력" required>
+                  <input type="name" class="form-control" id="name" name="name" placeholder="이름 입력" required>
                   <label for="name">이름</label>
                   <div class="invalid-feedback">
                     이름을 입력해주세요.
@@ -35,7 +35,7 @@
 
               <div class="col-md-4 mb-3">
                   <label for="birth">생년월일</label>
-                  <input type="date" class="form-control" id="birth" placeholder="" required>
+                  <input type="date" class="form-control" id="birth" name="birth" required>
                   <div class="invalid-feedback">
                       생년월일을 입력해주세요.
                   </div>
@@ -43,7 +43,7 @@
 
               <div class="col-md-4 mb-3">
                   <label for="gender">성별</label>
-              <select class="custom-select d-block w-100" id="gender">
+              <select class="custom-select d-block w-100" id="gender" name="gender">
               <option value="">성별을 선택해주세요</option>
                   <option>남성</option>
                   <option>여성</option>
@@ -54,10 +54,18 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
               <label for="email">이메일</label>
               <div class="invalid-feedback">
                 이메일을 입력해주세요.
+              </div>
+            </div>
+            
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="new_pw" name="new_pw" required>
+              <label for="new_pw">새 비밀번호</label>
+              <div class="invalid-feedback">
+                 새로운 비밀번호를 입력해주세요.
               </div>
             </div>
             

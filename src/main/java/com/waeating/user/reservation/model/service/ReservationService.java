@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.waitingRecord.model.dao.WaitingRecordMapper;
+import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 
 public class ReservationService {
 	
@@ -106,6 +107,13 @@ public class ReservationService {
 	}
 
 
+	/**
+	 * <pre>
+	 *  페이징을 위한 현재예약 전체 수 조회
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
 	public int selectNowTotalCount(Map<String, String> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -121,6 +129,14 @@ public class ReservationService {
 	}
 
 
+	/**
+	 * <pre>
+	 *  현재 예약 조회
+	 * </pre>
+	 * 
+	 * @param selectCriteria
+	 * @return
+	 */
 	public List<ComInfoDTO> selectNowReservation(SelectCriteria selectCriteria) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -134,6 +150,73 @@ public class ReservationService {
 		
 		return waiting;
 	}
+
+
+	/**
+	 * <pre>
+	 *  현재 예약 앞에 몇팀 남았는지 보여주기 위한 recordNo 카운트 조회
+	 * </pre>
+	 * 
+	 * @param comName
+	 * @return
+	 */
+	public WaitingRecordDTO selectCountRecord(String comName) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		WaitingRecordDTO waiting = reservationMapper.selectCountRecord(comName);
+		
+		sqlSession.close();
+		
+		return waiting;
+	}
+
+
+	public List<WaitingRecordDTO> selectWaitingRecordAll(Map<String, String> searchMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		List<WaitingRecordDTO> waiting = reservationMapper.selectWaitingRecordAll(searchMap);
+		
+		sqlSession.close();
+		
+		return waiting;
+	}
+
+
+	/**
+	 * <pre>
+	 *  예약 추가
+	 * </pre>
+	 * @param waitingRecord
+	 * @return
+	 */
+	public int insertReservation(Map<String, String> waitingRecord) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		int result = reservationMapper.insertReservation(waitingRecord);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+
 
 
 
