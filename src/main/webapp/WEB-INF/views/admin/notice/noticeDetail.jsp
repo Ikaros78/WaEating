@@ -75,6 +75,22 @@
 	                    </tr>
 	                </tbody>
 	            </table>
+	            <c:if test="${ !empty sessionScope.attachList}">
+	            <table class="table table-bordered">
+	            	<thead>
+	            		<tr>
+	            			<td>첨부사진</td>
+	            		</tr>
+	            	</thead>
+	            	<tbody>
+	            		<c:forEach var="file" items="${ attachList }">
+	            		<tr>
+	            			<td><img src="${ pageContext.servletContext.contextPath }/resources/upload/notice/origin/${ file.fileName }"></td>
+	            		</tr>
+						</c:forEach>
+	            	</tbody>
+	            </table>
+	            </c:if>
 	            <table class="table table-bordered">
 	            	<thead>
 	            		<tr>

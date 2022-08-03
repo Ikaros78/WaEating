@@ -2,6 +2,7 @@ package com.waeating.member.model.dao;
 
 import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.member.model.dto.UserDTO;
+import com.waeating.member.model.dto.UserInfoAttachDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ public interface MemberMapper {
 
 	int deleteMember(String id);
 
+	UserInfoAttachDTO selectUserAttach(Map<String, String> searchMap);
 
 	/* user-login */
 	MemberDTO selectMemberLogin(MemberDTO requestMember);
@@ -39,6 +41,7 @@ public interface MemberMapper {
 	MemberDTO selectFindIdForEmail(MemberDTO requestMember);
 
 	MemberDTO selectFindIdForPhone(MemberDTO requestMember);
+
 
 
 

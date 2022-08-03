@@ -37,14 +37,14 @@ public class AdminUsageLogSelectDetailServlet extends HttpServlet {
 		if(log != null) {
 			path = "/WEB-INF/views/admin/usageLog/usageLogDetail.jsp";
 			
+			request.getSession().setAttribute("path", path);
+			request.getSession().setAttribute("log", log);
+			
 			String status = log.getUseStatus();
 			if(status.equals("cancel")) {
 				String reason = logService.adminSelectRefuseLogDetail(searchMap);
 				request.getSession().setAttribute("reason", reason);
 			}
-			
-			request.getSession().setAttribute("path", path);
-			request.getSession().setAttribute("log", log);
 		} else {
 			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "이용이력정보 조회 실패!");

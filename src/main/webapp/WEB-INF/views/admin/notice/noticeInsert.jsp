@@ -45,7 +45,7 @@
                 </table>
             </div>
             <div class="col-md-9">
-	           	<form action="${ pageContext.servletContext.contextPath }/admin/notice/insert" method="post" id="frm">
+	           	<form action="${ pageContext.servletContext.contextPath }/admin/notice/insert" method="post" id="frm" encType="multipart/form-data">
 	            <table class="table table-bordered">
 	            <thead>
 	            		<tr>
@@ -67,6 +67,18 @@
 		            <tbody>
 			           	<tr>
 			           		<td><textarea id="summernote" name="content" placeholder="내용"></textarea>
+			           	</tr>
+		            </tbody>
+		        </table>
+		        <table class="table table-bordered">
+		            <thead>
+			           	<tr>
+			           		<td>첨부파일</td>
+			           	</tr>
+		            </thead>
+		            <tbody>
+			           	<tr>
+			           		<td><input type="file" id="attachFile1" name="attachFile1"></td>
 			           	</tr>
 		            </tbody>
 		        </table>
