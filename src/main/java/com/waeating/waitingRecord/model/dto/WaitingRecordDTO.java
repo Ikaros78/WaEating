@@ -16,6 +16,7 @@ public class WaitingRecordDTO {
 	private int memberNum;
 	private String requirement;
 	private String memo;
+	private int countRecordNo;
 	
 	private ComInfoDTO comInfo;
 	private MemberDTO memberInfo;
@@ -23,8 +24,12 @@ public class WaitingRecordDTO {
 	
 	public WaitingRecordDTO() {}
 
+	
+
+
 	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int memberNum,
-			String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo, ReviewDTO review) {
+			String requirement, String memo, int countRecordNo, ComInfoDTO comInfo, MemberDTO memberInfo,
+			ReviewDTO review) {
 		super();
 		this.recordNo = recordNo;
 		this.comNo = comNo;
@@ -34,10 +39,13 @@ public class WaitingRecordDTO {
 		this.memberNum = memberNum;
 		this.requirement = requirement;
 		this.memo = memo;
+		this.countRecordNo = countRecordNo;
 		this.comInfo = comInfo;
 		this.memberInfo = memberInfo;
 		this.review = review;
 	}
+
+
 
 
 	public int getRecordNo() {
@@ -128,12 +136,29 @@ public class WaitingRecordDTO {
 	public void setReview(ReviewDTO review) {
 		this.review = review;
 	}
+	
+	
+
+	public int getCountRecordNo() {
+		return countRecordNo;
+	}
+
+
+
+
+	public void setCountRecordNo(int countRecordNo) {
+		this.countRecordNo = countRecordNo;
+	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "WaitingRecordDTO [recordNo=" + recordNo + ", comNo=" + comNo + ", memberId=" + memberId + ", useDate="
 				+ useDate + ", useStatus=" + useStatus + ", memberNum=" + memberNum + ", requirement=" + requirement
-				+ ", memo=" + memo + ", comInfo=" + comInfo + ", memberInfo=" + memberInfo + ", review=" + review + "]";
+				+ ", memo=" + memo + ", countRecordNo=" + countRecordNo + ", comInfo=" + comInfo + ", memberInfo="
+				+ memberInfo + ", review=" + review + "]";
 	}
 
 	

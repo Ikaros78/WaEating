@@ -98,6 +98,7 @@
       LEFT JOIN USER_INFO_ATTACH F ON(F.MEMBER_ID = E.MEMBER_ID)
       LEFT JOIN REVIEW_ATTACH G ON(A.REVIEW_NO = G.REVIEW_NO)
       WHERE A.COM_NO = #{ comNo } 
+      ORDER BY C.USE_DATE DESC
   </select>
   
   <select id="selectAvgRatings" resultMap="reviewMap">

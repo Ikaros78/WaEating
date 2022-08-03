@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.SelectCriteria;
 
 public interface ComInfoMapper {
@@ -38,6 +39,9 @@ public interface ComInfoMapper {
 	List<ComInfoDTO> selectComMenu(int comNo);
 
 	List<ComBoardAttachDTO> selectComImg(int comNo);
+
+	ComInfoDTO selectComName(String comNo);
+
 
 	/* 업체 용도 */
 

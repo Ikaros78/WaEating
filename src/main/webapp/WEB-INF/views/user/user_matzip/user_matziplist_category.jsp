@@ -65,8 +65,9 @@
                       <h4 class="card-title">${ com.comName }</h4>
                       <p class="card-text">영업시간) ${ com.workTime } <br> 
                        휴무일) ${ com.holiday }</p>
+                     <a href="${ pageContext.servletContext.contextPath }/user/matzip/detail?comNo=${ com.comNo }" class="btn btn-outline-dark">상세보기</a>
                      <c:if test="${ com.waitYn eq 'Y' }">
-                      <a href="${ pageContext.servletContext.contextPath }/user/reservation" class="btn btn-danger">예약하기</a>
+                      <a href="${ pageContext.servletContext.contextPath }/user/reservation?comNo=${ com.comNo }" class="btn btn-danger">예약하기</a>
                      </c:if>
                      <c:if test="${ com.waitYn eq 'N' }">
                      <button type="button" class="btn btn-outline-success" disabled>예약 준비중</button>

@@ -7,16 +7,18 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.waeating.ceo.notice.model.dao.ComNoticeMapper;
 import com.waeating.com.model.dao.ComInfoMapper;
 import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.com.model.dto.ComMenuDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.SelectCriteria;
 
 
 public class ComService {
 	
 	private static ComInfoMapper comInfoMapper;
+	private static ComNoticeMapper comNoticeMapper;
 
 
 
@@ -159,6 +161,49 @@ public class ComService {
 		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
 		List<ComBoardAttachDTO> com = comInfoMapper.selectComImg(comNo);
+		
+		sqlSession.close();
+		
+		return com;
+	}
+
+
+	/**
+	 * <pre>
+	 *  업체 디테일 화면 공지사항 조회
+	 * </pre>
+	 * 
+	 * @param comNo
+	 * @return
+	 */
+	public List<ComNoticeDTO> selectComNotice(int comNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);
+		
+		List<ComNoticeDTO> com = comNoticeMapper.selectMatziplistComNotice(comNo);
+		
+		sqlSession.close();
+		
+		return com;
+	}
+
+
+	/**
+	 * <pre>
+	 *  예약하기 할 때 가게 이름 조회 용 
+	 * </pre>
+	 * @param comNo
+	 * @return
+	 */
+	public ComInfoDTO selectComName(String comNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		ComInfoDTO com = comInfoMapper.selectComName(comNo);
 		
 		sqlSession.close();
 		

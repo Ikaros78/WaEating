@@ -109,9 +109,9 @@
             <c:forEach var="review" items="${ requestScope.selectReview }">
               <div class="review_all m-5">
 
-                <div class="review my-2 ">
+                <div class="review my-2 " style=" min-height: 150px ">
       
-                  <div class="user">
+                  <div class="user" style="height:150px; ">
                  
                     <img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ review.userInfoAttach.fileName }" alt="user_profile" >
                     <p>${ review.memberInfo.id }</p>
@@ -151,21 +151,28 @@
                     </div>
                     
                   </div><!--content-->
+                  <div style="width:1000px;" class="d-flex justify-content-center">
                     <c:if test="${ review.reviewAns.ansContent ne null}">
-	                  <div class="reply my-2  mx-5" style="border-radius: 8px; background-color: rgb(221, 220, 220); height: auto;">
-	                    <img src="${ pageContext.servletContext.contextPath }/resources/images/user/right-arrow.png" alt="right-arrow" style="width:30px; height:30px; margin-left: 50px; float: left;">
-	                    <p style="text-indent: 20px;">
-	                     ${ review.reviewAns.ansContent }
-	                    </p>
+	                  <div class="reply my-2  mx-5 " style="border-radius: 8px; background-color: rgb(221, 220, 220); height: auto; width:700px; ">
+		                  <div style="min-height:80px; width:50px; float:left; ">
+		                    <img src="${ pageContext.servletContext.contextPath }/resources/images/user/right-arrow.png" alt="right-arrow" style="width:30px; height:30px; ">
+		                  </div>
+		                  <p style="">
+		                   ${ review.reviewAns.ansContent }
+		                  </p>
 	                  </div><!--reply-->
                     </c:if>
+                  </div>
                 </div><!--review-->
               </div> <!--review_all-->
             </c:forEach>
             </div>
             <div id="menu1" class="container tab-pane fade"><br>
-              <h5 style="float:left;">공지사항 테스트입니다. </h5>   <p style="color: gray; float: right;">2022/07/29</p>
-              <p style="clear:both;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <c:forEach var="notice" items="${ requestScope.selectComNotice }"> 
+              <h5 style="float:left;">${ notice.noticeTitle } </h5>   <p style="color: gray; float: right;">${ notice.regDate }</p>
+              <div style="clear:both;color:gray;" class="ms-3 ">${ notice.noticeContent }</div>
+              <hr>
+            </c:forEach>
             </div>
           </div>
         </div>

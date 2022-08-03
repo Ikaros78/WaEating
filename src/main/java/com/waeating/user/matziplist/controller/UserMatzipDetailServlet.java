@@ -1,10 +1,7 @@
 package com.waeating.user.matziplist.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
-import com.waeating.review.model.dto.ReviewAttachDTO;
+import com.waeating.com.model.dto.ComNoticeDTO;
+import com.waeating.notice.model.service.NoticeService;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.matziplist.model.service.ComService;
 import com.waeating.user.review.model.service.ReviewService;
@@ -41,6 +39,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
 		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
 		List<ComBoardAttachDTO> selectComImg = comService.selectComImg(comNo);
 		
+		List<ComNoticeDTO> selectComNotice = comService.selectComNotice(comNo);
 		
 		System.out.println("selectReview : " + selectReview);
 		System.out.println("selectCom : " + selectCom);
@@ -56,6 +55,7 @@ public class UserMatzipDetailServlet extends HttpServlet {
 			request.setAttribute("selectReview", selectReview);
 			request.setAttribute("selectAvgRatings", selectAvgRatings);
 			request.setAttribute("selectComImg", selectComImg);
+			request.setAttribute("selectComNotice", selectComNotice);
 			
 		}else {
 			path = "/WEB-INF/views/common/erroePage.jsp";

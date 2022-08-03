@@ -64,6 +64,7 @@
   	<result property="price" column="PRICE"/>
   	<result property="comNo" column="COM_NO"/>
   </resultMap>
+
   
   
   
@@ -222,17 +223,20 @@
  	 	 , A.COM_NAME
   	     , A.WORK_TIME
   	     , A.HOLIDAY
+  	     , A.WAIT_YN
   	     , E.THUMBNAIL_NAME
  	FROM(SELECT ROWNUM RNUM
  			  , B.COM_NO
 	  	      , B.COM_NAME
 	  	      , B.WORK_TIME
 	  	      , B.HOLIDAY
+	  	      , B.WAIT_YN
 	  	   FROM(SELECT
 	  	   			   C.COM_NO
 		  	         , C.COM_NAME
 		  	         , C.WORK_TIME
 		  	         , C.HOLIDAY
+		  	         , C.WAIT_YN
 	  	  	      FROM COM_INFO C
 	  	  	      JOIN COM_RECORD D ON(C.COM_NO = D.COM_NO)
 	  	  	     <where>
@@ -358,5 +362,10 @@
          WHERE A.COM_NO = #{ comNo }
   </select>
 
-  
+  <select id="selectComName" resultMap="generalCompanyResultMap">
+  SELECT
+         A.COM_NAME
+    FROM COM_INFO A
+   WHERE A.COM_NO = #{ comNo }    
+  </select>
 </mapper>

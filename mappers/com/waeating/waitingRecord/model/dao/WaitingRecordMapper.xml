@@ -13,6 +13,7 @@
   	  <result property="memberNum" column="MEMBER_NUM"/>
   	  <result property="requirement" column="REQUIREMENT"/>
   	  <result property="memo" column="MEMO"/>
+  	  <result property="countRecordNo" column="COUNT_RECORD_NO"/>
   	  
   	  <association property="comInfo" resultMap="companyResultMap"/>
   	  <association property="memberInfo" resultMap="memberResultMap"/>
@@ -153,14 +154,20 @@
   	     , A.USE_DATE
   	     , A.PHONE
   	     , A.COM_NAME
+  	     , A.COM_NO
+  	     , A.RECORD_NO
  	FROM(SELECT ROWNUM RNUM
 	  	      , B.MEMBER_NUM
 	  	      , B.USE_DATE
 			  , B.PHONE
-			  , B.COM_NAME	
+			  , B.COM_NAME
+			  , B.COM_NO	
+			  , B.RECORD_NO
 	  	   FROM(SELECT
 				       C.MEMBER_NUM
 				     , C.USE_DATE
+				     , C.COM_NO
+				     , C.RECORD_NO
 				     , D.PHONE
 				     , E.COM_NAME
 				  FROM WAITING_RECORD C
@@ -177,4 +184,38 @@
 	 
 	 WHERE A.RNUM >= #{ startRow } 
 	 </select>
+	 
+	 <select id="selectWaitingRecordAll" resultMap="waitingRecordMap">
+	 SELECT
+	        A.COM_NO
+	      , A.RECORD_NO
+	   FROM WAITING_RECORD A
+	  WHERE A.MEMBER_ID = #{ userId }
+	    AND A.USE_STATUS = 'waiting'     
+	 </select>
+	 <select id="selectCountRecord" resultType="_int">
+	  SELECT 
+           COUNT(A.RECORD_NO) COUNT_RECORD_NO
+      FROM WAITING_RECORD A
+      WHERE A.COM_NO = #{ comNo }
+      AND A.USE_STATUS = 'waiting'
+      AND A.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+      <![CDATA[AND A.RECORD_NO < #{ recordNo } ]]>
+      
+	 
+	 </select>
+	 
+	 <insert id="insertReservation" parameterType="com.waeating.waitingRecord.model.dto.WaitingRecordDTO">
+	 	INSERT
+	 	  INTO WAITING_RECORD WR
+	 	(
+	 		WR.RECORD_NO, WR.COM_NO, WR.MEMBER_ID
+	 		, WR.USE_STATUS, WR.MEMBER_NUM, WR.REQUIREMENT
+	 	)
+	 	VALUES
+	 	(
+	 		SEQ_RECORDNO.NEXTVAL, #{ comNo }, #{ userId }
+	 		, 'waiting', #{ memberNum }, #{ requirement }
+	 	)   
+	 </insert>
   </mapper>
