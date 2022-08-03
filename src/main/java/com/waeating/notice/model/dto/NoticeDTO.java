@@ -1,6 +1,7 @@
 package com.waeating.notice.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.waeating.member.model.dto.MemberDTO;
 
@@ -12,6 +13,7 @@ public class NoticeDTO {
 	private java.sql.Date regDate;
 	private String memberId;
 	
+	private List<NoticeAttachDTO> attachList;
 	
 	public NoticeDTO() {}
 	
@@ -22,6 +24,17 @@ public class NoticeDTO {
 		this.regDate= regDate;
 		this.memberId= memberId;
 		}
+
+	public NoticeDTO(int noticeNo, String noticeTitle, String noticeContent, Date regDate, String memberId,
+			List<NoticeAttachDTO> attachList) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.regDate = regDate;
+		this.memberId = memberId;
+		this.attachList = attachList;
+	}
 
 	public int getNoticeNo() {
 		return noticeNo;
@@ -63,10 +76,18 @@ public class NoticeDTO {
 		this.memberId = memberId;
 	}
 
+	public List<NoticeAttachDTO> getAttachList() {
+		return attachList;
+	}
+
+	public void setAttachList(List<NoticeAttachDTO> attachList) {
+		this.attachList = attachList;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeDTO [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
-				+ ", regDate=" + regDate + ", memberId=" + memberId + "]";
+				+ ", regDate=" + regDate + ", memberId=" + memberId + ", attachList=" + attachList + "]";
 	}
 	
 

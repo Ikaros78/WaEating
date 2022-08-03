@@ -24,10 +24,24 @@ public interface WaitingRecordMapper {
 	List<ComInfoDTO> selectReservationNow(SelectCriteria selectCriteria);
 
 	WaitingRecordDTO selectCountRecord(String comName);
-
+	
 	List<WaitingRecordDTO> selectWaitingRecordAll(Map<String, String> searchMap);
-
+	
 	int insertReservation(Map<String, String> waitingRecord);
+	
+	/* 관리자용 */
+	int adminSelectTotalCount(Map<String, String> searchMap);
+
+	List<WaitingRecordDTO> adminSelectLogList(SelectCriteria selectCriteria);
+
+	WaitingRecordDTO adminSelectLogDetail(Map<String, String> searchMap);
+
+	int deleteLog(String recordNo);
+
+	int adminUpdateLog(Map<String, String> updateLogMap);
+
+	String adminSelectRefuseLogDetail(Map<String, String> searchMap);
+	
 
 
 

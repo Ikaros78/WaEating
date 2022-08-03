@@ -48,6 +48,8 @@ public class AdminFAQInsertServlet extends HttpServlet {
 		
 		if(title.length() == 0 || content.length() == 0) {
 			
+			response.setCharacterEncoding("utf-8");
+			
 			response.setContentType("text/html; charset=UTF-8");
 			
 			PrintWriter out = response.getWriter();
