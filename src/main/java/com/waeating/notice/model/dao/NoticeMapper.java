@@ -29,6 +29,8 @@ public interface NoticeMapper {
 	int deleteNotice(String noticeNo);
 
 	int insertNotice(Map<String, String> insertNoticeMap);
+	
+	
 
 	
 

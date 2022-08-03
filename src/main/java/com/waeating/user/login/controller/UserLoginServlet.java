@@ -47,7 +47,7 @@ public class UserLoginServlet extends HttpServlet {
 		UserService userService = new UserService();
 	
 		MemberDTO loginMember = userService.loginCheck(requestMember);
-		System.out.println(loginMember);
+		System.out.println("loginMember : " + loginMember);
 		
 		
 		if(loginMember != null) {

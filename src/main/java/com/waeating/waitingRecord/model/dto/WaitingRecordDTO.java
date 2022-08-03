@@ -13,10 +13,10 @@ public class WaitingRecordDTO {
 	private String memberId;
 	private java.sql.Date useDate;
 	private String useStatus;
-	private int waitingNo;
 	private int memberNum;
 	private String requirement;
 	private String memo;
+	private int countRecordNo;
 	
 	private ComInfoDTO comInfo;
 	private MemberDTO memberInfo;
@@ -24,26 +24,11 @@ public class WaitingRecordDTO {
 	
 	public WaitingRecordDTO() {}
 
-	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int waitingNo,
-			int memberNum, String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo) {
-		super();
-		this.recordNo = recordNo;
-		this.comNo = comNo;
-		this.memberId = memberId;
-		this.useDate = useDate;
-		this.useStatus = useStatus;
-		this.waitingNo = waitingNo;
-		this.memberNum = memberNum;
-		this.requirement = requirement;
-		this.memo = memo;
-		this.comInfo = comInfo;
-		this.memberInfo = memberInfo;
-	}
-	
 	
 
-	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int waitingNo,
-			int memberNum, String requirement, String memo, ComInfoDTO comInfo, MemberDTO memberInfo,
+
+	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int memberNum,
+			String requirement, String memo, int countRecordNo, ComInfoDTO comInfo, MemberDTO memberInfo,
 			ReviewDTO review) {
 		super();
 		this.recordNo = recordNo;
@@ -51,14 +36,17 @@ public class WaitingRecordDTO {
 		this.memberId = memberId;
 		this.useDate = useDate;
 		this.useStatus = useStatus;
-		this.waitingNo = waitingNo;
 		this.memberNum = memberNum;
 		this.requirement = requirement;
 		this.memo = memo;
+		this.countRecordNo = countRecordNo;
 		this.comInfo = comInfo;
 		this.memberInfo = memberInfo;
 		this.review = review;
 	}
+
+
+
 
 	public int getRecordNo() {
 		return recordNo;
@@ -98,14 +86,6 @@ public class WaitingRecordDTO {
 
 	public void setUseStatus(String useStatus) {
 		this.useStatus = useStatus;
-	}
-
-	public int getWaitingNo() {
-		return waitingNo;
-	}
-
-	public void setWaitingNo(int waitingNo) {
-		this.waitingNo = waitingNo;
 	}
 
 	public int getMemberNum() {
@@ -156,12 +136,28 @@ public class WaitingRecordDTO {
 	public void setReview(ReviewDTO review) {
 		this.review = review;
 	}
+	
+	
+
+	public int getCountRecordNo() {
+		return countRecordNo;
+	}
+
+
+
+
+	public void setCountRecordNo(int countRecordNo) {
+		this.countRecordNo = countRecordNo;
+	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "WaitingRecordDTO [recordNo=" + recordNo + ", comNo=" + comNo + ", memberId=" + memberId + ", useDate="
-				+ useDate + ", useStatus=" + useStatus + ", waitingNo=" + waitingNo + ", memberNum=" + memberNum
-				+ ", requirement=" + requirement + ", memo=" + memo + ", comInfo=" + comInfo + ", memberInfo="
+				+ useDate + ", useStatus=" + useStatus + ", memberNum=" + memberNum + ", requirement=" + requirement
+				+ ", memo=" + memo + ", countRecordNo=" + countRecordNo + ", comInfo=" + comInfo + ", memberInfo="
 				+ memberInfo + ", review=" + review + "]";
 	}
 

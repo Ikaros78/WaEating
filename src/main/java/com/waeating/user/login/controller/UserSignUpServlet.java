@@ -71,7 +71,7 @@ public class UserSignUpServlet extends HttpServlet {
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
-			request.setAttribute("success", "insertMember");
+			request.setAttribute("success", "insertUser");
 		} else {
 			
 			page = "/WEB-INF/views/common/failed.jsp";

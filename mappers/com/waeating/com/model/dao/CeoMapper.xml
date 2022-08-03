@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waeating.com.model.dao.CeoMapper">
+	<resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="generalCompanyResultMap">
+		<id property="comNo" column="COM_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="comName" column="COM_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="comAddress" column="COM_ADDRESS"/>
+		<result property="comPhone" column="COM_PHONE"/>
+		<result property="comRegist" column="COM_REGIST"/>
+		<result property="waitYn" column="WAIT_YN"/>
+		<result property="workTime" column="WORK_TIME"/>
+		<result property="holiday" column="HOLIDAY"/>
+		
+		<association property="memberInfo" resultMap="memberResultMap"/>
+		
+	</resultMap>
+
+	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="pwd" column="MEMBER_PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="emailCheck" column="EMAIL_CHECK"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.com.model.dto.ComRecordDTO" id="comRecordMap">
+		<id property="recordNo" column="RECORD_NO"/>
+		<result property="reason" column="REFUSE_REASON"/>
+		<result property="comNo" column="COM_NO"/>
+		<result property="status" column="COM_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="com.waeating.com.model.dto.ComBoardAttachDTO" id="comBoardAttachMap">
+	    <id property="fileNo" column="FILE_NO"/>
+	    <result property="originName" column="ORIGIN_NAME"/>
+	    <result property="fileName" column="FILE_NAME"/>
+	    <result property="thumbnailName" column="THUMBNAIL_NAME"/>
+	    <result property="isDeleted" column="IS_DELETED"/>
+	    <result property="regDate" column="REG_DATE"/>
+	    <result property="comNo" column="COM_NO"/>
+    </resultMap>
+  
+  <resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
+	  <id property="reviewNo" column="REVIEW_NO"/>
+	  <result property="reviewContent" column="REVIEW_CONTENT"/>
+	  <result property="ratings" column="RATINGS"/>
+	  <result property="recordNo" column="RECORD_NO"/>
+	  <result property="comNo" column="COM_NO"/>
+  </resultMap>
+  
+  <resultMap type="com.waeating.com.model.dto.ComMenuDTO" id="comMenuMap">
+  	<id property="menuNo" column="MENU_NO"/>
+  	<result property="menuName" column="MENU_NAME"/>
+  	<result property="price" column="PRICE"/>
+  	<result property="comNo" column="COM_NO"/>
+  </resultMap>
+
+  <!-- 업주 로그인 -->
+  <insert id="insertMember" parameterType="com.waeating.member.model.dto.MemberDTO">
+		INSERT
+		  INTO MEMBER_INFO A
+		(
+		  A.MEMBER_ID
+		, A.MEMBER_PWD
+		, A.EMAIL
+		, A.NAME
+		, A.MEMBER_TYPE
+		, A.PHONE
+		, A.EMAIL_CHECK
+		)
+		VALUES
+		(
+		  #{ id }
+		, #{ pwd }
+		, #{ email }
+		, #{ name }
+		, #{ memberType }
+		, #{ phone }
+		, null
+		)
+	</insert>
+  
+  <insert id="insertComInfo" parameterType="com.waeating.com.model.dto.ComInfoDTO">
+  	INSERT
+  	  INTO COM_INFO A
+  	(
+  	  A.COM_NO
+	, A.MEMBER_ID
+	, A.COM_NAME
+	, A.CATEGORY
+	, A.COM_ADDRESS
+	, A.COM_PHONE
+	, A.COM_REGIST
+	, A.WAIT_YN
+	, A.WORK_TIME
+	, A.HOLIDAY
+	)
+	VALUES
+	(
+	  SEQ_COMNO.NEXTVAL
+	, #{ memberId }
+	, #{ comName }
+	, #{ category }
+	, #{ comAddress }
+	, #{ comPhone }
+	, #{ comRegist }
+	, 'Y'
+	, null
+	, null
+	)
+  </insert>
+  
+  <select id="dubleCkId" resultType="_int">
+		SELECT
+			   COUNT(*)
+		  FROM USER_INFO
+		 WHERE MEMBER_ID = #{ dubleCkId }
+  </select>
+  
+  <select id="selectEncryptedPwd" resultType="java.lang.String">
+		SELECT
+				A.MEMBER_PWD
+		  FROM MEMBER_INFO A
+		 WHERE A.MEMBER_TYPE = #{ memberType }
+		   AND A.MEMBER_ID = #{ id }
+  </select>
+  
+  <select id="selectMemberLogin" resultMap="generalCompanyResultMap" >
+		SELECT
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.PHONE
+			  , B.COM_NO
+			  , B.COM_NAME
+			  , B.CATEGORY
+			  , B.COM_ADDRESS
+			  , B.COM_PHONE
+			  , B.COM_REGIST
+			  , B.WAIT_YN
+			  , B.WORK_TIME
+			  , B.HOLIDAY
+			FROM MEMBER_INFO A
+			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.MEMBER_ID = #{ id }
+  </select>
+	
+	
+</mapper>

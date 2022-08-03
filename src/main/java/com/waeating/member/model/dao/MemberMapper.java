@@ -40,6 +40,11 @@ public interface MemberMapper {
 
 	MemberDTO selectFindIdForPhone(MemberDTO requestMember);
 
+	MemberDTO checkFindPwForEmail(MemberDTO requestMember);
+
+	MemberDTO updateNewPwd(MemberDTO requestMember);
+
+
 
 
 
