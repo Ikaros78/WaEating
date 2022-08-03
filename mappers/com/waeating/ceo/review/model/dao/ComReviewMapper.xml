@@ -14,14 +14,14 @@
   		<association property="waitingRecord" resultMap="waitingRecordResultMap"/>
   	</resultMap>
   	
-  	<resultMap type="com.waeating.com.model.dto.ReviewAnsDTO" id="comReviewAnsResultMap">
+  	<resultMap type="com.waeating.review.model.dto.ReviewAnsDTO" id="comReviewAnsResultMap">
   		<id property="ansNo" column="ANS_NO"/>
   		<result property="ansContent" column="ANS_CONTENT"/>
   		<result property="regDate" column="REG_DATE"/>
   		<result property="reviewNo" column="REVIEW_NO"/>
   	</resultMap>
   	
-  	<resultMap type="com.waeating.com.model.dto.WaitingRecordDTO" id="waitingRecordResultMap">
+  	<resultMap type="com.waeating.waitingRecord.model.dto.WaitingRecordDTO" id="waitingRecordResultMap">
   		<id property="recordNo" column="ANS_NO"/>
   		<result property="comNo" column="COM_NO"/>
   		<result property="memberId" column="MEMBER_ID"/>

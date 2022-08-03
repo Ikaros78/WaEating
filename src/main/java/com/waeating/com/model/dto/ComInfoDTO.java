@@ -6,6 +6,7 @@ import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.review.model.dto.ReviewAnsDTO;
 import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
+import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 
 public class ComInfoDTO {
 

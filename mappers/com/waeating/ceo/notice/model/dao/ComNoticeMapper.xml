@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.waeating.ceo.notice.model.dao.ComNoticeMapper">
-  	<resultMap type="com.waeating.ceo.notice.model.dto.ComNoticeDTO" id="comNoticeResultMap">
+  	<resultMap type="com.waeating.com.model.dto.ComNoticeDTO" id="comNoticeResultMap">
   		<id property="noticeNo" column="NOTICE_NO"/>
   		<result property="noticeTitle" column="NOTICE_TITLE"/>
   		<result property="noticeContent" column="NOTICE_CONTENT"/>
@@ -13,7 +13,7 @@
   		<association property="comNoticeAttach" resultMap="comNoticeAttachResultMap"/>
   	</resultMap>
   	
-  	<resultMap type="com.waeating.ceo.notice.model.dto.ComNoticeAttachDTO" id="comNoticeAttachResultMap">
+  	<resultMap type="com.waeating.com.model.dto.ComNoticeAttachDTO" id="comNoticeAttachResultMap">
   		<id property="fileNo" column="FILE_NO"/>
   		<result property="noticeNo" column="NOTICE_NO"/>
   		<result property="originName" column="ORIGIN_NAME"/>
@@ -22,7 +22,7 @@
   		<result property="date" column="DATE"/>
   	</resultMap>
   	
-  	<insert id="insertComNotice" parameterType="com.waeating.ceo.notice.model.dto.ComNoticeDTO">
+  	<insert id="insertComNotice" parameterType="com.waeating.com.model.dto.ComNoticeDTO">
   		INSERT
   		  INTO COM_NOTICE CN
   		(
@@ -101,7 +101,7 @@
   		 WHERE CN.NOTICE_NO = #{ noticeNo }
   	</update>
   	
-  	<delete id="deleteNotice" parameterType="com.waeating.ceo.notice.model.dto.ComNoticeDTO">
+  	<delete id="deleteNotice" parameterType="com.waeating.com.model.dto.ComNoticeDTO">
   		DELETE
   			   COM_NOTICE CN
   		 WHERE CN.NOTICE_NO = #{ noticeNo }

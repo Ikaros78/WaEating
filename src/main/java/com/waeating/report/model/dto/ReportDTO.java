@@ -1,51 +1,72 @@
 package com.waeating.report.model.dto;
 
+import java.sql.Date;
+
 public class ReportDTO {
-	
+
 	private int reportNo;
-	private String title;
-	private String content;
-	private String id;
+	private String reportTitle;
+	private String reportContent;
+	private String memberId;
 	private java.sql.Date regDate;
-	public ReportDTO() {
+	
+	public ReportDTO() {}
+
+	public ReportDTO(int reportNo, String reportTitle, String reportContent, String memberId, Date regDate) {
+		super();
+		this.reportNo = reportNo;
+		this.reportTitle = reportTitle;
+		this.reportContent = reportContent;
+		this.memberId = memberId;
+		this.regDate = regDate;
 	}
+
 	public int getReportNo() {
 		return reportNo;
 	}
+
 	public void setReportNo(int reportNo) {
 		this.reportNo = reportNo;
 	}
-	public String getTitle() {
-		return title;
+
+	public String getReportTitle() {
+		return reportTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setReportTitle(String reportTitle) {
+		this.reportTitle = reportTitle;
 	}
-	public String getContent() {
-		return content;
+
+	public String getReportContent() {
+		return reportContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setReportContent(String reportContent) {
+		this.reportContent = reportContent;
 	}
-	public String getId() {
-		return id;
+
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
+
 	public java.sql.Date getRegDate() {
 		return regDate;
 	}
+
 	public void setRegDate(java.sql.Date regDate) {
 		this.regDate = regDate;
 	}
+
 	@Override
 	public String toString() {
-		return "CsDTO [reportNo=" + reportNo + ", title=" + title + ", content=" + content + ", id=" + id + ", regDate="
-				+ regDate + "]";
-	} 
+		return "ReportDTO [reportNo=" + reportNo + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
+				+ ", memberId=" + memberId + ", regDate=" + regDate + "]";
+	}
 	
 	
 	
-
 }

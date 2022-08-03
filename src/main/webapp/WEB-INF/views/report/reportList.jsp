@@ -6,16 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>notice list</title>
+<title>고객센터 리스트</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/notice/main.css">
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/notice/notice.css">
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/user/user_header.jsp">
+<jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
 
-  
+  <div id="wrap">
    
  <div class="container">
         <section class="notice">
@@ -47,17 +47,20 @@
                           <tr>
                               <th scope="col" class="th-num">번호</th>
                               <th scope="col" class="th-title">제목</th>
-                              <th scope="col" class="th-date">작성자</th>
+                              <th scope="col" class="th-date">등록일</th>
                           </tr>
                           </thead>
                           <tbody>
-                    <c:forEach var ="report" items="${ requestScope.reportList }">
-                    <tr class="rowClick">
-                        <td class=details><c:out value="${ report.reportNo }"/></td>
-                        <td class=details><c:out value="${ report.title }"/></td>
-                        <td class=details><c:out value="${ report.id }"/></td>
-                    </tr>
-                    </c:forEach>
+                          <c:forEach var="report" items="${ requestScope.reportList }" varStatus="status">
+                          <tr>
+                              <td><c:out value="${ report.reportNo }"/></td>
+                              <th>
+                                <a href="${ pageContext.servletContext.contextPath }/report/report_detail?reportNo=${ report.reportNo }"><c:out value="${ report.reportTitle }"/></a>
+                                
+                              </th>
+                              <td><c:out value="${ report.regDate }"/></td>
+                          </tr>
+           				</c:forEach>
             
                          
                           </tbody>
@@ -70,12 +73,11 @@
             <div class="mt-3"></div>
             <!-- 검색 폼 -->
 			<div class="search-area" align="center">
-				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/report/main" method="get" style="display:inline-block">
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/report/list" method="get" style="display:inline-block">
 				<div class="input-group mb-3">
 				<input type="hidden" class="form-control" name="currentPage" value="1">
 				    <select id="searchCondition" name="searchCondition" class="form-control">
-						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "noticeTitle"? "selected": "" }>제목</option>
-						<option value="id" ${ requestScope.selectCriteria.searchCondition eq "id"? "selected": "" }>작성자</option>
+						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "reportTitle"? "selected": "" }>제목</option>
 					</select>
 			        <input type="text" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
 					<button type="submit" class="btn btn-primary">검색하기</button>
@@ -86,10 +88,10 @@
 			</div>
              
         </div>
-      
+       </aside>
     </section>
                          
-<jsp:include page="/WEB-INF/views/user/user_footer.jsp"> 
+<jsp:include page="/WEB-INF/views/user/user_footer.jsp">  
   </div>
   <script>
 		

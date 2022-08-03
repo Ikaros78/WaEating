@@ -1,4 +1,4 @@
-package com.waeating.ceo.notice.model.dto;
+package com.waeating.com.model.dto;
 
 import java.sql.Date;
 

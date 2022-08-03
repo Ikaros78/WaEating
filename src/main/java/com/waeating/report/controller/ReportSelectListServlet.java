@@ -13,26 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.report.model.service.ReportService;
+import com.waeating.notice.model.dto.NoticeDTO;
+import com.waeating.notice.model.service.NoticeService;
 import com.waeating.report.model.dto.ReportDTO;
+import com.waeating.report.model.service.ReportService;
 
 /**
- * Servlet implementation class SupportSelectListServlet
+ * Servlet implementation class ReportSelectListServlet
  */
 @WebServlet("/report/list")
 public class ReportSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getSession().getAttribute("ifUpdate") != null){
-			request.getSession().removeAttribute("ifUpdate");
-		}
-		
+       
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
-		if(currentPage != null && !"".equals(currentPage)) {
+		if(currentPage !=null && ! "".equals(currentPage)) {
 			pageNo = Integer.parseInt(currentPage);
 		}
 		
@@ -50,30 +48,35 @@ public class ReportSelectListServlet extends HttpServlet {
 		ReportService reportService = new ReportService();
 		int totalCount = reportService.selectTotalCount(searchMap);
 		
+		System.out.println("totalReportCount : " + totalCount);
+		
 		int limit = 10;
-		int buttonAmount = 5;
+		int buttonAmount =5;
 		
 		SelectCriteria selectCriteria = null;
 		
-		if(searchCondition != null && !"".equals(searchCondition)) {
+		if(searchCondition != null && ! "".equals(searchCondition)) {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, searchValue);
-		}else {
-			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
-		}
+			} else {
+				selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
+			}
+		System.out.println(selectCriteria);
 		
-		List<ReportDTO> reportList = reportService.selectAllreport(selectCriteria);
+		List<ReportDTO> reportList = reportService.selectReportList(selectCriteria);
+	
+		System.out.println("reportList : " + reportList);
 		
 		String path = "";
+		
 		if(reportList != null) {
-			path= "/WEB-INF/views/report/reportList";
+			path= "/WEB-INF/views/report/reportList.jsp";
 			request.setAttribute("reportList", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
-		}else {
-			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "문의정보 목록 조회 실패!");
-		}
-		
-		request.getRequestDispatcher(path).forward(request, response);
-	}
-
+			} else {
+				path = "/WEB-INF/views/common/errorPage.jsp";
+				request.setAttribute("message", "고객센터 조회에 실패했습니다");
+			}
+		   request.getRequestDispatcher(path).forward(request, response);
+	
+	}	
 }
