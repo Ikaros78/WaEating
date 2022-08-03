@@ -15,13 +15,20 @@
 		let movePath = "";
 		
 		switch(successCode){
-			case "insertMember" : 
+			case "insertUser" : 
 				successMessage = "회원 가입에 성공하셨습니다!";
 				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
 				break;
 			case "findId" :
-				successMessage = "아이디는 " + ${ requestScope.userId } + "입니다.";
+				successMessage = "아이디는 ${ requestScope.userId }입니다.";
 				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
+				break;
+			case "updatePwd" :
+				successMessage = "비밀번호가 변경되었습니다.";
+				movePath = "${ pageContext.servletContext.contextPath }/member/user/login";
+			case "insertCeo" : 
+				successMessage = "회원 가입에 성공하셨습니다!";
+				movePath = "${ pageContext.servletContext.contextPath }/member/ceo/login";
 				break;
 		}
 

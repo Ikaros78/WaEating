@@ -27,12 +27,13 @@ public class UserFindIdPhoneServlet extends HttpServlet {
 	}
 
 	@Override
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			HttpSession session = request.getSession();
 			
 			String userName = request.getParameter("name");
 			String phone = request.getParameter("phone");
+			String memberType = (String) session.getAttribute("memberType");
 			String birth = request.getParameter("birth");
 			String gender = request.getParameter("gender");
 			
@@ -43,11 +44,30 @@ public class UserFindIdPhoneServlet extends HttpServlet {
 			MemberDTO requestMember = new MemberDTO();
 			requestMember.setName(userName);
 			requestMember.setPhone(phone);
+			requestMember.setMemberType(memberType);
 			requestMember.setUserInfo(requestUser);
 			
 			UserService userService = new UserService();
 			
-			MemberDTO findUser = userService.findIdPhone(requestMember);
+			MemberDTO findUserId = userService.findIdPhone(requestMember);
 			
-		}
+			String userId = findUserId.getId();
+			System.out.println("userId : " + userId);
+			
+			String page = "";
+			
+			if(userId != null) {
+				
+				page = "/WEB-INF/views/common/success.jsp";
+				
+				request.setAttribute("success", "findId");
+				request.setAttribute("userId", userId);
+			} else {
+				
+				page = "/WEB-INF/views/common/failed.jsp";
+				
+				request.setAttribute("message", "정보가 일치하지 않습니다. 다시 시도해주세요.");
+			}
+			request.getRequestDispatcher(page).forward(request, response);
+	}
 }
