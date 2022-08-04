@@ -75,7 +75,7 @@
                             <td>비밀번호</td>
                             <td><c:out value="${ member.pwd }"/></td>
                             <c:if test="${ !empty sessionScope.ifUpdate }">
-                            	<td><input type="password" placeholder="비밀번호" name="updatePwd"></td>
+                            	<td><input type="password" placeholder="비밀번호" name="pw"></td>
                             </c:if>
                         </tr>
                         <tr>

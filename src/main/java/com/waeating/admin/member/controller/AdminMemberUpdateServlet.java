@@ -26,7 +26,7 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 		
 		String id = (String) request.getSession().getAttribute("memberId");
 		String name = request.getParameter("updateName");
-		String pwd = request.getParameter("updatePwd");
+		String pwd = request.getParameter("pw");
 		String email = request.getParameter("updateEmail");
 		String birth = request.getParameter("updateBirth");
 		String gender = request.getParameter("updateGender");
@@ -34,6 +34,7 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 		String originGender = member.getUserInfo().getGender();
 		
 		System.out.println(id);
+		System.out.println(pwd);
 		System.out.println(name);
 		System.out.println(birth);
 		System.out.println(gender);
