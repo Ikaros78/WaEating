@@ -183,13 +183,21 @@ public class UserService {
 	 * @param requestMember
 	 * @return
 	 */
-	public MemberDTO updateNewPwd(MemberDTO requestMember) {
+	public int updateNewPwd(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		memberMapper = sqlSession.getMapper(MemberMapper.class);
 		
-		MemberDTO updatePwd = memberMapper.updateNewPwd(requestMember);
+		int updatePwd = memberMapper.updateNewPwd(requestMember);
+		
+		if(updatePwd > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
 		
 		sqlSession.close();
 		

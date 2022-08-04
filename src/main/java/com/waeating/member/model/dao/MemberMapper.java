@@ -42,7 +42,7 @@ public interface MemberMapper {
 
 	MemberDTO checkFindPwForEmail(MemberDTO requestMember);
 
-	MemberDTO updateNewPwd(MemberDTO requestMember);
+	int updateNewPwd(MemberDTO requestMember);
 
 
 
