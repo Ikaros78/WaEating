@@ -18,6 +18,7 @@
   	  <association property="comInfo" resultMap="companyResultMap"/>
   	  <association property="memberInfo" resultMap="memberResultMap"/>
   	  <association property="review" resultMap="reviewMap"/>
+  	  <association property="refuseReason" resultMap="waitingRefuseMap"/>
   </resultMap>
   
   <resultMap type="com.waeating.com.model.dto.ComInfoDTO" id="companyResultMap">
@@ -43,13 +44,18 @@
 		<result property="emailCheck" column="EMAIL_CHECK"/>
 	</resultMap>
 	
-	 <resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
-  	<id property="reviewNo" column="REVIEW_NO"/>
-  	<result property="reviewContent" column="REVIEW_CONTENT"/>
-  	<result property="ratings" column="RATINGS"/>
-  	<result property="recordNo" column="RECORD_NO"/>
-  	<result property="comNo" column="COM_NO"/>
-  </resultMap>
+	<resultMap type="com.waeating.review.model.dto.ReviewDTO" id="reviewMap">
+	  	<id property="reviewNo" column="REVIEW_NO"/>
+	  	<result property="reviewContent" column="REVIEW_CONTENT"/>
+	  	<result property="ratings" column="RATINGS"/>
+	  	<result property="recordNo" column="RECORD_NO"/>
+	  	<result property="comNo" column="COM_NO"/>
+  	</resultMap>
+  
+  	<resultMap type="com.waeating.waitingRecord.model.dto.WaitingRefuseDTO" id="waitingRefuseMap">
+  		<id property="recordNo" column="RECORD_NO"/>
+  		<result property="refuseReason" column="REFUSE_REASON"/>
+  	</resultMap>
   
     <select id="selectFinishReservationCount" resultType="_int" parameterType="hashmap">
        SELECT
@@ -185,6 +191,115 @@
 	 WHERE A.RNUM >= #{ startRow } 
 	 </select>
 	 
+	 <select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+	 	SELECT
+	 			COUNT(*)
+	 		FROM WAITING_RECORD A
+	 		JOIN COM_INFO B ON(A.COM_NO = B.COM_NO)
+	 		<!-- 검색조건문 -->
+		<where>
+			<if test="searchCondition =='id'">
+				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+			</if>
+			<if test="searchCondition =='useStatus'">
+				A.USE_STATUS LIKE '%' || #{ searchValue } || '%'
+			</if>
+			<if test="searchCondition =='name'">
+				B.COM_NAME LIKE '%' || #{ searchValue } || '%'
+			</if>
+		</where>
+	 </select>
+	 
+	 <select id="adminSelectLogList" resultMap="waitingRecordMap">
+	 	SELECT
+	 			A.RNUM
+	 		  , A.RECORD_NO
+	 		  , A.COM_NAME
+	 		  , A.MEMBER_ID
+	 		  , A.USE_DATE
+	 		  , A.USE_STATUS
+	 	  FROM (SELECT ROWNUM RNUM
+	 	  			 , B.RECORD_NO
+	 	  			 , B.COM_NAME
+	 	  			 , B.MEMBER_ID
+	 	  			 , B.USE_DATE
+	 	  			 , B.USE_STATUS
+	 	  		  FROM(SELECT C.RECORD_NO
+	 	  		  			, D.COM_NAME
+	 	  		  			, C.MEMBER_ID
+	 	  		  			, C.USE_DATE
+	 	  		  			, C.USE_STATUS
+	 	  		  		 FROM WAITING_RECORD C
+	 	  		  		 JOIN COM_INFO D ON(C.COM_NO = D.COM_NO)
+	 	  		  		 <where>
+							<if test="searchCondition =='id'">
+								C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+							</if>
+							<if test="searchCondition =='useStatus'">
+								C.USE_STATUS LIKE '%' || #{ searchValue } || '%'
+							</if>
+							<if test="searchCondition =='name'">
+								D.COM_NAME LIKE '%' || #{ searchValue } || '%'
+							</if>
+						</where>
+						ORDER BY C.RECORD_NO DESC
+					  ) B
+					  <![CDATA[
+			     WHERE ROWNUM <= #{ endRow }
+			     ]]>
+		  )A
+		WHERE A.RNUM >= #{ startRow } 
+	 </select>
+	 
+	 <select id="adminSelectLogDetail" parameterType="hashmap" resultMap="waitingRecordMap">
+	 	SELECT
+	 		    A.COM_NO
+	 		  , B.COM_NAME
+	 		  , A.MEMBER_ID
+	 		  , A.USE_DATE
+	 		  , A.USE_STATUS
+	 		  , A.MEMBER_NUM
+	 		  , A.REQUIREMENT
+	 		  , A.MEMO
+	 	  FROM WAITING_RECORD A
+	 	  JOIN COM_INFO B ON(A.COM_NO = B.COM_NO)
+	 	 WHERE A.RECORD_NO = #{ recordNo }
+	 </select>
+	 
+	 <delete id="deleteLog" parameterType = "java.lang.String">
+	 	DELETE
+	 		FROM WAITING_RECORD A
+	 	   WHERE A.RECORD_NO = #{ recordNo }
+	 </delete>
+	 
+	 <update id="adminUpdateLog" parameterType="hashmap">
+	 	UPDATE
+	 			WAITING_RECORD A
+	 	<set>
+	 		<if test="status != null and status != ''">
+			A.USE_STATUS = #{ status },
+			</if>
+			<if test="memberNum != null and memberNum != ''">
+			A.MEMBER_NUM = #{ memberNum },
+			</if>
+			<if test="requirement != null and requirement != ''">
+			A.REQUIREMENT = #{ requirement },
+			</if>
+			<if test="memo != null and memo != ''">
+			A.MEMO = #{ memo },
+			</if>
+	 	</set>
+	 	WHERE A.RECORD_NO = #{ recordNo }
+	 </update>
+	 
+	 <select id="adminSelectRefuseLogDetail" parameterType="hashmap" resultType="java.lang.String">
+	 	SELECT
+	 			A.REFUSE_REASON
+	 	  FROM WAITING_REFUSE A
+	 	  JOIN WAITING_RECORD B ON(A.RECORD_NO = B.RECORD_NO)
+	 	 WHERE A.RECORD_NO = #{ recordNo }
+	 </select>
+
 	 <select id="selectWaitingRecordAll" resultMap="waitingRecordMap">
 	 SELECT
 	        A.COM_NO

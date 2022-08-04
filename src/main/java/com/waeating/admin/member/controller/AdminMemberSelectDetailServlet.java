@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.waeating.admin.member.service.AdminMemberService;
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.member.model.dto.UserInfoAttachDTO;
 
 /**
  * Servlet implementation class MemberSelectDetailServlet
@@ -41,6 +42,13 @@ public class AdminMemberSelectDetailServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("path", path);
 			session.setAttribute("member", member);
+
+			UserInfoAttachDTO attach = memberService.selectUserAttach(searchMap);
+			if(attach != null) {
+				session.setAttribute("attach", attach);
+			}else {
+				session.removeAttribute("attach");
+			}
 			
 		} else {
 			path = "/WEB-INF/views/common/failed.jsp";
