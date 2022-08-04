@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/user.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <jsp:include page="../user_header.jsp"/>
@@ -38,26 +39,24 @@
         <h2 style="text-indent: 30px;">현재 예약</h2>
         <hr>
         <c:forEach var="reservation" items="${ requestScope.waitingRecord }">
+			<form action="${ pageContext.servletContext.contextPath }/user/reservation/now" method="post">
         <div class="reservation now">
             <h5>[${ reservation.comInfo.comName }]</h5>
             <p style="color: gray;">${ reservation.useDate }</p>
-            <P style="color:#D94925 ;">내 앞에 '${ requestScope.countWaitingRecord.countRecordNo }' 남았어요! 주변에 있어주세요. 곧 호출됩니다.</P>
+            <div style="color:#D94925 ;" class="waitingNo"  > </div>
+             <button type="button" class="show">대기 현황 확인</button> 
             <br>
             <h6><나의 예약 정보></h6>
             <p>인원수 : ${ reservation.memberNum }</p>
             <p>전화번호 : ${ reservation.memberInfo.phone }</p>
-
-            <button type="button" class="btn btn-danger">예약 취소</button>
+			
+			<input type="hidden" id="comNo" name="comNo" value="${ reservation.comNo }">
+			<input type="hidden" id="recordNo" name="recordNo" value="${ reservation.recordNo }">
+            <button type="submit" class="btn btn-danger" >예약 취소</button>
             
         </div>
+			</form>
         </c:forEach>
-
-
-
-
-		<jsp:include page="../user_paging/paging_reservation_now.jsp"/>
-
-
 
        </aside>
     </section>
@@ -65,5 +64,19 @@
    <jsp:include page="../user_footer.jsp"/>
   </div>
 
+	 <script>
+		${".show"}.click(function)(){
+			
+			$.ajax({
+				url:"/user/reservation/count_recordNo"
+				type:"get"
+				success:function(data){
+					
+					innerHTML =
+				}
+			});
+		}
+	
+	</script> 
 </body>
 </html>
