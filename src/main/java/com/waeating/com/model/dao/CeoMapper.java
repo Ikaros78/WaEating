@@ -14,6 +14,6 @@ public interface CeoMapper {
 
 	String selectEncryptedPwd(MemberDTO requestMember);
 
-	MemberDTO selectMemberLogin(MemberDTO requestMember);
+	ComInfoDTO selectMemberLogin(MemberDTO requestMember);
 
 }

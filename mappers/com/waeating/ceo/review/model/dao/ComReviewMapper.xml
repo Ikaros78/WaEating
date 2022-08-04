@@ -55,6 +55,7 @@
   		   				   FROM REVIEW C
   		   				   LEFT JOIN REVIEW_ANS RA ON (C.REVIEW_NO = RA.REVIEW_NO)
   		   				  WHERE C.COM_NO = 1	
+  		   				  ORDER BY RA.ANS_CONTENT DESC
   		   				 <!-- <where>
   		   				 	<if test="searchCondition == 'noticeTitle'">
 	           				   C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
