@@ -21,6 +21,8 @@ public class UserFindIdEmailServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		request.getRequestDispatcher("/WEB-INF/views/user/user-login/user-find_id-email.jsp").forward(request, response);
 	}
 	

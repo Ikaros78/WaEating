@@ -12,6 +12,8 @@
 		<result property="waitYn" column="WAIT_YN"/>
 		<result property="workTime" column="WORK_TIME"/>
 		<result property="holiday" column="HOLIDAY"/>
+		<result property="startTime" column="STARTTIME"/>
+		<result property="endTime" column="ENDTIME"/>
 		<association property="comMenu" resultMap="comMenuResultMap"/>
 	</resultMap>
 	
@@ -32,6 +34,8 @@
 		     , CI.WAIT_YN
 		     , CI.WORK_TIME
 		     , CI.HOLIDAY
+		     , SUBSTR(CI.WORK_TIME, 1, INSTR(CI.WORK_TIME, '~') -1) STARTTIME
+		     , SUBSTR(CI.WORK_TIME, INSTR(CI.WORK_TIME, '~') +1, LENGTH(CI.WORK_TIME)) ENDTIME
 		  FROM COM_INFO CI
 		 WHERE CI.COM_NO = 1
 	</select>

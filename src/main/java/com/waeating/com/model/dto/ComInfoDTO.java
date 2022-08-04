@@ -20,6 +20,8 @@ public class ComInfoDTO {
 	private String waitYn;
 	private String workTime;
 	private String holiday;
+	private String startTime;
+	private String endTime;
 	
 	private List<ComBoardAttachDTO> comBoardAttach;
 	private ComMenuDTO comMenu;
@@ -35,10 +37,10 @@ public class ComInfoDTO {
 
 
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
-			String comRegist, String waitYn, String workTime, String holiday, List<ComBoardAttachDTO> comBoardAttach,
-			ComMenuDTO comMenu, MemberDTO memberInfo, List<ComRecordDTO> recordList, ReviewDTO review,
-			WaitingRecordDTO waitingRecord, ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
-		super();
+			String comRegist, String waitYn, String workTime, String holiday, String startTime, String endTime,
+			List<ComBoardAttachDTO> comBoardAttach, ComMenuDTO comMenu, MemberDTO memberInfo,
+			List<ComRecordDTO> recordList, ReviewDTO review, WaitingRecordDTO waitingRecord,
+			ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
 		this.comNo = comNo;
 		this.memberId = memberId;
 		this.comName = comName;
@@ -49,6 +51,8 @@ public class ComInfoDTO {
 		this.waitYn = waitYn;
 		this.workTime = workTime;
 		this.holiday = holiday;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.comBoardAttach = comBoardAttach;
 		this.comMenu = comMenu;
 		this.memberInfo = memberInfo;
@@ -58,8 +62,6 @@ public class ComInfoDTO {
 		this.reviewAttach = reviewAttach;
 		this.reviewAns = reviewAns;
 	}
-
-
 
 
 	public int getComNo() {
@@ -162,6 +164,26 @@ public class ComInfoDTO {
 	}
 
 
+	public String getStartTime() {
+		return startTime;
+	}
+
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+
 	public List<ComBoardAttachDTO> getComBoardAttach() {
 		return comBoardAttach;
 	}
@@ -192,27 +214,24 @@ public class ComInfoDTO {
 	}
 
 
-
 	public List<ComRecordDTO> getRecordList() {
 		return recordList;
 	}
-
 
 
 	public void setRecordList(List<ComRecordDTO> recordList) {
 		this.recordList = recordList;
 	}
 
-	
+
 	public ReviewDTO getReview() {
 		return review;
 	}
 
+
 	public void setReview(ReviewDTO review) {
 		this.review = review;
 	}
-	
-
 
 
 	public WaitingRecordDTO getWaitingRecord() {
@@ -224,7 +243,6 @@ public class ComInfoDTO {
 		this.waitingRecord = waitingRecord;
 	}
 
-	
 
 	public ReviewAttachDTO getReviewAttach() {
 		return reviewAttach;
@@ -250,10 +268,11 @@ public class ComInfoDTO {
 	public String toString() {
 		return "ComInfoDTO [comNo=" + comNo + ", memberId=" + memberId + ", comName=" + comName + ", category="
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
-				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", comBoardAttach="
-				+ comBoardAttach + ", comMenu=" + comMenu + ", memberInfo=" + memberInfo + ", recordList=" + recordList
-				+ ", review=" + review + ", waitingRecord=" + waitingRecord + ", reviewAttach=" + reviewAttach
-				+ ", reviewAns=" + reviewAns + "]";
+				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", comBoardAttach=" + comBoardAttach + ", comMenu=" + comMenu
+				+ ", memberInfo=" + memberInfo + ", recordList=" + recordList + ", review=" + review
+				+ ", waitingRecord=" + waitingRecord + ", reviewAttach=" + reviewAttach + ", reviewAns=" + reviewAns
+				+ "]";
 	}
 
 }

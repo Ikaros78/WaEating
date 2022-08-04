@@ -39,7 +39,7 @@ public class UserFindPasswordEmailServlet extends HttpServlet {
 		String birth = request.getParameter("birth");
 		String gender = request.getParameter("gender");
 		
-		String newPw = request.getParameter("newPw");
+		String pw = request.getParameter("pw");
 		
 		UserDTO requestUser = new UserDTO();
 		requestUser.setBirth(birth);
@@ -52,7 +52,8 @@ public class UserFindPasswordEmailServlet extends HttpServlet {
 		requestMember.setMemberType(memberType);
 		requestMember.setUserInfo(requestUser);
 		
-		requestMember.setPwd(newPw);
+		requestMember.setPwd(pw);
+		System.out.println("pw : " + pw);
 		
 		UserService userService = new UserService();
 		
@@ -65,7 +66,7 @@ public class UserFindPasswordEmailServlet extends HttpServlet {
 		
 		if(pwd != null) {
 			
-			MemberDTO updateNewPwd = userService.updateNewPwd(requestMember);
+			int updateNewPwd = userService.updateNewPwd(requestMember);
 			System.out.println("updatePwd : " + updateNewPwd);
 			
 			page = "/WEB-INF/views/common/success.jsp";

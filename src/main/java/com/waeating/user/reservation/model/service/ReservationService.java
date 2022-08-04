@@ -134,16 +134,16 @@ public class ReservationService {
 	 *  현재 예약 조회
 	 * </pre>
 	 * 
-	 * @param selectCriteria
+	 * @param searchMap
 	 * @return
 	 */
-	public List<ComInfoDTO> selectNowReservation(SelectCriteria selectCriteria) {
+	public List<ComInfoDTO> selectNowReservation(Map<String, String> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
-		List<ComInfoDTO> waiting = reservationMapper.selectReservationNow(selectCriteria);
+		List<ComInfoDTO> waiting = reservationMapper.selectReservationNow(searchMap);
 		
 		sqlSession.close();
 		
@@ -202,6 +202,28 @@ public class ReservationService {
 		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
 		int result = reservationMapper.insertReservation(waitingRecord);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+
+	public int updateReservaiton(Map<String, String> waitingRecord) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		int result = reservationMapper.updateReservation(waitingRecord);
 		
 		if(result > 0) {
 			

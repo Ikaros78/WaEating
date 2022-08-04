@@ -15,7 +15,7 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
             <h4 class="mb-3">전화번호로 찾기</h4>
-            <form class="validation-form" novalidate>
+            <form class="validation-form" method="post">
               
               
               <div class="form-floating mb-3">

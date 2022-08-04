@@ -21,7 +21,7 @@ public interface WaitingRecordMapper {
 
 	int selectNowReservationCount(Map<String, String> searchMap);
 
-	List<ComInfoDTO> selectReservationNow(SelectCriteria selectCriteria);
+	List<ComInfoDTO> selectReservationNow(Map<String, String> searchMap);
 
 	WaitingRecordDTO selectCountRecord(String comName);
 	
@@ -41,6 +41,8 @@ public interface WaitingRecordMapper {
 	int adminUpdateLog(Map<String, String> updateLogMap);
 
 	String adminSelectRefuseLogDetail(Map<String, String> searchMap);
+
+	int updateReservation(Map<String, String> waitingRecord);
 	
 
 
