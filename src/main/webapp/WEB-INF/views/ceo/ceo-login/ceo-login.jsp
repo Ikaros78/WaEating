@@ -18,7 +18,7 @@
                 <input type="text" class="login_box" id="login_id" name="ceoId" placeholder="아이디 입력"> 
                 <input type="password" class="login_box" id="login_pw" name="ceoPw" placeholder="비밀번호 입력">
     
-                <button type="submit" id="login_btn">로그인</button>
+                <input type="submit" id="login_btn" value="로그인"></input>
             </form>
         </div>
         <div class="sub">

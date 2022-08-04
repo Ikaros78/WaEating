@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.waeating.ceo.login.model.service.ComService;
+import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.member.model.dto.MemberDTO;
 
 /**
@@ -46,7 +47,7 @@ public class CeoLoginServlet extends HttpServlet {
 		
 		ComService comService = new ComService();
 		
-		MemberDTO loginMember = comService.loginCheck(requestMember);
+		ComInfoDTO loginMember = comService.loginCheck(requestMember);
 		System.out.println("loginMember : " + loginMember);
 		
 		if(loginMember != null) {
