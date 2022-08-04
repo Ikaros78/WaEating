@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.member.model.dao.MemberMapper;
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.member.model.dto.UserInfoAttachDTO;
 
 public class AdminMemberService {
 	
@@ -148,7 +149,28 @@ public class AdminMemberService {
 			sqlSession.rollback();
 		}
 		
+		sqlSession.close();
+		
 		return result;
+	}
+
+	/**
+	 * <pre>
+	 *   회원 첨부파일 정보 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
+	public UserInfoAttachDTO selectUserAttach(Map<String, String> searchMap) {
+
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		UserInfoAttachDTO attach = memberMapper.selectUserAttach(searchMap);
+		
+		sqlSession.close();
+		
+		return attach;
 	}
 
 }

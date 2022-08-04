@@ -34,7 +34,7 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/list">회원정보 조회</a></li>
-                                    <li role="presentation"><a href="#">회원정보 등록</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/insert">회원정보 등록</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -54,6 +54,12 @@
 	                	</tr>
                 	</thead>
                     <tbody>
+                    	<c:if test="${ !empty sessionScope.attach }">
+                    	<tr>
+                            <td>프로필사진</td>
+                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ attach.fileName }"></td>
+                        </tr>
+                        </c:if>
                         <tr>
                             <td>이름</td>
                             <td><c:out value="${ member.name }"/></td>

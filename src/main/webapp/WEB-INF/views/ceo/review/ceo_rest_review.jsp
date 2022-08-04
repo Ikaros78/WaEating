@@ -34,19 +34,18 @@
           <h3 class="ps-2">리뷰(${ requestScope.totalCount })</h3>
           <table width="100%" class="table table-borderless">
            	  <c:forEach var="review" items="${ requestScope.selectAllReview }">
-           	  <tr class="border-bottom">
-                <td class="col-10 pt-3"><c:out value="${ review.reviewContent }"/></td>
-                <td class="d-flex justify-content-end">
+           	  <tr class="border-bottom  d-flex align-items-center">
+                <td class="col-10 py-auto"><c:out value="${ review.reviewContent }"/></td>
+                <td class="my-auto ms-auto">
+                	<c:if test="${ review.reviewAns.ansContent eq null }">
+                	<button type="button" class="btn btn-primary" ><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new?reviewNo=${ review.reviewNo }" style="color:#fff; text-decoration: none;">답변 등록</a></button>
+                	</c:if>
                 	<c:if test="${ review.reviewAns.ansContent ne null }">
                 	<button type="button" class="btn btn-light"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_modify?reviewNo=${ review.reviewNo }" style="color:#6c757d; text-decoration: none;">답변 완료</a></button>
-                	</c:if>
-                	<c:if test="${ review.reviewAns.ansContent eq null }">
-                	<button type="button" class="btn btn-primary"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new?reviewNo=${ review.reviewNo }" style="color:#fff; text-decoration: none;">답변 등록</a></button>
                 	</c:if>
                 </td>         
               </tr>
               </c:forEach>
-            
              <%--  <tr class="border-bottom">
                 <td class="col-10 pt-3">웨이팅이 있었지만 금방 들어갔어요. 돈까스도 맛있고 다음에 또 오고싶어요!</td>
                 <td class="d-flex justify-content-end"><button type="button" class="btn btn-primary"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" style="color:#fff; text-decoration: none;">답변 등록</a></button></td>         
@@ -63,7 +62,6 @@
                 <td class="col-10 pt-3">너무 맛있게 잘 먹고 갑니다.</td>
                 <td class="d-flex justify-content-end"><button type="button" class="btn btn-light"><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_modify" style="color: #6c757d; text-decoration: none;">답변 완료</a></button></td>
               </tr> --%>
-            
           </table>
           
           <jsp:include page="../common/paging_review.jsp"/>
@@ -75,7 +73,6 @@
             <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">3</a></li>
             <li class="page-item"><a class="page-link" href="#" style="color: #6c757d;">></a></li>
           </ul> -->     
-           
         </div>
        </aside>
     </section>

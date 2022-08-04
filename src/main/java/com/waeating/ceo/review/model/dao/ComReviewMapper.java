@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.review.model.dto.ReviewAnsDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
 public interface ComReviewMapper {
@@ -12,6 +13,12 @@ public interface ComReviewMapper {
 
 	List<ReviewDTO> selectAllReview(SelectCriteria selectCriteria);
 
-	ReviewDTO selectOneReview(String reviewNo);
+	ReviewDTO selectOneReview(int reviewNo);
+
+	int insertReviewAns(ReviewAnsDTO reviewAns);
+
+	int deleteReviewAns(int reviewNo);
+
+	int updateReviewAns(ReviewAnsDTO reviewAns);
 
 }
