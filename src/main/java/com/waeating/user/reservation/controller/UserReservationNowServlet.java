@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.Pagenation;
@@ -28,18 +29,6 @@ public class UserReservationNowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		
-//		String currentPage = request.getParameter("currentPage");
-//		int pageNo = 1;
-//		
-//		if(currentPage != null && !"".equals(currentPage)) {
-//			pageNo = Integer.parseInt(currentPage);
-//		}
-//		
-//		if(pageNo <= 0) {
-//			pageNo = 1;
-//		}
-		
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
 		String userId = member.getId();
 		
@@ -49,51 +38,28 @@ public class UserReservationNowServlet extends HttpServlet {
 	
 		
 		ReservationService reservationService = new ReservationService();
-		/* 페이징용 */
-//		int totalCount = reservationService.selectNowTotalCount(searchMap);
-		
+	
 		/* 웨이팅 정보 불러오기 용 */
-		List<WaitingRecordDTO> waitingRecordAll = reservationService.selectWaitingRecordAll(searchMap);
+//		List<WaitingRecordDTO> waitingRecordAll = reservationService.selectWaitingRecordAll(searchMap);
 		
 //		System.out.println("totalreservationCount : " + totalCount);
 		
-//		int limit = 4;
-//		int buttonAmount = 5;
-		
-//		String searchCondition = "";
-//		String searchValue = userId;
-//		
-//		SelectCriteria selectCriteria = null;
-//		
-//		selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount,searchCondition, searchValue);
-//		
-//		System.out.println(selectCriteria);
+
 		
 		List<ComInfoDTO> waitingRecord = reservationService.selectNowReservation(searchMap);
 		
 		
-//		for(WaitingRecordDTO waiting : waitingRecordAll ) {
-//			Map<String, String> waitingMap = new HashMap<>();
-//			String comNo = String.valueOf(waiting.getComNo());
-//			String recordNo = String.valueOf(waiting.getRecordNo());
-//			waitingMap.put("comNo", comNo);
-//			waitingMap.put("recordNo", recordNo);
-//				
-//			
-//			int countWaitingRecord = reservationService.selectCountRecord();
-//		}
-//		List<Map<String, String> > waitingList =  
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("waitingRecord", waitingRecord); 
 		
 		
-//		System.out.println("waitingRecord : " + waitingRecord);
-		
+		System.out.println("waitingRecord : " + waitingRecord);
 		String path = "";
 		if(waitingRecord != null) {
 			
 			path = "/WEB-INF/views/user/user_reservation/user_reservation_now.jsp";
 			request.setAttribute("waitingRecord", waitingRecord);
-//			request.setAttribute("selectCriteria", selectCriteria);
-//			request.setAttribute("countWaitingRecord", countWaitingRecord);
 			
 		}else {
 			path = "/WEB-INF/views/common/erroePage.jsp";
@@ -101,6 +67,39 @@ public class UserReservationNowServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String comNo = request.getParameter("comNo");
+		String recordNo = request.getParameter("recordNo");
+		
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		String userId = member.getId();
+				
+		System.out.println("comNo :" +comNo);
+		System.out.println("recordNo : " +recordNo);
+		
+		Map<String, String> waitingRecord = new HashMap<>();
+		waitingRecord.put("userId", userId);
+		waitingRecord.put("comNo", comNo);
+		waitingRecord.put("recordNo", recordNo);
+		
+		System.out.println("updateWaitingRecord : " + waitingRecord);
+		
+		ReservationService reservationService = new ReservationService();
+		
+		int result = reservationService.updateReservaiton(waitingRecord);
+		String path = "";
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/user/reservation/cancel");
+		}else {
+			path = "/WEB-INF/views/common/erroePage.jsp";
+			request.setAttribute("message", "예약취소 실패");
+			request.getRequestDispatcher(path).forward(request, response);
+		}
+		
 	}
 
 }

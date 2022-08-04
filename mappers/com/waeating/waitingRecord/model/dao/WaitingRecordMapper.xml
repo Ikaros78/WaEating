@@ -291,7 +291,8 @@
 	 
 	 <select id="selectCountRecord" resultType="_int">
 	  SELECT 
-           COUNT(A.RECORD_NO) COUNT_RECORD_NO
+            COUNT(A.RECORD_NO) COUNT_RECORD_NO
+           ,A.COM_NO
       FROM WAITING_RECORD A
       WHERE A.COM_NO = #{ comNo }
       AND A.USE_STATUS = 'waiting'
@@ -315,4 +316,12 @@
 	 	)   
 	 </insert>
 	 
+	 <update id="updateReservation" parameterType="hashmap">
+	 UPDATE
+	         WAITING_RECORD WR
+	     SET WR.USE_STATUS = 'cancel'
+	   WHERE WR.RECORD_NO = #{ recordNo }      
+	 
+	 
+	 </update>
   </mapper>

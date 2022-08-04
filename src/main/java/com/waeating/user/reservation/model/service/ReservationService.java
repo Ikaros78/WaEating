@@ -217,6 +217,28 @@ public class ReservationService {
 	}
 
 
+	public int updateReservaiton(Map<String, String> waitingRecord) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		int result = reservationMapper.updateReservation(waitingRecord);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+
 
 
 

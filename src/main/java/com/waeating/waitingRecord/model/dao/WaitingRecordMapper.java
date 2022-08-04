@@ -41,6 +41,8 @@ public interface WaitingRecordMapper {
 	int adminUpdateLog(Map<String, String> updateLogMap);
 
 	String adminSelectRefuseLogDetail(Map<String, String> searchMap);
+
+	int updateReservation(Map<String, String> waitingRecord);
 	
 
 
