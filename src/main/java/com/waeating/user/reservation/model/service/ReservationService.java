@@ -160,13 +160,13 @@ public class ReservationService {
 	 * @param comName
 	 * @return
 	 */
-	public WaitingRecordDTO selectCountRecord(String comName) {
+	public int selectCountRecord(Map<String, String> waitingCountMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
 		
-		WaitingRecordDTO waiting = reservationMapper.selectCountRecord(comName);
+		int waiting = reservationMapper.selectCountRecord(waitingCountMap);
 		
 		sqlSession.close();
 		

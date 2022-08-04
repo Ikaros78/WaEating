@@ -292,11 +292,9 @@
 	 <select id="selectCountRecord" resultType="_int">
 	  SELECT 
             COUNT(A.RECORD_NO) COUNT_RECORD_NO
-           ,A.COM_NO
       FROM WAITING_RECORD A
       WHERE A.COM_NO = #{ comNo }
       AND A.USE_STATUS = 'waiting'
-      AND A.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
       <![CDATA[AND A.RECORD_NO < #{ recordNo } ]]>
       
 	 

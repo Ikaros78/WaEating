@@ -23,7 +23,7 @@ public interface WaitingRecordMapper {
 
 	List<ComInfoDTO> selectReservationNow(Map<String, String> searchMap);
 
-	WaitingRecordDTO selectCountRecord(String comName);
+	int selectCountRecord(Map<String, String> waitingCountMap);
 	
 	List<WaitingRecordDTO> selectWaitingRecordAll(Map<String, String> searchMap);
 	
