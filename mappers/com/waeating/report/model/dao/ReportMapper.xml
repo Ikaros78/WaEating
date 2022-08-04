@@ -2,16 +2,17 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.waeating.support.model.dao.ReportMapper">
-	<resultMap type="com.waeating.support.model.dto.ReportDTO" id="reportResultMap">
+<mapper namespace="com.waeating.report.model.dao.ReportMapper">
+	<resultMap type="com.waeating.report.model.dto.ReportDTO" id="reportResultMap">
 		<id property="reportNo" column="REPORT_NO"/>
 		<result property="title" column="REPORT_TITLE"/>
 		<result property="content" column="REPORT_CONTENT"/>
 		<result property="id" column="MEMBER_ID"/>
 		<result property="regDate" column="REG_DATE"/>
 		
-		<association property="answer" resultMap="answerResultMap"/>
+	<!-- 	<association property="answer" resultMap="answerResultMap"/> -->
 	</resultMap>
+	
 	
 	<resultMap type="com.waeating.support.model.dto.ReportAnswerDTO" id="answerResultMap">
 		<id property="ansNo" column="ANS_NO"/>
@@ -21,11 +22,11 @@
 		<result property="reportNo" column="REPORT_NO"/>
 	</resultMap>
 	
-	<select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
 		SELECT
 				COUNT(*)
 			FROM REPORT A
-			<!-- 검색조건문 -->
+		
 		<where>
 			<if test="searchCondition =='id'">
 				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
@@ -34,9 +35,9 @@
 				A.REPORT_TITLE LIKE '%' || #{ searchValue } || '%'
 			</if>
 		</where>
-	</select>
+	</select> 
 	
-	<select id="adminSelectReportList" resultMap="reportResultMap">
+	<select id="selectReportList" resultMap="reportResultMap">
 		SELECT
 				A.RNUM
 			  , A.REPORT_NO
@@ -64,10 +65,12 @@
 			     WHERE ROWNUM <= #{ endRow }
 			     ]]>
 		  )A
+		 
 		WHERE A.RNUM >= #{ startRow } 
+		 
 	</select>
 	
-	<select id="adminSelectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
+	<select id="selectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
 		SELECT
 				A.REPORT_TITLE
 			  , A.REPORT_CONTENT
@@ -79,5 +82,35 @@
 			FROM REPORT A
 			LEFT JOIN REPORT_ANS B ON (A.REPORT_NO = B.REPORT_NO)
 		   WHERE A.REPORT_NO = #{ reportNo }
-	</select>
+	</select> 
+	<insert id="insertReport" parameterType="hashmap">
+		INSERT
+			INTO REPORT A
+			(
+				A.REPORT_NO
+			  , A.REPORT_CONTENT
+			  , A.REPORT_DATE
+			  , A.REPORT_NO
+			)
+			VALUES
+			(
+				SEQ_ANSNO.NEXTVAL
+			  , #{ content }
+			  , #{ date }
+			  , #{ reportNo }
+			)
+	</insert>
+	
+	<delete id="deleteReport">
+		DELETE
+			FROM REPORT_ANS A
+		   WHERE A.ANS_NO = #{ ansNo }
+	</delete>
+	
+	<update id="updateReport">
+		UPDATE
+				REPORT_ANS A
+		
+		WHERE A.REPORT_NO = #{ reportNo }
+	</update>
 </mapper>

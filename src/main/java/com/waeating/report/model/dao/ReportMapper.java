@@ -4,19 +4,23 @@ import java.util.List;
 import java.util.Map;
 
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.support.model.dto.ReportDTO;
+import com.waeating.report.model.dto.ReportDTO;
+
 
 public interface ReportMapper {
+	
 
-  List<ReportDTO> selectReportList (SelectCriteria selectCriteria);
-   
-  int SelectTotalCount(Map<String, String> searchMap);
+	 int selectTotalCount(Map<String, String> searchMap);
+
+	 ReportDTO selectReportDeatail(int no); 
+    
+	 int insertReport(ReportDTO report);
+
+     List<ReportDTO> selectReportList(SelectCriteria selectCriteria);
   
-  ReportDTO SelectReportDetail(Map<String, String> searchMap);
+	 ReportDTO selectOneReport(int reportNo);
 
-static int insertReport(ReportDTO report) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+	 int updateReport(ReportDTO report);
 
+	 int deleteReport(int reportNo);
 }

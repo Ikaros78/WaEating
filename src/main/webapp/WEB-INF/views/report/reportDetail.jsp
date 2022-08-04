@@ -29,7 +29,7 @@
         <h4 class="mb-3 ms-1">가게 관리</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="${ pageContext.servletContext.contextPath }/report/main">문의 내용 조회</a>
+          <a href="${ pageContext.servletContext.contextPath }/report/list">문의 내용 조회</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
@@ -41,7 +41,7 @@
             <table width="100%">
               <tr>
                 <td><h5>제목</h5></td>
-                <td style="width: 95%;"><input type="text" class="form-control mb-2" placeholder="제목을 입력해주세요." name="noticeTitle" id="title"></td>
+                <td style="width: 95%;"><input type="text" class="form-control mb-2" placeholder="제목을 입력해주세요." name="reportTitle" id="title"></td>
               </tr>
               <tr>
                 <td class="d-flex align-content-start mt-2"><h5>내용</h5></td>
@@ -49,7 +49,7 @@
               </tr>
             </table>
             <div class="mt-3 d-flex justify-content-center">
-            <a href="${ pageContext.servletContext.contextPath }/report/main">
+            <a href="${ pageContext.servletContext.contextPath }/report/list">
               <button type="button" class="btn btn-light me-2" style="color: #6c757d;" value="취소">취소</button>            
             </a>
               <button type="button" class="btn btn-primary" value="등록" data-bs-toggle="modal" data-bs-target="#modalSubmit">등록</button>

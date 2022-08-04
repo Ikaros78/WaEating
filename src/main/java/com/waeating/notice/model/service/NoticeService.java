@@ -21,17 +21,12 @@ public class NoticeService {
 		noticeMapper = sqlSession.getMapper(NoticeMapper.class);
 		NoticeDTO noticeDetail = null;
 		
-		int result = noticeMapper.incrementNoticeCCount(no);
 		
-		if(result > 0) {
-			noticeDetail = noticeMapper.selectNoticeDeatail(no);
+		
+		
+		noticeDetail = noticeMapper.selectNoticeDeatail(no);
 			
-			if(noticeDetail !=null) {
-				sqlSession.commit();
-			} else {
-				sqlSession.rollback();
-			}
-		}
+		sqlSession.close();
 		return noticeDetail;
 		
 		

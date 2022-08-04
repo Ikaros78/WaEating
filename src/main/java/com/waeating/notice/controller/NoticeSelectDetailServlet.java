@@ -22,6 +22,8 @@ public class NoticeSelectDetailServlet extends HttpServlet {
 	
 		int no = Integer.parseInt(request.getParameter("no"));
 		
+		System.out.println("no " + no);
+		
 		NoticeService noticeService = new NoticeService();
 		NoticeDTO noticeDetail = noticeService.selectNoticeDetail(no);
 	    
@@ -29,10 +31,10 @@ public class NoticeSelectDetailServlet extends HttpServlet {
 		
 		String path = "";
 		if(noticeDetail != null) {
-			path = "/WEB-INF/views/notice/noticeDetail.jsp";
-			request.setAttribute("notice", noticeDetail);
+			path = "/WEB-INF/views/mainNotice/notice_detail.jsp";
+			request.setAttribute("noticeDetail", noticeDetail);
 		} else {
-			path = "WEB-INF/views/common/failed.jsp";
+			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "공지사항 상세보기에 실패하셨습니다");
 		}
 		 request.getRequestDispatcher(path).forward(request, response);
