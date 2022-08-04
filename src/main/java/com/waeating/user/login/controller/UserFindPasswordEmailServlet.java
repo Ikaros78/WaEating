@@ -57,7 +57,7 @@ public class UserFindPasswordEmailServlet extends HttpServlet {
 		
 		UserService userService = new UserService();
 		
-		MemberDTO checkPwd =  userService.checkPwd(requestMember);
+		MemberDTO checkPwd =  userService.checkPwdEmail(requestMember);
 		System.out.println("checkPwd: " + checkPwd);
 		String pwd = checkPwd.getPwd();
 		System.out.println("pwd: " + pwd);

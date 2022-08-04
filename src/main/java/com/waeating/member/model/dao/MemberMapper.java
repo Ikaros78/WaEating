@@ -46,6 +46,8 @@ public interface MemberMapper {
 
 	int updateNewPwd(MemberDTO requestMember);
 
+	MemberDTO checkFindPwForPhone(MemberDTO requestMember);
+
 
 
 

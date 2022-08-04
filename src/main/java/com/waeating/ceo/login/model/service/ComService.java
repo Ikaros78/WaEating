@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.waeating.com.model.dao.CeoMapper;
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.member.model.dao.MemberMapper;
 import com.waeating.member.model.dto.MemberDTO;
 
 public class ComService {
@@ -42,7 +43,7 @@ public class ComService {
 
 	/**
 	 * <pre>
-	 * 	 회원가입 메소드 (ComInfoDTO)
+	 * 	 회원가입 메소드 (ComInfoDTO) & COM_RECORD INSERT
 	 * </pre>
 	 * @param requestCom
 	 * @return
@@ -54,7 +55,11 @@ public class ComService {
 		
 		int registCom = ceoMapper.insertComInfo(requestCom);
 		
-		if(registCom > 0) {
+		int comNo = requestCom.getComNo();
+		
+		int comRecord = ceoMapper.insertComRecord(comNo);
+		
+		if(registCom > 0 && comRecord > 0) {
 			
 			sqlSession.commit();
 		} else { 
@@ -71,7 +76,7 @@ public class ComService {
 	 * <pre>
 	 * 	 아이디 중복 확인 메소드
 	 * </pre>
-	 * @param userId
+	 * @param ceoId
 	 * @return 
 	 */
 	public int dubleCkId(String ceoId) {
@@ -91,7 +96,7 @@ public class ComService {
 	 * <pre>
 	 * 	 로그인 처리 메소드
 	 * </pre>
-	 * @param requestMember
+	 * @param requestCom
 	 * @return loginMember
 	 */
 	public ComInfoDTO loginCheck(MemberDTO requestMember) {
@@ -112,5 +117,74 @@ public class ComService {
 		sqlSession.close();
 		
 		return loginMember;
+	}
+	
+	/**
+	 * <pre>
+	 * 	 전화번호로 아이디 찾는 메소드
+	 * </pre>
+	 * @param requestCom
+	 * @return
+	 */
+	public ComInfoDTO findIdPhone(ComInfoDTO requestCom) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		ComInfoDTO findCeoId = null;
+		findCeoId = ceoMapper.selectFindIdForPhone(requestCom);
+		
+		sqlSession.close();
+		
+		return findCeoId;
+	}
+
+	/**
+	 * <pre>
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Phone)
+	 * </pre>
+	 * @param requestCom
+	 * @return
+	 */
+	public ComInfoDTO checkPwdPhone(ComInfoDTO requestCom) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		ComInfoDTO checkPwd = ceoMapper.checkFindPwdForPhone(requestCom);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
+
+	/**
+	 * <pre>
+	 * 	 새로운 비밀번호 입력 메소드
+	 * </pre>
+	 * @param requestCom
+	 * @return
+	 */
+	public int updateNewPwd(ComInfoDTO requestCom) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		int updatePwd = ceoMapper.updateNewPwd(requestCom);
+		
+		if(updatePwd > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return updatePwd;
 	}
 }

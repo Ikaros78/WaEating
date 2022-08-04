@@ -158,12 +158,12 @@ public class UserService {
 
 	/**
 	 * <pre>
-	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Email)
 	 * </pre>
 	 * @param requestMember
 	 * @return
 	 */
-	public MemberDTO checkPwd(MemberDTO requestMember) {
+	public MemberDTO checkPwdEmail(MemberDTO requestMember) {
 
 		SqlSession sqlSession = getSqlSession();
 		
@@ -203,6 +203,27 @@ public class UserService {
 		
 		return updatePwd;
 	}
+	
+	/**
+	 * <pre>
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Phone)
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO checkPwdPhone(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO checkPwd = memberMapper.checkFindPwForPhone(requestMember);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
+
 
 
 
