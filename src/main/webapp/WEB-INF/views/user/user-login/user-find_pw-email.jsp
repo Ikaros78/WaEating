@@ -62,7 +62,7 @@
             </div>
             
             <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="new_pw" name="new_pw" required>
+              <input type="password" class="form-control" id="pw" name="pw" placeholder="새 비밀번호 입력" required>
               <label for="new_pw">새 비밀번호</label>
               <div class="invalid-feedback">
                  새로운 비밀번호를 입력해주세요.
