@@ -21,15 +21,13 @@ public class WaitingRecordDTO {
 	private ComInfoDTO comInfo;
 	private MemberDTO memberInfo;
 	private ReviewDTO review;
+	private WaitingRefuseDTO refuseReason;
 	
 	public WaitingRecordDTO() {}
 
-	
-
-
 	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int memberNum,
 			String requirement, String memo, int countRecordNo, ComInfoDTO comInfo, MemberDTO memberInfo,
-			ReviewDTO review) {
+			ReviewDTO review, WaitingRefuseDTO refuseReason) {
 		super();
 		this.recordNo = recordNo;
 		this.comNo = comNo;
@@ -43,10 +41,8 @@ public class WaitingRecordDTO {
 		this.comInfo = comInfo;
 		this.memberInfo = memberInfo;
 		this.review = review;
+		this.refuseReason = refuseReason;
 	}
-
-
-
 
 	public int getRecordNo() {
 		return recordNo;
@@ -128,7 +124,6 @@ public class WaitingRecordDTO {
 		this.memberInfo = memberInfo;
 	}
 
-	
 	public ReviewDTO getReview() {
 		return review;
 	}
@@ -137,6 +132,13 @@ public class WaitingRecordDTO {
 		this.review = review;
 	}
 	
+	public WaitingRefuseDTO getRefuseReason() {
+		return refuseReason;
+	}
+
+	public void setRefuseReason(WaitingRefuseDTO refuseReason) {
+		this.refuseReason = refuseReason;
+	}
 	
 
 	public int getCountRecordNo() {
@@ -144,22 +146,16 @@ public class WaitingRecordDTO {
 	}
 
 
-
-
 	public void setCountRecordNo(int countRecordNo) {
 		this.countRecordNo = countRecordNo;
 	}
-
-
-
 
 	@Override
 	public String toString() {
 		return "WaitingRecordDTO [recordNo=" + recordNo + ", comNo=" + comNo + ", memberId=" + memberId + ", useDate="
 				+ useDate + ", useStatus=" + useStatus + ", memberNum=" + memberNum + ", requirement=" + requirement
 				+ ", memo=" + memo + ", countRecordNo=" + countRecordNo + ", comInfo=" + comInfo + ", memberInfo="
-				+ memberInfo + ", review=" + review + "]";
+				+ memberInfo + ", review=" + review + ", refuseReason=" + refuseReason + "]";
 	}
-
 	
 }

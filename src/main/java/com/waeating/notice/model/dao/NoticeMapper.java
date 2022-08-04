@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.notice.model.dto.NoticeAttachDTO;
 import com.waeating.notice.model.dto.NoticeDTO;
 
 public interface NoticeMapper {
@@ -28,7 +29,11 @@ public interface NoticeMapper {
 
 	int deleteNotice(String noticeNo);
 
-	int insertNotice(Map<String, String> insertNoticeMap);
+	int insertNotice(NoticeDTO insertNotice);
+
+	int insertAttach(NoticeAttachDTO noticeAttachDTO);
+
+	List<NoticeAttachDTO> selectNoticeAttachList(Map<String, String> searchMap);
 	
 	
 

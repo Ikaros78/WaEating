@@ -94,12 +94,12 @@ public class ComService {
 	 * @param requestMember
 	 * @return loginMember
 	 */
-	public MemberDTO loginCheck(MemberDTO requestMember) {
+	public ComInfoDTO loginCheck(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		MemberDTO loginMember = null;
+		ComInfoDTO loginMember = null;
 		
 		String encPwd = ceoMapper.selectEncryptedPwd(requestMember);
 		System.out.println("encPwd 확인 : " + encPwd);

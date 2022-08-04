@@ -10,8 +10,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <result property="regDate" column="REG_DATE"/>
   <result property="memberId" column="MEMBER_ID"/>
   
+  <collection property="attachList" resultMap="attachResultMap"/>
   </resultMap> 
-  	
+  
+  <resultMap type="com.waeating.notice.model.dto.NoticeAttachDTO" id="attachResultMap">
+  <id property="fileNo" column="FILE_NO"/>
+  <result property="noticeNo" column="NOTICE_NO"/>
+  <result property="originName" column="ORIGIN_NAME"/>
+  <result property="fileName" column="FILE_NAME"/>
+  <result property="isDeleted" column="IS_DELETED"/>
+  <result property="regDate" column="REG_DATE"/>
+  </resultMap>
+  
+  
+  
  <select id="selectAllNoticeList" resultMap="noticeResultMap">
 		
 	  SELECT
@@ -166,23 +178,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   WHERE A.NOTICE_NO = #{ noticeNo }
 	</delete>
 	
-	<insert id="insertNotice" parameterType="hashmap">
+	<insert id="insertNotice" parameterType="com.waeating.notice.model.dto.NoticeDTO">
 		INSERT
 			INTO ADMIN_NOTICE A
 			(
 				A.NOTICE_NO
 			  , A.NOTICE_TITLE
 			  , A.NOTICE_CONTENT
-			  , A.REG_DATE
 			  , A.MEMBER_ID
 			)
 			VALUES
 			(
 				SEQ_ADMINNOTICENO.NEXTVAL
-			  , #{ title }
-			  , #{ content }
-			  , #{ date }
-			  , #{ id }
+			  , #{ noticeTitle }
+			  , #{ noticeContent }
+			  , #{ memberId }
+			)
+		<selectKey keyProperty="noticeNo" resultType="Integer" order="AFTER">
+			SELECT
+					SEQ_ADMINNOTICENO.CURRVAL
+			  FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttach" parameterType="com.waeating.notice.model.dto.NoticeAttachDTO">
+		INSERT
+			INTO ADMIN_NOTICE_ATTACH A
+			(
+				A.FILE_NO
+			  , A.NOTICE_NO
+			  , A.ORIGIN_NAME
+			  , A.FILE_NAME
+			)
+			VALUES
+			(
+				SEQ_ADMINNOTICEATTACHNO.NEXTVAL
+			  , #{ noticeNo }
+			  , #{ originName }
+			  , #{ fileName }
 			)
 	</insert> 
+	
+	<select id="selectNoticeAttachList" resultMap="attachResultMap" parameterType="hashmap">
+		SELECT
+				A.FILE_NAME
+		  FROM ADMIN_NOTICE_ATTACH A
+		 WHERE A.NOTICE_NO = #{ noticeNo }
+		   AND A.IS_DELETED = 'N'
+	</select>
 </mapper>
