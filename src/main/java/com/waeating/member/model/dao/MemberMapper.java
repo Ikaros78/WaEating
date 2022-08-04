@@ -29,6 +29,8 @@ public interface MemberMapper {
 
 	UserInfoAttachDTO selectUserAttach(Map<String, String> searchMap);
 
+	int insertAdmin(Map<String, String> adminMap);
+	
 	/* user-login */
 	MemberDTO selectMemberLogin(MemberDTO requestMember);
 	
@@ -45,6 +47,7 @@ public interface MemberMapper {
 	MemberDTO checkFindPwForEmail(MemberDTO requestMember);
 
 	int updateNewPwd(MemberDTO requestMember);
+
 
 
 

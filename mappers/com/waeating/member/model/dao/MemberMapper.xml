@@ -240,7 +240,7 @@
 	<select id="dubleCkId" resultType="_int">
 		SELECT
 			   COUNT(*)
-		  FROM USER_INFO
+		  FROM MEMBER_INFO
 		 WHERE MEMBER_ID = #{ dubleCkId }
 	</select>
 	
@@ -296,4 +296,26 @@
 		   SET A.MEMBER_PWD = #{ pwd }
 		 WHERE A.MEMBER_ID = #{ id }
 	</update>
+	
+	<insert id="insertAdmin" parameterType="hashmap">
+		INSERT
+			INTO MEMBER_INFO A
+			(
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.MEMBER_TYPE
+			  , A.PHONE
+			)
+			VALUES
+			(
+				#{ id }
+			  , #{ pwd }
+			  , #{ email }
+			  , #{ name }
+			  , 'admin'
+			  , #{ phone }
+			)
+	</insert>
 </mapper>
