@@ -87,14 +87,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				COUNT(*)
 			FROM ADMIN_NOTICE A
 			<!-- 검색조건문 -->
-		<where>
-			<if test="searchCondition =='id'">
-				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
-			</if>
-			<if test="searchCondition =='title'">
-				A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
-			</if>
-		</where>
+			<where>
+				<if test="searchCondition =='id'">
+					A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+				</if>
+				<if test="searchCondition =='title'">
+					A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+				</if>
+			</where>
 	</select>
 	
 	<select id="adminSelectNoticeList" resultMap="noticeResultMap">
