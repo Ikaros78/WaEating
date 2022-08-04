@@ -41,12 +41,12 @@
               <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" class="mx-2" width="350px" height="300px">
             </div>
             <div class="d-flex justify-content-end pe-5">
-              <button class="btn btn-primary" type="button">파일 선택</button>
+              <!-- <button class="btn btn-primary" type="button">파일 선택</button> -->
             </div>
           </div>
             
             <div class="my-4 row mx-1 px-5">
-              <form action="${ pageContext.servletContext.contextPath }/ceo/rest_restInfo" method="get">
+              <form action="${ pageContext.servletContext.contextPath }/ceo/rest_restInfo_modify" method="get">
                 <table width="100%">
                   <tr>
                     <td class="col-1">가게명</td>
@@ -150,78 +150,28 @@
                     <c:set var = "holiday" value="${ requestScope.comInfo.holiday }"/>
                       <select class="form-select" name="holiday" id="holiday" disabled>
 	                      <c:if test="${fn:contains(holiday, '월')}">
-	                      	<option>-</option>
 	                        <option selected>월</option>
-	                        <option>화</option>
-	                        <option>수</option>
-	                        <option>목</option>
-	                        <option>금</option>
-	                        <option>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '화')}">
-	                        <option>월</option>
 	                        <option selected>화</option>
-	                        <option>수</option>
-	                        <option>목</option>
-	                        <option>금</option>
-	                        <option>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '수')}">
-	                        <option>월</option>
-	                        <option>화</option>
 	                        <option selected>수</option>
-	                        <option>목</option>
-	                        <option>금</option>
-	                        <option>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '목')}">
-	                        <option>월</option>
-	                        <option>화</option>
-	                        <option>수</option>
 	                        <option selected>목</option>
-	                        <option>금</option>
-	                        <option>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '금')}">
-	                        <option>월</option>
-	                        <option>화</option>
-	                        <option>수</option>
-	                        <option>목</option>
 	                        <option selected>금</option>
-	                        <option>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '토')}">
-	                        <option>월</option>
-	                        <option>화</option>
-	                        <option>수</option>
-	                        <option>목</option>
-	                        <option>금</option>
 	                        <option selected>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '일')}">
-	                        <option>월</option>
-	                        <option>화</option>
-	                        <option>수</option>
-	                        <option>목</option>
-	                        <option>금</option>
-	                        <option>토</option>
 	                        <option selected>일</option>                          	
 	                      </c:if>
 	                      <c:if test="${fn:contains(holiday, '연중무휴')}">
 	                      	<option selected>-</option>
-	                        <option>월</option>
-	                        <option>화</option>
-	                        <option>수</option>
-	                        <option>목</option>
-	                        <option>금</option>
-	                        <option>토</option>
-	                        <option>일</option>                          	
 	                      </c:if>
                       </select>
                     </td>
@@ -233,10 +183,10 @@
                       	<div id="menugroup">
                       	<c:forEach items="${ requestScope.comMenuList }" var="menu">
                           <div class="input-group my-3" id="menu">
-                              <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }">
-                              <input type="text" name="price" id="menuPrice" class="form-control" value="${ menu.comMenu.price }">
-                              <button class="btn btn-light border minus" type="button" id="minus">-</button>
-                              <button class="btn btn-primary plus" type="button" id="plus">+</button>
+                              <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }" disabled>
+                              <input type="text" name="price" id="menuPrice" class="form-control" value="${ menu.comMenu.price }" disabled>
+                              <!-- <button class="btn btn-light border minus" type="button" id="minus">-</button>
+                              <button class="btn btn-primary plus" type="button" id="plus">+</button> -->
                           </div>
                           </c:forEach>
                         </div>
@@ -255,7 +205,7 @@
                  
                 </table>
                 <div class="col d-flex justify-content-center mt-4">
-                  <button class="btn btn-light border me-1" type="reset">취소</button>
+                  <button class="btn btn-light border me-1" type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/main'">취소</button>
                   <button class="btn btn-primary border ms-1" type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_restInfo_modify'">수정</button>
                 </div>
                 
@@ -274,7 +224,7 @@
                 
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
-                      </div>
+                      </iv>
                 
                     </div>
                   </div>
