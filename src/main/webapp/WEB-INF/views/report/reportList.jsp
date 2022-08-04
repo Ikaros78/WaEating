@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
 
-  <div id="wrap">
+ 
    
  <div class="container">
         <section class="notice">
@@ -25,21 +25,7 @@
                       <h3>고객센터</h3>
                   </div>
               </div>
-          
-              <!-- board seach area -->
-              <div id="board-search">
-                  <div class="container">
-                      <div class="search-window">
-                          <form action="">
-                              <div class="search-wrap">
-                                  <label for="search" class="blind">고객센터 내용 검색</label>
-                                  <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                                  <button type="submit" class="btn btn-dark">검색</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-              </div>
+
              <div id="board-list">
                   <div class="container">
                       <table class="board-table">
@@ -51,16 +37,13 @@
                           </tr>
                           </thead>
                           <tbody>
-                          <c:forEach var="report" items="${ requestScope.reportList }" varStatus="status">
-                          <tr>
-                              <td><c:out value="${ report.reportNo }"/></td>
-                              <th>
-                                <a href="${ pageContext.servletContext.contextPath }/report/report_detail?reportNo=${ report.reportNo }"><c:out value="${ report.reportTitle }"/></a>
-                                
-                              </th>
-                              <td><c:out value="${ report.regDate }"/></td>
-                          </tr>
-           				</c:forEach>
+                    <c:forEach items="${ requestScope.reportList }" var="report">
+					<tr>
+						<td><c:out value="${ report.reportNo}"/></td>
+						<td><c:out value="${ report.title }"/></td>
+						<td><c:out value="${ report.regDate }"/></td>
+					</tr>
+				</c:forEach>
             
                          
                           </tbody>
@@ -77,7 +60,7 @@
 				<div class="input-group mb-3">
 				<input type="hidden" class="form-control" name="currentPage" value="1">
 				    <select id="searchCondition" name="searchCondition" class="form-control">
-						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "reportTitle"? "selected": "" }>제목</option>
+						<option value="reportTitle" ${ requestScope.selectCriteria.searchCondition eq "reportTitle"? "selected": "" }>제목</option>
 					</select>
 			        <input type="text" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
 					<button type="submit" class="btn btn-primary">검색하기</button>
@@ -94,29 +77,35 @@
 <jsp:include page="/WEB-INF/views/user/user_footer.jsp">  
   </div>
   <script>
-		
-		if(document.getElementsByClassName('td')) {
-			
-			const $tds = document.getElementsByClassName('td');
-			for(let i = 0; i < $tds.length; i++) {
-				
-				$tds[i].onmouseenter = function() {
-					this.parentNode.style.cursor = "pointer";
-				}
-				
-				$tds[i].onclick = function() {
-					/* 게시물 번호까지 알아왔으니 이제 상세보기는 할 수 있습니다. */
-					
-					/* alert(this.parentNode.children[1].innerText); */
-					
-					location.href = ""
-					
-				}
-				
-			}
-			
-		}
-		
-	</script>
+    	
+    	const detailLink = "${ pageContext.servletContext.contextPath}/admin/report/detail/session"
+    
+    	if(document.getElementsByTagName("td")) {
+    		
+    		const $tds = document.getElementsByClassName("details");
+    		for(let i = 0; i < $tds.length; i++){
+    			
+    			$tds[i].onmouseenter = function(){
+    				this.parentNode.style.backgroundColor = "lightgrey";
+    				this.parentNode.style.cursor = "pointer";
+    			}
+    			
+    			$tds[i].onmouseout = function(){
+    				this.parentNode.style.backgroundColor = "white";
+    			}
+    		}
+    		const $trs = document.getElementsByClassName("rowClick");
+    		for(let j = 0; j < $trs.length; j++){
+    			
+    			$trs[j].onclick = function(){
+    				/* alert($(this).children().eq(0).text()); */
+    				var reportNo = $(this).children().eq(0).text();
+    				location.href = detailLink + "?reportNo=" + reportNo; 
+    			}
+    		}
+    		
+    	}
+
+    </script>
 </body>
-</html> --%>
+</html>

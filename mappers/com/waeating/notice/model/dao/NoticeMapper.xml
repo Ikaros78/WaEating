@@ -48,6 +48,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	            WHERE A.RNUM >= #{ startRow }    
 	            ]]>
      </select>
+     
+     	<select id="selectNoticeDeatail" resultMap="noticeResultMap">
+		SELECT
+				A.NOTICE_TITLE
+			  , A.NOTICE_CONTENT
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+		  FROM ADMIN_NOTICE A
+		 WHERE A.NOTICE_NO = #{ noticeNo }			
+	</select>
+	
 
    <select id="selectTotalCount" resultType="_int" parameterType="hashMap">
      SELECT
@@ -74,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 				COUNT(*)
 			FROM ADMIN_NOTICE A
-			<!-- 검색조건문 -->
+			검색조건문
 		<where>
 			<if test="searchCondition =='id'">
 				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
@@ -173,5 +184,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			  , #{ date }
 			  , #{ id }
 			)
-	</insert>
+	</insert> 
 </mapper>

@@ -70,7 +70,7 @@
 		 
 	</select>
 	
-	<select id="SelectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
+	<select id="selectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
 		SELECT
 				A.REPORT_TITLE
 			  , A.REPORT_CONTENT
@@ -83,4 +83,34 @@
 			LEFT JOIN REPORT_ANS B ON (A.REPORT_NO = B.REPORT_NO)
 		   WHERE A.REPORT_NO = #{ reportNo }
 	</select> 
+	<insert id="insertReport" parameterType="hashmap">
+		INSERT
+			INTO REPORT A
+			(
+				A.REPORT_NO
+			  , A.REPORT_CONTENT
+			  , A.REPORT_DATE
+			  , A.REPORT_NO
+			)
+			VALUES
+			(
+				SEQ_ANSNO.NEXTVAL
+			  , #{ content }
+			  , #{ date }
+			  , #{ reportNo }
+			)
+	</insert>
+	
+	<delete id="deleteReport">
+		DELETE
+			FROM REPORT_ANS A
+		   WHERE A.ANS_NO = #{ ansNo }
+	</delete>
+	
+	<update id="updateReport">
+		UPDATE
+				REPORT_ANS A
+		
+		WHERE A.REPORT_NO = #{ reportNo }
+	</update>
 </mapper>

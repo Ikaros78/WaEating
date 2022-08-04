@@ -12,7 +12,7 @@ public interface ReportMapper {
 
 	 int selectTotalCount(Map<String, String> searchMap);
 
-	 ReportDTO selectReprotDeatail(int no); 
+	 ReportDTO selectReportDeatail(int no); 
     
 	 int insertReport(ReportDTO report);
 

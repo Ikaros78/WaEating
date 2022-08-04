@@ -32,9 +32,9 @@ public class NoticeSelectDetailServlet extends HttpServlet {
 		String path = "";
 		if(noticeDetail != null) {
 			path = "/WEB-INF/views/mainNotice/notice_detail.jsp";
-			request.setAttribute("notice", noticeDetail);
+			request.setAttribute("noticeDetail", noticeDetail);
 		} else {
-			path = "WEB-INF/views/common/errorPage.jsp";
+			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "공지사항 상세보기에 실패하셨습니다");
 		}
 		 request.getRequestDispatcher(path).forward(request, response);

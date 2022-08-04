@@ -70,7 +70,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	    request.setAttribute("noticeList", noticeList);
 	    request.setAttribute("selectCriteria", selectCriteria);
 	} else {
-	    path = "/WEB-INF/views/common/errorPage.jsp";
+	    path = "/WEB-INF/views/common/failed.jsp";
 	    request.setAttribute("message", "공지사항 조회에 실패했습니다");
 	}
 

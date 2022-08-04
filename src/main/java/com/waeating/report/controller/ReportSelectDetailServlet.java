@@ -32,7 +32,7 @@ public class ReportSelectDetailServlet extends HttpServlet {
 			path = "/WEB-INF/views/report/reportDetail.jsp";
 			request.setAttribute("report", report);
 		} else {
-			path = "WEB-INF/views/common/failed.jsp";
+			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "공지사항 상세보기에 실패하셨습니다");
 		}
 		 request.getRequestDispatcher(path).forward(request, response);
