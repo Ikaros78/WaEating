@@ -118,7 +118,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    <button type="button" id="btnDelete" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
                 </div>
               </div>
@@ -149,6 +149,15 @@
               </div>
             </div>
           </form>
+          
+          <script>
+	          if(document.getElementById("btnDelete")){
+	      		const $delete = document.getElementById("btnDelete");
+	      		$delete.onclick = function(){
+	      			location.href = "${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_delete?reviewNo=${ requestScope.selectOneReview.reviewNo }";
+	      		}
+	      	  }
+          </script>
           <!-- <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-outline-secondary me-2" value="취소" onclick="history.go(-1)">취소</button>
             <button type="submit" class="btn btn-primary" value="등록">등록</button>
