@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +11,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/user.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+   <!-- bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<!-- summernote -->
+	<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote-lite.js"></script>
+	<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/summernote/summernote-lite.css">
+	<!-- summernote script -->
+	<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote.js"></script>
 </head>
 <body>
   <jsp:include page="../user_header.jsp"/>
@@ -37,43 +47,113 @@
         <h2 style="text-indent: 30px;">내가 쓴 리뷰</h2>
         <hr>
         <div class="review mx-4 ">
-            <h5>[또 보겠지 떡볶이집 몽글몽글 청계점]</h5>
-            <p style="color: gray;">2022/07/17</p>
+            <h5>[${ requestScope.waitingRecord.comInfo.comName }]</h5>
+            <p style="color: gray;">${ requestScope.waitingRecord.useDate }</p>
             <br>
             <h6><나의 예약 정보></h6>
-            <p>인원수 : 3명</p>
-            <p>전화번호 : 010-1234-5678</p>
-        </div>
+            <p>인원수 : ${ requestScope.waitingRecord.memberNum }</p>
+            <p>전화번호 : ${ requestScope.waitingRecord.memberInfo.phone }</p>
+        </div> <!-- review -->
         <br>
+        <form action="${ pageContext.servletContext.contextPath }/user/review/deleteupdate" method="post">
         <div class="review_write">
-            <br>
+        <br>
       
             <div class="container mt-3">
-                
-            
+
                 <div class="content_header">
-                    <p class="date">2022-07-17</p>
-                    <p class="point">★★★★★</p>
-                </div>
+                    <%-- <p class="date">${ requestScope.review.waitingRecord.useDate }</p> --%>
+                    
+                <div class="star-rating space-x-4 mx-auto">
+                   <c:if test="${ requestScope.review.ratings eq '5' }">
+	                <input type="radio" id="5-stars" name="ratings" value="5" checked/>
+	                <label for="5-stars" class="star pr-4">★</label>
+	                <input type="radio" id="4-stars" name="ratings" value="4"/>
+	                <label for="4-stars" class="star">★</label>
+	                <input type="radio" id="3-stars" name="ratings" value="3"/>
+	                <label for="3-stars" class="star">★</label>
+	                <input type="radio" id="2-stars" name="ratings" value="2"/>
+	                <label for="2-stars" class="star">★</label>
+	                <input type="radio" id="1-star" name="ratings" value="1"/>
+	                <label for="1-star" class="star">★</label>
+                   </c:if>
+                   <c:if test="${ requestScope.review.ratings eq '4' }">
+	                <input type="radio" id="5-stars" name="ratings" value="5"/>
+	                <label for="5-stars" class="star pr-4">★</label>
+	                <input type="radio" id="4-stars" name="ratings" value="4" checked/>
+	                <label for="4-stars" class="star">★</label>
+	                <input type="radio" id="3-stars" name="ratings" value="3"/>
+	                <label for="3-stars" class="star">★</label>
+	                <input type="radio" id="2-stars" name="ratings" value="2"/>
+	                <label for="2-stars" class="star">★</label>
+	                <input type="radio" id="1-star" name="ratings" value="1"/>
+	                <label for="1-star" class="star">★</label>
+                   </c:if>
+                   <c:if test="${ requestScope.review.ratings eq '3' }">
+	                 <input type="radio" id="5-stars" name="ratings" value="5"/>
+	                <label for="5-stars" class="star pr-4">★</label>
+	                <input type="radio" id="4-stars" name="ratings" value="4"/>
+	                <label for="4-stars" class="star">★</label>
+	                <input type="radio" id="3-stars" name="ratings" value="3" checked/>
+	                <label for="3-stars" class="star">★</label>
+	                <input type="radio" id="2-stars" name="ratings" value="2"/>
+	                <label for="2-stars" class="star">★</label>
+	                <input type="radio" id="1-star" name="ratings" value="1"/>
+	                <label for="1-star" class="star">★</label>
+                   </c:if>
+                   <c:if test="${ requestScope.review.ratings eq '2' }">
+	                 <input type="radio" id="5-stars" name="ratings" value="5"/>
+	                <label for="5-stars" class="star pr-4">★</label>
+	                <input type="radio" id="4-stars" name="ratings" value="4"/>
+	                <label for="4-stars" class="star">★</label>
+	                <input type="radio" id="3-stars" name="ratings" value="3"/>
+	                <label for="3-stars" class="star">★</label>
+	                <input type="radio" id="2-stars" name="ratings" value="2" checked/>
+	                <label for="2-stars" class="star">★</label>
+	                <input type="radio" id="1-star" name="ratings" value="1"/>
+	                <label for="1-star" class="star">★</label>
+                   </c:if>
+                   <c:if test="${ requestScope.review.ratings eq '1' }">
+	                 <input type="radio" id="5-stars" name="ratings" value="5"/>
+	                <label for="5-stars" class="star pr-4">★</label>
+	                <input type="radio" id="4-stars" name="ratings" value="4"/>
+	                <label for="4-stars" class="star">★</label>
+	                <input type="radio" id="3-stars" name="ratings" value="3"/>
+	                <label for="3-stars" class="star">★</label>
+	                <input type="radio" id="2-stars" name="ratings" value="2"/>
+	                <label for="2-stars" class="star">★</label>
+	                <input type="radio" id="1-star" name="ratings" value="1" checked/>
+	                <label for="1-star" class="star">★</label>
+                   </c:if>
+                   
+	                
+            	</div>
+             	
+                </div><!-- content_header -->
                  <textarea class="form-control" rows="5" id="summernote" name="reviewContent" >
-                 
+                 	${requestScope.review.reviewContent }
                  </textarea>
-                    <img src="../1_front/images/ddok1.png" alt="">
-                    <img src="../1_front/images/ddok1.png" alt="">
-                    <img src="../1_front/images/ddok1.png" alt="">        
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="margin-left: 40%; margin-top: 10px;" >수정하기</button>
-                  <button type="submit" class="btn btn-danger" style="margin-top: 10px; margin-left: 10px;" >삭제하기</button>
+              	<c:forEach var="reviewImg" items="${ requestScope.reviewAttach }">
+                	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewImg.fileName }" alt="" style="width:150px; height:150px; margin:20px;">
+              	</c:forEach>
+     
+                 
+            </div><!-- container -->
+            <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary me-3" style="margin-top: 10px;">수정하기</button>
+                  <button type="submit" class="btn btn-danger me-4" style="margin-top: 10px;">삭제하기</button>
             </div>
+        </div><!-- review_writer -->
+        </form>
           
-        </div>
-
-
-       </aside>
+      </aside>
     </section>
    
+        
+
+
     <jsp:include page="../user_footer.jsp"/>
-  </div>
+  </div><!-- wrap -->
 
 </body>
 </html>

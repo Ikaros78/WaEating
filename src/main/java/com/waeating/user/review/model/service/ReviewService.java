@@ -3,6 +3,7 @@ package com.waeating.user.review.model.service;
 import static com.waeating.common.mybatis.Template.getSqlSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -93,6 +94,41 @@ public class ReviewService {
 		sqlSession.close();
 		
 		return result;
+	}
+
+	/**
+	 * <pre>
+	 *  내 리뷰 보기 리뷰 조회
+	 * <pre>
+	 * @param selectComMap
+	 * @return
+	 */
+	public ReviewDTO selectReview(Map<String, String> selectComMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reviewMapper = sqlSession.getMapper(ReviewMapper.class);
+		
+		ReviewDTO review = reviewMapper.selectMyReview(selectComMap);
+		
+		sqlSession.close();
+		
+		return review;
+	}
+
+	public List<ReviewAttachDTO> selectReviewImg(int reviewNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reviewMapper = sqlSession.getMapper(ReviewMapper.class);
+		
+		List<ReviewAttachDTO> review = reviewMapper.selectMyReviewImg(reviewNo);
+		
+		sqlSession.close();
+		
+		return review;
+		
+		
 	}
 
 
