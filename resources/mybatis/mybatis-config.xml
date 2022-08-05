@@ -27,5 +27,6 @@
 	    <package name="com.waeating.ceo.review.model.dao"/>
 	    <package name="com.waeating.ceo.restInfo.model.dao"/>
 	    <package name="com.waeating.review.model.dao"/>
+	    <package name="com.waeating.ceo.reservation.model.dao"/>
 	</mappers>
 </configuration>

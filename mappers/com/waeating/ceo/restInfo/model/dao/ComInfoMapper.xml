@@ -42,11 +42,44 @@
 	
 	<select id="comSelectOneComMenu" resultMap="comInfoResultMap">
 		SELECT
-		       CM.MENU_NAME
+			   CM.MENU_NO
+		     , CM.MENU_NAME
 		     , CM.PRICE
 		  FROM COM_INFO CI
 		  JOIN COM_MENU CM ON (CI.COM_NO = CM.COM_NO)
 		 WHERE CI.COM_NO = 1
 	</select>
+	
+	<insert id="insertComMenu">
+		INSERT
+  		  INTO COM_MENU CM
+  		(
+  			CM.MENU_NO, CM.MENU_NAME, CM.PRICE,
+  			CM.COM_NO
+  		)
+  		VALUES
+  		(
+  			SEQ_MENUNO.NEXTVAL, #{ menuName }, #{ price },
+  			1
+  		)
+	</insert>
+	
+	<delete id="deleteComMenu">
+		DELETE
+		  FROM COM_MENU CM
+		 WHERE CM.COM_NO = #{ comNo }
+	</delete>
+	
+	<update id="updateComInfo">
+		UPDATE
+			   COM_INFO CI
+		   SET CI.COM_NAME = #{ comName }
+		     , CI.CATEGORY = #{ category }
+		     , CI.COM_ADDRESS = #{ comAddress }
+		     , CI.COM_PHONE = #{ comPhone }
+		     , CI.WORK_TIME = #{ workTime }
+		     , CI.HOLIDAY = #{ holiday }
+		 WHERE CI.COM_NO = #{ comNo }
+	</update>
 
 </mapper>
