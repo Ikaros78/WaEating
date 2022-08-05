@@ -72,9 +72,6 @@ public class UserReservationServlet extends HttpServlet {
 		waitingRecord.put("memberNum", memberNum);
 		waitingRecord.put("requirement", requirement);
 		
-	
-		
-		
 		System.out.println("insetWaitingRecord : " + waitingRecord);
 		
 		ReservationService reservationService = new ReservationService();

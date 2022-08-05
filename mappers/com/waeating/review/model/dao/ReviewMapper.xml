@@ -257,4 +257,19 @@
   	   FROM REVIEW_ATTACH A
   	  WHERE A.REVIEW_NO = #{ reviewNo }    
   </select>
+  
+  <update id="userUpdateReview" parameterType="hashMap">
+  	UPDATE
+  	       REVIEW A
+  	   SET A.REVIEW_CONTENT = #{ reviewContent }
+  	   	 , A.RATINGS = #{ ratings }
+  	 WHERE A.RECORD_NO = #{ recordNo } 	 		   
+  	
+  </update>
+  
+  <delete id="userDeleteReview" >
+  	DELETE
+  	 FROM REVIEW A
+  	 WHERE A.RECORD_NO = #{ recordNo }
+  </delete>
   </mapper>

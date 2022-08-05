@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.review.model.dto.ReviewAttachDTO;
@@ -21,16 +22,13 @@ import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 /**
  * Servlet implementation class UserReviewDeleteUpdateServlet
  */
-@WebServlet("/user/review/deleteupdate")
-public class UserReviewDeleteUpdateServlet extends HttpServlet {
+@WebServlet("/user/review/selecteupdate")
+public class UserReviewSelectUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		
-//		request.getRequestDispatcher("/WEB-INF/views/user/user_review/user_review_deleteupdate.jsp").forward(request, response);
-		
+
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
 		String userId = member.getId();
 		
@@ -43,6 +41,10 @@ public class UserReviewDeleteUpdateServlet extends HttpServlet {
 		selectComMap.put("userId",userId);
 		selectComMap.put("comNo", comNo);
 		selectComMap.put("recordNo", recordNo);
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("recordNo", recordNo);
 		
 		ReservationService reservationService = new ReservationService();
 		ReviewService reviewService = new ReviewService();
@@ -70,6 +72,40 @@ public class UserReviewDeleteUpdateServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+		
+	}
+	
+	@Override
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String reviewContent = request.getParameter("reviewContent");
+		String recordNo = (String) request.getSession().getAttribute("recordNo");
+		String ratings = request.getParameter("ratings");
+		
+		System.out.println("a :" + reviewContent);
+		System.out.println("b :" + recordNo);
+		System.out.println("d :" + ratings);
+		
+		Map<String, String> updateReviewMap = new HashMap<>();
+		updateReviewMap.put("reviewContent", reviewContent);
+		updateReviewMap.put("recordNo", recordNo);
+		updateReviewMap.put("ratings", ratings);
+		
+		System.out.println("updateReviewMap : " + updateReviewMap);
+		
+		ReviewService reviewService = new ReviewService();
+		
+		int result = reviewService.updateReview(updateReviewMap);
+		
+		String path = "";
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/user/reservation/finish");
+		} else {
+			path = "/WEB-INF/views/common/erroePage.jsp";
+			request.setAttribute("message", "리뷰 수정 실패");
+			request.getRequestDispatcher(path).forward(request, response);
+		}
 		
 	}
 

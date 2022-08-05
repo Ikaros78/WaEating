@@ -55,7 +55,7 @@
             <p>전화번호 : ${ requestScope.waitingRecord.memberInfo.phone }</p>
         </div> <!-- review -->
         <br>
-        <form action="${ pageContext.servletContext.contextPath }/user/review/deleteupdate" method="post">
+        <form action="${ pageContext.servletContext.contextPath }/user/review/selecteupdate" method="post">
         <div class="review_write">
         <br>
       
@@ -130,7 +130,7 @@
             	</div>
              	
                 </div><!-- content_header -->
-                 <textarea class="form-control" rows="5" id="summernote" name="reviewContent" >
+                 <textarea class="form-control" rows="5" id="summernote" name="reviewContent" required>
                  	${requestScope.review.reviewContent }
                  </textarea>
               	<c:forEach var="reviewImg" items="${ requestScope.reviewAttach }">
@@ -140,12 +140,19 @@
                  
             </div><!-- container -->
             <div class="d-flex justify-content-end">
-                  <button type="submit" class="btn btn-primary me-3" style="margin-top: 10px;">수정하기</button>
-                  <button type="submit" class="btn btn-danger me-4" style="margin-top: 10px;">삭제하기</button>
+                  <button type="submit" class="btn btn-primary me-3" style="margin-top: 10px;" >수정하기</button>
+                  <button type="button" id="ReviewDelete" class="btn btn-danger me-4" style="margin-top: 10px;">삭제하기</button>
             </div>
         </div><!-- review_writer -->
         </form>
-          
+          <script>
+          	if(document.getElementById("ReviewDelete")){
+          		const $delete = document.getElementById("ReviewDelete");
+          		$delete.onclick = function(){
+          			location.href = "${ pageContext.servletContext.contextPath }/user/review/delete?recordNo=${ requestScope.review.recordNo }";
+          		}
+          	}
+          </script>
       </aside>
     </section>
    
