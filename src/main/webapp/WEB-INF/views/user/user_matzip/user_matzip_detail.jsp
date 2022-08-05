@@ -107,16 +107,16 @@
           <div class="tab-content">
             <div id="home" class="container tab-pane active"><br>
             <c:forEach var="review" items="${ requestScope.selectReview }">
-              <div class="review_all m-5">
 
-                <div class="review my-2 " style=" min-height: 150px ">
+                <div class="review my-2 m-2" style=" min-height: 150px ">
       
-                  <div class="user" style="height:150px; ">
+                  <div class="user float-start" style="width:19%">
                  
                     <img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ review.userInfoAttach.fileName }" alt="user_profile" >
                     <p>${ review.memberInfo.id }</p>
+                    
                   </div>
-                  <div class="content ">
+                  <div class="content float-end" style="width:77%">
                     
                     <div class="content_header">
                       <p class="date">${ review.waitingRecord.useDate }</p>
@@ -164,7 +164,7 @@
                     </c:if>
                   </div>
                 </div><!--review-->
-              </div> <!--review_all-->
+         
             </c:forEach>
             </div>
             <div id="menu1" class="container tab-pane fade"><br>

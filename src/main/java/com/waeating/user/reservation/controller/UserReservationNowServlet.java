@@ -39,18 +39,11 @@ public class UserReservationNowServlet extends HttpServlet {
 		
 		ReservationService reservationService = new ReservationService();
 	
-		/* 웨이팅 정보 불러오기 용 */
-//		List<WaitingRecordDTO> waitingRecordAll = reservationService.selectWaitingRecordAll(searchMap);
-		
-//		System.out.println("totalreservationCount : " + totalCount);
-		
 
-		
 		List<ComInfoDTO> waitingRecord = reservationService.selectNowReservation(searchMap);
 		
 		
 		HttpSession session = request.getSession();
-		
 		session.setAttribute("waitingRecord", waitingRecord); 
 		
 		
