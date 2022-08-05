@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,6 @@
           <!-- 메뉴 세부 제목 -->
           <a href="${ pageContext.servletContext.contextPath }/ceo/reservation_current" class="list-group-item list-group-item-action py-3 select">예약 현황 관리</a>
           <a href="${ pageContext.servletContext.contextPath }/ceo/reservation_list" class="list-group-item list-group-item-action py-3">예약 리스트 보기</a>
-         
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
@@ -45,235 +45,96 @@
               </div>
             </div>
             <div id="accordion">
+              <c:forEach var="waiting" items="${ requestScope.waitingRecordList }" varStatus="stu">
               <div class="card">
                 <div class="card-header">
-                  <a class="btn container-fluid" data-bs-toggle="collapse" href="#collapse1">
+                  <a class="btn container-fluid" data-bs-toggle="collapse" href="#collapse${ stu.count }">
                     <table width="100%">
                       <tr>
-                        <td class="h1">1</td>
-                        <td class="h4" colspan="2">홍길동</td>
+                        <td class="h1">${ waiting.rNum }</td>
+                        <td class="col-2 h4 text-center">${ waiting.memberInfo.name }</td>
                         <td class="col-8"></td>
-                        <td class="text-end pe-1" rowspan="2"><button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call">고객 호출</button></td>
-                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit">착석 완료</button></td>
+                        <td class="text-end pe-1" rowspan="2">
+                        	<c:if test="${ waiting.useStatus eq 'waiting' }">
+                        	<button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call" style="width: 65px">고객 호출</button>
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus ne 'waiting' }">
+                        	<button type="button" class="btn btn-secondary text-white" value="고객 호출" style="width: 65px">고객 호출</button>
+                        	</c:if>
+                        </td>
+                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit" style="width: 65px">착석 완료</button></td>
                       </tr>
                       <tr>
-                        <td>18:20</td>
-                        <td class="col-1 text-end pe-1">성인 02</td>
-                        <td class="col-1 text-start ps-1">유아 02</td>
+                        <td>${ waiting.useTime }</td>
+                        <td class="col-1 text-center">인원 ${ waiting.memberNum }</td>
                       </tr>
                     </table>
                   </a>
                 </div>
-                <div id="collapse1" class="collapse" data-bs-parent="#accordion">
+                <div id="collapse${ stu.count}" class="collapse" data-bs-parent="#accordion">
                   <div class="card-body">
-                    <div class="row">
-                      <div class="h5 col-1">홍길동</div>
-                      <div class="h5 col-2">010-1234-5678</div>
-                    </div>
                     <table width="100%">
+                      <tr>
+                      	<td><h5>${ waiting.memberInfo.name }</h5></td>
+                      	<td><h5>${ waiting.memberInfo.phone }</h5></td>
+                      </tr>
                       <tr>
                         <th class="col-1">상태</th>
                         <th class="col-2">예약 취소 사유</th>
-                        <th class="col-4">요청사항</th>
-                        <th class="col-4">고객 메모</th>
-                        <td class="px-3" rowspan="2"><button type="button" class="btn btn-light px-3" value="예약 취소">예약 취소</button></td>
+                        <th class="col-9">요청사항</th>
+                        <td class="px-2" rowspan="2">
+                        	<c:if test="${ waiting.useStatus eq 'waiting' }">
+                        		<button type="button" class="btn btn-danger me-1" value="예약 취소" data-bs-toggle="modal" data-bs-target="#cancel" style="width: 65px">예약 취소</button>
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus ne 'waiting' }">
+                        		<button type="button" class="btn btn-light me-1" value="예약 취소" style="width: 65px">예약 취소</button>
+                        	</c:if>
+                        </td>
                       </tr>
                       <tr>
-                        <td class="col-1"><span class="badge bg-success">착석 완료</span></td>
-                        <td class="col-2">-</td>
+                        <td class="col-1">
+                        	<c:if test="${ waiting.useStatus eq 'complete' }">
+                        		<span class="badge bg-success">착석 완료</span>
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus eq 'waiting' }">
+                        		<span class="badge bg-warning">대기</span>
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus eq 'cancel' }">
+                        		<span class="badge bg-danger">예약 취소</span>
+                        	</c:if>
+                        </td>
+                        <td class="col-2">
+                        	<c:if test="${ waiting.useStatus eq 'complete' }">
+                        	-
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus eq 'waiting' }">
+                        	-
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus eq 'cancel' }">
+                        		<c:if test="${ waiting.refuseReason.refuseReason eq 'soldout' }">
+                        			재료소진
+                        		</c:if>
+                        		<c:if test="${ waiting.refuseReason.refuseReason eq 'close' }">
+                        			영업종료
+                        		</c:if>
+                        		<c:if test="${ waiting.refuseReason.refuseReason eq 'waitingclose' }">
+                        			대기마감
+                        		</c:if>
+                        		<c:if test="${ waiting.refuseReason.refuseReason eq 'request' }">
+                        			고객요청
+                        		</c:if>
+                        	</c:if>
+                        </td>
                         <!-- <span class="badge bg-warning">대기</span>
                         <span class="badge bg-danger">예약 취소</span> -->
-                        <td class="col-4">창가자리로 부탁드립니다.</td>
-                        <td class="col-4">땅콩 알레르기</td>
+                        <td class="col-8">${ waiting.requirement }</td>
                       </tr>
                     </table>
                   </div>
                 </div>
               </div>
-              <div class="card">
-                <div class="card-header">
-                  <a class="collapsed btn container-fluid" data-bs-toggle="collapse" href="#collapse2">
-                    <table width="100%">
-                      <tr>
-                        <td class="h1">2</td>
-                        <td class="h4" colspan="2">홍길동</td>
-                        <td class="col-8"></td>
-                        <td class="text-end pe-1" rowspan="2"><button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call">고객 호출</button></td>
-                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit">착석 완료</button></td>
-                      </tr>
-                      <tr>
-                        <td>18:22</td>
-                        <td class="col-1 text-end pe-1">성인 02</td>
-                        <td class="col-1 text-start ps-1">유아 00</td>
-                      </tr>
-                    </table>
-                  </a>
-                </div>
-                <div id="collapse2" class="collapse" data-bs-parent="#accordion">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="h5 col-1">홍길동</div>
-                      <div class="h5 col-2">010-1234-5678</div>
-                    </div>
-                    <table width="100%">
-                      <tr>
-                        <th class="col-1">상태</th>
-                        <th class="col-2">예약 취소 사유</th>
-                        <th class="col-4">요청사항</th>
-                        <th class="col-4">고객 메모</th>
-                        <td class="px-3" rowspan="2"><button type="button" class="btn btn-light px-3" value="예약 취소">예약 취소</button></td>
-                      </tr>
-                      <tr>
-                        <td class="col-1"><span class="badge bg-success">착석 완료</span></td>
-                        <td class="col-2">-</td>
-                        <!-- <span class="badge bg-warning">대기</span>
-                        <span class="badge bg-danger">예약 취소</span> -->
-                        <td class="col-4">창가자리로 부탁드립니다.</td>
-                        <td class="col-4">땅콩 알레르기</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <a class="collapsed btn container-fluid" data-bs-toggle="collapse" href="#collapse3">
-                    <table width="100%">
-                      <tr>
-                        <td class="h1">3</td>
-                        <td class="h4" colspan="2">홍길동</td>
-                        <td class="col-8"></td>
-                        <td class="text-end pe-1" rowspan="2"><button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call">고객 호출</button></td>
-                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit">착석 완료</button></td>
-                      </tr>
-                      <tr>
-                        <td>18:25</td>
-                        <td class="col-1 text-end pe-1">성인 04</td>
-                        <td class="col-1 text-start ps-1">유아 00</td>
-                      </tr>
-                    </table>
-                  </a>
-                </div>
-                <div id="collapse3" class="collapse" data-bs-parent="#accordion">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="h5 col-1">홍길동</div>
-                      <div class="h5 col-2">010-1234-5678</div>
-                    </div>
-                    <table width="100%">
-                      <tr>
-                        <th class="col-1">상태</th>
-                        <th class="col-2">예약 취소 사유</th>
-                        <th class="col-4">요청사항</th>
-                        <th class="col-4">고객 메모</th>
-                        <td class="px-3" rowspan="2"><button type="button" class="btn btn-light px-3" value="예약 취소">예약 취소</button></td>
-                      </tr>
-                      <tr>
-                        <td class="col-1"><span class="badge bg-danger">예약 취소</span></td>
-                        <td class="col-2">고객 요청</td>
-                        <!-- <td class="col-2">고객 요청 or 대기 마감 or 재료 소진 or 영업 마감</td> -->
-                        <!-- <span class="badge bg-warning">대기</span>
-                        <span class="badge bg-danger">예약 취소</span> -->
-                        <td class="col-4">창가자리로 부탁드립니다.</td>
-                        <td class="col-4">땅콩 알레르기</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <a class="btn container-fluid" data-bs-toggle="collapse" href="#collapse4">
-                    <table width="100%">
-                      <tr>
-                        <td class="h1">4</td>
-                        <td class="h4" colspan="2">홍길동</td>
-                        <td class="col-8"></td>
-                        <td class="text-end pe-1" rowspan="2"><button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call">고객 호출</button></td>
-                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit">착석 완료</button></td>
-                      </tr>
-                      <tr>
-                        <td>18:30</td>
-                        <td class="col-1 text-end pe-1">성인 02</td>
-                        <td class="col-1 text-start ps-1">유아 02</td>
-                      </tr>
-                    </table>
-                  </a>
-                </div>
-                <div id="collapse4" class="collapse" data-bs-parent="#accordion">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="h5 col-1">홍길동</div>
-                      <div class="h5 col-2">010-1234-5678</div>
-                    </div>
-                    <table width="100%">
-                      <tr>
-                        <th class="col-1">상태</th>
-                        <th class="col-2">예약 취소 사유</th>
-                        <th class="col-4">요청사항</th>
-                        <th class="col-4">고객 메모</th>
-                        <td class="px-3" rowspan="2"><button type="button" class="btn btn-danger px-3" value="예약 취소" data-bs-toggle="modal" data-bs-target="#cancel">예약 취소</button></td>
-                      </tr>
-                      <tr>
-                        <td class="col-1"><span class="badge bg-warning">대기</span></td>
-                        <td class="col-2">-</td>
-                        <!-- 
-                          <span class="badge bg-success">착석 완료</span>
-                          <span class="badge bg-warning">대기</span>
-                          <span class="badge bg-danger">예약 취소</span> 
-                        -->
-                        <td class="col-4">창가자리로 부탁드립니다.</td>
-                        <td class="col-4">땅콩 알레르기</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <a class="btn container-fluid" data-bs-toggle="collapse" href="#collapse5">
-                    <table width="100%">
-                      <tr>
-                        <td class="h1">5</td>
-                        <td class="h4" colspan="2">홍길동</td>
-                        <td class="col-8"></td>
-                        <td class="text-end pe-1" rowspan="2"><button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call">고객 호출</button></td>
-                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit">착석 완료</button></td>
-                      </tr>
-                      <tr>
-                        <td>18:38</td>
-                        <td class="col-1 text-end pe-1">성인 02</td>
-                        <td class="col-1 text-start ps-1">유아 02</td>
-                      </tr>
-                    </table>
-                  </a>
-                </div>
-                <div id="collapse5" class="collapse" data-bs-parent="#accordion">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="h5 col-1">홍길동</div>
-                      <div class="h5 col-2">010-1234-5678</div>
-                    </div>
-                    <table width="100%">
-                      <tr>
-                        <th class="col-1">상태</th>
-                        <th class="col-2">예약 취소 사유</th>
-                        <th class="col-4">요청사항</th>
-                        <th class="col-4">고객 메모</th>
-                        <td class="px-3" rowspan="2"><button type="button" class="btn btn-danger px-3" value="예약 취소" data-bs-toggle="modal" data-bs-target="#cancel">예약 취소</button></td>
-                      </tr>
-                      <tr>
-                        <td class="col-1"><span class="badge bg-warning">대기</span></td>
-                        <td class="col-2">-</td>
-                        <!-- <span class="badge bg-warning">대기</span>
-                        <span class="badge bg-danger">예약 취소</span> -->
-                        <td class="col-4">창가자리로 부탁드립니다.</td>
-                        <td class="col-4">땅콩 알레르기</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
+              </c:forEach>
+              
             </div><!-- 아코디언 -->
 
             <!-- 고객 호출 modal -->
@@ -352,10 +213,10 @@
                 </div>
               </div>
             </div>
-
-            <div class="d-flex justify-content-center my-3">
+			<jsp:include page="../common/paging_reservationc.jsp"/>
+            <!-- <div class="d-flex justify-content-center my-3">
               <button type="button" class="btn btn-danger" style="background: #D94925; border: #D94925;">더보기</button>
-            </div>
+            </div> -->
            
           </div>  
         </div>

@@ -24,9 +24,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">자주 묻는 질문</a>
-              </li>
             </ul>
           </li>
           <li class="nav-item dropmenu mt-4">
@@ -62,6 +59,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">가게 정보 수정</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">고객센터</a>
               </li>
             </ul>
           </li>
