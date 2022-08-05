@@ -173,4 +173,31 @@ public class AdminMemberService {
 		return attach;
 	}
 
+	/**
+	 * <pre>
+	 * 	관리자 회원가입용 메소드
+	 * </pre>
+	 * @param adminMap
+	 * @return
+	 */
+	public int insertAdmin(Map<String, String> adminMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		int result = memberMapper.insertAdmin(adminMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		}else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 }

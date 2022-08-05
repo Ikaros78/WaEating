@@ -297,6 +297,28 @@
 		 WHERE A.MEMBER_ID = #{ id }
 	</update>
 	
+	<insert id="insertAdmin" parameterType="hashmap">
+		INSERT
+			INTO MEMBER_INFO A
+			(
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.MEMBER_TYPE
+			  , A.PHONE
+			)
+			VALUES
+			(
+				#{ id }
+			  , #{ pwd }
+			  , #{ email }
+			  , #{ name }
+			  , 'admin'
+			  , #{ phone }
+			)
+	</insert>
+
 	<select id="checkFindPwForPhone" resultMap="generalUserResultMap" >
 		SELECT
 			   A.MEMBER_PWD
