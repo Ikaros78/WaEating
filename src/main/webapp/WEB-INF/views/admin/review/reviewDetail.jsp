@@ -56,7 +56,7 @@
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><c:out value="${ review.reviewContent }"/></td>
+                            <td><c:out value="${ review.reviewContent }" escapeXml="false"/></td>
                         </tr>
                         <tr>
                             <td>평점</td>
