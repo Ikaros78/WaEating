@@ -43,12 +43,29 @@
             </div>
   
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="business" name="business" placeholder="사업자 번호 입력" required>
-              <label for="business">사업자번호</label>
+                  <input type="tel" class="form-control" id="store_phone" name="store_phone" placeholder="업체 전화번호 입력" required>
+                  <label for="store_phone">업체 전화번호</label>
+                  <div class="invalid-feedback">
+                    업체 전화번호를 입력해주세요.
+                  </div>
+            </div>
+
+          <div class="col-md-4 mb-3">
+                  <label for="category">카테고리</label>
+              <select class="custom-select d-block w-100" id="category" name="category">
+              <option value="">카테고리를 선택해주세요</option>
+                  <option>한식</option>
+                  <option>분식</option>
+                  <option>일식</option>
+                  <option>양식</option>
+                  <option>중식</option>
+                  <option>카페</option>
+                  <option>기타</option>
+              </select>
               <div class="invalid-feedback">
-                사업자번호를 입력해주세요.
+                  카테고리를 선택해주세요.
               </div>
-          </div>
+            </div>
 
             <hr class="mb-4">
             <div class="col-md-12 mb-4"></div>

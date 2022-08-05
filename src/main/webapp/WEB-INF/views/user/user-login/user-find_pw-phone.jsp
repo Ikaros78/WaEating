@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>비밀번호 찾기</title>
+    <title>비밀번호 변경</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/user/user-login/user-find-detail.css">
@@ -14,11 +14,11 @@
     <div class="container">
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
-            <h4 class="mb-3">전화번호로 찾기</h4>
+            <h4 class="mb-3">전화번호로 변경</h4>
             <form class="validation-form" method="post">
               
               <div class="form-floating mb-3">
-                <input type="id" class="form-control" id="id" placeholder="아이디 입력" required>
+                <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" required>
                 <label for="id" style="margin-left:10px">아이디</label>
                 <div class="invalid-feedback">
                   아이디를 입력해주세요.
@@ -26,7 +26,7 @@
             </div>
             
               <div class="form-floating mb-3">
-                  <input type="name" class="form-control" id="name" placeholder="이름 입력" required>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="이름 입력" required>
                   <label for="name">이름</label>
                   <div class="invalid-feedback">
                     이름을 입력해주세요.
@@ -35,7 +35,7 @@
 
               <div class="col-md-4 mb-3">
                   <label for="birth">생년월일</label>
-                  <input type="date" class="form-control" id="birth" placeholder="" required>
+                  <input type="date" class="form-control" id="birth" name="birth" placeholder="" required>
                   <div class="invalid-feedback">
                       생년월일을 입력해주세요.
                   </div>
@@ -43,7 +43,7 @@
 
               <div class="col-md-4 mb-3">
                   <label for="gender">성별</label>
-              <select class="custom-select d-block w-100" id="gender">
+              <select class="custom-select d-block w-100" id="gender" name="gender">
               <option value="">성별을 선택해주세요</option>
                   <option>남성</option>
                   <option>여성</option>
@@ -54,16 +54,24 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="tel" class="form-control" id="phone" placeholder="전화번호 입력" required>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="전화번호 입력" required>
                 <label for="phone">전화번호</p></label>
                 <div class="invalid-feedback">
                   전화번호를 입력해주세요.
                 </div>
-              </div> 
+              </div>
+              
+              <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="pw" name="pw" placeholder="새 비밀번호 입력" required>
+              <label for="new_pw">새 비밀번호</label>
+              <div class="invalid-feedback">
+                 새로운 비밀번호를 입력해주세요.
+              </div>
+            </div>
               
             <hr class="mb-4">
             <div class="col-md-12 mb-4"></div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit" id="completion">비밀번호 찾기</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" id="completion">비밀번호 변경</button>
             <a href="${ pageContext.servletContext.contextPath }/member/user/findpw"><button class="btn btn-primary btn-lg btn-block" type="button" id="backBtn">뒤로가기</button></a>
             </form>
          </div>
