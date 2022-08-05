@@ -40,7 +40,7 @@ $(document).ready(function() {
             focus : true,
             lang : 'ko-KR',
             toolbar : toolbar,
-            placeholder : '가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요.'
+            //placeholder : '가게나 메뉴 소개, 이벤트 등 눈에 띄었으면 하는 내용을 올려주세요.'
             /* callbacks : { //여기 부분이 이미지를 첨부하는 부분
             onImageUpload : function(files, editor,
             welEditable) {

@@ -47,7 +47,7 @@
             <p style="color: gray;">${ reservation.useDate }</p>
             <div style="color:#D94925 ;" class="waitingNo"  > 
             <p class="content"></p>
-             <button type="button" class="show">대기 현황 확인</button> 
+             <button type="button" class="show btn btn-outline-secondary">대기 현황 확인</button> 
              
             </div>
             <br>

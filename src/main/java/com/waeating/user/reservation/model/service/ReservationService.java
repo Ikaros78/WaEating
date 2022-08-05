@@ -217,6 +217,13 @@ public class ReservationService {
 	}
 
 
+	/**
+	 * <pre>
+	 *  예약 취소를 위한 업데이트
+	 * </pre>
+	 * @param waitingRecord
+	 * @return
+	 */
 	public int updateReservaiton(Map<String, String> waitingRecord) {
 		
 		SqlSession sqlSession = getSqlSession();
@@ -237,6 +244,31 @@ public class ReservationService {
 		
 		return result;
 	}
+
+
+	/**
+	 * <pre>
+	 * 	리뷰 작성 시 보여줄 예약 정보 
+	 * </pre>
+	 * @param selectComMap
+	 * @return
+	 */
+	public WaitingRecordDTO selectReservation(Map<String, String> selectComMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reservationMapper = sqlSession.getMapper(WaitingRecordMapper.class);
+		
+		WaitingRecordDTO waiting = reservationMapper.selectReservation(selectComMap);
+		
+		sqlSession.close();
+		
+		
+		return waiting;
+	}
+
+
+
 
 
 

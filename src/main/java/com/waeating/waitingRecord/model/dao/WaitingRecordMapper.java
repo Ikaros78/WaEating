@@ -29,6 +29,9 @@ public interface WaitingRecordMapper {
 	
 	int insertReservation(Map<String, String> waitingRecord);
 	
+	int updateReservation(Map<String, String> waitingRecord);
+	
+	WaitingRecordDTO selectReservation(Map<String, String> selectComMap);
 	/* 관리자용 */
 	int adminSelectTotalCount(Map<String, String> searchMap);
 
@@ -42,7 +45,6 @@ public interface WaitingRecordMapper {
 
 	String adminSelectRefuseLogDetail(Map<String, String> searchMap);
 
-	int updateReservation(Map<String, String> waitingRecord);
 	
 
 

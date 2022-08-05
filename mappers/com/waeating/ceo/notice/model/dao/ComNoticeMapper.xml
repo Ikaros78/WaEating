@@ -108,13 +108,22 @@
   	</delete>
   	
      <select id="selectMatziplistComNotice" resultMap="comNoticeResultMap">
-     	 SELECT
-		          A.NOTICE_TITLE
-		        , A.NOTICE_CONTENT
-		        , A.REG_DATE
-		   	 FROM COM_NOTICE A
-		    WHERE A.COM_NO = #{ comNo }
-		    ORDER BY A.REG_DATE DESC
+     	      SELECT
+	     	      	  B.RNUM	
+			        , B.NOTICE_TITLE
+			        , B.NOTICE_CONTENT
+			        , B.REG_DATE
+			   	 FROM (SELECT ROWNUM RNUM	
+					        , A.NOTICE_TITLE
+					        , A.NOTICE_CONTENT
+					        , A.REG_DATE
+					   	 FROM COM_NOTICE A
+					    WHERE A.COM_NO = #{ comNo }
+					    ORDER BY A.REG_DATE DESC)B
+					    <![CDATA[      
+			            WHERE ROWNUM <= 5
+				                ]]>
+            
      
      </select>
   	
