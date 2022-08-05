@@ -51,7 +51,7 @@
                 <div class="container row mt-3  mb-3" style="margin-left:80px;"><!--idcard1 시작-->
                   <c:forEach var="com" items="${ requestScope.selectCom }">
                  <div class="card col-3 ms-3 me-3 mb-5 d-flex justify-content-center" >
-                    <img class="card-img-aside ms-1 mt-3" src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ com.comBoardAttach[0].thumbnailName }" alt="Card image" style="width:284px; height:300px;">
+                    <img class="card-img-aside ms-1 mt-3" src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ com.comBoardAttach[0].thumbnailName }" alt="Card image" style="width:230px; height:250px;">
                     <div class="card-body">
                       <h4 class="card-title">${ com.comName }</h4>
                       <p class="card-text">영업시간) ${ com.workTime } <br>

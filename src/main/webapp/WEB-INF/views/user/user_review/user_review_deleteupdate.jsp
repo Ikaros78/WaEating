@@ -41,7 +41,6 @@
             <p style="color: gray;">2022/07/17</p>
             <br>
             <h6><나의 예약 정보></h6>
-            <p>번호 : 6번</p>
             <p>인원수 : 3명</p>
             <p>전화번호 : 010-1234-5678</p>
         </div>
@@ -56,11 +55,9 @@
                     <p class="date">2022-07-17</p>
                     <p class="point">★★★★★</p>
                 </div>
-                  <div class="content_body">
-                    <p>
-                      떡볶이 짱 맛있었어요!! <br>
-                      감자튀김도 꼭 드세요! 소스가 진해서 최고예여!! 
-                    </p>
+                 <textarea class="form-control" rows="5" id="summernote" name="reviewContent" >
+                 
+                 </textarea>
                     <img src="../1_front/images/ddok1.png" alt="">
                     <img src="../1_front/images/ddok1.png" alt="">
                     <img src="../1_front/images/ddok1.png" alt="">        
