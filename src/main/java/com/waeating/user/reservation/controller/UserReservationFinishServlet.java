@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.common.paging.Pagenation;
@@ -63,6 +64,10 @@ public class UserReservationFinishServlet extends HttpServlet {
 		List<ComInfoDTO> waitingRecord = reservationService.selectFinshReservation(selectCriteria);
 		
 		System.out.println("waitingRecord : " + waitingRecord);
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("waitingRecordNo", waitingRecord); 
 		
 		String path = "";
 		if(waitingRecord != null) {

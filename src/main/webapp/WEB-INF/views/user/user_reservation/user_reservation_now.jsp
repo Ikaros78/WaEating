@@ -41,17 +41,21 @@
         <c:forEach var="reservation" items="${ requestScope.waitingRecord }">
 			<form action="${ pageContext.servletContext.contextPath }/user/reservation/now" method="post">
         <div class="reservation now">
+        	<input type="hidden" class="comNo" name="comNo" value="${ reservation.comNo }">
+			<input type="hidden" class="recordNo" name="recordNo" value="${ reservation.recordNo }">
             <h5>[${ reservation.comInfo.comName }]</h5>
             <p style="color: gray;">${ reservation.useDate }</p>
-            <div style="color:#D94925 ;" class="waitingNo"  > </div>
-             <button type="button" class="show">대기 현황 확인</button> 
+            <div style="color:#D94925 ;" class="waitingNo"  > 
+            <p class="content"></p>
+             <button type="button" class="show btn btn-outline-secondary">대기 현황 확인</button> 
+             
+            </div>
             <br>
             <h6><나의 예약 정보></h6>
             <p>인원수 : ${ reservation.memberNum }</p>
             <p>전화번호 : ${ reservation.memberInfo.phone }</p>
 			
-			<input type="hidden" id="comNo" name="comNo" value="${ reservation.comNo }">
-			<input type="hidden" id="recordNo" name="recordNo" value="${ reservation.recordNo }">
+			
             <button type="submit" class="btn btn-danger" >예약 취소</button>
             
         </div>
@@ -65,16 +69,36 @@
   </div>
 
 	 <script>
-		${".show"}.click(function)(){
-			
-			$.ajax({
-				url:"/user/reservation/count_recordNo"
-				type:"get"
-				success:function(data){
-					
-					innerHTML =
-				}
-			});
+	 	const $shows = document.getElementsByClassName("show");
+	 	const $comNoList = document.getElementsByClassName("comNo");
+	 	const $recordNoList = document.getElementsByClassName("recordNo");
+	 	const $contentList = document.getElementsByClassName("content");
+	 	
+	 	for(let i = 0; i < $shows.length; i++){
+	 			
+			$shows[i].onclick = function(){
+				
+				const comNo = $comNoList[i].value;
+				const recordNo = $recordNoList[i].value;
+				const content = $contentList[i];
+				 $.ajax({
+					url:"${ pageContext.servletContext.contextPath }/user/reservation/count_recordNo",
+					type:"get",
+					data:{
+						comNo : comNo
+					  , recordNo : recordNo			
+					},
+					success: function(data){
+						
+						$(content).text(data);
+						
+					},
+					error: function(error){
+						console.log(error);
+					}
+				}); 
+				
+		 	}
 		}
 	
 	</script> 

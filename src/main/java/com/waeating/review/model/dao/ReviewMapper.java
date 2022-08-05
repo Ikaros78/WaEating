@@ -3,7 +3,11 @@ package com.waeating.review.model.dao;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 import com.waeating.common.paging.SelectCriteria;
+=======
+
+>>>>>>> refs/remotes/origin/master
 import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
@@ -13,6 +17,10 @@ public interface ReviewMapper {
 
 	ReviewDTO selectAvgRatings(int comNo);
 
+	int insertReview(ReviewDTO insertReview);
+	
+	int insertReviewAttach(ReviewAttachDTO reviewAttachDTO);
+	
 	/* 관리자 용도 */
 	int adminSelectTotalCount(Map<String, String> searchMap);
 
@@ -23,6 +31,8 @@ public interface ReviewMapper {
 	List<ReviewAttachDTO> adminSelectReviewAttachList(Map<String, String> searchMap);
 
 	int adminDeleteReview(Map<String, String> searchMap);
+
+	
 
 
 }

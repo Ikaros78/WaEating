@@ -85,7 +85,7 @@
 
                 <div class="form-floating mb-3">
                   <input type="tel" class="form-control" id="store_phone" name="store_phone" placeholder="업체 전화번호 입력" required>
-                  <label for="store_phone">업체 전화번호</p></label>
+                  <label for="store_phone">업체 전화번호</label>
                   <div class="invalid-feedback">
                     업체 전화번호를 입력해주세요.
                   </div>

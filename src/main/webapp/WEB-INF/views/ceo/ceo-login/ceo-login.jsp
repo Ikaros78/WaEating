@@ -25,7 +25,7 @@
             <ul>
                 <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/signup">회원가입</a></li>
                 <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/findid">아이디 찾기</a></li>
-                <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/findpw">비밀번호 찾기</a></li>
+                <li><a href="${ pageContext.servletContext.contextPath }/member/ceo/findpw">비밀번호 변경</a></li>
             </ul>
         </div>
     </div>

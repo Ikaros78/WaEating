@@ -17,6 +17,8 @@ public class WaitingRecordDTO {
 	private String requirement;
 	private String memo;
 	private int countRecordNo;
+	private String useTime;
+	private int rNum;
 	
 	private ComInfoDTO comInfo;
 	private MemberDTO memberInfo;
@@ -26,9 +28,8 @@ public class WaitingRecordDTO {
 	public WaitingRecordDTO() {}
 
 	public WaitingRecordDTO(int recordNo, int comNo, String memberId, Date useDate, String useStatus, int memberNum,
-			String requirement, String memo, int countRecordNo, ComInfoDTO comInfo, MemberDTO memberInfo,
-			ReviewDTO review, WaitingRefuseDTO refuseReason) {
-		super();
+			String requirement, String memo, int countRecordNo, String useTime, int rNum, ComInfoDTO comInfo,
+			MemberDTO memberInfo, ReviewDTO review, WaitingRefuseDTO refuseReason) {
 		this.recordNo = recordNo;
 		this.comNo = comNo;
 		this.memberId = memberId;
@@ -38,6 +39,8 @@ public class WaitingRecordDTO {
 		this.requirement = requirement;
 		this.memo = memo;
 		this.countRecordNo = countRecordNo;
+		this.useTime = useTime;
+		this.rNum = rNum;
 		this.comInfo = comInfo;
 		this.memberInfo = memberInfo;
 		this.review = review;
@@ -108,6 +111,30 @@ public class WaitingRecordDTO {
 		this.memo = memo;
 	}
 
+	public int getCountRecordNo() {
+		return countRecordNo;
+	}
+
+	public void setCountRecordNo(int countRecordNo) {
+		this.countRecordNo = countRecordNo;
+	}
+
+	public String getUseTime() {
+		return useTime;
+	}
+
+	public void setUseTime(String useTime) {
+		this.useTime = useTime;
+	}
+
+	public int getrNum() {
+		return rNum;
+	}
+
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
+	}
+
 	public ComInfoDTO getComInfo() {
 		return comInfo;
 	}
@@ -131,7 +158,7 @@ public class WaitingRecordDTO {
 	public void setReview(ReviewDTO review) {
 		this.review = review;
 	}
-	
+
 	public WaitingRefuseDTO getRefuseReason() {
 		return refuseReason;
 	}
@@ -139,23 +166,16 @@ public class WaitingRecordDTO {
 	public void setRefuseReason(WaitingRefuseDTO refuseReason) {
 		this.refuseReason = refuseReason;
 	}
-	
-
-	public int getCountRecordNo() {
-		return countRecordNo;
-	}
-
-
-	public void setCountRecordNo(int countRecordNo) {
-		this.countRecordNo = countRecordNo;
-	}
 
 	@Override
 	public String toString() {
 		return "WaitingRecordDTO [recordNo=" + recordNo + ", comNo=" + comNo + ", memberId=" + memberId + ", useDate="
 				+ useDate + ", useStatus=" + useStatus + ", memberNum=" + memberNum + ", requirement=" + requirement
-				+ ", memo=" + memo + ", countRecordNo=" + countRecordNo + ", comInfo=" + comInfo + ", memberInfo="
-				+ memberInfo + ", review=" + review + ", refuseReason=" + refuseReason + "]";
+				+ ", memo=" + memo + ", countRecordNo=" + countRecordNo + ", useTime=" + useTime + ", rNum=" + rNum
+				+ ", comInfo=" + comInfo + ", memberInfo=" + memberInfo + ", review=" + review + ", refuseReason="
+				+ refuseReason + "]";
 	}
+
+	
 	
 }
