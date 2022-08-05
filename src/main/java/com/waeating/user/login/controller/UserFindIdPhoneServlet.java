@@ -29,45 +29,45 @@ public class UserFindIdPhoneServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+		
+		String userName = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String memberType = (String) session.getAttribute("memberType");
+		String birth = request.getParameter("birth");
+		String gender = request.getParameter("gender");
+		
+		UserDTO requestUser = new UserDTO();
+		requestUser.setBirth(birth);
+		requestUser.setGender(gender);
+		
+		MemberDTO requestMember = new MemberDTO();
+		requestMember.setName(userName);
+		requestMember.setPhone(phone);
+		requestMember.setMemberType(memberType);
+		requestMember.setUserInfo(requestUser);
+		
+		UserService userService = new UserService();
+		
+		MemberDTO findUserId = userService.findIdPhone(requestMember);
+		
+		String userId = findUserId.getId();
+		System.out.println("userId : " + userId);
+		
+		String page = "";
+		
+		if(userId != null) {
 			
-			String userName = request.getParameter("name");
-			String phone = request.getParameter("phone");
-			String memberType = (String) session.getAttribute("memberType");
-			String birth = request.getParameter("birth");
-			String gender = request.getParameter("gender");
+			page = "/WEB-INF/views/common/success.jsp";
 			
-			UserDTO requestUser = new UserDTO();
-			requestUser.setBirth(birth);
-			requestUser.setGender(gender);
+			request.setAttribute("success", "findId");
+			request.setAttribute("userId", userId);
+		} else {
 			
-			MemberDTO requestMember = new MemberDTO();
-			requestMember.setName(userName);
-			requestMember.setPhone(phone);
-			requestMember.setMemberType(memberType);
-			requestMember.setUserInfo(requestUser);
+			page = "/WEB-INF/views/common/failed.jsp";
 			
-			UserService userService = new UserService();
-			
-			MemberDTO findUserId = userService.findIdPhone(requestMember);
-			
-			String userId = findUserId.getId();
-			System.out.println("userId : " + userId);
-			
-			String page = "";
-			
-			if(userId != null) {
-				
-				page = "/WEB-INF/views/common/success.jsp";
-				
-				request.setAttribute("success", "findId");
-				request.setAttribute("userId", userId);
-			} else {
-				
-				page = "/WEB-INF/views/common/failed.jsp";
-				
-				request.setAttribute("message", "정보가 일치하지 않습니다. 다시 시도해주세요.");
-			}
-			request.getRequestDispatcher(page).forward(request, response);
+			request.setAttribute("message", "정보가 일치하지 않습니다. 다시 시도해주세요.");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 }

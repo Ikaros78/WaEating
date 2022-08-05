@@ -158,12 +158,12 @@ public class UserService {
 
 	/**
 	 * <pre>
-	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Email)
 	 * </pre>
 	 * @param requestMember
 	 * @return
 	 */
-	public MemberDTO checkPwd(MemberDTO requestMember) {
+	public MemberDTO checkPwdEmail(MemberDTO requestMember) {
 
 		SqlSession sqlSession = getSqlSession();
 		
@@ -203,6 +203,85 @@ public class UserService {
 		
 		return updatePwd;
 	}
+	
+	/**
+	 * <pre>
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Phone)
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO checkPwdPhone(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO checkPwd = memberMapper.checkFindPwForPhone(requestMember);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
+
+	/**
+	 * <pre>
+	 *	 회원 정보 수정을 위한 비밀번호 확인하는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO checkPwdUser(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO userInfo = null;
+		
+		String encPwd = memberMapper.selectEncryptedPwd(requestMember);
+		System.out.println("encPwd 확인 : " + encPwd);
+		System.out.println("pwd : " + requestMember.getPwd());
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if(passwordEncoder.matches(requestMember.getPwd(), encPwd)) {
+			
+			userInfo = memberMapper.selectMemberLogin(requestMember);
+		}
+		
+		sqlSession.close();
+		
+		return userInfo;
+		
+	}
+
+	/**
+	 * <pre>
+	 * 	 회원 정보 update 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public int updateUserInformation(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		int result = memberMapper.updateUserInformation(requestMember);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 
 
 
