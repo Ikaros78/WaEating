@@ -240,7 +240,7 @@
 	<select id="dubleCkId" resultType="_int">
 		SELECT
 			   COUNT(*)
-		  FROM USER_INFO
+		  FROM MEMBER_INFO
 		 WHERE MEMBER_ID = #{ dubleCkId }
 	</select>
 	
@@ -294,6 +294,52 @@
 		UPDATE 
 			   MEMBER_INFO A
 		   SET A.MEMBER_PWD = #{ pwd }
+		 WHERE A.MEMBER_ID = #{ id }
+	</update>
+	
+	<insert id="insertAdmin" parameterType="hashmap">
+		INSERT
+			INTO MEMBER_INFO A
+			(
+				A.MEMBER_ID
+			  , A.MEMBER_PWD
+			  , A.EMAIL
+			  , A.NAME
+			  , A.MEMBER_TYPE
+			  , A.PHONE
+			)
+			VALUES
+			(
+				#{ id }
+			  , #{ pwd }
+			  , #{ email }
+			  , #{ name }
+			  , 'admin'
+			  , #{ phone }
+			)
+	</insert>
+
+	<select id="checkFindPwForPhone" resultMap="generalUserResultMap" >
+		SELECT
+			   A.MEMBER_PWD
+		  FROM MEMBER_INFO A
+		  JOIN USER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		 WHERE A.MEMBER_ID = #{ id }
+		   AND A.NAME = #{ name }
+		   AND A.PHONE = #{ phone }
+		   AND A.MEMBER_TYPE = #{ memberType }
+		   AND B.BIRTH = #{ userInfo.birth }
+		   AND B.GENDER = #{ userInfo.gender }
+	</select>
+	
+	<update id="updateUserInformation" parameterType="com.waeating.member.model.dto.MemberDTO">
+		UPDATE 
+			   MEMBER_INFO A
+		   SET 
+		       A.MEMBER_PWD = NVL(#{ pwd }, A.MEMBER_PWD)
+		     , A.NAME = NVL(#{ name }, A.NAME)
+		     , A.PHONE = NVL(#{ phone }, A.PHONE)
+		     , A.EMAIL = NVL(#{ email }, A.EMAIL)
 		 WHERE A.MEMBER_ID = #{ id }
 	</update>
 </mapper>

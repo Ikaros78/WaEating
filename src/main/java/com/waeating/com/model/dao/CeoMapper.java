@@ -16,4 +16,13 @@ public interface CeoMapper {
 
 	ComInfoDTO selectMemberLogin(MemberDTO requestMember);
 
+	int insertComRecord(int comNo);
+
+	ComInfoDTO selectFindIdForPhone(ComInfoDTO requestCom);
+
+	ComInfoDTO checkFindPwdForPhone(ComInfoDTO requestCom);
+
+	int updateNewPwd(ComInfoDTO requestCom);
+
+
 }

@@ -24,9 +24,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="${ pageContext.servletContext.contextPath }/notice/list">공지사항</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">자주 묻는 질문</a>
-              </li>
             </ul>
           </li>
           <li class="nav-item dropmenu mt-4">
@@ -63,13 +60,16 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">가게 정보 수정</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">고객센터</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link px-2 my-1 ms-5" href="#"><c:out value="${ sessionScope.loginMember.memberInfo.name }"/>님</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-2 my-1 me-3" href="${ pageContext.servletContext.contextPath }/member/ceo/login">로그아웃</a>
+            <a class="nav-link px-2 my-1 me-3" href="${ pageContext.servletContext.contextPath }/common/logout">로그아웃</a>
           </li>
         </ul>
       </div>

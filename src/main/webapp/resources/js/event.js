@@ -7,5 +7,11 @@ window.onload = function(){
 		}		
 	}
 	
+	if(document.getElementById("loginAdmin")){
+		const $login = document.getElementById("loginAdmin");
+		$login.onclick = function(){
+			location.href = "/WaEating/admin/login";
+		}
+	}
 	
 }

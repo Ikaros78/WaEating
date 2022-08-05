@@ -35,7 +35,9 @@
           <table width="100%" class="table table-borderless">
            	  <c:forEach var="review" items="${ requestScope.selectAllReview }">
            	  <tr class="border-bottom  d-flex align-items-center">
-                <td class="col-10 py-auto"><c:out value="${ review.reviewContent }"/></td>
+                <td class="col-10 py-auto">
+                	<c:out value="${ review.reviewContent }" escapeXml="false"/>
+                </td>
                 <td class="my-auto ms-auto">
                 	<c:if test="${ review.reviewAns.ansContent eq null }">
                 	<button type="button" class="btn btn-primary" ><a href="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new?reviewNo=${ review.reviewNo }" style="color:#fff; text-decoration: none;">답변 등록</a></button>

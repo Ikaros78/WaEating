@@ -68,7 +68,7 @@
                 </td>
               </tr>  
               <tr>
-                <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" id="review">${ requestScope.selectOneReview.reviewAns.ansContent }</textarea></td>
+                <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" id="review" required>${ requestScope.selectOneReview.reviewAns.ansContent }</textarea></td>
               </tr>
             </table>
             <div class="d-flex justify-content-center">

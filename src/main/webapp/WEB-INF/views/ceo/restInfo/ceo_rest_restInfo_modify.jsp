@@ -232,18 +232,22 @@
                     <td class="pb-3" rowspan="100">메뉴</td>
                       <td class="pb-3">
                         <div id="menugroup">
-                          <c:forEach items="${ requestScope.comMenuList }" var="menu">
-                          <div class="input-group my-3" id="menu">
+                          <c:forEach items="${ requestScope.comMenuList }" var="menu" varStatus="status">
+                          
+                          <div class="input-group my-3" id="menu" >
                               <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }">
                               <input type="text" name="price" id="menuPrice" class="form-control" value="${ menu.comMenu.price }">
                               <button class="btn btn-light border minus" type="button" id="minus">-</button>
                               <button class="btn btn-primary plus" type="button" id="plus">+</button>
                           </div>
+                          
                           </c:forEach>
+                     
                         </div>
                       </td>
                       
                   </tr>
+                  
                  
                 </table>
                 <div class="col d-flex justify-content-center mt-4">
@@ -275,6 +279,21 @@
                   </div>
                 </div>
               </form>
+              
+             <!-- <script>
+             if(document.getElementById("plus")){
+ 	      		const $insert = document.getElementById("plus");
+ 	      		$insert.onclick = function(){
+ 	      			location.href = "${ pageContext.servletContext.contextPath}/ceo/rest_restInfo_modify/insertmenu?menuNo=${ requestScope.comSelectOneComMenu.menuNo }";
+ 	      		}
+ 	      	  }
+	          if(document.getElementById("minus")){
+	      		const $delete = document.getElementById("minus");
+	      		$delete.onclick = function(){
+	      			location.href = "${ pageContext.servletContext.contextPath}/ceo/rest_restInfo_modify/deletemenu?menuNo=${ requestScope.comSelectOneComMenu.menuNo }";
+	      		}
+	      	  }
+          	</script> -->
                   
             
                       

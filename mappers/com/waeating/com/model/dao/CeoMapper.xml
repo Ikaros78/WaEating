@@ -82,6 +82,29 @@
 	, null
 	, null
 	)
+	<selectKey keyProperty="comNo" resultType="Integer" order="AFTER">
+		SELECT
+				SEQ_COMNO.CURRVAL
+		FROM DUAL
+	</selectKey>
+  </insert>
+  
+  <insert id="insertComRecord" parameterType="com.waeating.com.model.dto.ComRecordDTO">
+  	INSERT
+  	  INTO COM_RECORDA
+  	(
+	  RECORD_NO
+	, REFUSE_REASON
+	, COM_NO
+	, COM_STATUS
+  	)
+  	VALUES
+  	(
+  	  SEQ_RECORDNO.NEXTVAL
+  	, null
+  	, #{ comNo }
+  	, '승인대기'
+  	)
   </insert>
   
   <select id="dubleCkId" resultType="_int">
@@ -119,6 +142,35 @@
 			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
 		   WHERE A.MEMBER_ID = #{ id }
   </select>
+	<select id="selectFindIdForPhone" resultMap="generalCompanyResultMap" >
+		SELECT
+				A.MEMBER_ID
+			FROM MEMBER_INFO A
+			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.NAME = #{ memberInfo.name }
+		     AND A.PHONE = #{ memberInfo.phone }
+		     AND B.COM_NAME = #{ comName }
+		     AND B.COM_PHONE = #{ comPhone }
+		     AND B.CATEGORY = #{ category }
+	</select>
 	
+	<select id="checkFindPwdForPhone" resultMap="generalCompanyResultMap" >
+		SELECT
+			   A.MEMBER_PWD
+		  FROM MEMBER_INFO A
+		  JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		 WHERE A.MEMBER_ID = #{ memberInfo.id }
+		   AND A.NAME = #{ memberInfo.name }
+		   AND A.PHONE = #{ memberInfo.phone }
+		   AND B.COM_NAME = #{ comName }
+		   AND B.COM_PHONE = #{ comPhone }
+		   AND B.CATEGORY = #{ category }
+	</select>
 	
+	<update id="updateNewPwd" parameterType="com.waeating.member.model.dto.MemberDTO">
+		UPDATE 
+			   MEMBER_INFO A
+		   SET A.MEMBER_PWD = #{ pwd }
+		 WHERE A.MEMBER_ID = #{ id }
+	</update>
 </mapper>

@@ -29,4 +29,10 @@
   	<param-name>mybatis-config-location</param-name>
   	<param-value>mybatis/mybatis-config.xml</param-value>
   </context-param>
+  <error-page>
+  	<error-code>403</error-code>
+  	<location>/WEB-INF/views/common/error403.jsp</location>
+  </error-page>
+  
+  
 </web-app>
