@@ -309,4 +309,15 @@
 		   AND B.BIRTH = #{ userInfo.birth }
 		   AND B.GENDER = #{ userInfo.gender }
 	</select>
+	
+	<update id="updateUserInformation" parameterType="com.waeating.member.model.dto.MemberDTO">
+		UPDATE 
+			   MEMBER_INFO A
+		   SET 
+		       A.MEMBER_PWD = NVL(#{ pwd }, A.MEMBER_PWD)
+		     , A.NAME = NVL(#{ name }, A.NAME)
+		     , A.PHONE = NVL(#{ phone }, A.PHONE)
+		     , A.EMAIL = NVL(#{ email }, A.EMAIL)
+		 WHERE A.MEMBER_ID = #{ id }
+	</update>
 </mapper>
