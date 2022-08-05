@@ -10,23 +10,23 @@
 		<result property="id" column="MEMBER_ID"/>
 		<result property="regDate" column="REG_DATE"/>
 		
-	<!-- 	<association property="answer" resultMap="answerResultMap"/> -->
+		 <association property="answer" resultMap="answerResultMap"/> 
 	</resultMap>
 	
 	
-	<resultMap type="com.waeating.support.model.dto.ReportAnswerDTO" id="answerResultMap">
+	 <resultMap type="com.waeating.support.model.dto.ReportAnswerDTO" id="answerResultMap">
 		<id property="ansNo" column="ANS_NO"/>
 		<result property="ansContent" column="ANS_CONTENT"/>
 		<result property="ansDate" column="ANS_DATE"/>
 		<result property="isDeleted" column="IS_DELETED"/>
 		<result property="reportNo" column="REPORT_NO"/>
-	</resultMap>
+	</resultMap> 
 	
 	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
 		SELECT
-				COUNT(*)
-			FROM REPORT A
-		
+			   COUNT(*)				
+		  FROM REPORT A
+	      
 		<where>
 			<if test="searchCondition =='id'">
 				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
@@ -35,6 +35,7 @@
 				A.REPORT_TITLE LIKE '%' || #{ searchValue } || '%'
 			</if>
 		</where>
+		
 	</select> 
 	
 	<select id="selectReportList" resultMap="reportResultMap">
@@ -51,23 +52,22 @@
 		  		  			, C.REPORT_TITLE
 		  		  			, C.MEMBER_ID
 		  		  		 FROM REPORT C
-			  		  	 <where>
-							<if test="searchCondition =='id'">
-								C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
-							</if>
-							<if test="searchCondition =='title'">
-								C.REPORT_TITLE LIKE '%' || #{ searchValue } || '%'
-							</if>
-						</where>
+			  		  	WHERE C.MEMBER_ID = #{ memId } 
+						<if test="searchCondition =='id'">
+						  AND C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+						</if>
+						<if test="searchCondition =='title'">
+						  AND C.REPORT_TITLE LIKE '%' || #{ searchValue } || '%'
+						</if>
 						ORDER BY C.REPORT_NO DESC
 		  		  ) B
 		  		  <![CDATA[
-			     WHERE ROWNUM <= #{ endRow }
-			     ]]>
+			     WHERE ROWNUM <= #{ selectCriteria.endRow }
+			     
 		  )A
 		 
-		WHERE A.RNUM >= #{ startRow } 
-		 
+		WHERE A.RNUM >= #{ selectCriteria.startRow } 
+		  ]]>
 	</select>
 	
 	<select id="selectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
@@ -88,28 +88,32 @@
 			INTO REPORT A
 			(
 				A.REPORT_NO
-			  , A.REPORT_CONTENT
-			  , A.REPORT_DATE
-			  , A.REPORT_NO
+			   ,A.REPORT_TITLE
+			   ,A.REPORT_CONTENT
+			   ,A.MEMBER_ID
+			   ,A.REG_DATE	
+			  
 			)
-			VALUES
-			(
-				SEQ_ANSNO.NEXTVAL
-			  , #{ content }
-			  , #{ date }
-			  , #{ reportNo }
-			)
+			
+		VALUES 
+		(  
+		  SEQ_REPORT.NEXTVAL
+		  #{ title }
+		  #{ content }
+		  #{ id }
+		  #{ date } 
+		    )	
 	</insert>
 	
 	<delete id="deleteReport">
 		DELETE
-			FROM REPORT_ANS A
-		   WHERE A.ANS_NO = #{ ansNo }
+			FROM REPORT A
+		   WHERE A.REPORT_NO = #{ reportNo }
 	</delete>
 	
 	<update id="updateReport">
 		UPDATE
-				REPORT_ANS A
+				REPORT A
 		
 		WHERE A.REPORT_NO = #{ reportNo }
 	</update>

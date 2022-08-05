@@ -31,7 +31,7 @@ public class ReportSelectDetailDeleteServlet extends HttpServlet {
 		String path = "";
 		
 		if(result > 0) {
-			path = "report/report";
+			path = "report/list";
 			response.sendRedirect(path);
 			
 		} else {

@@ -20,10 +20,6 @@ public class NoticeService {
 		SqlSession sqlSession = getSqlSession();
 		noticeMapper = sqlSession.getMapper(NoticeMapper.class);
 		NoticeDTO noticeDetail = null;
-		
-		
-		
-		
 		noticeDetail = noticeMapper.selectNoticeDeatail(no);
 			
 		sqlSession.close();

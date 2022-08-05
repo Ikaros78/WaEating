@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.waeating.common.paging.SelectCriteria;
 import com.waeating.report.model.dao.ReportMapper;
 import com.waeating.report.model.dto.ReportDTO;
 
@@ -35,15 +34,15 @@ public class ReportService {
 		return result;
 	}
 
-	public List<ReportDTO> selectReportList(SelectCriteria selectCriteria) {
+	public List<ReportDTO> selectReportList(Map<String, Object> selectMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		reportMapper = sqlSession.getMapper(ReportMapper.class);
 		
-		List<ReportDTO> reportList = reportMapper.selectReportList(selectCriteria);
+		List<ReportDTO> reportList = reportMapper.selectReportList(selectMap);
 		
 		sqlSession.close();
-		
+				
 		return reportList;
 	}
 
@@ -59,16 +58,29 @@ public class ReportService {
 		return totalCount;
 	}
 
-	public ReportDTO selectOneReport(int reportNo) {
+	public ReportDTO selectOneReport(ReportDTO reportNo) {
 		
 		SqlSession sqlSession = getSqlSession();
-		
 		reportMapper = sqlSession.getMapper(ReportMapper.class);
-		ReportDTO report = reportMapper.selectOneReport(reportNo);
+//		ReportDTO report = reportMapper.selectOneReport(reportNo);
 		
 		sqlSession.close();
 		
-		return report;
+		return reportNo;
+	}
+	
+	public ReportDTO selectReportDetail(int no) { 
+		
+		SqlSession sqlSession = getSqlSession();
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		ReportDTO reportDetail = null;
+		
+		reportDetail = reportMapper.selectReportDetail(no);
+			
+		sqlSession.close();
+		return reportDetail;
+		
+		
 	}
 
 	public int updateReport(ReportDTO report) {

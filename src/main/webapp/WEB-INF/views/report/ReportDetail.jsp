@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>notice_detail</title>
+<title>ReportDetail</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/notice/notice_detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -28,27 +28,26 @@
 				<tbody>
 					<tr>
 						<th scope="row">글 번호</th>
-						<td><c:out value="${requestScope.noticeDetail.noticeNo }"/><td>
+						<td><c:out value="${requestScope.reportDetail.reportNo }"/><td>
 						
 					</tr>
 					<tr>
 						<th scope="row">작성자</th>
-						<td>${requestScope.noticeDetail.memberId }</td>
+						<td>${requestScope.reportDetail.id }</td>
 						<th scope="row">작성일</th>
-						<td>${requestScope.noticeDetail.regDate }</td>
+						<td>${requestScope.reportDetail.regDate }</td>
 						
 						
 					</tr>
 					<tr>
 						<th scope="row">제목</th>
-						<td colspan="3">"${requestScope.noticeDetail.noticeTitle }"</td>
-			<!-- 	<input type="text" id="title" name="title" --><td>
-						</td>
+						<td colspan="3">"${requestScope.reportDetail.title }"</td>
+		
 					</tr>
 					<tr>
-						<td colspan="4" class="view_text">${requestScope.noticeDetail.noticeContent }</td>
+						<td colspan="4" class="view_text">${requestScope.reportDetail.content }</td>
 					
-				 <!-- <textarea title="내용" id="contents" name="contents" --> 
+				
 		
 		            </tr>
 		            
@@ -75,7 +74,7 @@
 				
 				 $tds[i].onclick = function() {
 		               const no = this.parentNode.children[0].innerText;
-		               location.href = "${ pageContext.servletContext.contextPath }/notice/detail?no=" + no;
+		               location.href = "${ pageContext.servletContext.contextPath }/repor/detail?no=" + no;
 		            }
 				
 			}

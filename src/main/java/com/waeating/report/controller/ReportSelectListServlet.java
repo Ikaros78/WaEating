@@ -10,11 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
-import com.waeating.notice.model.dto.NoticeDTO;
-import com.waeating.notice.model.service.NoticeService;
+import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.report.model.dto.ReportDTO;
 import com.waeating.report.model.service.ReportService;
 
@@ -27,6 +27,11 @@ public class ReportSelectListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("loginMember");
+		
+		String memId = member.getId();
+		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
@@ -50,7 +55,7 @@ public class ReportSelectListServlet extends HttpServlet {
 		
 		System.out.println("totalReportCount : " + totalCount);
 		
-		int limit = 10;
+		int limit = 5;
 		int buttonAmount =5;
 		
 		SelectCriteria selectCriteria = null;
@@ -62,14 +67,19 @@ public class ReportSelectListServlet extends HttpServlet {
 			}
 		System.out.println(selectCriteria);
 		
-		List<ReportDTO> reportList = reportService.selectReportList(selectCriteria);
+		/* 두 가지 타입의 객체를 넘겨주기 위해서 Map객체를 생성 */
+		Map<String, Object> selectMap = new HashMap<>();
+		selectMap.put("memId", memId);
+		selectMap.put("selectCriteria", selectCriteria);
+		
+		List<ReportDTO> reportList = reportService.selectReportList(selectMap);
 	
 		System.out.println("reportList : " + reportList);
 		
 		String path = "";
 		
 		if(reportList != null) {
-			path= "/WEB-INF/views/report/reportList.jsp";
+			path= "/WEB-INF/views/report/ReportList.jsp";
 			request.setAttribute("reportList", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			} else {

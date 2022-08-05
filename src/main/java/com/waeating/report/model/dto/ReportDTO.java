@@ -2,70 +2,82 @@ package com.waeating.report.model.dto;
 
 import java.sql.Date;
 
+import com.waeating.support.model.dto.ReportAnswerDTO;
+
 public class ReportDTO {
 
 	private int reportNo;
-	private String reportTitle;
-	private String reportContent;
-	private String memberId;
+	private String title;
+	private String Content;
+	private String id;
 	private java.sql.Date regDate;
-	
+	private ReportAnswerDTO answer;
 	public ReportDTO() {}
-
-	public ReportDTO(int reportNo, String reportTitle, String reportContent, String memberId, Date regDate) {
+	public ReportDTO(int reportNo, String title, String content, String id, Date regDate) {
 		super();
 		this.reportNo = reportNo;
-		this.reportTitle = reportTitle;
-		this.reportContent = reportContent;
-		this.memberId = memberId;
+		this.title = title;
+		Content = content;
+		this.id = id;
 		this.regDate = regDate;
+		
 	}
-
+	public ReportDTO(int reportNo, String title, String content, String id, Date regDate, ReportAnswerDTO answer) {
+		super();
+		this.reportNo = reportNo;
+		this.title = title;
+		this.Content = content;
+		this.id = id;
+		this.regDate = regDate;
+		this.answer = answer;
+	}
 	public int getReportNo() {
 		return reportNo;
 	}
-
 	public void setReportNo(int reportNo) {
 		this.reportNo = reportNo;
 	}
-
-	public String getReportTitle() {
-		return reportTitle;
+	public String getTitle() {
+		return title;
 	}
-
-	public void setReportTitle(String reportTitle) {
-		this.reportTitle = reportTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-
-	public String getReportContent() {
-		return reportContent;
+	public String getContent() {
+		return Content;
 	}
-
-	public void setReportContent(String reportContent) {
-		this.reportContent = reportContent;
+	public void setContent(String content) {
+		Content = content;
 	}
-
-	public String getMemberId() {
-		return memberId;
+	public String getId() {
+		return id;
 	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setId(String id) {
+		this.id = id;
 	}
-
 	public java.sql.Date getRegDate() {
 		return regDate;
 	}
-
 	public void setRegDate(java.sql.Date regDate) {
 		this.regDate = regDate;
+	}
+	public ReportAnswerDTO getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(ReportAnswerDTO answer) {
+		this.answer = answer;
 	}
 
 	@Override
 	public String toString() {
-		return "ReportDTO [reportNo=" + reportNo + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
-				+ ", memberId=" + memberId + ", regDate=" + regDate + "]";
+		return "ReportDTO [reportNo=" + reportNo + ", title=" + title + ", content=" + Content + ", id=" + id
+				+ ", regDate=" + regDate + ", answer=" + answer + "]";
 	}
+	
+	
+	
+	
 	
 	
 	

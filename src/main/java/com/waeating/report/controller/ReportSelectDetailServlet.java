@@ -17,27 +17,26 @@ import com.waeating.report.model.service.ReportService;
 public class ReportSelectDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-   
-
-		int reportNo = Integer.parseInt(request.getParameter("no"));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ReportDTO report = new ReportService().selectOneReport(reportNo);
-	    
-		System.out.println("reportDetail : " + report);
+		int no = Integer.parseInt(request.getParameter("no"));
+		
+		System.out.println("no " + no);
+		
+		ReportService reportService = new ReportService();
+		ReportDTO reportDetail = reportService.selectReportDetail(no);
+		System.out.println("reportDetail : " + reportDetail);
 		
 		String path = "";
-		if(report != null) {
-			path = "/WEB-INF/views/report/reportDetail.jsp";
-			request.setAttribute("report", report);
+		if(reportDetail != null) {
+			path = "/WEB-INF/views/report/ReportDetail.jsp";
+			request.setAttribute("reportDetail", reportDetail);
 		} else {
 			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "공지사항 상세보기에 실패하셨습니다");
+			request.setAttribute("message", "문의사항 상세보기에 실패하셨습니다");
 		}
 		 request.getRequestDispatcher(path).forward(request, response);
-   
-   
+	}
    
    
    }
@@ -45,4 +44,4 @@ public class ReportSelectDetailServlet extends HttpServlet {
 
 
 
-}
+
