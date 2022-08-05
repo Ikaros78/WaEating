@@ -146,7 +146,7 @@
     )
     VALUES
     (
-    	SEQ_REVIEW_NO.NEXTVAL
+    	SEQ_REVIEWATTACH_NO.NEXTVAL
       , #{ reviewNo }
       , #{ originName }
       , #{ fileName }
