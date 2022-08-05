@@ -37,7 +37,7 @@
         <div id="container">
         <h1>회원 정보 수정</h1>
         <hr id="con_hr">
-        <form action="" id="user_update" onsubmit="return ck_infor();">
+        <form action="" id="user_update" method="post" onsubmit="return ck_infor();">
             <div class="profile">
               <div class="profile_img">
                 <img src="../img/profile.png" alt="프로필">

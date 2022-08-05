@@ -25,7 +25,6 @@ public class ComInfoDTO {
 	
 	private List<ComBoardAttachDTO> comBoardAttach;
 	private ComMenuDTO comMenu;
-	private MemberDTO memberInfo;
 	private List<ComRecordDTO> recordList;
 	private ReviewDTO review;
 	private WaitingRecordDTO waitingRecord;
@@ -38,9 +37,9 @@ public class ComInfoDTO {
 
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
 			String comRegist, String waitYn, String workTime, String holiday, String startTime, String endTime,
-			List<ComBoardAttachDTO> comBoardAttach, ComMenuDTO comMenu, MemberDTO memberInfo,
-			List<ComRecordDTO> recordList, ReviewDTO review, WaitingRecordDTO waitingRecord,
-			ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
+			List<ComBoardAttachDTO> comBoardAttach, ComMenuDTO comMenu, List<ComRecordDTO> recordList, ReviewDTO review,
+			WaitingRecordDTO waitingRecord, ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
+		super();
 		this.comNo = comNo;
 		this.memberId = memberId;
 		this.comName = comName;
@@ -55,7 +54,6 @@ public class ComInfoDTO {
 		this.endTime = endTime;
 		this.comBoardAttach = comBoardAttach;
 		this.comMenu = comMenu;
-		this.memberInfo = memberInfo;
 		this.recordList = recordList;
 		this.review = review;
 		this.waitingRecord = waitingRecord;
@@ -204,16 +202,6 @@ public class ComInfoDTO {
 	}
 
 
-	public MemberDTO getMemberInfo() {
-		return memberInfo;
-	}
-
-
-	public void setMemberInfo(MemberDTO memberInfo) {
-		this.memberInfo = memberInfo;
-	}
-
-
 	public List<ComRecordDTO> getRecordList() {
 		return recordList;
 	}
@@ -270,9 +258,8 @@ public class ComInfoDTO {
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
 				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", comBoardAttach=" + comBoardAttach + ", comMenu=" + comMenu
-				+ ", memberInfo=" + memberInfo + ", recordList=" + recordList + ", review=" + review
-				+ ", waitingRecord=" + waitingRecord + ", reviewAttach=" + reviewAttach + ", reviewAns=" + reviewAns
-				+ "]";
+				+ ", recordList=" + recordList + ", review=" + review + ", waitingRecord=" + waitingRecord
+				+ ", reviewAttach=" + reviewAttach + ", reviewAns=" + reviewAns + "]";
 	}
 
 }

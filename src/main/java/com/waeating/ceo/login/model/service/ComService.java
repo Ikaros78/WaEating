@@ -53,6 +53,8 @@ public class ComService {
 		SqlSession sqlSession = getSqlSession();
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
+		int result = 0;
+		
 		int registCom = ceoMapper.insertComInfo(requestCom);
 		
 		int comNo = requestCom.getComNo();
@@ -62,6 +64,7 @@ public class ComService {
 		if(registCom > 0 && comRecord > 0) {
 			
 			sqlSession.commit();
+			result = 1;
 		} else { 
 			
 			sqlSession.rollback();
@@ -69,7 +72,7 @@ public class ComService {
 		
 		sqlSession.close();
 		
-		return registCom;
+		return result;
 	}
 
 	/**
@@ -99,12 +102,12 @@ public class ComService {
 	 * @param requestCom
 	 * @return loginMember
 	 */
-	public ComInfoDTO loginCheck(MemberDTO requestMember) {
+	public MemberDTO loginCheck(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		ComInfoDTO loginMember = null;
+		MemberDTO loginMember = null;
 		
 		String encPwd = ceoMapper.selectEncryptedPwd(requestMember);
 		System.out.println("encPwd 확인 : " + encPwd);
@@ -123,17 +126,17 @@ public class ComService {
 	 * <pre>
 	 * 	 전화번호로 아이디 찾는 메소드
 	 * </pre>
-	 * @param requestCom
+	 * @param requestMember
 	 * @return
 	 */
-	public ComInfoDTO findIdPhone(ComInfoDTO requestCom) {
+	public MemberDTO findIdPhone(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		ComInfoDTO findCeoId = null;
-		findCeoId = ceoMapper.selectFindIdForPhone(requestCom);
+		MemberDTO findCeoId = null;
+		findCeoId = ceoMapper.selectFindIdForPhone(requestMember);
 		
 		sqlSession.close();
 		
@@ -144,16 +147,16 @@ public class ComService {
 	 * <pre>
 	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Phone)
 	 * </pre>
-	 * @param requestCom
+	 * @param requestMember
 	 * @return
 	 */
-	public ComInfoDTO checkPwdPhone(ComInfoDTO requestCom) {
+	public MemberDTO checkPwdPhone(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		ComInfoDTO checkPwd = ceoMapper.checkFindPwdForPhone(requestCom);
+		MemberDTO checkPwd = ceoMapper.checkFindPwdForPhone(requestMember);
 		
 		sqlSession.close();
 		

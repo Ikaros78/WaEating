@@ -14,13 +14,13 @@ public interface CeoMapper {
 
 	String selectEncryptedPwd(MemberDTO requestMember);
 
-	ComInfoDTO selectMemberLogin(MemberDTO requestMember);
+	MemberDTO selectMemberLogin(MemberDTO requestMember);
 
 	int insertComRecord(int comNo);
 
-	ComInfoDTO selectFindIdForPhone(ComInfoDTO requestCom);
+	MemberDTO selectFindIdForPhone(MemberDTO requestMember);
 
-	ComInfoDTO checkFindPwdForPhone(ComInfoDTO requestCom);
+	MemberDTO checkFindPwdForPhone(MemberDTO requestMember);
 
 	int updateNewPwd(ComInfoDTO requestCom);
 

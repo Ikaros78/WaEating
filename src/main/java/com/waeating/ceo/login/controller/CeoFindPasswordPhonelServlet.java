@@ -40,25 +40,25 @@ public class CeoFindPasswordPhonelServlet extends HttpServlet {
 		
 		String pw = request.getParameter("pw");
 		
+		ComInfoDTO requestCom = new ComInfoDTO();
+		requestCom.setComName(comName);
+		requestCom.setComPhone(comNum);
+		requestCom.setCategory(category);
+		
 		MemberDTO requestMember = new MemberDTO();
 		requestMember.setId(ceoId);
 		requestMember.setName(ceoName);
 		requestMember.setPhone(phone);
 		requestMember.setPwd(pw);
+		requestMember.setComInfo(requestCom);
 		
-		ComInfoDTO requestCom = new ComInfoDTO();
-		requestCom.setComName(comName);
-		requestCom.setComPhone(comNum);
-		requestCom.setCategory(category);
-		requestCom.setMemberInfo(requestMember);
 		
 		ComService comService = new ComService();
 		
-		ComInfoDTO checkPwd = comService.checkPwdPhone(requestCom);
+		MemberDTO checkPwd = comService.checkPwdPhone(requestMember);
 		System.out.println("checkPwd: " + checkPwd);
 		
-		MemberDTO memberInfo = checkPwd.getMemberInfo(); 
-		String pwd = memberInfo.getPwd();
+		String pwd = checkPwd.getPwd();
 		System.out.println("pwd : " + pwd);
 		
 		String page = "";
