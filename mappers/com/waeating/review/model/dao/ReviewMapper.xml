@@ -108,6 +108,88 @@
        WHERE COM_NO = #{ comNo } 
   </select>
   
+  <select id="adminSelectTotalCount" resultType="_int" parameterType="hashmap">
+  	SELECT
+  			COUNT(*)
+  	  FROM REVIEW A
+  	  JOIN COM_INFO B ON(A.COM_NO = B.COM_NO) 
+  	  JOIN WAITING_RECORD C ON(A.RECORD_NO = C.RECORD_NO)
+  	  <!-- 검색조건문 -->
+		<where>
+			<if test="searchCondition =='comName'">
+				B.COM_NAME LIKE '%' || #{ searchValue } || '%'
+			</if>
+			<if test="searchCondition =='name'">
+				C.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+			</if>
+		</where>
+  </select>
+  
+  <select id="adminSelectReviewList" resultMap="reviewMap">
+  	SELECT
+  			A.RNUM
+  		  , A.REVIEW_NO
+  		  , A.COM_NAME
+  		  , A.MEMBER_ID
+  		  , A.RATINGS
+  	  FROM(SELECT ROWNUM RNUM
+  	  		 	, B.REVIEW_NO
+  	  		 	, B.COM_NAME
+  	  		 	, B.MEMBER_ID 
+  	  		 	, B.RATINGS
+  	  		 FROM(SELECT C.REVIEW_NO
+  	  		 		   , D.COM_NAME
+  	  		 		   , F.MEMBER_ID
+  	  		 		   , C.RATINGS
+  	  		 		FROM REVIEW C
+  	  		 		JOIN COM_INFO D ON(C.COM_NO = D.COM_NO)
+  	  		 		JOIN WAITING_RECORD F ON(C.RECORD_NO = F.RECORD_NO)
+  	  		 		<where>
+						<if test="searchCondition =='comName'">
+							D.COM_NAME LIKE '%' || #{ searchValue } || '%'
+						</if>
+						<if test="searchCondition =='name'">
+							F.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+						</if>
+					</where>
+  	  		 		ORDER BY C.REVIEW_NO DESC
+  	  		 	  ) B
+  	  		 	   <![CDATA[
+			     WHERE ROWNUM <= #{ endRow }
+			     ]]>
+		  	  )A
+		WHERE A.RNUM >= #{ startRow }
+  </select>
+  
+  <select id="adminSelectReviewDetail" parameterType="hashmap" resultMap="reviewMap">
+  	SELECT
+  			A.REVIEW_NO
+  		  , A.REVIEW_CONTENT
+  		  , A.RATINGS
+  		  , A.RECORD_NO
+  		  , A.COM_NO
+  		  , B.ANS_NO
+  		  , B.ANS_CONTENT
+  		  , B.REG_DATE
+  	  FROM REVIEW A
+  	  LEFT JOIN REVIEW_ANS B ON(A.REVIEW_NO = B.REVIEW_NO)
+  	 WHERE A.REVIEW_NO = #{ reviewNo }
+  </select>
+  
+  <select id="adminSelectReviewAttachList" parameterType="hashmap" resultMap="reviewAttachMap">
+	SELECT
+			A.FILE_NAME
+	  FROM REVIEW_ATTACH A
+	 WHERE A.REVIEW_NO = #{ reviewNo }
+	   AND A.IS_DELETED = 'N'
+  </select>
+  
+  <delete id="adminDeleteReview" parameterType="hashmap">
+  	DELETE
+  		FROM REVIEW A
+  	   WHERE A.REVIEW_NO = #{ reviewNo }
+  </delete>
+
   <insert id="insertReview" parameterType="com.waeating.review.model.dto.ReviewDTO">
   INSERT
     INTO REVIEW A

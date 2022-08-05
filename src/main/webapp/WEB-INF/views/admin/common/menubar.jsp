@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +30,16 @@
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/usageLog/list">사용이력 관리</a></li>
                 </ul>
             </div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-primary" id="logout">로그아웃</button>
-            </div>
+            <c:if test="${ !empty sessionScope.loginMember }">
+	            <div class="col-md-1">
+	                <button type="button" class="btn btn-primary" id="logout">로그아웃</button>
+	            </div>
+            </c:if>
+            <c:if test="${ empty sessionScope.loginMember }">
+	            <div class="col-md-1">
+	                <button type="button" class="btn btn-primary" id="adminLogin">로그인</button>
+	            </div>
+            </c:if>
    </div> 
 </body>
 </html>
