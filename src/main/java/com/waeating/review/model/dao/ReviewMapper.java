@@ -3,11 +3,8 @@ package com.waeating.review.model.dao;
 import java.util.List;
 import java.util.Map;
 
-<<<<<<< HEAD
 import com.waeating.common.paging.SelectCriteria;
-=======
 
->>>>>>> refs/remotes/origin/master
 import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
