@@ -182,7 +182,7 @@ if(ServletFileUpload.isMultipartContent(request)) {
 					int result = reviewService.insertReview(insertReview);
 					
 					if(result > 0) {
-						response.sendRedirect(request.getContextPath() + "/user/review/deleteupdate");
+						response.sendRedirect(request.getContextPath() + "/user/review/selecteupdate");
 					} else {
 						String path = "WEB-INF/views/common/failed.jsp";
 						request.setAttribute("message", "리뷰 등록 실패!");

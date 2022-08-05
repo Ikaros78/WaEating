@@ -18,6 +18,14 @@ public interface ReviewMapper {
 	
 	int insertReviewAttach(ReviewAttachDTO reviewAttachDTO);
 	
+	ReviewDTO selectMyReview(Map<String, String> selectComMap);
+	
+	List<ReviewAttachDTO> selectMyReviewImg(int reviewNo);
+	
+	int userUpdateReview(Map<String, String> updateReviewMap);
+	
+	int userDeleteReview(int recordNo);
+
 	/* 관리자 용도 */
 	int adminSelectTotalCount(Map<String, String> searchMap);
 
@@ -28,6 +36,8 @@ public interface ReviewMapper {
 	List<ReviewAttachDTO> adminSelectReviewAttachList(Map<String, String> searchMap);
 
 	int adminDeleteReview(Map<String, String> searchMap);
+
+
 
 	
 

@@ -248,7 +248,7 @@ public class ReservationService {
 
 	/**
 	 * <pre>
-	 * 	리뷰 작성 시 보여줄 예약 정보 
+	 * 	리뷰 작성 시 & 내 리뷰 보기 시 보여줄 예약 정보 
 	 * </pre>
 	 * @param selectComMap
 	 * @return

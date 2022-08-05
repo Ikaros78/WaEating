@@ -99,6 +99,7 @@
 				  LEFT JOIN REVIEW R ON (C.RECORD_NO = R.RECORD_NO)
 				  WHERE C.MEMBER_ID = #{ searchValue }
 				    AND C.USE_STATUS = 'complete'
+				  ORDER BY C.USE_DATE DESC
 	  	  	   ) B
 	  	  	      <![CDATA[
 				        WHERE ROWNUM <= #{ endRow }
@@ -139,6 +140,7 @@
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
 				  WHERE C.MEMBER_ID = #{ searchValue }
 				    AND C.USE_STATUS = 'cancel'
+				  ORDER BY C.USE_DATE DESC
 	  	  	   ) B
 	  	  	      <![CDATA[
 				        WHERE ROWNUM <= #{ endRow }
@@ -156,7 +158,7 @@
 	    JOIN MEMBER_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
 	   WHERE B.MEMBER_ID = #{ userId }
 	     AND A.USE_STATUS = 'waiting'
-	     AND A.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	     AND TO_CHAR(A.USE_DATE,'YYYY/MM/DD') = TO_CHAR(SYSDATE, 'YYYY/MM/DD') 
 	 </select>
 	 
 	<select id="selectReservationNow" resultMap="waitingRecordMap" parameterType="hashmap">
@@ -173,6 +175,8 @@
 				  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
 				  WHERE C.MEMBER_ID = #{ userId }
 				    AND C.USE_STATUS = 'waiting'
+				    AND TO_CHAR(C.USE_DATE,'YYYY/MM/DD') = TO_CHAR(SYSDATE,'YYYY/MM/DD')
+				  ORDER BY C.USE_DATE DESC
 				   
 	  	  	   
 	 </select>
@@ -301,6 +305,7 @@
       FROM WAITING_RECORD A
       WHERE A.COM_NO = #{ comNo }
       AND A.USE_STATUS = 'waiting'
+      AND TO_CHAR(A.USE_DATE,'YYYY/MM/DD') = TO_CHAR(SYSDATE, 'YYYY/MM/DD') 
       <![CDATA[AND A.RECORD_NO < #{ recordNo } ]]>
       
 	 

@@ -236,4 +236,40 @@
     )
   </insert>
   
+  <select id="selectMyReview" resultMap="reviewMap">
+  	     SELECT
+            A.REVIEW_CONTENT
+          , A.RATINGS
+          , C.USE_DATE
+          , C.RECORD_NO
+          , F.REVIEW_NO
+      FROM REVIEW A
+      LEFT JOIN WAITING_RECORD C ON(A.RECORD_NO = C.RECORD_NO)
+      LEFT JOIN REVIEW_ATTACH F ON(A.REVIEW_NO = F.REVIEW_NO)
+    WHERE C.RECORD_NO = #{ recordNo }
+  	
+  
+  </select>
+  
+  <select id="selectMyReviewImg" resultMap="reviewAttachMap">
+  	SELECT
+  	        A.FILE_NAME
+  	   FROM REVIEW_ATTACH A
+  	  WHERE A.REVIEW_NO = #{ reviewNo }    
+  </select>
+  
+  <update id="userUpdateReview" parameterType="hashMap">
+  	UPDATE
+  	       REVIEW A
+  	   SET A.REVIEW_CONTENT = #{ reviewContent }
+  	   	 , A.RATINGS = #{ ratings }
+  	 WHERE A.RECORD_NO = #{ recordNo } 	 		   
+  	
+  </update>
+  
+  <delete id="userDeleteReview" >
+  	DELETE
+  	 FROM REVIEW A
+  	 WHERE A.RECORD_NO = #{ recordNo }
+  </delete>
   </mapper>
