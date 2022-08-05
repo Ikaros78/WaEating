@@ -37,7 +37,9 @@
         <br>
         <h2 style="text-indent: 30px;">이전 예약</h2>
         <hr>
-        <c:forEach var="reservation" items="${ requestScope.waitingRecord }">
+        <c:forEach var="reservation" items="${ requestScope.waitingRecord }" >
+          <input type="hidden" class="comNo" name="comNo" value="${ reservation.comNo } ">
+	      <input type="hidden" class="recordNo" name="recordNo" value="${ reservation.recordNo }" >
         <div class="reservation finish">
             <h5>[${ reservation.comInfo.comName }]</h5>
             <p style="color: gray;">${ reservation.useDate }</p>
@@ -49,13 +51,13 @@
               <button type="button" class="btn btn-outline-success" disabled>방문 완료</button>
               
               <c:choose>
-              	<c:when test="${ reservation.review.reviewNo eq null }">
-              		 <a href="${ pageContext.servletContext.contextPath }/user/review">
+              	<c:when test="${ reservation.review.reviewNo eq '0' }">
+              		 <a href="${ pageContext.servletContext.contextPath }/user/review?comNo=${ reservation.comNo }&&recordNo=${ reservation.recordNo }">
               			<button type="button" class="btn btn-success">리뷰 쓰기</button> 
            			 </a>
               	</c:when>
               	<c:otherwise>
-		            <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate">
+		            <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate?comNo=${ reservation.comNo }&&recordNo=${ reservation.recordNo }">
 		              <button type="button" class="btn btn-success">내가 쓴 리뷰 보기</button>
 		            </a>
               	</c:otherwise>
@@ -82,7 +84,7 @@
 
 
 
-	<jsp:include page="../user_paging/paging_reservation_finish.jsp"></jsp:include>
+	<jsp:include page="../user_paging/paging_reservation_finish.jsp"/>
 
 
        </aside>
@@ -92,5 +94,8 @@
 
   </div>
 
+	<script>
+	
+	</script>
 </body>
 </html>

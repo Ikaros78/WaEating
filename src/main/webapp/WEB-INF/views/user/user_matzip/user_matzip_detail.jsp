@@ -143,7 +143,7 @@
                       </p>
                       <c:forEach var="reviewImg" items="${ review.reviewAttach }">
                         <c:if test="${ reviewImg.fileName ne null  }">
-                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/${ reviewImg.fileName }" alt="">
+                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewImg.fileName }" alt="">
                       	</c:if>
                       </c:forEach>
                       <!-- <img src="../1_front/images/ddok1.png" alt="">
@@ -168,11 +168,25 @@
             </c:forEach>
             </div>
             <div id="menu1" class="container tab-pane fade"><br>
-            <c:forEach var="notice" items="${ requestScope.selectComNotice }"> 
-              <h5 style="float:left;">${ notice.noticeTitle } </h5>   <p style="color: gray; float: right;">${ notice.regDate }</p>
-              <div style="clear:both;color:gray;" class="ms-3 ">${ notice.noticeContent }</div>
-              <hr>
+            
+			 <div id="accordion">
+            <c:forEach var="notice" items="${ requestScope.selectComNotice }" varStatus="stu"> 
+			   <div class="card">
+			      <div class="card-header">
+			        <a class="btn" data-bs-toggle="collapse" href="#collapse${ stu.count }" >
+			          <h5 style="float:left;">${ notice.noticeTitle } </h5> <br> 
+			        </a>
+			        <div id="collapse${ stu.count }" class="collapse" data-bs-parent="#accordion">
+			        <div class="card-body ms-3" style="clear:both;color:gray;">
+			          ${ notice.noticeContent }
+			          <p style="color: gray; float: right;">${ notice.regDate }</p>
+				    </div><!-- collapsOne -->
+			        </div><!-- card-body -->
+			      </div><!-- card-header -->
+			   </div><!-- card -->
             </c:forEach>
+			 </div> <!-- accordion -->
+             
             </div>
           </div>
         </div>

@@ -108,4 +108,50 @@
        WHERE COM_NO = #{ comNo } 
   </select>
   
+  <insert id="insertReview" parameterType="com.waeating.review.model.dto.ReviewDTO">
+  INSERT
+    INTO REVIEW A
+    (
+    	A.REVIEW_NO
+   	  , A.REVIEW_CONTENT
+   	  , A.RATINGS
+   	  , A.RECORD_NO
+   	  , A.COM_NO  	
+    ) 
+    VALUES
+    (
+       SEQ_REVIEW_NO.NEXTVAL
+     , #{ reviewContent }
+     , #{ ratings }
+     , #{ recordNo }
+     , #{ comNo }  
+    )
+    
+    <selectKey keyProperty="reviewNo" resultType="Integer" order="AFTER">
+			SELECT
+					SEQ_REVIEW_NO.CURRVAL
+			  FROM DUAL
+	</selectKey>
+  </insert>
+  
+  <insert id="insertReviewAttach" parameterType="com.waeating.review.model.dto.ReviewAttachDTO">
+  INSERT
+    INTO REVIEW_ATTACH A
+    (
+    	A.FILE_NO
+	  ,	A.REVIEW_NO
+	  ,	A.ORIGIN_NAME
+	  ,	A.FILE_NAME
+	  ,	A.IS_DELETED
+    )
+    VALUES
+    (
+    	SEQ_REVIEWATTACH_NO.NEXTVAL
+      , #{ reviewNo }
+      , #{ originName }
+      , #{ fileName }
+      , 'N'	
+    )
+  </insert>
+  
   </mapper>
