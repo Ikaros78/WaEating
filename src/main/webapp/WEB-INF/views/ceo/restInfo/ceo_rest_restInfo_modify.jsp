@@ -46,7 +46,8 @@
           </div>
             
             <div class="my-4 row mx-1 px-5">
-              <form action="${ pageContext.servletContext.contextPath }/ceo/rest_restInfo" method="get">
+              <form action="${ pageContext.servletContext.contextPath }/ceo/rest_restInfo_modify" method="post">
+              	<!-- <input type="hidden" name="comNo" value="${ requestScope.comInfo.comNo }"> 업체 로그인 정보 넘기기 -->
                 <table width="100%">
                   <tr>
                     <td class="col-1">가게명</td>
@@ -59,10 +60,6 @@
                     <td class="pb-3 col-1">주소</td>
                     <td class="pb-3 col-4">
                       <input type="text" id="address_kakao" class="form-control" value="${ requestScope.comInfo.comAddress }" name="comAddress">
-                      <!-- <div class="input-group">
-                        <input type="text" id="address_kakao" class="form-control" placeholder="서울 종로구 삼일대로 385">
-                        <button class="btn btn-primary" type="button" onclick="address_kakao()">주소 찾기</button>
-                      </div> -->
                     </td>
                     <td class="col-1"></td>
                     <td class="pb-3 col-1">카테고리</td>
@@ -139,21 +136,95 @@
                     <td class="pb-3 col-1">영업시간</td>
                     <td class="pb-3 col-4">
                       <div class="input-group">
-                        <input type="time" class="form-control" name="restStart" id="restStart">
-                        <input type="time" class="form-control" name="restEnd" id="restEnd">
+                        <input type="time" class="form-control" name="startTime" id="startTime" value="${ requestScope.comInfo.startTime }">
+                        <input type="time" class="form-control" name="endTime" id="endTime" value="${ requestScope.comInfo.endTime }">
                       </div>
                     </td>
                     <td class="col-1"></td>
                     <td class="pb-3 col-1">휴일</td>
                     <td class="pb-3 col-4">
+                    <c:set var = "holiday" value="${ requestScope.comInfo.holiday }"/>
                       <select class="form-select" name="holiday" id="holiday">
-                        <option>월</option>
-                        <option>화</option>
-                        <option>수</option>
-                        <option>목</option>
-                        <option>금</option>
-                        <option>토</option>
-                        <option>일</option>
+                        <c:if test="${fn:contains(holiday, '월')}">
+	                      	<option value="연중무휴">-</option>
+	                        <option value="월" selected>월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>                          	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '화')}">
+	                        <option value="연중무휴">-</option>
+	                        <option value="월">월</option>
+	                        <option value="화" selected>화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>                             	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '수')}">
+	                        <option value="연중무휴">-</option>
+	                        <option value="월">월</option>
+	                        <option value="화">화</option>
+	                        <option value="수" selected>수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>                       	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '목')}">
+	                        <option value="연중무휴">-</option>
+	                        <option value="월">월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목" selected>목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>                                        	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '금')}">
+	                        <option value="연중무휴">-</option>
+	                        <option value="월">월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금" selected>금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>                              	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '토')}">
+	                        <option value="연중무휴">-</option>
+	                        <option value="월">월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토" selected>토</option>
+	                        <option value="일">일</option>                          	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '일')}">
+	                        <option value="연중무휴">-</option>
+	                        <option value="월">월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일" selected>일</option>                          	
+	                      </c:if>
+	                      <c:if test="${fn:contains(holiday, '연중무휴')}">
+	                      	<option value="연중무휴" selected>-</option>
+	                        <option value="월">월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>                          	
+	                      </c:if>
                       </select>
                     </td>
                   </tr>
@@ -161,21 +232,27 @@
                     <td class="pb-3" rowspan="100">메뉴</td>
                       <td class="pb-3">
                         <div id="menugroup">
-                          <div class="input-group my-3" id="menu">
-                              <input type="text" id="menuName" class="form-control" placeholder="메뉴명">
-                              <input type="text" id="menuPrice" class="form-control" placeholder="가격">
+                          <c:forEach items="${ requestScope.comMenuList }" var="menu" varStatus="status">
+                          
+                          <div class="input-group my-3" id="menu" >
+                              <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }">
+                              <input type="text" name="price" id="menuPrice" class="form-control" value="${ menu.comMenu.price }">
                               <button class="btn btn-light border minus" type="button" id="minus">-</button>
                               <button class="btn btn-primary plus" type="button" id="plus">+</button>
                           </div>
+                          
+                          </c:forEach>
+                     
                         </div>
                       </td>
                       
                   </tr>
+                  
                  
                 </table>
                 <div class="col d-flex justify-content-center mt-4">
-                  <button class="btn btn-light border me-1" type="reset">취소</button>
-                  <button class="btn btn-primary border ms-1" type="button" data-bs-toggle="modal" data-bs-target="#modalSubmit">수정</button>
+                  <button class="btn btn-light border me-1" type="reset" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/rest_restInfo'">취소</button>
+                  <button class="btn btn-primary border ms-1" type="button" data-bs-toggle="modal" data-bs-target="#modalSubmit">확인</button>
                 </div>
                 <!-- Modal(수정) -->
                 <div class="modal fade" id="modalSubmit">
@@ -202,6 +279,21 @@
                   </div>
                 </div>
               </form>
+              
+             <!-- <script>
+             if(document.getElementById("plus")){
+ 	      		const $insert = document.getElementById("plus");
+ 	      		$insert.onclick = function(){
+ 	      			location.href = "${ pageContext.servletContext.contextPath}/ceo/rest_restInfo_modify/insertmenu?menuNo=${ requestScope.comSelectOneComMenu.menuNo }";
+ 	      		}
+ 	      	  }
+	          if(document.getElementById("minus")){
+	      		const $delete = document.getElementById("minus");
+	      		$delete.onclick = function(){
+	      			location.href = "${ pageContext.servletContext.contextPath}/ceo/rest_restInfo_modify/deletemenu?menuNo=${ requestScope.comSelectOneComMenu.menuNo }";
+	      		}
+	      	  }
+          	</script> -->
                   
             
                       

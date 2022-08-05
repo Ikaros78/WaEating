@@ -68,7 +68,7 @@
                 </td>
               </tr>  
               <tr>
-                <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" id="review">${ requestScope.selectOneReview.reviewAns.ansContent }</textarea></td>
+                <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" id="review" required>${ requestScope.selectOneReview.reviewAns.ansContent }</textarea></td>
               </tr>
             </table>
             <div class="d-flex justify-content-center">
@@ -118,7 +118,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    <button type="button" id="btnDelete" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
                 </div>
               </div>
@@ -149,6 +149,15 @@
               </div>
             </div>
           </form>
+          
+          <script>
+	          if(document.getElementById("btnDelete")){
+	      		const $delete = document.getElementById("btnDelete");
+	      		$delete.onclick = function(){
+	      			location.href = "${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_delete?reviewNo=${ requestScope.selectOneReview.reviewNo }";
+	      		}
+	      	  }
+          </script>
           <!-- <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-outline-secondary me-2" value="취소" onclick="history.go(-1)">취소</button>
             <button type="submit" class="btn btn-primary" value="등록">등록</button>

@@ -31,7 +31,7 @@
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" method="POST">
+          <form action="${ pageContext.servletContext.contextPath }/ceo/rest_review_detail_new" method="POST" name="submit" id="submit" onSubmit="return doAction();">
           <input type="hidden" value="${ requestScope.reviewNo }" name="reviewNo">
             <table width="100%">
                 <tr>
@@ -68,7 +68,7 @@
                   </td>
                 </tr>  
                 <tr>
-                  <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" placeholder="답변을 등록해주세요."></textarea></td>
+                  <td colspan="2"><textarea class="form-control mb-2 ms-1" rows="5" name="ansContent" id="ansContent" placeholder="답변을 등록해주세요." ></textarea></td>
                 </tr>
               </table>
             <div class="d-flex justify-content-center">
