@@ -2,6 +2,7 @@ package com.waeating.admin.review.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.admin.review.service.AdminReviewService;
+import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
 /**
@@ -37,6 +39,13 @@ public class AdminReviewSelectDetailServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("path", path);
 			request.getSession().setAttribute("review", review);
+			
+			List<ReviewAttachDTO> attachList = reviewService.selectReviewAttachList(searchMap);
+			if(attachList != null) {
+				request.getSession().setAttribute("attachList",attachList);
+			}else {
+				request.getSession().removeAttribute("attachList");
+			}
 		} else {
 			path = "/WEB-INF/views/common/failed.jsp";
 			request.setAttribute("message", "리뷰 정보 조회 실패");

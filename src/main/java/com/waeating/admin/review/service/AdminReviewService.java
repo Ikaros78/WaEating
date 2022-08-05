@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.common.paging.SelectCriteria;
 import com.waeating.review.model.dao.ReviewMapper;
+import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
 public class AdminReviewService {
@@ -48,6 +49,8 @@ public class AdminReviewService {
 		
 		List<ReviewDTO> reviewList = reviewMapper.adminSelectReviewList(selectCriteria);
 		
+		sqlSession.close();
+		
 		return reviewList;
 	}
 
@@ -65,7 +68,55 @@ public class AdminReviewService {
 		
 		ReviewDTO review = reviewMapper.adminSelectReviewDetail(searchMap);
 		
+		sqlSession.close();
+		
 		return review;
+	}
+
+	/**
+	 * <pre>
+	 *   리뷰 첨부파일 조회용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
+	public List<ReviewAttachDTO> selectReviewAttachList(Map<String, String> searchMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		reviewMapper = sqlSession.getMapper(ReviewMapper.class);
+		
+		List<ReviewAttachDTO> attachList = reviewMapper.adminSelectReviewAttachList(searchMap);
+		
+		sqlSession.close();
+		
+		return attachList;
+	}
+
+	/**
+	 * <pre>
+	 *   리뷰 삭제용 메소드
+	 * </pre>
+	 * @param searchMap
+	 * @return
+	 */
+	public int deleteReview(Map<String, String> searchMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		reviewMapper = sqlSession.getMapper(ReviewMapper.class);
+		
+		int result = reviewMapper.adminDeleteReview(searchMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
 	}
 
 

@@ -20,5 +20,9 @@ public interface ReviewMapper {
 
 	ReviewDTO adminSelectReviewDetail(Map<String, String> searchMap);
 
+	List<ReviewAttachDTO> adminSelectReviewAttachList(Map<String, String> searchMap);
+
+	int adminDeleteReview(Map<String, String> searchMap);
+
 
 }
