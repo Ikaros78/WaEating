@@ -72,18 +72,24 @@
  		   A.RNUM
  	 	 , A.MEMBER_NUM
   	     , A.USE_DATE
+  	     , A.RECORD_NO
+		 , A.COM_NO
   	     , A.PHONE
   	     , A.COM_NAME
   	     , A.REVIEW_NO
  	FROM(SELECT ROWNUM RNUM
 	  	      , B.MEMBER_NUM
 	  	      , B.USE_DATE
+	  	      , B.RECORD_NO
+			  , B.COM_NO
 			  , B.PHONE
 			  , B.COM_NAME
 			  , B.REVIEW_NO	
 	  	   FROM(SELECT
 				       C.MEMBER_NUM
 				     , C.USE_DATE
+				     , C.RECORD_NO
+				     , C.COM_NO
 				     , D.PHONE
 				     , E.COM_NAME
 				     , R.REVIEW_NO
@@ -292,11 +298,9 @@
 	 <select id="selectCountRecord" resultType="_int">
 	  SELECT 
             COUNT(A.RECORD_NO) COUNT_RECORD_NO
-           ,A.COM_NO
       FROM WAITING_RECORD A
       WHERE A.COM_NO = #{ comNo }
       AND A.USE_STATUS = 'waiting'
-      AND A.USE_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
       <![CDATA[AND A.RECORD_NO < #{ recordNo } ]]>
       
 	 
@@ -324,4 +328,21 @@
 	 
 	 
 	 </update>
+	 
+	 <select id="selectReservation" resultMap="waitingRecordMap">
+		SELECT
+		       C.MEMBER_NUM
+		     , C.USE_DATE
+		     , C.RECORD_NO
+		     , C.COM_NO
+		     , D.PHONE
+		     , E.COM_NAME
+		  FROM WAITING_RECORD C
+		  JOIN MEMBER_INFO D ON(C.MEMBER_ID = D.MEMBER_ID)
+		  JOIN COM_INFO E ON(C.COM_NO = E.COM_NO)
+		  LEFT JOIN REVIEW R ON (C.RECORD_NO = R.RECORD_NO)
+		  WHERE C.MEMBER_ID = #{ userId }
+		    AND C.RECORD_NO = #{ recordNo }
+				   
+	 </select>
   </mapper>
