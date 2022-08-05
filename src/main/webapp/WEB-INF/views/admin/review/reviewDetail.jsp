@@ -74,7 +74,7 @@
                         <c:forEach var= "reviewAttach" items="${ sessionScope.attachList }">
                     	<tr>
                             <td>첨부파일</td>
-                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/review/${ reviewAttach.fileName }"></td>
+                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewAttach.fileName }"></td>
                         </tr>
                         </c:forEach>
                         </c:if>
