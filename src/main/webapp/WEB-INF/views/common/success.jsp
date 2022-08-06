@@ -8,6 +8,9 @@
 <title>성공 메시지</title>
 </head>
 <body>
+  <c:if test="${ !empty requestScope.no}"><script>	alert("문의하기 게시물이 수정되었습니다");
+	
+	location.replace("/report/detail?no=" + ${requestScope.no})</script></c:if>
 
  <script>
 		var successCode = "${ requestScope.success }";
@@ -42,12 +45,12 @@
 				movePath = "${ pageContext.servletContext.contextPath }/report/list";
 				break;
 		      
-		    case "updateReport" : 
+		   /*  case "updateReport" : 
 				successMessage = "문의하기 게시물이 수정되었습니다";
 				if(${requestScope.no})
-				{movePath = "${ pageContext.servletContext.contextPath }/report/detail?no=" + ${requestScope.no};
+				{movePath = "${ pageContext.servletContext.contextPath }/report/detail?no=" + ${requestScope.no}
 				}
-				break;
+				break; */
 		}
 
     

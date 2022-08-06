@@ -16,6 +16,21 @@
 <jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
 
   <div id="wrap">
+      <div id="wrap">
+    <!-- 왼쪽 (메뉴) -->
+    <section class="row container-fluid px-5">
+      <aside class="float-start col-2 mt-4 ms-5 px-3">
+        <!-- 메뉴 제목 -->
+        <h4 class="mb-3 ms-1">마이페이지</h4>
+        <div class="list-group list-group-flush border-top border-bottom">
+          <!-- 메뉴 세부 제목 -->
+          <a href="${ pageContext.servletContext.contextPath }/notice/list" class="list-group-item list-group-item-action py-3 select">공지사항</a>
+        </div>
+       </aside>
+       <!-- 오른쪽 (컨텐츠) -->
+       <aside class="float-end col-9 mt-4 ms-3 border">
+  
+  
    
  <div class="container">
         <section class="notice">
@@ -66,7 +81,6 @@
                           </tbody>
                       </table>
                   </div>
-            
             <jsp:include page="./common/paging.jsp"/>
              
             
@@ -86,12 +100,12 @@
 				</form>
 				
 			</div>
-        </div>
-       </aside>
-    </section>
+			</div>
+			</section>
+			 <jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
                          
   </div>
-  <jsp:include page="/WEB-INF/views/user/user_footer.jsp"/>  
+  
   <script>
 		
 		if(document.getElementsByClassName('td')) {
