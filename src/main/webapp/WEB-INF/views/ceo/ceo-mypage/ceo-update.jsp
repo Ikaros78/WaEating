@@ -24,12 +24,11 @@
     <section class="row container-fluid px-5">
       <aside class="float-start col-2 mt-4 ms-5 px-3">
         <!-- 메뉴 제목 -->
-        <h4 class="mb-3 ms-1">마이페이지</h4>
+        <h4 class="mb-3 ms-1">마이 페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">즐겨찾기</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">고객센터</a>
-          <a href="${ pageContext.servletContext.contextPath }/user/check/password" class="list-group-item list-group-item-action py-3 select">회원 정보 수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/ceo/check/password" class="list-group-item list-group-item-action py-3 select">개인 정보 수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice" class="list-group-item list-group-item-action py-3">고객센터</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
@@ -64,7 +63,7 @@
               </tr>
             </table>
            
-            <label for="phone">업주 전화번호</label>
+            <label for="phone">전화번호</label>
             <input type="tel" name="phone" id="phone" placeholder="${ sessionScope.loginMember.phone }" ><br>
             
 
@@ -72,15 +71,10 @@
             <input type="email" name="email" id="email" placeholder="${ sessionScope.loginMember.email }"><br>
 
 
-			<label for="name">업체 이름</label>
-            <input type="text" name="store_name" id="store_name" placeholder="${ sessionScope.loginMember.name }" ><br>
-
-			<label for="phone">업체 전화번호</label>
-            <input type="tel" name="stroe_phone" id="store_phone" placeholder="${ sessionScope.loginMember.phone }" ><br>
-            
-            <label for="address">업체 주소</label>
-            <input type="text" name="address" id="address" value="${ sessionScope.loginMember.userInfo.birth }" readonly="readonly">
-            <input type="submit" value="회원수정" id="updatebtn">
+			<label for="name">사업자 번호</label>
+            <input type="text" name="business" id="business" placeholder="${ sessionScope.loginMember.comInfo.comRegist }" ><br>
+			
+			<input type="submit" value="회원수정" id="updatebtn">
         </form>
 
        </aside>

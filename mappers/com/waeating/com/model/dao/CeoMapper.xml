@@ -173,4 +173,46 @@
 		   SET A.MEMBER_PWD = #{ pwd }
 		 WHERE A.MEMBER_ID = #{ id }
 	</update>
+	<update id="updateCeoInformation" parameterType="com.waeating.member.model.dto.MemberDTO">
+		UPDATE 
+			   MEMBER_INFO A
+		   SET 
+		       A.MEMBER_PWD = NVL(#{ pwd }, A.MEMBER_PWD)
+		     , A.NAME = NVL(#{ name }, A.NAME)
+		     , A.PHONE = NVL(#{ phone }, A.PHONE)
+		     , A.EMAIL = NVL(#{ email }, A.EMAIL)
+		 WHERE A.MEMBER_ID = #{ id }
+	</update>
+	<update id="updateComRegist" parameterType="com.waeating.com.model.dto.ComInfoDTO">
+		UPDATE 
+			   COM_INFO A
+		   SET 
+		       A.COM_REGIST = NVL(#{ comRegist }, A.COM_REGIST)
+		 WHERE A.MEMBER_ID = #{ memberId }
+	</update>
+	
+	<select id="selectFindIdForEmail" resultMap="generalCeoResultMap" >
+		SELECT
+				A.MEMBER_ID
+			FROM MEMBER_INFO A
+			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.NAME = #{ name }
+		     AND A.EMAIL = #{ email }
+		     AND B.COM_NAME = #{ comInfo.comName }
+		     AND B.COM_PHONE = #{ comInfo.comPhone }
+		     AND B.CATEGORY = #{ comInfo.category }
+	</select>
+	
+	<select id="checkFindPwdForEmail" resultMap="generalCeoResultMap" >
+		SELECT
+			   A.MEMBER_PWD
+		  FROM MEMBER_INFO A
+		  JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		 WHERE A.MEMBER_ID = #{ id }
+		   AND A.NAME = #{ name }
+		   AND A.EMAIL = #{ email }
+		   AND B.COM_NAME = #{ comInfo.comName }
+		   AND B.COM_PHONE = #{ comInfo.comPhone }
+		   AND B.CATEGORY = #{ comInfo.category }
+	</select>
 </mapper>

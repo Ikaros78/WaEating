@@ -1,4 +1,4 @@
-package com.waeating.user.mypage.controller;
+package com.waeating.ceo.mypage.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.waeating.ceo.login.model.service.ComService;
+import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.user.login.model.service.UserService;
 
 /**
- * Servlet implementation class UpdateUserInformationServlet
+ * Servlet implementation class CeoUpdateInformationServlet
  */
-@WebServlet("/member/user/update/information")
-public class UserUpdateInformationServlet extends HttpServlet {
+@WebServlet("/member/ceo/update/information")
+public class CeoUpdateInformationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
 		
-		request.getRequestDispatcher("/WEB-INF/views/user/user-mypage/user-update.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/ceo/ceo-mypage/ceo-update.jsp").forward(request, response);
 	}
 	
 	@Override
@@ -33,14 +35,19 @@ public class UserUpdateInformationServlet extends HttpServlet {
 		
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
 		
-		String userId = loginMember.getId();
+		String ceoId = loginMember.getId();
 		String name = request.getParameter("name");
 		String pw = request.getParameter("pw");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
+		String business = request.getParameter("business");
+		
+		ComInfoDTO requestCom = new ComInfoDTO();
+		requestCom.setMemberId(ceoId);
+		requestCom.setComRegist(business);
 		
 		MemberDTO requestMember = new MemberDTO();
-		requestMember.setId(userId);
+		requestMember.setId(ceoId);
 		requestMember.setName(name);
 		requestMember.setPwd(pw);
 		requestMember.setPhone(phone);
@@ -48,24 +55,26 @@ public class UserUpdateInformationServlet extends HttpServlet {
 		
 		System.out.println("requestMember : " + requestMember);
 		
-		UserService userService =  new UserService();
+		ComService comService = new ComService();
 		
-		int result = userService.updateUserInformation(requestMember);
+		int resultMember = comService.updateCeoInformation(requestMember);
+		int resultCom = comService.updaupdateComRegist(requestCom);
 		
-		System.out.println("result : " + result);
+		System.out.println("resultMember : " + resultMember);
+		System.out.println("resultCom : " + resultCom);
 		
 		String page = "";
 		
-		if(result > 0 ) {
+		if(resultMember > 0 && resultCom > 0 ) {
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
-			request.setAttribute("success", "updateUser");
+			request.setAttribute("success", "updateCeo");
 		} else {
 			
 			page = "/WEB-INF/views/common/failed.jsp";
 			
-			request.setAttribute("message", "정보수정에 실패하셨습니다. 다시 시도해주세요.");
+			request.setAttribute("message", "정보 수정에 실패하셨습니다. 다시 시도해주세요.");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		

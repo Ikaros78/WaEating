@@ -24,5 +24,13 @@ public interface CeoMapper {
 
 	int updateNewPwd(ComInfoDTO requestCom);
 
+	int updateCeoInformation(MemberDTO requestMember);
+
+	int updateComRegist(ComInfoDTO requestCom);
+
+	MemberDTO selectFindIdForEmail(MemberDTO requestMember);
+
+	MemberDTO checkFindPwdForEmail(MemberDTO requestMember);
+
 
 }

@@ -190,4 +190,126 @@ public class ComService {
 		
 		return updatePwd;
 	}
+	
+	/**
+	 * <pre>
+	 *	 회원 정보 수정을 위한 비밀번호 확인하는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO checkPwdCeo(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO ceoInfo = null;
+		
+		String encPwd = ceoMapper.selectEncryptedPwd(requestMember);
+		System.out.println("encPwd 확인 : " + encPwd);
+		System.out.println("pwd : " + requestMember.getPwd());
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if(passwordEncoder.matches(requestMember.getPwd(), encPwd)) {
+			
+			ceoInfo = ceoMapper.selectMemberLogin(requestMember);
+		}
+		
+		sqlSession.close();
+		
+		return ceoInfo;
+	
+	}
+
+	/**
+	 * <pre>
+	 * 	 회원 정보 update 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public int updateCeoInformation(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		int resultMember = ceoMapper.updateCeoInformation(requestMember);
+		
+		
+		if(resultMember > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return resultMember;
+	}
+
+	/**
+	 * <pre>
+	 * 	 회원 정보 update 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public int updaupdateComRegist(ComInfoDTO requestCom) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		int resultCom = ceoMapper.updateComRegist(requestCom);
+		
+		
+		if(resultCom > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return resultCom;
+	}
+
+	/**
+	 * <pre>
+	 * 	 이메일로 아이디 찾는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO findIdEmail(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO findCeoId = null;
+		findCeoId = ceoMapper.selectFindIdForEmail(requestMember);
+		
+		sqlSession.close();
+		
+		return findCeoId;
+	}
+
+	public MemberDTO checkPwdEmail(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO checkPwd = ceoMapper.checkFindPwdForEmail(requestMember);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
 }

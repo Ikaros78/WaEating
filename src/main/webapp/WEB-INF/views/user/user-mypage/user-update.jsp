@@ -37,12 +37,12 @@
         <div id="container">
         <h1>회원 정보 수정</h1>
         <hr id="con_hr">
-        <form action="" id="user_update" method="post" onsubmit="return ck_infor();">
+        <form action="" id="user_update" method="post" onsubmit="return ck_infor();" encType="multipart/form-data">
             <div class="profile">
               <div class="profile_img">
-                <img src="../img/profile.png" alt="프로필">
+                <img id="profile" alt="프로필" width="100" height="100">
               </div>
-              <input type="file" accept=".jpg,.jpeg,.png" name="upload" id="upload">
+              <input type="file" accept=".jpg,.jpeg,.png" name="upload" id="upload" onchange="loadImg(this);">
             </div>
 
             <label for="id">아이디</label>
@@ -83,6 +83,24 @@
 	<jsp:include page="../user_footer.jsp"/>
   </div>
   
+  <script>
+  const $profille =  document.getElementById("profile");
+  
+  $profile.onclick = function() {
+	  document.getElementById("upload").click();
+  }
+
+  function loadImg(value) {
+	  if (value.files && value.files[0]) {
+		  const reader = new FileReader();
+		  reader.onload = function(e){
+			  document.getElementById("profile").src = e.target.result;
+		  }
+		  reader.readAsDataURL(value.files[0]);
+	  }
+  }
+  
+  </script>
 
 </body>
 </html>

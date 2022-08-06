@@ -43,6 +43,10 @@
 				successMessage = "비밀번호가 변경되었습니다.";
 				movePath = "${ pageContext.servletContext.contextPath }/member/ceo/login";
 				break;
+			case "updateCeo" :
+				successMessage = "회원정보가 수정되었습니다.";
+				movePath = "${ pageContext.servletContext.contextPath }/ceo/main";
+				break;
 		}
 
 		alert(successMessage);
