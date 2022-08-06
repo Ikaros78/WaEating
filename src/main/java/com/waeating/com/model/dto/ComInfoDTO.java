@@ -23,9 +23,9 @@ public class ComInfoDTO {
 	private String startTime;
 	private String endTime;
 	
+	private MemberDTO memberInfo;
 	private List<ComBoardAttachDTO> comBoardAttach;
 	private ComMenuDTO comMenu;
-	private MemberDTO memberInfo;
 	private List<ComRecordDTO> recordList;
 	private ReviewDTO review;
 	private WaitingRecordDTO waitingRecord;
@@ -38,9 +38,10 @@ public class ComInfoDTO {
 
 	public ComInfoDTO(int comNo, String memberId, String comName, String category, String comAddress, String comPhone,
 			String comRegist, String waitYn, String workTime, String holiday, String startTime, String endTime,
-			List<ComBoardAttachDTO> comBoardAttach, ComMenuDTO comMenu, MemberDTO memberInfo,
+			MemberDTO memberInfo, List<ComBoardAttachDTO> comBoardAttach, ComMenuDTO comMenu,
 			List<ComRecordDTO> recordList, ReviewDTO review, WaitingRecordDTO waitingRecord,
 			ReviewAttachDTO reviewAttach, ReviewAnsDTO reviewAns) {
+		super();
 		this.comNo = comNo;
 		this.memberId = memberId;
 		this.comName = comName;
@@ -53,9 +54,9 @@ public class ComInfoDTO {
 		this.holiday = holiday;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.memberInfo = memberInfo;
 		this.comBoardAttach = comBoardAttach;
 		this.comMenu = comMenu;
-		this.memberInfo = memberInfo;
 		this.recordList = recordList;
 		this.review = review;
 		this.waitingRecord = waitingRecord;
@@ -184,6 +185,16 @@ public class ComInfoDTO {
 	}
 
 
+	public MemberDTO getMemberInfo() {
+		return memberInfo;
+	}
+
+
+	public void setMemberInfo(MemberDTO memberInfo) {
+		this.memberInfo = memberInfo;
+	}
+
+
 	public List<ComBoardAttachDTO> getComBoardAttach() {
 		return comBoardAttach;
 	}
@@ -201,16 +212,6 @@ public class ComInfoDTO {
 
 	public void setComMenu(ComMenuDTO comMenu) {
 		this.comMenu = comMenu;
-	}
-
-
-	public MemberDTO getMemberInfo() {
-		return memberInfo;
-	}
-
-
-	public void setMemberInfo(MemberDTO memberInfo) {
-		this.memberInfo = memberInfo;
 	}
 
 
@@ -269,10 +270,10 @@ public class ComInfoDTO {
 		return "ComInfoDTO [comNo=" + comNo + ", memberId=" + memberId + ", comName=" + comName + ", category="
 				+ category + ", comAddress=" + comAddress + ", comPhone=" + comPhone + ", comRegist=" + comRegist
 				+ ", waitYn=" + waitYn + ", workTime=" + workTime + ", holiday=" + holiday + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", comBoardAttach=" + comBoardAttach + ", comMenu=" + comMenu
-				+ ", memberInfo=" + memberInfo + ", recordList=" + recordList + ", review=" + review
-				+ ", waitingRecord=" + waitingRecord + ", reviewAttach=" + reviewAttach + ", reviewAns=" + reviewAns
-				+ "]";
+				+ ", endTime=" + endTime + ", memberInfo=" + memberInfo + ", comBoardAttach=" + comBoardAttach
+				+ ", comMenu=" + comMenu + ", recordList=" + recordList + ", review=" + review + ", waitingRecord="
+				+ waitingRecord + ", reviewAttach=" + reviewAttach + ", reviewAns=" + reviewAns + "]";
 	}
-
+	
+	
 }

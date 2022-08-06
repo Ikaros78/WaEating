@@ -65,7 +65,7 @@ public class UserUpdateInformationServlet extends HttpServlet {
 			
 			page = "/WEB-INF/views/common/failed.jsp";
 			
-			request.setAttribute("message", "회원가입에 실패하셨습니다. 다시 시도해주세요.");
+			request.setAttribute("message", "정보수정에 실패하셨습니다. 다시 시도해주세요.");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		

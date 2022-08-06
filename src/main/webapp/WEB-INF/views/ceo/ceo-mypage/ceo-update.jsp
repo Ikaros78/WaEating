@@ -17,19 +17,18 @@
 <body>
   <!-- header -->
  
- <jsp:include page="../user_header.jsp"/>
+ <jsp:include page="../common/ceo_header.jsp"/>
 
   <div id="wrap">
     <!-- 왼쪽 (메뉴) -->
     <section class="row container-fluid px-5">
       <aside class="float-start col-2 mt-4 ms-5 px-3">
         <!-- 메뉴 제목 -->
-        <h4 class="mb-3 ms-1">마이페이지</h4>
+        <h4 class="mb-3 ms-1">마이 페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">즐겨찾기</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">고객센터</a>
-          <a href="${ pageContext.servletContext.contextPath }/user/check/password" class="list-group-item list-group-item-action py-3 select">회원 정보 수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/ceo/check/password" class="list-group-item list-group-item-action py-3 select">개인 정보 수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/ceo/rest_notice" class="list-group-item list-group-item-action py-3">고객센터</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
@@ -37,12 +36,12 @@
         <div id="container">
         <h1>회원 정보 수정</h1>
         <hr id="con_hr">
-        <form action="" id="user_update" method="post" onsubmit="return ck_infor();" encType="multipart/form-data">
+        <form action="" id="user_update" method="post" onsubmit="return ck_infor();">
             <div class="profile">
               <div class="profile_img">
-                <img id="profile" alt="프로필" width="100" height="100">
+                <img src="../img/profile.png" alt="프로필">
               </div>
-              <input type="file" accept=".jpg,.jpeg,.png" name="upload" id="upload" onchange="loadImg(this);">
+              <input type="file" accept=".jpg,.jpeg,.png" name="upload" id="upload">
             </div>
 
             <label for="id">아이디</label>
@@ -71,36 +70,19 @@
             <label for="email">이메일</label>
             <input type="email" name="email" id="email" placeholder="${ sessionScope.loginMember.email }"><br>
 
-            <label for="birth">생년월일</label>
-            <input type="text" name="birth" id="birth" value="${ sessionScope.loginMember.userInfo.birth }" readonly="readonly">
 
-            <input type="submit" value="회원수정" id="updatebtn">
+			<label for="name">사업자 번호</label>
+            <input type="text" name="business" id="business" placeholder="${ sessionScope.loginMember.comInfo.comRegist }" ><br>
+			
+			<input type="submit" value="회원수정" id="updatebtn">
         </form>
 
        </aside>
     </section>
    
-	<jsp:include page="../user_footer.jsp"/>
+	<jsp:include page="../common/ceo_footer.jsp"/>
   </div>
   
-  <script>
-  const $profille =  document.getElementById("profile");
-  
-  $profile.onclick = function() {
-	  document.getElementById("upload").click();
-  }
-
-  function loadImg(value) {
-	  if (value.files && value.files[0]) {
-		  const reader = new FileReader();
-		  reader.onload = function(e){
-			  document.getElementById("profile").src = e.target.result;
-		  }
-		  reader.readAsDataURL(value.files[0]);
-	  }
-  }
-  
-  </script>
 
 </body>
 </html>

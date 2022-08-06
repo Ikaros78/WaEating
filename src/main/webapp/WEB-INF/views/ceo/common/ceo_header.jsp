@@ -52,13 +52,10 @@
             </ul>
           </li>
           <li class="nav-item dropmenu  mt-4">
-            <a class="nav-link px-5 fs-5" href="#">마이페이지</a>
+            <a class="nav-link px-5 fs-5" href="${ pageContext.servletContext.contextPath }/ceo/check/password">마이페이지</a>
             <ul class="nav flex-column pt-3" style="width:188px;">
               <li class="nav-item">
-                <a class="nav-link" href="#">개인 정보 수정</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">가게 정보 수정</a>
+                <a class="nav-link" href="${ pageContext.servletContext.contextPath }/ceo/check/password">개인 정보 수정</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">고객센터</a>
@@ -66,7 +63,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-2 my-1 ms-5" href="#"><c:out value="${ sessionScope.loginMember.memberInfo.name }"/>님</a>
+            <a class="nav-link px-2 my-1 ms-5" href="#"><c:out value="${ sessionScope.loginMember.name }"/>님</a>
           </li>
           <li class="nav-item">
             <a class="nav-link px-2 my-1 me-3" href="${ pageContext.servletContext.contextPath }/common/logout">로그아웃</a>
