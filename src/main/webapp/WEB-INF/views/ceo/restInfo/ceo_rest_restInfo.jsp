@@ -181,6 +181,7 @@
                     <td class="pb-3" rowspan="100">메뉴</td>
                       <td class="pb-3">
                       	<div id="menugroup">
+                      	
                       	<c:forEach items="${ requestScope.comMenuList }" var="menu">
                           <div class="input-group my-3" id="menu">
                               <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }" disabled>

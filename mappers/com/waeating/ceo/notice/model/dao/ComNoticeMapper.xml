@@ -32,7 +32,7 @@
   		VALUES
   		(
   			SEQ_NOTICENO.NEXTVAL, #{ noticeTitle }, #{ noticeContent },
-  			SYSDATE, 1
+  			SYSDATE, #{ comNo }
   		)
   		<!-- CN.CON_NO : 업체 정보 받고 쿼리문 다시 수정하기 -->
   	</insert>
@@ -51,6 +51,7 @@
   		   		   			  , C.NOTICE_TITLE
   		   					  , C.REG_DATE
   		   				   FROM COM_NOTICE C
+  		   				  WHERE C.COM_NO = #{ comNo }
   		   				 <where>
   		   				 	<if test="searchCondition == 'noticeTitle'">
 	           				   C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'

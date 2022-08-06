@@ -15,6 +15,7 @@ import com.waeating.ceo.notice.model.service.ComNoticeService;
 import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
 
 /**
  * Servlet implementation class CeoRestNotice
@@ -24,7 +25,10 @@ public class CeoRestNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+		
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
+		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
@@ -39,9 +43,10 @@ public class CeoRestNoticeServlet extends HttpServlet {
 		String searchCondition = request.getParameter("searchCondition");
 		String searchValue = request.getParameter("searchValue");
 		
-		Map<String, String> searchMap = new HashMap<>();
+		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
+		searchMap.put("comNo", comNo);
 		
 		ComNoticeService noticeService = new ComNoticeService();
 		int totalCount = noticeService.selectTotalCount(searchMap);

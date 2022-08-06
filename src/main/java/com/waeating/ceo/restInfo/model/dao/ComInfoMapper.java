@@ -16,7 +16,7 @@ public interface ComInfoMapper {
 
 	int insertComMenu(ComMenuDTO comMenuList);
 
-	int deleteComMenu(String comNo);
+	int deleteComMenu(int comNo);
 
 
 }

@@ -12,7 +12,7 @@ public interface ComNoticeMapper {
 
 	List<ComNoticeDTO> selectAllNotice(SelectCriteria selectCriteria);
 
-	int selectTotalCount(Map<String, String> searchMap);
+	int selectTotalCount(Map<String, Object> searchMap);
 
 	ComNoticeDTO selectOneNotice(int noticeNo);
 

@@ -131,6 +131,15 @@
                         <option>기타</option>
                         <option selected>카페</option>                             	
                       	</c:if>
+                      	<c:if test="${ empty category }">
+                        <option selected>한식</option>
+                        <option>분식</option>
+                        <option>양식</option>
+                        <option>일식</option>
+                        <option>중식</option>
+                        <option>기타</option>
+                        <option>카페</option>                   	
+                      	</c:if>
                       </select>
                     </td>
                   </tr>
@@ -234,6 +243,14 @@
                     <td class="pb-3" rowspan="100">메뉴</td>
                       <td class="pb-3">
                         <div id="menugroup">
+                          <c:if test="${ requestScope.comMenuList eq null}">
+	                          <div class="input-group my-3" id="menu" >
+	                              <input type="text" name="menuName" id="menuName" class="form-control" value="">
+	                              <input type="text" name="price" id="menuPrice" class="form-control" value="">
+	                              <button class="btn btn-light border minus" type="button" id="minus">-</button>
+	                              <button class="btn btn-primary plus" type="button" id="plus">+</button>
+	                          </div>
+                          </c:if>
                           <c:forEach items="${ requestScope.comMenuList }" var="menu" varStatus="status">
                           
                           <div class="input-group my-3" id="menu" >

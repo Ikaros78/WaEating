@@ -47,7 +47,7 @@ public class ComNoticeService {
 		return comNoticeList;
 	}
 
-	public int selectTotalCount(Map<String, String> searchMap) {
+	public int selectTotalCount(Map<String, Object> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);

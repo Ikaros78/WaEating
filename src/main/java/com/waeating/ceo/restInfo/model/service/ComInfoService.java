@@ -83,7 +83,7 @@ public class ComInfoService {
 		return result;
 	}
 
-	public int deleteComMenu(String comNo) {
+	public int deleteComMenu(int comNo) {
 		
 		SqlSession sqlSession = getSqlSession();
 		

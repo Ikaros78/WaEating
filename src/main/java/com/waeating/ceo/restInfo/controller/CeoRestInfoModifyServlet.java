@@ -28,7 +28,8 @@ public class CeoRestInfoModifyServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 //		 로그인 정보에서 ComNo 가져오기
-		int comNo = 1;
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
 
 		ComInfoService comInfoService = new ComInfoService();
 
@@ -51,7 +52,9 @@ public class CeoRestInfoModifyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 업체 로그인 정보 가져오기
-		String comNo = "1";
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
+		
 		// 업체 정보 수정
 		String comName = request.getParameter("comName");
 		String category = request.getParameter("category");

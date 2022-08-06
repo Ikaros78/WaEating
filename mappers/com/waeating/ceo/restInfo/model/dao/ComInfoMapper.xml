@@ -37,7 +37,7 @@
 		     , SUBSTR(CI.WORK_TIME, 1, INSTR(CI.WORK_TIME, '~') -1) STARTTIME
 		     , SUBSTR(CI.WORK_TIME, INSTR(CI.WORK_TIME, '~') +1, LENGTH(CI.WORK_TIME)) ENDTIME
 		  FROM COM_INFO CI
-		 WHERE CI.COM_NO = 1
+		 WHERE CI.COM_NO = #{ comNo }
 	</select>
 	
 	<select id="comSelectOneComMenu" resultMap="comInfoResultMap">
@@ -47,7 +47,7 @@
 		     , CM.PRICE
 		  FROM COM_INFO CI
 		  JOIN COM_MENU CM ON (CI.COM_NO = CM.COM_NO)
-		 WHERE CI.COM_NO = 1
+		 WHERE CI.COM_NO = #{ comNo }
 	</select>
 	
 	<insert id="insertComMenu">

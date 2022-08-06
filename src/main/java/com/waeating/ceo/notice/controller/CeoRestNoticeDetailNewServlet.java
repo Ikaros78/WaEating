@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.waeating.ceo.notice.model.service.ComNoticeService;
 import com.waeating.com.model.dto.ComNoticeDTO;
+import com.waeating.member.model.dto.MemberDTO;
 
 /**
  * Servlet implementation class CeoRestNoticeDetailNewServlet
@@ -29,10 +30,14 @@ public class CeoRestNoticeDetailNewServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
+		
 		String noticeTitle = request.getParameter("noticeTitle");
 		String noticeContent = request.getParameter("noticeContent");
 		
 		ComNoticeDTO comNotice = new ComNoticeDTO();
+		comNotice.setComNo(comNo);
 		comNotice.setNoticeTitle(noticeTitle);
 		comNotice.setNoticeContent(noticeContent);
 		

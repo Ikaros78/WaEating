@@ -20,10 +20,6 @@ public class CeoRestNoticeDetailModifyServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String path = "/WEB-INF/views/ceo/notice/ceo_rest_notice_detail_modify.jsp";
-//		
-//		request.getRequestDispatcher(path).forward(request, response);
-		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		
 		ComNoticeDTO comNotice = new ComNoticeService().selectOneNotice(noticeNo);
