@@ -8,12 +8,13 @@
 <title>성공 메시지</title>
 </head>
 <body>
+
  <script>
 		var successCode = "${ requestScope.success }";
 		
 		let successMessage = "";
 		let movePath = "";
-		
+	    	
 		switch(successCode){
 			case "insertUser" : 
 				successMessage = "회원 가입에 성공하셨습니다!";
@@ -35,17 +36,21 @@
 				successMessage = "문의하기 게시물을 등록하였습니다";
 				movePath = "${ pageContext.servletContext.contextPath }/report/list";
 				break;
+				
 		    case "deleteReport" : 
 				successMessage = "문의하기 게시물이 삭제되었습니다";
 				movePath = "${ pageContext.servletContext.contextPath }/report/list";
 				break;
+		      
 		    case "updateReport" : 
 				successMessage = "문의하기 게시물이 수정되었습니다";
-				movePath = "${ pageContext.servletContext.contextPath }/report/detail?no=" + ${requestScope.no};
+				if(${requestScope.no})
+				{movePath = "${ pageContext.servletContext.contextPath }/report/detail?no=" + ${requestScope.no};
+				}
 				break;
 		}
 
-
+    
 		alert(successMessage);
 		
 		location.replace(movePath);

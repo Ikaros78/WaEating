@@ -90,9 +90,8 @@
         </div>
        </aside>
     </section>
-                         
-<jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
   </div>
+<jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
   <script>
 		
 		if(document.getElementsByClassName('td')) {

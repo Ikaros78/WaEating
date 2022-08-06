@@ -11,7 +11,7 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
+    <jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/>
     
      <div id="wrap">
     <section class="row container-fluid px-5">
@@ -28,33 +28,26 @@
 				<tbody>
 					<tr>
 						<th scope="row">글 번호</th>
-						<td><c:out value="${requestScope.noticeDetail.noticeNo }"/><td>
-						
+						<td colspan="4"><c:out value="${requestScope.noticeDetail.noticeNo }"/></td>
 					</tr>
 					<tr>
 						<th scope="row">작성자</th>
 						<td>${requestScope.noticeDetail.memberId }</td>
 						<th scope="row">작성일</th>
-						<td>${requestScope.noticeDetail.regDate }</td>
-						
-						
+						<td colspan="2">${requestScope.noticeDetail.regDate }</td>
+
 					</tr>
 					<tr>
 						<th scope="row">제목</th>
-						<td colspan="3">${requestScope.noticeDetail.noticeTitle }</td>
-			<!-- 	<input type="text" id="title" name="title" --><td>
-						</td>
+						<td colspan="4">${requestScope.noticeDetail.noticeTitle }</td>
 					</tr>
 					<tr>
-						<td colspan="4" class="view_text">${requestScope.noticeDetail.noticeContent }</td>
-					
-				 <!-- <textarea title="내용" id="contents" name="contents" --> 
-		
+						<td colspan="5" class="view_text">${requestScope.noticeDetail.noticeContent }</td>
 		            </tr>
 		            
 				</tbody>
 			</table>
-            <c:if test="${ !empty requestScope.attachList}">
+			<c:if test="${ !empty requestScope.attachList}">
 	            <table class="table table-bordered">
 	            	<thead>
 	            		<tr>
@@ -70,15 +63,15 @@
 	            	</tbody>
 	            </table>
             </c:if>
+            
        </aside>
     </section>
    
-   <jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
+    <jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
 
   </div>
-		 	 
+			 
  <script>
-		
 		if(document.getElementsByClassName('td')) {
 			
 			const $tds = document.getElementsByClassName('td');

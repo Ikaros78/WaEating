@@ -19,8 +19,8 @@ import com.waeating.notice.model.service.NoticeService;
 /**
  * Servlet implementation class NoticeSelectDetailServlet
  */
-@WebServlet("/notice/detail")
-public class NoticeSelectDetailServlet extends HttpServlet {
+@WebServlet("/ceonotice/detail")
+public class NoticeSelectCeoDetailServlet extends HttpServlet {
        
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +29,7 @@ public class NoticeSelectDetailServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		
 		System.out.println("no " + no);
+		
 		Map<String, String> searchMap = new HashMap<>();	
 		searchMap.put("noticeNo", request.getParameter("no"));
 		AdminNoticeService noticeService = new AdminNoticeService();
@@ -36,7 +37,7 @@ public class NoticeSelectDetailServlet extends HttpServlet {
 		System.out.println("noticeDetail : " + noticeDetail);
 		String path = "";
 		if(noticeDetail != null) {
-			path = "/WEB-INF/views/mainNotice/notice_detail.jsp";
+			path = "/WEB-INF/views/mainNotice/notice_ceodetail.jsp";
 			List<NoticeAttachDTO> attachList = noticeService.selectNoticeAttachList(searchMap);
 			System.out.println("attachList : " + attachList);
 			

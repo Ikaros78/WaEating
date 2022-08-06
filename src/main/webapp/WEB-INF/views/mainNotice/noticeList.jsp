@@ -86,13 +86,12 @@
 				</form>
 				
 			</div>
-             
         </div>
        </aside>
     </section>
                          
-<jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
   </div>
+  <jsp:include page="/WEB-INF/views/user/user_footer.jsp"/>  
   <script>
 		
 		if(document.getElementsByClassName('td')) {

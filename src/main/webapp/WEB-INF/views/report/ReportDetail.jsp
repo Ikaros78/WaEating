@@ -149,6 +149,7 @@
 			
 		}
 		function delEvent(){
+			window.event.preventDefault()
 			const reportNum = $('.report-num').text();
 			window.location.href = '/report/delete?reportNum='+reportNum;
 		}
