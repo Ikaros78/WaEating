@@ -282,6 +282,26 @@ public class UserService {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 * 	 회원 정보 수정 후 수정된 세션 등록을 위한 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO newUserInfo(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		MemberDTO loginMember = memberMapper.selectMemberLogin(requestMember);
+		
+		sqlSession.close();
+		
+		return loginMember;
+	}
+
 
 
 

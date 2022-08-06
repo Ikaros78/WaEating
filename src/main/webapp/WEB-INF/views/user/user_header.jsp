@@ -61,17 +61,14 @@
                 </ul>
               </li>
               <li class="nav-item dropmenu  mt-4">
-                <a class="nav-link px-5 fs-5" href="#">마이페이지</a>
+                <a class="nav-link px-5 fs-5" href="${ pageContext.servletContext.contextPath }/user/check/password">마이페이지</a>
                 <ul class="nav flex-column pt-3" style="width:188px;">
                   <li class="nav-item">
-                    <a class="nav-link" href="#">즐겨찾기</a>
+                    <a class="nav-link" href="${ pageContext.servletContext.contextPath }/user/check/password">회원 정보 수정</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="${ pageContext.servletContext.contextPath }/report/main">고객센터</a>
                     </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="${ pageContext.servletContext.contextPath }/user/check/password">회원 정보 수정</a>
-                  </li>
                 </ul>
               </li>
               <li class="nav-item">

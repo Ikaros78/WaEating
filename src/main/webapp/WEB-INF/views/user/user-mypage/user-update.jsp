@@ -27,9 +27,8 @@
         <h4 class="mb-3 ms-1">마이페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">즐겨찾기</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">고객센터</a>
           <a href="${ pageContext.servletContext.contextPath }/user/check/password" class="list-group-item list-group-item-action py-3 select">회원 정보 수정</a>
+          <a href="#" class="list-group-item list-group-item-action py-3">고객센터</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
@@ -37,13 +36,7 @@
         <div id="container">
         <h1>회원 정보 수정</h1>
         <hr id="con_hr">
-        <form action="" id="user_update" method="post" onsubmit="return ck_infor();" encType="multipart/form-data">
-            <div class="profile">
-              <div class="profile_img">
-                <img id="profile" alt="프로필" width="100" height="100">
-              </div>
-              <input type="file" accept=".jpg,.jpeg,.png" name="upload" id="upload" onchange="loadImg(this);">
-            </div>
+        <form action="${ pageContext.servletContext.contextPath }/member/user/update/information" id="user_update" method="post" onsubmit="return ck_infor();">
 
             <label for="id">아이디</label>
             <input type="text" name="id" id="id" value="${ sessionScope.loginMember.id }" readonly="readonly"><br>
@@ -57,10 +50,10 @@
                 <td  rowspan="3"><label for="password" style="margin-bottom: 0;">비밀번호</label></td>
               </tr>
               <tr>
-                <td><input type="password" name="pw" class="pw" placeholder="새 비밀번호를 입력하세요" style="margin-bottom: 3px;"><br></td>
+                <td><input type="password" name="pw" id="pw" class="pw" placeholder="새 비밀번호를 입력하세요" style="margin-bottom: 3px;"><br></td>
               </tr>
               <tr>
-                <td><input type="password" name="newPw" class="pw" placeholder="새 비밀번호를 다시 입력하세요"><br></td>
+                <td><input type="password" name="newPw" id="re_pw" class="pw" placeholder="새 비밀번호를 다시 입력하세요"><br></td>
               </tr>
             </table>
            
@@ -83,24 +76,6 @@
 	<jsp:include page="../user_footer.jsp"/>
   </div>
   
-  <script>
-  const $profille =  document.getElementById("profile");
-  
-  $profile.onclick = function() {
-	  document.getElementById("upload").click();
-  }
-
-  function loadImg(value) {
-	  if (value.files && value.files[0]) {
-		  const reader = new FileReader();
-		  reader.onload = function(e){
-			  document.getElementById("profile").src = e.target.result;
-		  }
-		  reader.readAsDataURL(value.files[0]);
-	  }
-  }
-  
-  </script>
 
 </body>
 </html>

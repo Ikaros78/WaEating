@@ -33,9 +33,9 @@ public class CeoUpdateInformationServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+		MemberDTO ceo = (MemberDTO) session.getAttribute("loginMember");
 		
-		String ceoId = loginMember.getId();
+		String ceoId = ceo.getId();
 		String name = request.getParameter("name");
 		String pw = request.getParameter("pw");
 		String phone = request.getParameter("phone");
@@ -66,6 +66,10 @@ public class CeoUpdateInformationServlet extends HttpServlet {
 		String page = "";
 		
 		if(resultMember > 0 && resultCom > 0 ) {
+			
+			MemberDTO loginMember = comService.newCeoInfo(requestMember); 
+			
+			session.setAttribute("loginMember", loginMember);
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			

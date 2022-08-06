@@ -31,9 +31,9 @@ public class UserUpdateInformationServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+		MemberDTO user = (MemberDTO) session.getAttribute("loginMember");
 		
-		String userId = loginMember.getId();
+		String userId = user.getId();
 		String name = request.getParameter("name");
 		String pw = request.getParameter("pw");
 		String phone = request.getParameter("phone");
@@ -57,6 +57,10 @@ public class UserUpdateInformationServlet extends HttpServlet {
 		String page = "";
 		
 		if(result > 0 ) {
+			
+			MemberDTO loginMember = userService.newUserInfo(requestMember); 
+			
+			session.setAttribute("loginMember", loginMember);
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
