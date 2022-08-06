@@ -46,7 +46,7 @@
                 </table>
             </div>
 			<div class="col-md-9">
-	           	<form action="${ pageContext.servletContext.contextPath }/admin/notice/update" method="post" id="frm">
+	           	<form action="${ pageContext.servletContext.contextPath }/admin/notice/update" method="post" id="frm" encType="multipart/form-data">
 	            <table class="table table-bordered">
 	            	<thead>
 		            	<tr>
@@ -75,21 +75,37 @@
 	                    </tr>
 	                </tbody>
 	            </table>
-	            <c:if test="${ !empty sessionScope.attachList}">
-	            <table class="table table-bordered">
-	            	<thead>
-	            		<tr>
-	            			<td>첨부사진</td>
-	            		</tr>
-	            	</thead>
-	            	<tbody>
-	            		<c:forEach var="file" items="${ attachList }">
-	            		<tr>
-	            			<td><img src="${ pageContext.servletContext.contextPath }/resources/upload/notice/origin/${ file.fileName }"></td>
-	            		</tr>
-						</c:forEach>
-	            	</tbody>
-	            </table>
+	            <c:if test="${ empty sessionScope.ifUpdate }">
+		            <c:if test="${ !empty sessionScope.attachList}">
+		            <table class="table table-bordered">
+		            	<thead>
+		            		<tr>
+		            			<td>첨부사진</td>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<c:forEach var="file" items="${ attachList }">
+		            		<tr>
+		            			<td><img src="${ pageContext.servletContext.contextPath }/resources/upload/notice/origin/${ file.fileName }" width="600" height="371"></td>
+		            		</tr>
+							</c:forEach>
+		            	</tbody>
+		            </table>
+		            </c:if>
+	            </c:if>
+	            <c:if test="${ !empty sessionScope.ifUpdate }">
+	            	<table class="table table-bordered">
+		            <thead>
+			           	<tr>
+			           		<td>첨부파일</td>
+			           	</tr>
+		            </thead>
+		            <tbody>
+			           	<tr>
+			           		<td><input type="file" id="attachFile" name="attachFile" multiple></td>
+			           	</tr>
+		            </tbody>
+		        </table>
 	            </c:if>
 	            <table class="table table-bordered">
 	            	<thead>
