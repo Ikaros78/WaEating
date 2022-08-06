@@ -25,8 +25,6 @@ public class CeoReservationCurrentServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//request.getRequestDispatcher("/WEB-INF/views/ceo/reservation/ceo_reservation_current.jsp").forward(request, response);
-		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
@@ -79,6 +77,12 @@ public class CeoReservationCurrentServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 	}
 
 }

@@ -8,6 +8,7 @@
 <title>업체</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/ceo/style.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
@@ -26,7 +27,7 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 840px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
@@ -38,13 +39,15 @@
                   <span id="clock2"></span>
               </div><!-- 시간-->
               <div class="col fs-5">
-                <div class="col form-check form-switch d-flex justify-content-end">
-				  <label class="form-check-label" for="waitYn">예약 가능</label>
-				  <input class="form-check-input ms-3" type="checkbox" id="waitYn" name="waitYn" value="yes" checked>
-				</div>
+              	<form action="">
+	                <div class="col form-check form-switch d-flex justify-content-end">
+					  <label class="form-check-label" for="waitYn">예약 가능</label>
+					  	<input class="form-check-input ms-3" type="checkbox" id="waitYn" name="waitYn" value="Y" checked>
+					</div>
+				</form>
               </div>
             </div>
-            <div id="accordion">
+            <div id="accordion" class="mb-3">
               <c:forEach var="waiting" items="${ requestScope.waitingRecordList }" varStatus="stu">
               <div class="card">
                 <div class="card-header">
@@ -53,16 +56,23 @@
                       <tr>
                         <td class="h1">${ waiting.rNum }</td>
                         <td class="col-2 h4 text-center">${ waiting.memberInfo.name }</td>
-                        <td class="col-8"></td>
+                        <td class="col-9"></td>
                         <td class="text-end pe-1" rowspan="2">
                         	<c:if test="${ waiting.useStatus eq 'waiting' }">
-                        	<button type="button" class="btn btn-warning text-white" value="고객 호출" data-bs-toggle="modal" data-bs-target="#call" style="width: 65px">고객 호출</button>
+                        	<button type="button" class="btn btn-warning text-white" style="width: 65px" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/reservation_current_call?recordNo=${ waiting.recordNo }'">고객 호출</button>
                         	</c:if>
                         	<c:if test="${ waiting.useStatus ne 'waiting' }">
-                        	<button type="button" class="btn btn-secondary text-white" value="고객 호출" style="width: 65px">고객 호출</button>
+                        	<button type="button" class="btn btn-secondary" value="called" style="width: 65px; background: #bbb; border:0" disabled>고객 호출</button>
                         	</c:if>
                         </td>
-                        <td class="text-end ps-1" rowspan="2"><button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit" style="width: 65px">착석 완료</button></td>
+                        <%-- <td class="text-end ps-1" rowspan="2">
+                        	<c:if test="${ waiting.useStatus eq 'waiting' }">
+                        		<button type="button" class="btn btn-success" value="착석 완료" data-bs-toggle="modal" data-bs-target="#sit" style="width: 65px">착석 완료</button>
+                        	</c:if>
+                        	<c:if test="${ waiting.useStatus ne 'waiting' }">
+                        		<button type="button" class="btn btn-secondary" value="착석 완료" style="width: 65px; background: #bbb; border:0" disabled>착석 완료</button>
+                        	</c:if>
+                        </td> --%>
                       </tr>
                       <tr>
                         <td>${ waiting.useTime }</td>
@@ -71,7 +81,7 @@
                     </table>
                   </a>
                 </div>
-                <div id="collapse${ stu.count}" class="collapse" data-bs-parent="#accordion">
+                <div id="collapse${ stu.count }" class="collapse" data-bs-parent="#accordion">
                   <div class="card-body">
                     <table width="100%">
                       <tr>
@@ -84,10 +94,10 @@
                         <th class="col-9">요청사항</th>
                         <td class="px-2" rowspan="2">
                         	<c:if test="${ waiting.useStatus eq 'waiting' }">
-                        		<button type="button" class="btn btn-danger me-1" value="예약 취소" data-bs-toggle="modal" data-bs-target="#cancel" style="width: 65px">예약 취소</button>
+                        		<button type="button" class="btn btn-danger me-2" value="예약 취소" data-bs-toggle="modal" data-bs-target="#cancel" style="width: 65px">예약 취소</button>
                         	</c:if>
                         	<c:if test="${ waiting.useStatus ne 'waiting' }">
-                        		<button type="button" class="btn btn-light me-1" value="예약 취소" style="width: 65px">예약 취소</button>
+                        		<button type="button" class="btn btn-light me-2" value="예약 취소" style="width: 65px" disabled>예약 취소</button>
                         	</c:if>
                         </td>
                       </tr>
@@ -127,17 +137,21 @@
                         </td>
                         <!-- <span class="badge bg-warning">대기</span>
                         <span class="badge bg-danger">예약 취소</span> -->
-                        <td class="col-8">${ waiting.requirement }</td>
+                        <td class="col-8">
+                        	<c:if test="${ waiting.requirement eq null }">
+                        		-
+                        	</c:if>
+                        	<c:if test="${ waiting.requirement ne null }">
+                        		${ waiting.requirement }
+                        	</c:if>
+                        </td>
                       </tr>
                     </table>
                   </div>
                 </div>
               </div>
-              </c:forEach>
               
-            </div><!-- 아코디언 -->
-
-            <!-- 고객 호출 modal -->
+              <!-- 고객 호출 modal -->
             <div class="modal fade" id="call">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -155,32 +169,7 @@
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
-                  </div>
-            
-                </div>
-              </div>
-            </div>
-
-            <!-- 착석 완료 modal -->
-            <div class="modal fade" id="sit">
-              <div class="modal-dialog">
-                <div class="modal-content">
-            
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">착석 완료</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-            
-                  <!-- Modal body -->
-                  <div class="modal-body">
-                    착석이 완료되었습니다.
-                  </div>
-            
-                  <!-- Modal footer -->
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    <button type="button" class="btn btn-primary" id="btnCall" data-bs-dismiss="modal">확인</button>
                   </div>
             
                 </div>
@@ -200,9 +189,9 @@
             
                   <!-- Modal body -->
                   <div class="modal-body d-flex justify-content-center">
-                    <button type="button" class="btn btn-light p-4 mx-3" data-bs-dismiss="modal">재료 소진</button>
-                    <button type="button" class="btn btn-light p-4 mx-3" data-bs-dismiss="modal">대기 마감</button>
-                    <button type="button" class="btn btn-light p-4 mx-3" data-bs-dismiss="modal">영업 종료</button>
+                    <button type="button" class="btn btn-light p-4 mx-3" data-bs-dismiss="modal" name="refuseReason" value="soldout" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/reservation_current_refuse?recordNo=${ waiting.recordNo }&refuseReason=soldout'">재료 소진</button>
+                    <button type="button" class="btn btn-light p-4 mx-3" data-bs-dismiss="modal" name="refuseReason" value="waitingclose" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/reservation_current_refuse?recordNo=${ waiting.recordNo }&refuseReason=waitingclose'">대기 마감</button>
+                    <button type="button" class="btn btn-light p-4 mx-3" data-bs-dismiss="modal" name="refuseReason" value="close" onclick="location.href='${ pageContext.servletContext.contextPath }/ceo/reservation_current_refuse?recordNo=${ waiting.recordNo }&refuseReason=close'">영업 종료</button>
                   </div>
             
                   <!-- Modal footer -->
@@ -213,6 +202,11 @@
                 </div>
               </div>
             </div>
+            
+              </c:forEach>
+              
+            </div><!-- 아코디언 -->
+
 			<jsp:include page="../common/paging_reservationc.jsp"/>
             <!-- <div class="d-flex justify-content-center my-3">
               <button type="button" class="btn btn-danger" style="background: #D94925; border: #D94925;">더보기</button>

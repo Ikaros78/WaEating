@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.waeating.ceo.restInfo.model.service.ComInfoService;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.com.model.dto.ComMenuDTO;
+import com.waeating.member.model.dto.MemberDTO;
 
 /**
  * Servlet implementation class CeoRestInfoModifyServlet
