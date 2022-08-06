@@ -15,11 +15,9 @@
 		<result property="workTime" column="WORK_TIME"/>
 		<result property="holiday" column="HOLIDAY"/>
 		
-		<association property="memberInfo" resultMap="memberResultMap"/>
-		
 	</resultMap>
 
-	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="memberResultMap">
+	<resultMap type="com.waeating.member.model.dto.MemberDTO" id="generalCeoResultMap">
 		<id property="id" column="MEMBER_ID"/>
 		<result property="pwd" column="MEMBER_PWD"/>
 		<result property="email" column="EMAIL"/>
@@ -27,6 +25,8 @@
 		<result property="memberType" column="MEMBER_TYPE"/>
 		<result property="phone" column="PHONE"/>
 		<result property="emailCheck" column="EMAIL_CHECK"/>
+		
+		<association property="comInfo" resultMap="generalCompanyResultMap"/>
 	</resultMap>
 	
   <!-- 업주 로그인 -->
@@ -91,7 +91,7 @@
   
   <insert id="insertComRecord" parameterType="com.waeating.com.model.dto.ComRecordDTO">
   	INSERT
-  	  INTO COM_RECORDA
+  	  INTO COM_RECORD
   	(
 	  RECORD_NO
 	, REFUSE_REASON
@@ -122,7 +122,7 @@
 		   AND A.MEMBER_ID = #{ id }
   </select>
   
-  <select id="selectMemberLogin" resultMap="generalCompanyResultMap" >
+  <select id="selectMemberLogin" resultMap="generalCeoResultMap" >
 		SELECT
 				A.MEMBER_ID
 			  , A.MEMBER_PWD
@@ -142,29 +142,29 @@
 			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
 		   WHERE A.MEMBER_ID = #{ id }
   </select>
-	<select id="selectFindIdForPhone" resultMap="generalCompanyResultMap" >
+	<select id="selectFindIdForPhone" resultMap="generalCeoResultMap" >
 		SELECT
 				A.MEMBER_ID
 			FROM MEMBER_INFO A
 			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-		   WHERE A.NAME = #{ memberInfo.name }
-		     AND A.PHONE = #{ memberInfo.phone }
-		     AND B.COM_NAME = #{ comName }
-		     AND B.COM_PHONE = #{ comPhone }
-		     AND B.CATEGORY = #{ category }
+		   WHERE A.NAME = #{ name }
+		     AND A.PHONE = #{ phone }
+		     AND B.COM_NAME = #{ comInfo.comName }
+		     AND B.COM_PHONE = #{ comInfo.comPhone }
+		     AND B.CATEGORY = #{ comInfo.category }
 	</select>
 	
-	<select id="checkFindPwdForPhone" resultMap="generalCompanyResultMap" >
+	<select id="checkFindPwdForPhone" resultMap="generalCeoResultMap" >
 		SELECT
 			   A.MEMBER_PWD
 		  FROM MEMBER_INFO A
 		  JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
-		 WHERE A.MEMBER_ID = #{ memberInfo.id }
-		   AND A.NAME = #{ memberInfo.name }
-		   AND A.PHONE = #{ memberInfo.phone }
-		   AND B.COM_NAME = #{ comName }
-		   AND B.COM_PHONE = #{ comPhone }
-		   AND B.CATEGORY = #{ category }
+		 WHERE A.MEMBER_ID = #{ id }
+		   AND A.NAME = #{ name }
+		   AND A.PHONE = #{ phone }
+		   AND B.COM_NAME = #{ comInfo.comName }
+		   AND B.COM_PHONE = #{ comInfo.comPhone }
+		   AND B.CATEGORY = #{ comInfo.category }
 	</select>
 	
 	<update id="updateNewPwd" parameterType="com.waeating.member.model.dto.MemberDTO">
@@ -173,4 +173,46 @@
 		   SET A.MEMBER_PWD = #{ pwd }
 		 WHERE A.MEMBER_ID = #{ id }
 	</update>
+	<update id="updateCeoInformation" parameterType="com.waeating.member.model.dto.MemberDTO">
+		UPDATE 
+			   MEMBER_INFO A
+		   SET 
+		       A.MEMBER_PWD = NVL(#{ pwd }, A.MEMBER_PWD)
+		     , A.NAME = NVL(#{ name }, A.NAME)
+		     , A.PHONE = NVL(#{ phone }, A.PHONE)
+		     , A.EMAIL = NVL(#{ email }, A.EMAIL)
+		 WHERE A.MEMBER_ID = #{ id }
+	</update>
+	<update id="updateComRegist" parameterType="com.waeating.com.model.dto.ComInfoDTO">
+		UPDATE 
+			   COM_INFO A
+		   SET 
+		       A.COM_REGIST = NVL(#{ comRegist }, A.COM_REGIST)
+		 WHERE A.MEMBER_ID = #{ memberId }
+	</update>
+	
+	<select id="selectFindIdForEmail" resultMap="generalCeoResultMap" >
+		SELECT
+				A.MEMBER_ID
+			FROM MEMBER_INFO A
+			JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		   WHERE A.NAME = #{ name }
+		     AND A.EMAIL = #{ email }
+		     AND B.COM_NAME = #{ comInfo.comName }
+		     AND B.COM_PHONE = #{ comInfo.comPhone }
+		     AND B.CATEGORY = #{ comInfo.category }
+	</select>
+	
+	<select id="checkFindPwdForEmail" resultMap="generalCeoResultMap" >
+		SELECT
+			   A.MEMBER_PWD
+		  FROM MEMBER_INFO A
+		  JOIN COM_INFO B ON(A.MEMBER_ID = B.MEMBER_ID)
+		 WHERE A.MEMBER_ID = #{ id }
+		   AND A.NAME = #{ name }
+		   AND A.EMAIL = #{ email }
+		   AND B.COM_NAME = #{ comInfo.comName }
+		   AND B.COM_PHONE = #{ comInfo.comPhone }
+		   AND B.CATEGORY = #{ comInfo.category }
+	</select>
 </mapper>

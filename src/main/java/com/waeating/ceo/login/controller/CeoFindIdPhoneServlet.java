@@ -38,21 +38,21 @@ public class CeoFindIdPhoneServlet extends HttpServlet {
 		String comNum = request.getParameter("store_phone");
 		String category = request.getParameter("category");
 		
-		MemberDTO requestMember = new MemberDTO();
-		requestMember.setName(ceoName);
-		requestMember.setPhone(phone);
-		
 		ComInfoDTO requestCom = new ComInfoDTO();
 		requestCom.setComName(comName);
 		requestCom.setComPhone(comNum);
 		requestCom.setCategory(category);
-		requestCom.setMemberInfo(requestMember);
+		
+		MemberDTO requestMember = new MemberDTO();
+		requestMember.setName(ceoName);
+		requestMember.setPhone(phone);
+		requestMember.setComInfo(requestCom);
 		
 		ComService comService = new ComService();
 		
-		ComInfoDTO findCeoId = comService.findIdPhone(requestCom);
+		MemberDTO findCeoId = comService.findIdPhone(requestMember);
 		
-		String ceoId = findCeoId.getMemberId();
+		String ceoId = findCeoId.getId();
 		System.out.println("ceoId : " + ceoId);
 		
 		String page = "";

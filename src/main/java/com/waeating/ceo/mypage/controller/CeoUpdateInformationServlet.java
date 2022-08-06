@@ -1,6 +1,7 @@
-package com.waeating.ceo.login.controller;
+package com.waeating.ceo.mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +12,20 @@ import javax.servlet.http.HttpSession;
 import com.waeating.ceo.login.model.service.ComService;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.user.login.model.service.UserService;
 
 /**
- * Servlet implementation class CeoFindPasswordServlet
+ * Servlet implementation class CeoUpdateInformationServlet
  */
-@WebServlet("/member/ceo/findpw/phone")
-public class CeoFindPasswordPhonelServlet extends HttpServlet {
+@WebServlet("/member/ceo/update/information")
+public class CeoUpdateInformationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
 		
-		request.getRequestDispatcher("/WEB-INF/views/ceo/ceo-login/ceo-find_pw-phone.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/ceo/ceo-mypage/ceo-update.jsp").forward(request, response);
 	}
 	
 	@Override
@@ -31,51 +33,48 @@ public class CeoFindPasswordPhonelServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		String ceoId = request.getParameter("id");
-		String ceoName = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		String comName = request.getParameter("store_name");
-		String comNum = request.getParameter("store_phone");
-		String category = request.getParameter("category");
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
 		
+		String ceoId = loginMember.getId();
+		String name = request.getParameter("name");
 		String pw = request.getParameter("pw");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String business = request.getParameter("business");
 		
 		ComInfoDTO requestCom = new ComInfoDTO();
-		requestCom.setComName(comName);
-		requestCom.setComPhone(comNum);
-		requestCom.setCategory(category);
+		requestCom.setMemberId(ceoId);
+		requestCom.setComRegist(business);
 		
 		MemberDTO requestMember = new MemberDTO();
 		requestMember.setId(ceoId);
-		requestMember.setName(ceoName);
-		requestMember.setPhone(phone);
+		requestMember.setName(name);
 		requestMember.setPwd(pw);
-		requestMember.setComInfo(requestCom);
+		requestMember.setPhone(phone);
+		requestMember.setEmail(email);
 		
+		System.out.println("requestMember : " + requestMember);
 		
 		ComService comService = new ComService();
 		
-		MemberDTO checkPwd = comService.checkPwdPhone(requestMember);
-		System.out.println("checkPwd: " + checkPwd);
+		int resultMember = comService.updateCeoInformation(requestMember);
+		int resultCom = comService.updaupdateComRegist(requestCom);
 		
-		String pwd = checkPwd.getPwd();
-		System.out.println("pwd : " + pwd);
+		System.out.println("resultMember : " + resultMember);
+		System.out.println("resultCom : " + resultCom);
 		
 		String page = "";
 		
-		if(pwd != null) {
-			
-			int updateNewPwd = comService.updateNewPwd(requestCom);
-			System.out.println("updatePwd : " + updateNewPwd);
+		if(resultMember > 0 && resultCom > 0 ) {
 			
 			page = "/WEB-INF/views/common/success.jsp";
 			
-			request.setAttribute("success", "updateCeoPwd");
+			request.setAttribute("success", "updateCeo");
 		} else {
 			
 			page = "/WEB-INF/views/common/failed.jsp";
 			
-			request.setAttribute("message", "정보가 일치하지 않습니다. 다시 시도해주세요.");
+			request.setAttribute("message", "정보 수정에 실패하셨습니다. 다시 시도해주세요.");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		
