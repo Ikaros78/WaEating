@@ -66,7 +66,11 @@ public class CeoRestNoticeServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<ComNoticeDTO> comNoticeList = noticeService.selectAllNotice(selectCriteria);
+		Map<String, Object> search = new HashMap<>();
+		search.put("selectCriteria", selectCriteria);
+		search.put("comNo", comNo);
+		
+		List<ComNoticeDTO> comNoticeList = noticeService.selectAllNotice(search);
 		
 		System.out.println(comNoticeList);
 		
@@ -75,6 +79,7 @@ public class CeoRestNoticeServlet extends HttpServlet {
 			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
 			request.setAttribute("selectAllNotice", comNoticeList);
 			request.setAttribute("selectCriteria", selectCriteria);
+			request.setAttribute("search", search);
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
 			request.setAttribute("message", "공지 리스트 조회 실패");

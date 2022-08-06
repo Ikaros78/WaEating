@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.ceo.restInfo.model.dao.ComInfoMapper;
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.com.model.dto.ComMenuDTO;
 
@@ -101,6 +102,47 @@ public class ComInfoService {
 		sqlSession.close();
 		
 		return result;
+	}
+
+	public int insertComInfoImg(ComInfoDTO insertComInfoImg) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		int result = 0; 
+		
+        List<ComBoardAttachDTO> fileList = insertComInfoImg.getComBoardAttach();
+        
+        int attachResult = 0;
+        for(int i = 0; i < fileList.size(); i++) {
+        	attachResult += comInfoMapper.insertComInfoImg(fileList.get(i));
+        }
+        
+		if(attachResult == fileList.size()) {
+			
+			sqlSession.commit();
+			result = 1;
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public List<ComBoardAttachDTO> comSelectBoardImage(int comNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		List<ComBoardAttachDTO> com = comInfoMapper.comSelectBoardImage(comNo);
+		
+		sqlSession.close();
+		
+		return com;
 	}
 
 	

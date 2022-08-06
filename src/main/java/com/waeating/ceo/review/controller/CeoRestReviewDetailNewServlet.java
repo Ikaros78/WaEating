@@ -1,6 +1,8 @@
 package com.waeating.ceo.review.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.waeating.ceo.review.model.service.ComReviewService;
 import com.waeating.review.model.dto.ReviewAnsDTO;
+import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 import com.waeating.user.review.model.service.ReviewService;
 
@@ -26,6 +29,7 @@ public class CeoRestReviewDetailNewServlet extends HttpServlet {
 		
 		ComReviewService reviewService = new ComReviewService();
 		ReviewDTO selectReview = reviewService.selectOneReview(reviewNo);
+		List<ReviewAttachDTO> selectReviewImg = reviewService.selectReviewImg(reviewNo);
 		
 		System.out.println(selectReview);
 		
@@ -34,7 +38,7 @@ public class CeoRestReviewDetailNewServlet extends HttpServlet {
 			path = "/WEB-INF/views/ceo/review/ceo_rest_review_detail_new.jsp";
 			request.setAttribute("selectOneReview", selectReview);
 			request.setAttribute("reviewNo", reviewNo);
-			
+			request.setAttribute("selectReviewImg", selectReviewImg);
 		} else{
 			path = "/WEB-INF/views/common/errorPage.jsp";
 			request.setAttribute("message", "리뷰 조회 실패");
@@ -57,17 +61,33 @@ public class CeoRestReviewDetailNewServlet extends HttpServlet {
 		System.out.println(reviewAns);
 		
 		ComReviewService reviewService = new ComReviewService();
-		int result = reviewService.insertReviewAns(reviewAns);
 		
 		String path = "";
 		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/ceo/rest_review");
-		
+		if ( ansContent.length() == 0 ) {
+			
+			response.setCharacterEncoding("utf-8");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('답변을 다시 입력하세요.');</script>");
+			
+			out.flush();
+			out.close();
+			
 		} else {
-			path = "/WEB-INF/views/common/errorPage.jsp";
-			request.setAttribute("message", "리뷰 등록에 실패하셨습니다.");
-			request.getRequestDispatcher(path).forward(request, response);
+
+			int result = reviewService.insertReviewAns(reviewAns);
+			
+			if(result > 0) {
+				response.sendRedirect(request.getContextPath() + "/ceo/rest_review");
+			
+			} else {
+				path = "/WEB-INF/views/common/errorPage.jsp";
+				request.setAttribute("message", "리뷰 등록에 실패하셨습니다.");
+				request.getRequestDispatcher(path).forward(request, response);
+			}
 		}
 		
 	}

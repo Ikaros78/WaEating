@@ -69,14 +69,13 @@
             
                   <!-- Modal body -->
                   <div class="modal-body">
-                    공지 등록이 완료되었습니다.
+                    공지를 등록하시겠습니까?
                   </div>
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
-            
                 </div>
               </div>
             </div>

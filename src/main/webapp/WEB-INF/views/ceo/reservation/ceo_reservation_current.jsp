@@ -38,14 +38,14 @@
                   <span id="clock1"></span>
                   <span id="clock2"></span>
               </div><!-- 시간-->
-              <div class="col fs-5">
+              <!-- <div class="col fs-5">
               	<form action="">
 	                <div class="col form-check form-switch d-flex justify-content-end">
 					  <label class="form-check-label" for="waitYn">예약 가능</label>
 					  	<input class="form-check-input ms-3" type="checkbox" id="waitYn" name="waitYn" value="Y" checked>
 					</div>
 				</form>
-              </div>
+              </div> -->
             </div>
             <div id="accordion" class="mb-3">
               <c:forEach var="waiting" items="${ requestScope.waitingRecordList }" varStatus="stu">

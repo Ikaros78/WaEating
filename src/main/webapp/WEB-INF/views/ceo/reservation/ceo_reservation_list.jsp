@@ -36,13 +36,20 @@
               <div class="col">
                 
               </div>
-              <div class="container col-3 fs-5 text-end">
+              <div class="container ">
                   <!-- <span id="clock1"></span>
                   <span id="clock2"></span> -->
-                  <div class="input-group mb-2">
-                    <input type="date" class="form-control" placeholder="Search">
-                    <button class="btn btn-primary" type="submit">검색</button>
-                  </div>
+                  <div class="input-group mb-2 d-flex justify-content-end">
+	                <form id="loginForm" action="${ pageContext.servletContext.contextPath }/ceo/reservation_list" method="get" style="display:inline-block">
+						<div class="input-group mb-3">
+						<select id="searchCondition" name="searchCondition" class="form-control" style="display: none ">
+							<option value="date" ${ requestScope.selectCriteria.searchCondition eq "date"? "selected": "" }>날짜</option>
+						</select>
+						<input style="width:150px" type="date" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+	                    <button class="btn btn-primary" type="submit">검색</button>
+						</div>		
+					</form>
+                 </div>
               </div>
             </div><!-- 시간-->
             <div id="accordion" class="mb-3">

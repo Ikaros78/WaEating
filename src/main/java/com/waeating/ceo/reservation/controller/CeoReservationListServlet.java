@@ -10,11 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.waeating.ceo.reservation.model.service.CeoReservationService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 
 /**
@@ -37,12 +37,16 @@ public class CeoReservationListServlet extends HttpServlet {
 			pageNo = 1;
 		}
 		
-		String searchCondition = "";
-		String searchValue = "";
+		String searchCondition = request.getParameter("searchCondition");
+		String searchValue = request.getParameter("searchValue");
+		
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
 		
 		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
+		searchMap.put("comNo", comNo);
 		
 		CeoReservationService ceoReservatonService = new CeoReservationService();
 		int totalCount = ceoReservatonService.selectTotalCountDate(searchMap);
@@ -62,7 +66,11 @@ public class CeoReservationListServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<WaitingRecordDTO> waitingRecordListDate = ceoReservatonService.selectAllWaitingListDate(selectCriteria);
+		Map<String, Object> search = new HashMap<>();
+		search.put("selectCriteria", selectCriteria);
+		search.put("comNo", comNo);
+		
+		List<WaitingRecordDTO> waitingRecordListDate = ceoReservatonService.selectAllWaitingListDate(search);
 		
 		System.out.println(waitingRecordListDate);
 		
@@ -72,6 +80,7 @@ public class CeoReservationListServlet extends HttpServlet {
 			request.setAttribute("waitingRecordListDate", waitingRecordListDate);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("totalCount", totalCount);
+			request.setAttribute("search", search);
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
 			request.setAttribute("message", "예약 리스트 조회 실패");

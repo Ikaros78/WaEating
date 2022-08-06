@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.waeating.ceo.reservation.model.service.CeoReservationService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 
 /**
@@ -38,10 +39,13 @@ public class CeoReservationCurrentServlet extends HttpServlet {
 		
 		String searchCondition = "";
 		String searchValue = "";
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
 		
 		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
+		searchMap.put("comNo", comNo);
 		
 		CeoReservationService ceoReservatonService = new CeoReservationService();
 		int totalCount = ceoReservatonService.selectTotalCount(searchMap);
@@ -61,7 +65,11 @@ public class CeoReservationCurrentServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<WaitingRecordDTO> waitingRecordList = ceoReservatonService.selectAllWaitingList(selectCriteria);
+		Map<String, Object> search = new HashMap<>();
+		search.put("selectCriteria", selectCriteria);
+		search.put("comNo", comNo);
+		
+		List<WaitingRecordDTO> waitingRecordList = ceoReservatonService.selectAllWaitingList(search);
 		
 		System.out.println(waitingRecordList);
 		
@@ -71,6 +79,7 @@ public class CeoReservationCurrentServlet extends HttpServlet {
 			request.setAttribute("waitingRecordList", waitingRecordList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("totalCount", totalCount);
+			request.setAttribute("search", search);
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
 			request.setAttribute("message", "예약 리스트 조회 실패");

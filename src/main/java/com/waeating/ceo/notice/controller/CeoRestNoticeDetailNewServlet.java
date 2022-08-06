@@ -1,6 +1,7 @@
 package com.waeating.ceo.notice.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,19 +45,34 @@ public class CeoRestNoticeDetailNewServlet extends HttpServlet {
 		System.out.println("insert : " + comNotice);
 		 
 		ComNoticeService comNoticeService = new ComNoticeService();
-		int result = comNoticeService.insertComNotice(comNotice);
 		
 		String path = "";
 		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/ceo/rest_notice");
-		
+		if ( noticeContent.length() == 0 || noticeTitle.length() == 0) {
+			
+			response.setCharacterEncoding("utf-8");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('공지를 다시 입력하세요.');</script>");
+			
+			out.flush();
+			out.close();
+			
 		} else {
-			path = "/WEB-INF/views/common/errorPage.jsp";
-			request.setAttribute("message", "공지 등록에 실패하셨습니다.");
-			request.getRequestDispatcher(path).forward(request, response);
+			
+			int result = comNoticeService.insertComNotice(comNotice);
+			
+			if(result > 0) {
+				response.sendRedirect(request.getContextPath() + "/ceo/rest_notice");
+			
+			} else {
+				path = "/WEB-INF/views/common/errorPage.jsp";
+				request.setAttribute("message", "공지 등록에 실패하셨습니다.");
+				request.getRequestDispatcher(path).forward(request, response);
+			}
 		}
-		
 		
 		
 	}

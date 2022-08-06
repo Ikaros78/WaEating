@@ -11,6 +11,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${ pageContext.servletContext.contextPath }/resources/js/ceo/address.js"></script>
 </head>
 <body>
@@ -30,26 +31,29 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 860px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
-          <div class="container-fluid">
-            <div class="container my-3 d-flex justify-content-center">
-              <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest1.jpg" class="mx-2" width="350px" height="300px">
-              <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest2.jpg" class="mx-2" width="350px" height="300px">
-              <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" class="mx-2" width="350px" height="300px">
-            </div>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-primary" type="button">
-              	파일 선택
-              </button>
-            </div>
-          </div>
+          
             
             <div class="my-4 row mx-1 px-5">
               <form action="${ pageContext.servletContext.contextPath }/ceo/rest_restInfo_modify" method="post">
               	<!-- <input type="hidden" name="comNo" value="${ requestScope.comInfo.comNo }"> 업체 로그인 정보 넘기기 -->
+              	<div class="container-fluid">
+            		<div class="container my-3 d-flex justify-content-center" style="height : 300px">
+              			 <c:forEach var="image" items="${ requestScope.comBoard }" >        
+            			 <img src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ image.fileName }" class="mx-2" width="280" height="300">
+        		         </c:forEach>
+            	   </div>
+          	    </div>
+              	<!-- <div class="container-fluid">
+            		<div class="container my-3 d-flex justify-content-center">
+              			<div class="content-img-area1" id="contentImgArea1"><img id="contentImg1" class="mx-2" width="350px" height="300px"><input type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this,1)" style="width:350px" class="mx-2 mt-3"></div>
+              			<div class="content-img-area2" id="contentImgArea2"><img id="contentImg2" class="mx-2" width="350px" height="300px"><input type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this,2)" style="width:350px" class="mx-2 mt-3"></div>
+              			<div class="content-img-area3" id="contentImgArea3"><img id="contentImg3" class="mx-2" width="350px" height="300px"><input type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this,3)" style="width:350px" class="mx-2 mt-3"></div>
+            	   </div>
+          	    </div> -->
                 <table width="100%">
                   <tr>
                     <td class="col-1">가게명</td>
@@ -156,6 +160,14 @@
                     <td class="pb-3 col-4">
                     <c:set var = "holiday" value="${ requestScope.comInfo.holiday }"/>
                       <select class="form-select" name="holiday" id="holiday">
+                      		<option value="연중무휴">-</option>
+	                        <option value="월" selected>월</option>
+	                        <option value="화">화</option>
+	                        <option value="수">수</option>
+	                        <option value="목">목</option>
+	                        <option value="금">금</option>
+	                        <option value="토">토</option>
+	                        <option value="일">일</option>     
                         <c:if test="${fn:contains(holiday, '월')}">
 	                      	<option value="연중무휴">-</option>
 	                        <option value="월" selected>월</option>
@@ -243,14 +255,7 @@
                     <td class="pb-3" rowspan="100">메뉴</td>
                       <td class="pb-3">
                         <div id="menugroup">
-                          <c:if test="${ requestScope.comMenuList eq null}">
-	                          <div class="input-group my-3" id="menu" >
-	                              <input type="text" name="menuName" id="menuName" class="form-control" value="">
-	                              <input type="text" name="price" id="menuPrice" class="form-control" value="">
-	                              <button class="btn btn-light border minus" type="button" id="minus">-</button>
-	                              <button class="btn btn-primary plus" type="button" id="plus">+</button>
-	                          </div>
-                          </c:if>
+                          
                           <c:forEach items="${ requestScope.comMenuList }" var="menu" varStatus="status">
                           
                           <div class="input-group my-3" id="menu" >
@@ -261,6 +266,12 @@
                           </div>
                           
                           </c:forEach>
+                          <div class="input-group my-3" id="menu" >
+                              <input type="text" name="menuName" id="menuName" class="form-control" value="${ menu.comMenu.menuName }">
+                              <input type="text" name="price" id="menuPrice" class="form-control" value="${ menu.comMenu.price }">
+                              <button class="btn btn-light border minus" type="button" id="minus">-</button>
+                              <button class="btn btn-primary plus" type="button" id="plus">+</button>
+                          </div>
                      
                         </div>
                       </td>
@@ -286,7 +297,7 @@
                 
                       <!-- Modal body -->
                       <div class="modal-body">
-                        가게 정보 수정이 완료되었습니다.
+                        가게 정보를 수정하시겠습니까?
                       </div>
                 
                       <!-- Modal footer -->
@@ -317,6 +328,45 @@
             
                       
             </div>
+            <script>
+			const $contentImgArea1 = document.getElementById("contentImgArea1");
+			const $contentImgArea2 = document.getElementById("contentImgArea2");
+			const $contentImgArea3 = document.getElementById("contentImgArea3");
+			
+			$titleImgArea1.onclick = function() { 
+				document.getElementById("thumbnailImg1").click(); 
+			}
+			
+			$contentImgArea2.onclick = function() {
+				document.getElementById("thumbnailImg2").click();
+			}
+			
+			$contentImgArea3.onclick = function() {
+				document.getElementById("thumbnailImg3").click();
+			}
+			
+			
+			function loadImg(value, num) {
+				if (value.files && value.files[0]) {
+					const reader = new FileReader();
+					reader.onload = function(e) {
+						switch(num){
+						case 1:
+							document.getElementById("contentImg1").src = e.target.result;
+							break;
+						case 2:
+							document.getElementById("contentImg2").src = e.target.result;
+							break;
+						case 3:
+							document.getElementById("contentImg3").src = e.target.result;
+							break;
+						}
+					}
+					reader.readAsDataURL(value.files[0]);
+				}
+			}
+			
+		</script>
             <script src="${ pageContext.servletContext.contextPath }/resources/js/ceo/addmenu.js"></script>
         </div>
        </aside>

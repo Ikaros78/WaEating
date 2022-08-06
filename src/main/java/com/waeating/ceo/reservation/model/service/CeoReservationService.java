@@ -29,12 +29,12 @@ public class CeoReservationService {
 		
 	}
 
-	public List<WaitingRecordDTO> selectAllWaitingList(SelectCriteria selectCriteria) {
+	public List<WaitingRecordDTO> selectAllWaitingList(Map<String, Object> search) {
 
 		SqlSession sqlSession = getSqlSession();
 		ceoWaitingRecordMapper = sqlSession.getMapper(CeoWaitingRecordMapper.class);
 		
-		List<WaitingRecordDTO> waitingRecordList = ceoWaitingRecordMapper.selectAllWaitingList(selectCriteria);
+		List<WaitingRecordDTO> waitingRecordList = ceoWaitingRecordMapper.selectAllWaitingList(search);
 		
 		sqlSession.close();
 		
@@ -81,12 +81,12 @@ public class CeoReservationService {
 		return result;
 	}
 
-	public List<WaitingRecordDTO> selectAllWaitingListDate(SelectCriteria selectCriteria) {
+	public List<WaitingRecordDTO> selectAllWaitingListDate(Map<String, Object> search) {
 		
 		SqlSession sqlSession = getSqlSession();
 		ceoWaitingRecordMapper = sqlSession.getMapper(CeoWaitingRecordMapper.class);
 		
-		List<WaitingRecordDTO> waitingRecordList = ceoWaitingRecordMapper.selectAllWaitingListDate(selectCriteria);
+		List<WaitingRecordDTO> waitingRecordList = ceoWaitingRecordMapper.selectAllWaitingListDate(search);
 		
 		sqlSession.close();
 		

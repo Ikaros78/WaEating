@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.waeating.ceo.review.model.service.ComReviewService;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
 import com.waeating.review.model.dto.ReviewAnsDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
@@ -40,9 +41,13 @@ public class CeoRestReviewServlet extends HttpServlet {
 		String searchCondition = "";
 		String searchValue = "";
 		
-		Map<String, String> searchMap = new HashMap<>();
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
+		
+		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
+		searchMap.put("comNo", comNo);
 		
 		ComReviewService reviewService = new ComReviewService();
 		int totalCount = reviewService.selectTotalCount(searchMap);
@@ -62,7 +67,11 @@ public class CeoRestReviewServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<ReviewDTO> comReviewList = reviewService.selectAllReview(selectCriteria);
+		Map<String, Object> search = new HashMap<>();
+		search.put("selectCriteria", selectCriteria);
+		search.put("comNo", comNo);
+		
+		List<ReviewDTO> comReviewList = reviewService.selectAllReview(search);
 		
 		System.out.println(comReviewList);
 		
@@ -72,6 +81,7 @@ public class CeoRestReviewServlet extends HttpServlet {
 			request.setAttribute("selectAllReview", comReviewList);
 			request.setAttribute("selectCriteria", selectCriteria);
 			request.setAttribute("totalCount", totalCount);
+			request.setAttribute("search", search);
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
 			request.setAttribute("message", "리뷰 리스트 조회 실패");

@@ -11,13 +11,13 @@ public interface CeoWaitingRecordMapper {
 
 	int selectTotalCount(Map<String, Object> searchMap);
 
-	List<WaitingRecordDTO> selectAllWaitingList(SelectCriteria selectCriteria);
+	List<WaitingRecordDTO> selectAllWaitingList(Map<String, Object> search);
 
 	int updateWaitingRecord(WaitingRecordDTO waitingRecord);
 
 	int insertWaitingRefuse(WaitingRefuseDTO waitingRefuse);
 
-	List<WaitingRecordDTO> selectAllWaitingListDate(SelectCriteria selectCriteria);
+	List<WaitingRecordDTO> selectAllWaitingListDate(Map<String, Object> search);
 
 	int selectTotalCountDate(Map<String, Object> searchMap);
 

@@ -62,9 +62,11 @@
                 </tr>
                 <tr>
                   <td class="ps-3 py-3" colspan="2">
-                    <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest1.jpg" alt="rest1" width="233px" height="200px" class="mx-1">
-                    <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest2.jpg" alt="rest2" width="233px" height="200px" class="mx-1">
-                    <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" alt="rest3" width="233px" height="200px" class="mx-1">
+                    <c:forEach var="reviewImg" items="${ requestScope.selectReviewImg }">
+                        <c:if test="${ reviewImg.fileName ne null  }">
+                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewImg.fileName }" width="233px" height="200px" class="mx-1">
+                      	</c:if>
+                     </c:forEach>
                   </td>
                 </tr>  
                 <tr>

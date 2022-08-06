@@ -73,7 +73,7 @@
                   </div>
             
                   <div class="modal-body">
-                    공지 수정이 완료되었습니다.
+                    공지를 수정하시겠습니까?
                   </div>
             
                   <div class="modal-footer">

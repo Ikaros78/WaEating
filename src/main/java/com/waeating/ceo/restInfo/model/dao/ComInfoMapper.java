@@ -3,6 +3,7 @@ package com.waeating.ceo.restInfo.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.waeating.com.model.dto.ComBoardAttachDTO;
 import com.waeating.com.model.dto.ComInfoDTO;
 import com.waeating.com.model.dto.ComMenuDTO;
 
@@ -18,5 +19,8 @@ public interface ComInfoMapper {
 
 	int deleteComMenu(int comNo);
 
+	int insertComInfoImg(ComBoardAttachDTO comBoardAttachDTO);
+
+	List<ComBoardAttachDTO> comSelectBoardImage(int comNo);
 
 }

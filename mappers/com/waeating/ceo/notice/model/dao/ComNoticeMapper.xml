@@ -37,7 +37,7 @@
   		<!-- CN.CON_NO : 업체 정보 받고 쿼리문 다시 수정하기 -->
   	</insert>
   	
-  	<select id="selectAllNotice" resultMap="comNoticeResultMap">
+  	<select id="selectAllNotice" resultMap="comNoticeResultMap" parameterType="hashmap">
   		 SELECT
   		   		A.RNUM
   		   	  , A.NOTICE_NO 
@@ -51,19 +51,19 @@
   		   		   			  , C.NOTICE_TITLE
   		   					  , C.REG_DATE
   		   				   FROM COM_NOTICE C
-  		   				  WHERE C.COM_NO = #{ comNo }
   		   				 <where>
-  		   				 	<if test="searchCondition == 'noticeTitle'">
-	           				   C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+  		   				 	<if test="selectCriteria.searchCondition == 'noticeTitle'">
+	           				   C.NOTICE_TITLE LIKE '%' || #{ selectCriteria.searchValue } || '%'
 							</if>
+							AND C.COM_NO = #{ comNo }
   		   				 </where>
   		   				 ORDER BY C.REG_DATE DESC
   		   		   		) B
   		   		   	<![CDATA[
-	                WHERE ROWNUM <= #{ endRow }
+	                WHERE ROWNUM <= #{ selectCriteria.endRow }
 	                ]]>
   		   		) A
-  		   	WHERE A.RNUM >= #{ startRow }     
+  		   	WHERE A.RNUM >= #{ selectCriteria.startRow }     
   		 <!-- SELECT
   			    CN.NOTICE_TITLE
   			  , CN.REG_DATE
@@ -79,7 +79,7 @@
 			<if test="searchCondition == 'noticeTitle'">
 	           CN.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
 			</if>
-			
+			AND CN.COM_NO = #{ comNo }
     	</where>
     	ORDER BY 1 DESC
 	</select>

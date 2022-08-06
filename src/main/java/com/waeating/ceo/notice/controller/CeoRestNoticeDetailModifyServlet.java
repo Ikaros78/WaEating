@@ -1,6 +1,7 @@
 package com.waeating.ceo.notice.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,26 +53,37 @@ public class CeoRestNoticeDetailModifyServlet extends HttpServlet {
 		System.out.println(comNotice);
 		
 		ComNoticeService comNoticeService = new ComNoticeService();
-		int result = comNoticeService.updateNotice(comNotice);
-		
-		System.out.println(result);
 		
 		String path = "";
 		
-		if(result > 0) {
-			path = "rest_notice";
-			response.sendRedirect(path);
+		if ( noticeContent.length() == 0 || noticeTitle.length() == 0) {
+			
+			response.setCharacterEncoding("utf-8");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('공지를 다시 입력하세요.');</script>");
+			
+			out.flush();
+			out.close();
 			
 		} else {
 			
-			path = "/WEB-INF/views/common.errorPage.jsp";
-			request.setAttribute("message", "공지 수정 실패");
-			request.getRequestDispatcher(path).forward(request, response);
+			int result = comNoticeService.updateNotice(comNotice);
+			
+			if(result > 0) {
+				path = "rest_notice";
+				response.sendRedirect(path);
+				
+			} else {
+				
+				path = "/WEB-INF/views/common.errorPage.jsp";
+				request.setAttribute("message", "공지 수정 실패");
+				request.getRequestDispatcher(path).forward(request, response);
+			}
 		}
 		
-			
-			
-
 	}
 
 
