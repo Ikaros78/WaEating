@@ -1,5 +1,7 @@
 package com.waeating.member.model.dto;
 
+import com.waeating.com.model.dto.ComInfoDTO;
+
 public class MemberDTO {
 	private String id;
 	private String pwd;
@@ -8,24 +10,16 @@ public class MemberDTO {
 	private String memberType;
 	private String phone;
 	private String emailCheck;
-	private UserDTO userInfo;
 	
-	public MemberDTO() {}
+	private UserDTO userInfo;
+	private ComInfoDTO comInfo;
+	
+	public MemberDTO() {
+		
+	}
 
 	public MemberDTO(String id, String pwd, String email, String name, String memberType, String phone,
-			String emailCheck) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.email = email;
-		this.name = name;
-		this.memberType = memberType;
-		this.phone = phone;
-		this.emailCheck = emailCheck;
-	}
-	
-	public MemberDTO(String id, String pwd, String email, String name, String memberType, String phone,
-			String emailCheck, UserDTO userInfo) {
+			String emailCheck, UserDTO userInfo, ComInfoDTO comInfo) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -35,6 +29,7 @@ public class MemberDTO {
 		this.phone = phone;
 		this.emailCheck = emailCheck;
 		this.userInfo = userInfo;
+		this.comInfo = comInfo;
 	}
 
 	public String getId() {
@@ -101,16 +96,20 @@ public class MemberDTO {
 		this.userInfo = userInfo;
 	}
 
+	public ComInfoDTO getComInfo() {
+		return comInfo;
+	}
+
+	public void setComInfo(ComInfoDTO comInfo) {
+		this.comInfo = comInfo;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name + ", memberType="
-				+ memberType + ", phone=" + phone + ", emailCheck=" + emailCheck + ", userInfo=" + userInfo + "]";
+				+ memberType + ", phone=" + phone + ", emailCheck=" + emailCheck + ", userInfo=" + userInfo
+				+ ", comInfo=" + comInfo + "]";
 	}
-
-	
-	
-
-	
 	
 	
 }

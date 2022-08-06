@@ -116,13 +116,13 @@
               </div>
             </div>
 
-              <div class="col-md-6 mb-3">
-                <label for="business">사업자 등록증</label>
-                <input type="file" class="form-control" id="business" name="business" accept=".jpg, .jpeg, .png, .pdf" required multiple>
-                <div class="invalid-feedback">
-                  사업자 등록증을 등록해주세요
-                </div>
-            </div>
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="business" name="business" placeholder="사업자 번호 입력" required>
+                  <label for="name">사업자 번호</label>
+                  <div class="invalid-feedback">
+                    사업자 번호를 입력해주세요.
+                  </div>
+              </div>
                   
             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
