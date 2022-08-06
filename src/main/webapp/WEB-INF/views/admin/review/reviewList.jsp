@@ -34,7 +34,6 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="">게시글 첨부파일 조회</a></li>
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/review/list">리뷰글 조회</a></li>
                                 </ul>
                             </td>

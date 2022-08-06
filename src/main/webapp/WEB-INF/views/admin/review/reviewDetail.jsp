@@ -33,7 +33,6 @@
                         <tr>
                             <td>
                                 <ul class="nav nav-stacked">
-                                    <li role="presentation"><a href="">게시글 첨부파일 조회</a></li>
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/review/list">리뷰글 조회</a></li>
                                 </ul>
                             </td>
@@ -74,7 +73,7 @@
                         <c:forEach var= "reviewAttach" items="${ sessionScope.attachList }">
                     	<tr>
                             <td>첨부파일</td>
-                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewAttach.fileName }"></td>
+                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewAttach.fileName }" width="600" height="371"></td>
                         </tr>
                         </c:forEach>
                         </c:if>
