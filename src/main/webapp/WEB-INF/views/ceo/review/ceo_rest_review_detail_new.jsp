@@ -27,7 +27,7 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 700px">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 860px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
@@ -62,9 +62,11 @@
                 </tr>
                 <tr>
                   <td class="ps-3 py-3" colspan="2">
-                    <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest1.jpg" alt="rest1" width="233px" height="200px" class="mx-1">
-                    <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest2.jpg" alt="rest2" width="233px" height="200px" class="mx-1">
-                    <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" alt="rest3" width="233px" height="200px" class="mx-1">
+                    <c:forEach var="reviewImg" items="${ requestScope.selectReviewImg }">
+                        <c:if test="${ reviewImg.fileName ne null  }">
+                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewImg.fileName }" width="233px" height="200px" class="mx-1">
+                      	</c:if>
+                     </c:forEach>
                   </td>
                 </tr>  
                 <tr>

@@ -9,14 +9,16 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.waeating.ceo.review.model.dao.ComReviewMapper;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.review.model.dao.ReviewMapper;
 import com.waeating.review.model.dto.ReviewAnsDTO;
+import com.waeating.review.model.dto.ReviewAttachDTO;
 import com.waeating.review.model.dto.ReviewDTO;
 
 public class ComReviewService {
 	
 	private ComReviewMapper comReviewMapper;
 
-	public int selectTotalCount(Map<String, String> searchMap) {
+	public int selectTotalCount(Map<String, Object> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		comReviewMapper = sqlSession.getMapper(ComReviewMapper.class);
@@ -28,12 +30,12 @@ public class ComReviewService {
 		return totalCount;
 	}
 
-	public List<ReviewDTO> selectAllReview(SelectCriteria selectCriteria) {
+	public List<ReviewDTO> selectAllReview(Map<String, Object> search) {
 		
 		SqlSession sqlSession = getSqlSession();
 		comReviewMapper = sqlSession.getMapper(ComReviewMapper.class);
 		
-		List<ReviewDTO> comReviewList = comReviewMapper.selectAllReview(selectCriteria);
+		List<ReviewDTO> comReviewList = comReviewMapper.selectAllReview(search);
 		
 		sqlSession.close();
 		
@@ -110,6 +112,19 @@ public class ComReviewService {
 		
 		return result;
 		
+	}
+
+	public List<ReviewAttachDTO> selectReviewImg(int reviewNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comReviewMapper = sqlSession.getMapper(ComReviewMapper.class);
+		
+		List<ReviewAttachDTO> review = comReviewMapper.selectReviewImg(reviewNo);
+		
+		sqlSession.close();
+		
+		return review;
 	}
 
 }

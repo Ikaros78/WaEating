@@ -30,15 +30,18 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 860px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
           <div class="container-fluid">
-            <div class="container my-3 d-flex justify-content-center">
-              <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest1.jpg" class="mx-2" width="350px" height="300px">
+            <div class="container my-3 d-flex justify-content-center" style="height : 300px;">
+             <c:forEach var="image" items="${ requestScope.comBoard }" >        
+            	<img src="${ pageContext.servletContext.contextPath }/resources/upload/com_info/${ image.fileName }" class="mx-2" width="280" height="300">
+        	</c:forEach>
+              <%-- <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest1.jpg" class="mx-2" width="350px" height="300px">
               <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest2.jpg" class="mx-2" width="350px" height="300px">
-              <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" class="mx-2" width="350px" height="300px">
+              <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" class="mx-2" width="350px" height="300px"> --%>
             </div>
             <div class="d-flex justify-content-end pe-5">
               <!-- <button class="btn btn-primary" type="button">파일 선택</button> -->

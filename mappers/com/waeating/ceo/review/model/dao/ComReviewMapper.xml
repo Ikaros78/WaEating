@@ -12,6 +12,7 @@
   		<result property="total" column="TOTAL"/>
   		<association property="reviewAns" resultMap="comReviewAnsResultMap"/>
   		<association property="waitingRecord" resultMap="waitingRecordResultMap"/>
+  		<association property="reviewAttach" resultMap="reviewAttachMap"/>
   	</resultMap>
   	
   	<resultMap type="com.waeating.review.model.dto.ReviewAnsDTO" id="comReviewAnsResultMap">
@@ -33,10 +34,19 @@
   		<result property="memo" column="MEMO"/>
   	</resultMap>
   	
+  	<resultMap type="com.waeating.review.model.dto.ReviewAttachDTO" id="reviewAttachMap">
+	  	<id property="fileNo" column="FILE_NO"/>
+	  	<result property="reviewNo" column="REVIEW_NO"/>
+	  	<result property="originName" column="ORIGIN_NAME"/>
+	  	<result property="fileName" column="FILE_NAME"/>
+	  	<result property="isDeleted" column="IS_DELETED"/>
+	  	<result property="regDate" column="REG_DATE"/>
+    </resultMap>
   	
   	
   	
-  	<select id="selectAllReview" resultMap="comReviewResultMap">
+  	
+  	<select id="selectAllReview" resultMap="comReviewResultMap" parameterType="hashmap">
   		 SELECT
   		   		A.RNUM
   		   	  , A.REVIEW_NO
@@ -54,7 +64,7 @@
   		   		   			  , RA.ANS_CONTENT	
   		   				   FROM REVIEW C
   		   				   LEFT JOIN REVIEW_ANS RA ON (C.REVIEW_NO = RA.REVIEW_NO)
-  		   				  WHERE C.COM_NO = 1	
+  		   				  WHERE C.COM_NO = #{ comNo }	
   		   				  ORDER BY RA.ANS_CONTENT DESC
   		   				 <!-- <where>
   		   				 	<if test="searchCondition == 'noticeTitle'">
@@ -63,10 +73,10 @@
   		   				 </where> -->
   		   		   		) B
   		   		   	<![CDATA[
-	                WHERE ROWNUM <= #{ endRow }
+	                WHERE ROWNUM <= #{ selectCriteria.endRow }
 	                ]]>
   		   		) A	
-  		   	WHERE A.RNUM >= #{ startRow }
+  		   	WHERE A.RNUM >= #{ selectCriteria.startRow }
   		 <!-- SELECT
   			    CN.NOTICE_TITLE
   			  , CN.REG_DATE
@@ -78,7 +88,7 @@
         SELECT
                COUNT(*) total
           FROM REVIEW A
-         WHERE A.COM_NO = 1
+         WHERE A.COM_NO = #{ comNo }
     	<!-- <where>
 			<if test="searchCondition == 'noticeTitle'">
 	           A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
@@ -127,6 +137,11 @@
 		 WHERE RA.REVIEW_NO = #{ reviewNo }
 	</update>
 	
-  	
+  	<select id="selectReviewImg" resultMap="reviewAttachMap" resultType="_int">
+	  	SELECT
+	           RA.FILE_NAME
+	      FROM REVIEW_ATTACH RA
+	     WHERE RA.REVIEW_NO = #{ reviewNo } 
+  	</select>
   </mapper>
   
