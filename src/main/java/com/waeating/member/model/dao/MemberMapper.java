@@ -52,11 +52,4 @@ public interface MemberMapper {
 
 	int updateUserInformation(MemberDTO requestMember);
 
-
-
-
-
-
-
-
 }
