@@ -32,14 +32,15 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td><textarea rows="10" cols="40" name="content"></textarea></td>
+                    <td><textarea class="notice-text" rows="10" cols="40" name="content"></textarea></td>
                 </tr>
                 
             </table>
             <div id="button" style="text-align: right;">
                 <button>삭제</button>
                 <button>수정</button>
-                <button href="${ pageContext.servletContext.contextPath }/report/list">확인</a></button>
+                <button>확인</button>
+                
            </div>
         </form></div>
        

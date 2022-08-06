@@ -36,18 +36,16 @@ public class ReportInsertServlet extends HttpServlet {
 	   newReport.setContent(Content);
 	   System.out.println("newReport" + newReport);
 	   
-//	   ReportService reportService = new ReportService();
-//	   int result = reportService.insertReport(newReport);
-//	   
-//	   String path = "";
-//	   if(result > 0) {
-//		   path = "WEB-INF/views/common/success.jsp";
-//		   request.setAttribute("sucessCode", "insertReport");
-//	   } else {
-//		   path = "WEB-INF/views/common/faile.jap";
-//		   request.setAttribute("message", "문의하기에 실패하셨습니다");
-//	   }
-//	     request.getRequestDispatcher(path).forward(request, response);
+	   ReportService reportService = new ReportService();
+       int result = reportService.insertReport(newReport);	   	 
+       String path = "";
+       if(result > 0) {
+	   path = "WEB-INF/views/common/success.jsp";
+		   request.setAttribute("sucessCode", "insertReport");
+	   } else {
+		   path = "WEB-INF/views/common/faile.jap";
+	   request.setAttribute("message", "문의하기에 실패하셨습니다");	   }
+     request.getRequestDispatcher(path).forward(request, response);
 
  
  }
