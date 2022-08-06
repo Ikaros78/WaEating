@@ -40,8 +40,10 @@
               <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest2.jpg" class="mx-2" width="350px" height="300px">
               <img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/rest3.jpg" class="mx-2" width="350px" height="300px">
             </div>
-            <div class="d-flex justify-content-end pe-5">
-              <button class="btn btn-primary" type="button">파일 선택</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary" type="button">
+              	파일 선택
+              </button>
             </div>
           </div>
             
