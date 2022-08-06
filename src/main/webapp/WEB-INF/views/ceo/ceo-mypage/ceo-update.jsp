@@ -36,13 +36,7 @@
         <div id="container">
         <h1>회원 정보 수정</h1>
         <hr id="con_hr">
-        <form action="" id="user_update" method="post" onsubmit="return ck_infor();">
-            <div class="profile">
-              <div class="profile_img">
-                <img src="../img/profile.png" alt="프로필">
-              </div>
-              <input type="file" accept=".jpg,.jpeg,.png" name="upload" id="upload">
-            </div>
+        <form action="${ pageContext.servletContext.contextPath }/member/ceo/update/information" id="user_update" method="post" onsubmit="return ck_infor();">
 
             <label for="id">아이디</label>
             <input type="text" name="id" id="id" value="${ sessionScope.loginMember.id }" readonly="readonly"><br>
@@ -56,10 +50,10 @@
                 <td  rowspan="3"><label for="password" style="margin-bottom: 0;">비밀번호</label></td>
               </tr>
               <tr>
-                <td><input type="password" name="pw" class="pw" placeholder="새 비밀번호를 입력하세요" style="margin-bottom: 3px;"><br></td>
+                <td><input type="password" name="pw" id="pw" class="pw" placeholder="새 비밀번호를 입력하세요" style="margin-bottom: 3px;"><br></td>
               </tr>
               <tr>
-                <td><input type="password" name="newPw" class="pw" placeholder="새 비밀번호를 다시 입력하세요"><br></td>
+                <td><input type="password" name="newPw" id="re_pw" class="pw" placeholder="새 비밀번호를 다시 입력하세요"><br></td>
               </tr>
             </table>
            

@@ -342,4 +342,6 @@
 		     , A.EMAIL = NVL(#{ email }, A.EMAIL)
 		 WHERE A.MEMBER_ID = #{ id }
 	</update>
+	
+	
 </mapper>
