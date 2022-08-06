@@ -75,7 +75,7 @@
 				
 				 $tds[i].onclick = function() {
 		               const no = this.parentNode.children[0].innerText;
-		               location.href = "${ pageContext.servletContext.contextPath }/notice/detail?no=" + no;
+		               location.href = "${ pageContext.servletContext.contextPath }/notice/ceodetail?no=" + no;
 		            }
 				
 			}

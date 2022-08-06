@@ -8,7 +8,7 @@ public class ReportDTO {
 
 	private int reportNo;
 	private String title;
-	private String Content;
+	private String content;
 	private String id;
 	private java.sql.Date regDate;
 	private ReportAnswerDTO answer;
@@ -17,7 +17,7 @@ public class ReportDTO {
 		super();
 		this.reportNo = reportNo;
 		this.title = title;
-		Content = content;
+		this.content = content;
 		this.id = id;
 		this.regDate = regDate;
 		
@@ -26,7 +26,7 @@ public class ReportDTO {
 		super();
 		this.reportNo = reportNo;
 		this.title = title;
-		this.Content = content;
+		this.content = content;
 		this.id = id;
 		this.regDate = regDate;
 		this.answer = answer;
@@ -44,10 +44,10 @@ public class ReportDTO {
 		this.title = title;
 	}
 	public String getContent() {
-		return Content;
+		return content;
 	}
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 	public String getId() {
 		return id;
@@ -71,7 +71,7 @@ public class ReportDTO {
 
 	@Override
 	public String toString() {
-		return "ReportDTO [reportNo=" + reportNo + ", title=" + title + ", content=" + Content + ", id=" + id
+		return "ReportDTO [reportNo=" + reportNo + ", title=" + title + ", content=" + content + ", id=" + id
 				+ ", regDate=" + regDate + ", answer=" + answer + "]";
 	}
 	

@@ -15,16 +15,15 @@
 <script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote-lite.js"></script>
 <script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/summernote/summernote-lite.css">
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/notice/cs.css">
 <!-- summernote script -->
-<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote.js"></script>
+<script src="${ pageContext.servletContext.contextPath }/resources/js/report/report.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
     <h2>고객센터 문의사항 작성</h2>
-	<div style="
-    margin: top;
-    margin-top: 118px" >  
-		<form action="${ pageContext.servletContext.contextPath }/report/insert" method="post">
+	<div class="container" >  
+		<form class="report-form" action="${ pageContext.servletContext.contextPath }/report/insert" method="post">
             <table>
                 <tr>
                     <th>제목</th>
@@ -32,14 +31,13 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td><textarea class="notice-text" rows="10" cols="40" name="content"></textarea></td>
+                    <td class="sum-td"><textarea id="summernote" rows="10" cols="40" name="content"></textarea></td>
                 </tr>
                 
             </table>
-            <div id="button" style="text-align: right;">
-                <button>삭제</button>
-                <button>수정</button>
-                <button>확인</button>
+            <div id="button" style="text-align: center;">
+                <button class="close-btn" onclick="closeEvent()">취소</button>
+                <button class="insert-btn">등록</button>
                 
            </div>
         </form></div>

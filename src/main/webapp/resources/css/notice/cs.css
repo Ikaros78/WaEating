@@ -1,9 +1,22 @@
 @charset "UTF-8";
 
-
-
-       
-
+input[name=title]{
+    width: 1200px;
+    padding: 5px;
+    height: 30px;
+}
+.report-form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#button{
+	margin: 10px;
+}
+.sum-td{
+	width: 1200px;
+}
     p {width: 600px; text-align: right;}
 
    table thead tr th {background-color: gray; width: 1200px;} 
@@ -12,9 +25,12 @@
     .button{float: right;}  
    .aria-label{text-align: center;} 
  
-
-   
-
 .notice-text{
 	resize: none;
+}
+
+.container{
+    margin: top;
+    margin-top: 118px;
+    height: 490px;
 }

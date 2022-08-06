@@ -72,7 +72,8 @@
 	
 	<select id="selectReportDetail" parameterType="hashmap" resultMap="reportResultMap">
 		SELECT
-				A.REPORT_TITLE
+                A.REPORT_NO		
+			  , A.REPORT_TITLE
 			  , A.REPORT_CONTENT
 			  , A.MEMBER_ID
 			  , A.REG_DATE
@@ -97,11 +98,11 @@
 			
 		VALUES 
 		(  
-		  SEQ_REPORT.NEXTVAL
-		  #{ title }
-		  #{ content }
-		  #{ id }
-		  #{ date } 
+		   SEQ_REPORTNO.NEXTVAL
+		  ,#{ title }
+		  ,#{ content }
+		  ,#{ id }
+		  ,sysdate 
 		    )	
 	</insert>
 	
@@ -114,7 +115,8 @@
 	<update id="updateReport">
 		UPDATE
 				REPORT A
-		
+			SET A.REPORT_TITLE = #{title}
+			   ,A.REPORT_CONTENT = #{content}
 		WHERE A.REPORT_NO = #{ reportNo }
 	</update>
 </mapper>

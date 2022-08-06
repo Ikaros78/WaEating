@@ -63,7 +63,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      
      	<select id="selectNoticeDeatail" resultMap="noticeResultMap">
 		SELECT
-				A.NOTICE_TITLE
+				A.NOTICE_NO
+			  , A.NOTICE_TITLE
 			  , A.NOTICE_CONTENT
 			  , A.REG_DATE
 			  , A.MEMBER_ID

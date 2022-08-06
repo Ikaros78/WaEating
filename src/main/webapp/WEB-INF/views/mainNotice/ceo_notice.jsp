@@ -27,7 +27,7 @@
               </div>
           
               <!-- board seach area -->
-              <div id="board-search">
+            <!--   <div id="board-search">
                   <div class="container">
                       <div class="search-window">
                           <form action="">
@@ -39,7 +39,7 @@
                           </form>
                       </div>
                   </div>
-              </div>
+              </div> -->
              <div id="board-list">
                   <div class="container">
                       <table class="board-table">
@@ -55,7 +55,7 @@
                           <tr>
                               <td><c:out value="${ notice.noticeNo }"/></td>
                               <th>
-                                <a href="${ pageContext.servletContext.contextPath }/mainNotice/notice_detail?noticeNo=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
+                                <a href="${ pageContext.servletContext.contextPath }/ceonotice/detail?no=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
                                 
                               </th>
                               <td><c:out value="${ notice.regDate }"/></td>
@@ -73,13 +73,13 @@
             <div class="mt-3"></div>
             <!-- 검색 폼 -->
 			<div class="search-area" align="center">
-				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/notice/list" method="get" style="display:inline-block">
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/notice/ceolist" method="get" style="display:inline-block">
 				<div class="input-group mb-3">
 				<input type="hidden" class="form-control" name="currentPage" value="1">
 				    <select id="searchCondition" name="searchCondition" class="form-control">
 						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "noticeTitle"? "selected": "" }>제목</option>
 					</select>
-			        <input type="text" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+			        <input type="text" class="form-control" id="searchValue" name="searchValue" placeholder="검색어를 입력해주세요."value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
 					<button type="submit" class="btn btn-primary">검색하기</button>
 				</div>		
 				    
