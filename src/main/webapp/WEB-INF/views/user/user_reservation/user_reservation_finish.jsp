@@ -57,7 +57,7 @@
            			 </a>
               	</c:when>
               	<c:otherwise>
-		            <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate?comNo=${ reservation.comNo }&&recordNo=${ reservation.recordNo }">
+		            <a href="${ pageContext.servletContext.contextPath }/user/review/selecteupdate?comNo=${ reservation.comNo }&&recordNo=${ reservation.recordNo }">
 		              <button type="button" class="btn btn-success">내가 쓴 리뷰 보기</button>
 		            </a>
               	</c:otherwise>
@@ -75,7 +75,7 @@
             <p>전화번호 : 010-1234-5678</p>
 
             <button type="button" class="btn btn-outline-success" disabled>방문 완료</button>
-            <a href="${ pageContext.servletContext.contextPath }/user/review/deleteupdate">
+            <a href="${ pageContext.servletContext.contextPath }}/user/review/selecteupdate">
               <button type="button" class="btn btn-success">내가 쓴 리뷰 보기</button>
             </a>
         </div> --%>

@@ -57,7 +57,7 @@
                     	<c:if test="${ !empty sessionScope.attach }">
                     	<tr>
                             <td>프로필사진</td>
-                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ attach.fileName }"></td>
+                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ attach.fileName }" width="600" height="371"></td>
                         </tr>
                         </c:if>
                         <tr>
