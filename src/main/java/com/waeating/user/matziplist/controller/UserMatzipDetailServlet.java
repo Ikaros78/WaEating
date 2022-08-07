@@ -31,15 +31,18 @@ public class UserMatzipDetailServlet extends HttpServlet {
 		ComService comService = new ComService();
 		ReviewService reviewService = new ReviewService();
 		
+		/* 가게 상세 정보 */
 		ComInfoDTO selectCom = comService.selctComDetail(comNo);
 		List<ComInfoDTO> selectComMenu = comService.selectComMenu(comNo);
-		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
-		
-		
 		ReviewDTO selectAvgRatings = reviewService.selectAvgRatings(comNo);
 		List<ComBoardAttachDTO> selectComImg = comService.selectComImg(comNo);
 		
+		/* 리뷰 */
+		List<ReviewDTO> selectReview = reviewService.selectComReview(comNo);
+		
+		/* 공지사항 */
 		List<ComNoticeDTO> selectComNotice = comService.selectComNotice(comNo);
+		
 		
 		System.out.println("selectReview : " + selectReview);
 		System.out.println("selectCom : " + selectCom);
