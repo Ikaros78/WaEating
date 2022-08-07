@@ -276,6 +276,12 @@
     
   </select>
   
+  <select id="selectComCountByGrade" resultType="_int">
+  	SELECT
+           COUNT(DISTINCT COM_NO) 
+      FROM REVIEW A
+  </select>
+  
   <select id="selectComByGrade" resultMap="generalCompanyResultMap" >
      SELECT
  		   A.RNUM
