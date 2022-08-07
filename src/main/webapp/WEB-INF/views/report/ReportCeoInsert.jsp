@@ -19,7 +19,7 @@
 <script src="${ pageContext.servletContext.contextPath }/resources/js/report/report.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
+<jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/> 
   <div id="wrap">
     <!-- 왼쪽 (메뉴) -->
     <section class="row container-fluid px-5">
@@ -28,16 +28,15 @@
         <h4 class="mb-3 ms-1">마이페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">즐겨찾기</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="${ pageContext.servletContext.contextPath }/report/list" class="list-group-item list-group-item-action py-3">고객센터</a>
-          <a href="${ pageContext.servletContext.contextPath }/check/password/user" class="list-group-item list-group-item-action py-3 select">회원 정보 수정</a>
+         <a href="${ pageContext.servletContext.contextPath }/ceo/check/password" class="list-group-item list-group-item-action py-3">개인정보수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/report/ceo/list" class="list-group-item list-group-item-action py-3">고객센터</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
        <aside class="float-end col-9 mt-4 ms-3 border">
 
 	<div class="container" >  
-		<form class="report-form" action="${ pageContext.servletContext.contextPath }/report/insert" method="post">
+		<form class="report-form" action="${ pageContext.servletContext.contextPath }/report/ceo/insert" method="post">
             <table>
                 <tr>
                     <th>제목</th>
@@ -57,7 +56,7 @@
         </form></div>
        
    
-   <jsp:include page="/WEB-INF/views/user/user_footer.jsp"/>
+     <jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
 
  
 </body>
