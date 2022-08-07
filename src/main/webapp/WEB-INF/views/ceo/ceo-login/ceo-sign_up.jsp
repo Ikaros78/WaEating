@@ -18,7 +18,7 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12">
             <h4 class="mb-3">업주 회원가입</h4>
-            <form class="validation-form" method="post">
+            <form class="validation-form" method="post" onsubmit="return ck_infor();">
               <div class="row">
                   <div class="form-floating col-md-6 mb-3">
                       <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" required>
