@@ -67,7 +67,7 @@
                     <a class="nav-link" href="${ pageContext.servletContext.contextPath }/user/check/password">회원 정보 수정</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="${ pageContext.servletContext.contextPath }/report/main">고객센터</a>
+                      <a class="nav-link" href="${ pageContext.servletContext.contextPath }/report/list">고객센터</a>
                     </li>
                 </ul>
               </li>

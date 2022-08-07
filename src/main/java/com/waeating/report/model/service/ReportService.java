@@ -7,33 +7,19 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.waeating.common.paging.SelectCriteria;
 import com.waeating.report.model.dao.ReportMapper;
-import com.waeating.support.model.dto.ReportDTO;
+import com.waeating.report.model.dto.ReportDTO;
 
 public class ReportService {
 	
-	
 	private ReportMapper reportMapper;
-	
-	public int selectTotalCount(Map<String, String> searchMap) {
-
-		SqlSession sqlSession = getSqlSession();
-		reportMapper = sqlSession.getMapper(ReportMapper.class);
-		
-		int totalCount = reportMapper.SelectTotalCount(searchMap);
-		
-		sqlSession.close();
-		
-		return totalCount;
-	}
 	
 	public int insertReport(ReportDTO report) {
 
 		SqlSession sqlSession = getSqlSession();
 		
 		reportMapper = sqlSession.getMapper(ReportMapper.class);
-		int result = ReportMapper.insertReport(report);
+		int result = reportMapper.insertReport(report);
 		
 		if(result > 0) {
 			
@@ -47,35 +33,105 @@ public class ReportService {
 		
 		return result;
 	}
-	
-	public List<ReportDTO> selectAllreport(SelectCriteria selectCriteria) {
 
+	public List<ReportDTO> selectReportList(Map<String, Object> selectMap) {
+		
 		SqlSession sqlSession = getSqlSession();
 		reportMapper = sqlSession.getMapper(ReportMapper.class);
 		
-		List<ReportDTO> reportList = reportMapper.selectReportList(selectCriteria);
+		List<ReportDTO> reportList = reportMapper.selectReportList(selectMap);
 		
 		sqlSession.close();
-		
+				
 		return reportList;
 	}
-	
-    public ReportDTO selectReportDetail(Map<String, String> searchMap) {
+
+	public int selectTotalCount(Map<String, String> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		reportMapper = sqlSession.getMapper(ReportMapper.class);
 		
-		ReportDTO report = reportMapper.SelectReportDetail(searchMap);
+		int totalCount = reportMapper.selectTotalCount(searchMap);
 		
 		sqlSession.close();
 		
-		return report;
+		return totalCount;
 	}
 
-	public List<ReportDTO> selectAllReport(SelectCriteria selectCriteria) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReportDTO selectOneReport(ReportDTO reportNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+//		ReportDTO report = reportMapper.selectOneReport(reportNo);
+		
+		sqlSession.close();
+		
+		return reportNo;
+	}
+	
+	public ReportDTO selectReportDetail(int no) { 
+		
+		SqlSession sqlSession = getSqlSession();
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		ReportDTO reportDetail = null;
+		
+		reportDetail = reportMapper.selectReportDetail(no);
+			
+		sqlSession.close();
+		return reportDetail;
+		
+		
 	}
 
+	public int updateReport(ReportDTO report) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		int result = reportMapper.updateReport(report);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+		
+	}
+
+	public int deleteReport(int reportNo) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		reportMapper = sqlSession.getMapper(ReportMapper.class);
+		int result = reportMapper.deleteReport(reportNo);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+
+	
+	
+
+	
+
+	
 
 }
+	
+     
