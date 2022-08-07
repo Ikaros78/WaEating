@@ -27,7 +27,7 @@ public class AdminCompanyUpdateServlet extends HttpServlet {
 		/* 업체 회원 정보 */
 		String id = company.getMemberInfo().getId();
 		String name = request.getParameter("updateName");
-		String pwd = request.getParameter("updatePwd");
+		String pwd = request.getParameter("pw");
 		String email = request.getParameter("updateEmail");
 		String phone = request.getParameter("updatePhone");
 		

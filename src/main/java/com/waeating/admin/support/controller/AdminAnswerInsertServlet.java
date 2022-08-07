@@ -37,15 +37,8 @@ public class AdminAnswerInsertServlet extends HttpServlet {
 		
 		if(content.length() == 0) {
 			
-			response.setCharacterEncoding("utf-8");
-
-			response.setContentType("text/html; charset=UTF-8");
-			
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('내용을 다시 입력해주세요.'); location.href='detail';</script>");
-			
-			out.flush();
-			out.close();
+			request.getSession().removeAttribute("ifUpdate");
+			response.sendRedirect(request.getContextPath() + "/admin/report/detail");
 		} else {
 			
 			int result = supportService.insertAns(insertAnsMap);

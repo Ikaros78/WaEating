@@ -15,7 +15,7 @@ import com.waeating.common.wrapper.EncryptRequestWrapper;
 /**
  * Servlet Filter implementation class AdminPasswordEncryptFilter
  */
-@WebFilter("/admin/member/*")
+@WebFilter(urlPatterns ={"/admin/member/*","/admin/company/*"})
 public class AdminPasswordEncryptFilter implements Filter {
 
     public AdminPasswordEncryptFilter() {}
