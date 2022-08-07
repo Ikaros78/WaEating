@@ -30,11 +30,11 @@
     <section class="row container-fluid px-5">
       <aside class="float-start col-2 mt-4 ms-5 px-3" style="min-height:700px;">
         <!-- 메뉴 제목 -->
-        <h4 class="mb-3 ms-1">맛집리스트</h4>
+        <h4 class="mb-3 ms-1">나의 예약</h4>
         <div class="list-group list-group-flush border-top border-bottom" >
           <!-- 메뉴 세부 제목 -->
-          <a href="${ pageContext.servletContext.contextPath }/user/reservation/finish" class="list-group-item list-group-item-action py-3 ">이전 예약</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
-          <a href="${ pageContext.servletContext.contextPath }/user/reservation/now" class="list-group-item list-group-item-action py-3 select">현재 예약</a>
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/finish" class="list-group-item list-group-item-action py-3 select">이전 예약</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
+          <a href="${ pageContext.servletContext.contextPath }/user/reservation/now" class="list-group-item list-group-item-action py-3 ">현재 예약</a>
           <a href="${ pageContext.servletContext.contextPath }/user/reservation/cancel" class="list-group-item list-group-item-action py-3">취소한 예약</a>
         </div>
        </aside>

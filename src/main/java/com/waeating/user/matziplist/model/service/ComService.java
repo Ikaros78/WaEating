@@ -209,6 +209,21 @@ public class ComService {
 		
 		return com;
 	}
+
+
+	public int selectComCountByGrade(Map<String, String> searchMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
+		
+		int totalCount = comInfoMapper.selectComCountByGrade(searchMap);
+		
+		sqlSession.close();
+		
+		
+		return totalCount;
+	}
 	
 
 
