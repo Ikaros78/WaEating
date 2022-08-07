@@ -61,24 +61,24 @@
 	            <table class="table table-bordered">
 		            <thead>
 			           	<tr>
+			           		<td>첨부사진</td>
+			           	</tr>
+		            </thead>
+		            <tbody>
+			           	<tr>
+			           		<td><input type="file" id="attachFile" name="attachFile" multiple></td>
+			           	</tr>
+		            </tbody>
+		        </table>
+	            <table class="table table-bordered">
+		            <thead>
+			           	<tr>
 			           		<td>내용</td>
 			           	</tr>
 		            </thead>
 		            <tbody>
 			           	<tr>
 			           		<td><textarea id="summernote" name="content" placeholder="내용"></textarea>
-			           	</tr>
-		            </tbody>
-		        </table>
-		        <table class="table table-bordered">
-		            <thead>
-			           	<tr>
-			           		<td>첨부파일</td>
-			           	</tr>
-		            </thead>
-		            <tbody>
-			           	<tr>
-			           		<td><input type="file" id="attachFile1" name="attachFile1"></td>
 			           	</tr>
 		            </tbody>
 		        </table>

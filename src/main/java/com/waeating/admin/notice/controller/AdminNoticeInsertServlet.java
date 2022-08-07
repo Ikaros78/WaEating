@@ -53,16 +53,13 @@ public class AdminNoticeInsertServlet extends HttpServlet {
 			System.out.println("인코딩 방식 : " + encodingType);
 			
 			String fileUploadDirectory = rootLocation + "/resources/upload/notice/origin/";
-			String copyFileDirectory = rootLocation + "/resources/upload/notice/copy/";
 			
 			File directory = new File(fileUploadDirectory);
-			File directory2 = new File(copyFileDirectory);
 			
 			/* 파일 저장경로가 존재하지 않는 경우 디렉토리를 생성한다. */
-			if(!directory.exists() || !directory2.exists()) {
+			if(!directory.exists()) {
 				/* 폴더를 한 개만 생성할거면 mkdir, 상위 폴더도 존재하지 않으면 한 번에 생성하란 의미로 mkdirs를 이용한다. */
 				System.out.println("폴더 생성 : " + directory.mkdirs());
-				System.out.println("폴더 생성 : " + directory2.mkdirs());
 			}
 			
 			/* 이게 최종적으로 request를 parsing하고 파일을 저장한 뒤 필요한 내용을 담을 리스트와 맵이다.
@@ -119,7 +116,6 @@ public class AdminNoticeInsertServlet extends HttpServlet {
 							fileMap.put("filedName", filedName);
 							fileMap.put("originFileName", originFileName);
 							fileMap.put("savedFileName", randomFileName);
-							fileMap.put("savePath", fileUploadDirectory);
 							
 							fileList.add(fileMap);
 						}

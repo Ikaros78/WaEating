@@ -47,7 +47,7 @@ public class CeoLoginServlet extends HttpServlet {
 		
 		ComService comService = new ComService();
 		
-		ComInfoDTO loginMember = comService.loginCheck(requestMember);
+		MemberDTO loginMember = comService.loginCheck(requestMember);
 		System.out.println("loginMember : " + loginMember);
 		
 		if(loginMember != null) {

@@ -99,14 +99,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				COUNT(*)
 			FROM ADMIN_NOTICE A
 			<!-- 검색조건문 -->
-		<where>
-			<if test="searchCondition =='id'">
-				A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
-			</if>
-			<if test="searchCondition =='title'">
-				A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
-			</if>
-		</where>
+			<where>
+				<if test="searchCondition =='id'">
+					A.MEMBER_ID LIKE '%' || #{ searchValue } || '%'
+				</if>
+				<if test="searchCondition =='title'">
+					A.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+				</if>
+			</where>
 	</select>
 	
 	<select id="adminSelectNoticeList" resultMap="noticeResultMap">
@@ -163,7 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="content != null and content != ''">
 			A.NOTICE_CONTENT = #{ content },
 			</if> 
-			<if test="date != null and date!= ''">
+			<if test="date != null and date != ''">
 			A.REG_DATE = #{ date },
 			</if>
 			<if test="id != null and id != ''">
@@ -227,4 +227,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE A.NOTICE_NO = #{ noticeNo }
 		   AND A.IS_DELETED = 'N'
 	</select>
+	
+	<delete id="deleteNoticeAttach" parameterType="hashmap">
+		DELETE
+			FROM ADMIN_NOTICE_ATTACH A
+		   WHERE A.NOTICE_NO = #{ noticeNo }
+	</delete>
 </mapper>

@@ -34,7 +34,7 @@
                             <td>
                                 <ul class="nav nav-stacked">
                                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/list">회원정보 조회</a></li>
-                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/insert">회원정보 등록</a></li>
+                                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/member/insert">관리자 회원가입</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -57,7 +57,7 @@
                     	<c:if test="${ !empty sessionScope.attach }">
                     	<tr>
                             <td>프로필사진</td>
-                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ attach.fileName }"></td>
+                            <td><img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ attach.fileName }" width="600" height="371"></td>
                         </tr>
                         </c:if>
                         <tr>

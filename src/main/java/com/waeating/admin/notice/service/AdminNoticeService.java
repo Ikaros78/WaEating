@@ -49,6 +49,8 @@ public class AdminNoticeService {
 		
 		List<NoticeDTO> noticeList = noticeMapper.adminSelectNoticeList(selectCriteria);
 		
+		sqlSession.close();
+		
 		return noticeList;
 	}
 
@@ -181,6 +183,71 @@ public class AdminNoticeService {
 		sqlSession.close();
 		
 		return attachList;
+	}
+
+	/**
+	 * <pre>
+	 *   공지사항 첨부파일 수정용 메소드
+	 * </pre>
+	 * @param updateNotice
+	 * @return
+	 */
+	public int updateNoticeAttach(NoticeDTO updateNotice) {
+
+		SqlSession sqlSession = getSqlSession();
+		noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		
+		int result = 0;
+		
+		List<NoticeAttachDTO> fileList = updateNotice.getAttachList();
+		
+		int attachResult = 0;
+		
+		for(int i = 0 ; i < fileList.size(); i++) {
+			fileList.get(i).setNoticeNo(updateNotice.getNoticeNo());
+		}
+		
+		for(int i = 0; i < fileList.size(); i++) {
+			attachResult += noticeMapper.insertAttach(fileList.get(i));
+		}
+		
+		if(attachResult == fileList.size()) {
+			sqlSession.commit();
+			result = 1;
+		}else {
+			sqlSession.rollback();
+		}
+			
+		sqlSession.close();
+		
+		return result;
+	}
+
+	/**
+	 * <pre>
+	 *   첨부파일 삭제용 메소드
+	 * </pre>
+	 * @param noticeNoMap
+	 * @return
+	 */
+	public int deleteNoticeAttach(Map<String, String> noticeNoMap) {
+		
+		SqlSession sqlSession = getSqlSession();
+		noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		
+		int result = noticeMapper.deleteNoticeAttach(noticeNoMap);
+		
+		if(result > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
 	}
 
 }

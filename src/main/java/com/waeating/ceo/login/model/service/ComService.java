@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.waeating.com.model.dao.CeoMapper;
 import com.waeating.com.model.dto.ComInfoDTO;
+import com.waeating.member.model.dao.MemberMapper;
 import com.waeating.member.model.dto.MemberDTO;
 
 public class ComService {
@@ -42,7 +43,7 @@ public class ComService {
 
 	/**
 	 * <pre>
-	 * 	 회원가입 메소드 (ComInfoDTO)
+	 * 	 회원가입 메소드 (ComInfoDTO) & COM_RECORD INSERT
 	 * </pre>
 	 * @param requestCom
 	 * @return
@@ -52,11 +53,18 @@ public class ComService {
 		SqlSession sqlSession = getSqlSession();
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
+		int result = 0;
+		
 		int registCom = ceoMapper.insertComInfo(requestCom);
 		
-		if(registCom > 0) {
+		int comNo = requestCom.getComNo();
+		
+		int comRecord = ceoMapper.insertComRecord(comNo);
+		
+		if(registCom > 0 && comRecord > 0) {
 			
 			sqlSession.commit();
+			result = 1;
 		} else { 
 			
 			sqlSession.rollback();
@@ -64,14 +72,14 @@ public class ComService {
 		
 		sqlSession.close();
 		
-		return registCom;
+		return result;
 	}
 
 	/**
 	 * <pre>
 	 * 	 아이디 중복 확인 메소드
 	 * </pre>
-	 * @param userId
+	 * @param ceoId
 	 * @return 
 	 */
 	public int dubleCkId(String ceoId) {
@@ -91,15 +99,15 @@ public class ComService {
 	 * <pre>
 	 * 	 로그인 처리 메소드
 	 * </pre>
-	 * @param requestMember
+	 * @param requestCom
 	 * @return loginMember
 	 */
-	public ComInfoDTO loginCheck(MemberDTO requestMember) {
+	public MemberDTO loginCheck(MemberDTO requestMember) {
 		
 		SqlSession sqlSession = getSqlSession();
 		ceoMapper = sqlSession.getMapper(CeoMapper.class);
 		
-		ComInfoDTO loginMember = null;
+		MemberDTO loginMember = null;
 		
 		String encPwd = ceoMapper.selectEncryptedPwd(requestMember);
 		System.out.println("encPwd 확인 : " + encPwd);
@@ -108,6 +116,218 @@ public class ComService {
 			
 			loginMember = ceoMapper.selectMemberLogin(requestMember);
 		}
+		
+		sqlSession.close();
+		
+		return loginMember;
+	}
+	
+	/**
+	 * <pre>
+	 * 	 전화번호로 아이디 찾는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO findIdPhone(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO findCeoId = null;
+		findCeoId = ceoMapper.selectFindIdForPhone(requestMember);
+		
+		sqlSession.close();
+		
+		return findCeoId;
+	}
+
+	/**
+	 * <pre>
+	 * 	 비밀번호 찾기를 위해 입력한 정보가 일치하는지 확인하는 메소드(Phone)
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO checkPwdPhone(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO checkPwd = ceoMapper.checkFindPwdForPhone(requestMember);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
+
+	/**
+	 * <pre>
+	 * 	 새로운 비밀번호 입력 메소드
+	 * </pre>
+	 * @param requestCom
+	 * @return
+	 */
+	public int updateNewPwd(ComInfoDTO requestCom) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		int updatePwd = ceoMapper.updateNewPwd(requestCom);
+		
+		if(updatePwd > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return updatePwd;
+	}
+	
+	/**
+	 * <pre>
+	 *	 회원 정보 수정을 위한 비밀번호 확인하는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO checkPwdCeo(MemberDTO requestMember) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO ceoInfo = null;
+		
+		String encPwd = ceoMapper.selectEncryptedPwd(requestMember);
+		System.out.println("encPwd 확인 : " + encPwd);
+		System.out.println("pwd : " + requestMember.getPwd());
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if(passwordEncoder.matches(requestMember.getPwd(), encPwd)) {
+			
+			ceoInfo = ceoMapper.selectMemberLogin(requestMember);
+		}
+		
+		sqlSession.close();
+		
+		return ceoInfo;
+	
+	}
+
+	/**
+	 * <pre>
+	 * 	 회원 정보 update 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public int updateCeoInformation(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		int resultMember = ceoMapper.updateCeoInformation(requestMember);
+		
+		
+		if(resultMember > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return resultMember;
+	}
+
+	/**
+	 * <pre>
+	 * 	 회원 정보 update 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public int updaupdateComRegist(ComInfoDTO requestCom) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		int resultCom = ceoMapper.updateComRegist(requestCom);
+		
+		
+		if(resultCom > 0) {
+			
+			sqlSession.commit();
+		} else {
+			
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return resultCom;
+	}
+
+	/**
+	 * <pre>
+	 * 	 이메일로 아이디 찾는 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO findIdEmail(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO findCeoId = null;
+		findCeoId = ceoMapper.selectFindIdForEmail(requestMember);
+		
+		sqlSession.close();
+		
+		return findCeoId;
+	}
+
+	
+	public MemberDTO checkPwdEmail(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO checkPwd = ceoMapper.checkFindPwdForEmail(requestMember);
+		
+		sqlSession.close();
+		
+		return checkPwd;
+	}
+
+	/**
+	 * <pre>
+	 * 	 회원 정보 수정 후 수정된 세션 등록을 위한 메소드
+	 * </pre>
+	 * @param requestMember
+	 * @return
+	 */
+	public MemberDTO newCeoInfo(MemberDTO requestMember) {
+
+		SqlSession sqlSession = getSqlSession();
+		
+		ceoMapper = sqlSession.getMapper(CeoMapper.class);
+		
+		MemberDTO loginMember = ceoMapper.selectMemberLogin(requestMember);
 		
 		sqlSession.close();
 		

@@ -25,20 +25,21 @@
         <h4 class="mb-3 ms-1">마이페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="#" class="list-group-item list-group-item-action py-3">즐겨찾기</a><!-- 상세 페이지에 select 클래스 넣어주기 -->
+          <a href="${ pageContext.servletContext.contextPath }/user/check/password" class="list-group-item list-group-item-action py-3 select">회원 정보 수정</a>
           <a href="#" class="list-group-item list-group-item-action py-3">고객센터</a>
-          <a href="${ pageContext.servletContext.contextPath }/check/password/user" class="list-group-item list-group-item-action py-3 select">회원 정보 수정</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
        <aside class="float-end col-9 mt-4 ms-3 border">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
       <div id="checkuser">
-        <form action="">
-          <label for="id" id="nowid">아이디</label><input type="text" value="hong" readonly="readonly">
+        <form method="post">
+        <label for="id" id="nowid">아이디</label>
+        <input type="text" value="${ sessionScope.loginMember.id }" readonly="readonly">
         <br>
-        <label for="pw" id="nowpw" style="margin-top: 20px;">비밀번호</label> <input type="password" placeholder="비밀번호를 입력해주세요." style="margin-top: 10px;">
-        <a href="${ pageContext.servletContext.contextPath }/update/information/user"><input type="button" value="확인" id="ckbtn"></a>
+        <label for="pw" id="nowpw" style="margin-top: 20px;">비밀번호</label>
+        <input type="password" placeholder="비밀번호를 입력해주세요." name="pw"  style="margin-top: 10px;">
+        <input type="submit" value="확인" id="ckbtn">
         </form>
       </div>
 
@@ -46,21 +47,8 @@
     </section>
    
 
+ <jsp:include page="../user_footer.jsp"></jsp:include>
   </div>
 </body>
  <!-- footer -->
-	<footer class="container-fluid  mt-5 p-4 text-white" id="checkpw_footer">
-      <div >
-        
-        <a class="navbar-brand float-end" href="#">
-          <img src="${ pageContext.servletContext.contextPath }/resources/images/user/logo.png" alt="Avatar Logo" style="width:140px;"> 
-        </a>
-        웨잇-팅<br>
-        서울특별시 종로구 <br>
-        사업자 등록번호 : 111-11-11111 <br>
-        고객센터 : 02-1111-1111 <br>
-        <br>
-        copyright 2022 Waeating Co., Ltd. All rights reserved
-      </div>
-    </footer> 
 </html>

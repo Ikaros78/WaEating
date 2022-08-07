@@ -107,16 +107,16 @@
           <div class="tab-content">
             <div id="home" class="container tab-pane active"><br>
             <c:forEach var="review" items="${ requestScope.selectReview }">
-              <div class="review_all m-5">
 
-                <div class="review my-2 " style=" min-height: 150px ">
+                <div class="review my-2 m-2" style=" min-height: 150px ">
       
-                  <div class="user" style="height:150px; ">
+                  <div class="user float-start" style="width:19%">
                  
                     <img src="${ pageContext.servletContext.contextPath }/resources/upload/user_profile/${ review.userInfoAttach.fileName }" alt="user_profile" >
                     <p>${ review.memberInfo.id }</p>
+                    
                   </div>
-                  <div class="content ">
+                  <div class="content float-end" style="width:77%">
                     
                     <div class="content_header">
                       <p class="date">${ review.waitingRecord.useDate }</p>
@@ -143,7 +143,7 @@
                       </p>
                       <c:forEach var="reviewImg" items="${ review.reviewAttach }">
                         <c:if test="${ reviewImg.fileName ne null  }">
-                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/${ reviewImg.fileName }" alt="">
+                      	<img src="${ pageContext.servletContext.contextPath }/resources/upload/review/origin/${ reviewImg.fileName }" alt="">
                       	</c:if>
                       </c:forEach>
                       <!-- <img src="../1_front/images/ddok1.png" alt="">
@@ -164,15 +164,29 @@
                     </c:if>
                   </div>
                 </div><!--review-->
-              </div> <!--review_all-->
+         
             </c:forEach>
             </div>
             <div id="menu1" class="container tab-pane fade"><br>
-            <c:forEach var="notice" items="${ requestScope.selectComNotice }"> 
-              <h5 style="float:left;">${ notice.noticeTitle } </h5>   <p style="color: gray; float: right;">${ notice.regDate }</p>
-              <div style="clear:both;color:gray;" class="ms-3 ">${ notice.noticeContent }</div>
-              <hr>
+            
+			 <div id="accordion">
+            <c:forEach var="notice" items="${ requestScope.selectComNotice }" varStatus="stu"> 
+			   <div class="card">
+			      <div class="card-header">
+			        <a class="btn" data-bs-toggle="collapse" href="#collapse${ stu.count }" >
+			          <h5 style="float:left;">${ notice.noticeTitle } </h5> <br> 
+			        </a>
+			        <div id="collapse${ stu.count }" class="collapse" data-bs-parent="#accordion">
+			        <div class="card-body ms-3" style="clear:both;color:gray;">
+			          ${ notice.noticeContent }
+			          <p style="color: gray; float: right;">${ notice.regDate }</p>
+				    </div><!-- collapsOne -->
+			        </div><!-- card-body -->
+			      </div><!-- card-header -->
+			   </div><!-- card -->
             </c:forEach>
+			 </div> <!-- accordion -->
+             
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-package com.waeating.admin.content.controller;
+package com.waeating.admin.review.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ContentSelectListServlet
+ * Servlet implementation class AdminReviewSelectDetailSessionHandlerServlet
  */
-@WebServlet("/admin/content/list")
-public class AdminContentSelectListServlet extends HttpServlet {
+@WebServlet("/admin/review/detail/session")
+public class AdminReviewSelectDetailSessionHandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path = "";
-		path= "/WEB-INF/views/admin/content/contentList.jsp";
+		String reviewNo = request.getParameter("reviewNo");
 		
-		request.getRequestDispatcher(path).forward(request, response);
+		request.getSession().setAttribute("reviewNo",reviewNo);
+		
+		response.sendRedirect(request.getContextPath() + "/admin/review/detail");
 	}
 
 }
