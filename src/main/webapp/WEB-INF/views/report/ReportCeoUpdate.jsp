@@ -5,29 +5,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>notice_detail</title>
+<title>ReportDetail</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/notice/notice_detail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- summernote -->
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/summernote-lite.js"></script>
+<script src="${ pageContext.servletContext.contextPath }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/summernote/summernote-lite.css">
+<link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/notice/cs.css">
+<!-- summernote script -->
+<script src="${ pageContext.servletContext.contextPath }/resources/js/report/report.js"></script>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/>
+  <jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/> 
     
      <div id="wrap">
-     <div id="wrap">
+       <div id="wrap">
     <!-- 왼쪽 (메뉴) -->
     <section class="row container-fluid px-5">
       <aside class="float-start col-2 mt-4 ms-5 px-3">
         <!-- 메뉴 제목 -->
-        <h4 class="mb-3 ms-1">공지사항</h4>
+        <h4 class="mb-3 ms-1">마이페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="${ pageContext.servletContext.contextPath }/notice/ceolist" class="list-group-item list-group-item-action py-3 select">공지사항</a>
+          <a href="${ pageContext.servletContext.contextPath }/ceo/check/password" class="list-group-item list-group-item-action py-3">개인정보수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/report/ceo/list" class="list-group-item list-group-item-action py-3">고객센터</a>
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
        <aside class="float-end col-9 mt-4 ms-3 border">
-    <section class="row container-fluid px-5">
     <section class="row container-fluid px-5">
 
        <aside class="float-end col-9 mt-4 ms-3" style="min-height: 700px">
@@ -42,50 +50,39 @@
 				<tbody>
 					<tr>
 						<th scope="row">글 번호</th>
-						<td colspan="4"><c:out value="${requestScope.noticeDetail.noticeNo }"/></td>
+						<td><c:out value="${requestScope.reportDetail.reportNo }"/><td>
+						
 					</tr>
 					<tr>
 						<th scope="row">작성자</th>
-						<td>${requestScope.noticeDetail.memberId }</td>
+						<td>${requestScope.reportDetail.id }</td>
 						<th scope="row">작성일</th>
-						<td colspan="2">${requestScope.noticeDetail.regDate }</td>
-
+						<td>${requestScope.reportDetail.regDate }</td>
+						
+						
 					</tr>
 					<tr>
 						<th scope="row">제목</th>
-						<td colspan="4">${requestScope.noticeDetail.noticeTitle }</td>
+						<td colspan="3"><input value="${requestScope.reportDetail.title }"></td>
+		
 					</tr>
 					<tr>
-						<td colspan="5" class="view_text">${requestScope.noticeDetail.noticeContent }</td>
+						<td colspan="4" class="view_text">
+						<textarea id="summernote">${requestScope.reportDetail.content }</textarea></td>
 		            </tr>
-		            
+		            <input button=>
 				</tbody>
 			</table>
-			<c:if test="${ !empty requestScope.attachList}">
-	            <table class="table table-bordered">
-	            	<thead>
-	            		<tr>
-	            			<td>첨부사진</td>
-	            		</tr>
-	            	</thead>
-	            	<tbody>
-	            		<c:forEach var="file" items="${ requestScope.attachList }">
-	            		<tr>
-	            			<td><img src="${ pageContext.servletContext.contextPath }/resources/upload/notice/origin/${ file.fileName }"></td>
-	            		</tr>
-						</c:forEach>
-	            	</tbody>
-	            </table>
-            </c:if>
             
        </aside>
     </section>
    
-    <jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
+   <jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/> 
 
   </div>
 			 
  <script>
+		
 		if(document.getElementsByClassName('td')) {
 			
 			const $tds = document.getElementsByClassName('td');
@@ -97,7 +94,7 @@
 				
 				 $tds[i].onclick = function() {
 		               const no = this.parentNode.children[0].innerText;
-		               location.href = "${ pageContext.servletContext.contextPath }/notice/ceodetail?no=" + no;
+		               location.href = "${ pageContext.servletContext.contextPath }/repor/ceo/detail?no=" + no;
 		            }
 				
 			}
