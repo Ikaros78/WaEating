@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
+<jsp:include page="/WEB-INF/views/ceo/common/ceo_header.jsp"/> 
 
  
    
@@ -27,8 +27,8 @@
         <h4 class="mb-3 ms-1">마이페이지</h4>
         <div class="list-group list-group-flush border-top border-bottom">
           <!-- 메뉴 세부 제목 -->
-          <a href="${ pageContext.servletContext.contextPath }/report/list" class="list-group-item list-group-item-action py-3">고객센터</a>
-          <a href="${ pageContext.servletContext.contextPath }/user/check/password" class="list-group-item list-group-item-action py-3">회원정보수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/ceo/check/password" class="list-group-item list-group-item-action py-3">개인정보수정</a>
+          <a href="${ pageContext.servletContext.contextPath }/report/ceo/list" class="list-group-item list-group-item-action py-3">고객센터</a>
                    
         </div>
        </aside>
@@ -73,7 +73,7 @@
                           <c:forEach var="report" items="${ requestScope.reportList }" varStatus="status">
                           <tr>
                               <td><c:out value="${ report.reportNo }"/></td>
-                              <td><a href="${ pageContext.servletContext.contextPath }/report/detail?no=${ report.reportNo }"><c:out value="${ report.title }"/></a></td>
+                              <td><a href="${ pageContext.servletContext.contextPath }/report/ceo/detail?no=${ report.reportNo }"><c:out value="${ report.title }"/></a></td>
                               <td><c:out value="${ report.id }"/><td><c:out value="${ report.regDate }"/></td>
                               <td><c:out value="${ report.regDate }"/></td>
                               
@@ -91,11 +91,11 @@
             <div class="mt-3"></div>
             <!-- 검색 폼 -->
 		 	<div class="write" align="right">
-				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/report/list" method="get" style="display:inline-block">
+				<form id="loginForm" action="${ pageContext.servletContext.contextPath }/report/ceo/list" method="get" style="display:inline-block">
 				<div class="input-group mb-3">
 				<input type="hidden" class="form-control" name="currentPage" value="1">
 				<!-- <button type="submit" class="btn btn-primary">문의하기</button> -->
-				<a class="btn black mr5" href="${ pageContext.servletContext.contextPath }/report/insert">문의하기</a>
+				<a class="btn black mr5" href="${ pageContext.servletContext.contextPath }/report/ceo/insert">문의하기</a>
 				</div>		
 				    
 				</form>
@@ -104,12 +104,11 @@
              
         </div>
     </section>
-                         
-<jsp:include page="/WEB-INF/views/user/user_footer.jsp"/>  
+       <jsp:include page="/WEB-INF/views/ceo/common/ceo_footer.jsp"/>              
   </div>
   <script>
     	
-    	const detailLink = "${ pageContext.servletContext.contextPath}//report/detail/session"
+    	const detailLink = "${ pageContext.servletContext.contextPath}//report/ceo/detail/session"
     
     	if(document.getElementsByTagName("td")) {
     		
