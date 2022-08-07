@@ -94,7 +94,7 @@
                         <th class="col-9">요청사항</th>
                         <td class="px-2" rowspan="2">
                         	<c:if test="${ waiting.useStatus eq 'waiting' }">
-                        		<button type="button" class="btn btn-danger me-2" value="예약 취소" data-bs-toggle="modal" data-bs-target="#cancel" style="width: 65px">예약 취소</button>
+                        		<button type="button" class="btn btn-danger me-2"  value="${ waiting.recordNo }" data-bs-toggle="modal" data-bs-target="#cancel" style="width: 65px">예약 취소</button>
                         	</c:if>
                         	<c:if test="${ waiting.useStatus ne 'waiting' }">
                         		<button type="button" class="btn btn-light me-2" value="예약 취소" style="width: 65px" disabled>예약 취소</button>

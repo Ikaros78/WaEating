@@ -254,6 +254,7 @@
 				  ]]>
 	  	) A
 	 LEFT JOIN COM_BOARD_ATTACH E ON(A.COM_NO = E.COM_NO)
+
 	 WHERE A.RNUM >= #{ startRow } 
   	    
   	       
