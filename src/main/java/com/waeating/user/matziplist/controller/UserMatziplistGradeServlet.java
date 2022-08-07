@@ -40,7 +40,7 @@ public class UserMatziplistGradeServlet extends HttpServlet {
 		
 		ComService comService = new ComService();
 		
-		int totalCount = comService.selectTotalCount(searchMap);
+		int totalCount = comService.selectComCountByGrade(searchMap);
 		System.out.println("totalCount : " + totalCount);
 		
 		int limit = 9;
