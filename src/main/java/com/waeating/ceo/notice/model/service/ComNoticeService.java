@@ -35,19 +35,19 @@ public class ComNoticeService {
 		return result;
 	}
 
-	public List<ComNoticeDTO> selectAllNotice(SelectCriteria selectCriteria) {
+	public List<ComNoticeDTO> selectAllNotice(Map<String, Object> search) {
 		
 		SqlSession sqlSession = getSqlSession();
 		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);
 		
-		List<ComNoticeDTO> comNoticeList = comNoticeMapper.selectAllNotice(selectCriteria);
+		List<ComNoticeDTO> comNoticeList = comNoticeMapper.selectAllNotice(search);
 		
 		sqlSession.close();
 		
 		return comNoticeList;
 	}
 
-	public int selectTotalCount(Map<String, String> searchMap) {
+	public int selectTotalCount(Map<String, Object> searchMap) {
 		
 		SqlSession sqlSession = getSqlSession();
 		comNoticeMapper = sqlSession.getMapper(ComNoticeMapper.class);

@@ -35,7 +35,7 @@
         </div>
        </aside>
        <!-- 오른쪽 (컨텐츠) -->
-       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 700px">
+       <aside class="float-end col-9 mt-4 ms-3" style="min-height : 860px">
         <!-- 이미지 지우고 넣을 컨텐츠 써서 사용 -->
         <!-- <img src="img/visual.jpg" width="100%">  -->
         <div class="px-5 py-3">
@@ -69,14 +69,13 @@
             
                   <!-- Modal body -->
                   <div class="modal-body">
-                    공지 등록이 완료되었습니다.
+                    공지를 등록하시겠습니까?
                   </div>
             
                   <!-- Modal footer -->
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                   </div>
-            
                 </div>
               </div>
             </div>

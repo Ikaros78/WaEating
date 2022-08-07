@@ -15,6 +15,7 @@ import com.waeating.ceo.notice.model.service.ComNoticeService;
 import com.waeating.com.model.dto.ComNoticeDTO;
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
 
 /**
  * Servlet implementation class CeoRestNotice
@@ -24,7 +25,10 @@ public class CeoRestNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+		
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
+		int comNo = member.getComInfo().getComNo();
+		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
@@ -39,9 +43,10 @@ public class CeoRestNoticeServlet extends HttpServlet {
 		String searchCondition = request.getParameter("searchCondition");
 		String searchValue = request.getParameter("searchValue");
 		
-		Map<String, String> searchMap = new HashMap<>();
+		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
+		searchMap.put("comNo", comNo);
 		
 		ComNoticeService noticeService = new ComNoticeService();
 		int totalCount = noticeService.selectTotalCount(searchMap);
@@ -61,7 +66,11 @@ public class CeoRestNoticeServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		List<ComNoticeDTO> comNoticeList = noticeService.selectAllNotice(selectCriteria);
+		Map<String, Object> search = new HashMap<>();
+		search.put("selectCriteria", selectCriteria);
+		search.put("comNo", comNo);
+		
+		List<ComNoticeDTO> comNoticeList = noticeService.selectAllNotice(search);
 		
 		System.out.println(comNoticeList);
 		
@@ -70,6 +79,7 @@ public class CeoRestNoticeServlet extends HttpServlet {
 			path = "/WEB-INF/views/ceo/notice/ceo_rest_notice.jsp";
 			request.setAttribute("selectAllNotice", comNoticeList);
 			request.setAttribute("selectCriteria", selectCriteria);
+			request.setAttribute("search", search);
 		} else {
 			path = "/WEB-INF/views/common.errorPage.jsp";
 			request.setAttribute("message", "공지 리스트 조회 실패");

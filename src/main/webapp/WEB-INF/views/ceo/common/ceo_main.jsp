@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="ceo_header.jsp"/>
 	<div id="wrap">
-	<section style="min-height : 717px">
+	<section style="min-height : 860px">
 		<!-- 컨텐츠 -->
 	</section>
 	<jsp:include page="ceo_footer.jsp"/>
