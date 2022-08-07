@@ -59,8 +59,7 @@ public class AdminLoginServlet extends HttpServlet {
 			
 			path = "/WEB-INF/views/admin/main.jsp";
 
-			/* response.sendRedirect(path); */ // 안되는중
-			request.getRequestDispatcher(path).forward(request, response); // 가능
+			request.getRequestDispatcher(path).forward(request, response);
 
 		} else {
 			

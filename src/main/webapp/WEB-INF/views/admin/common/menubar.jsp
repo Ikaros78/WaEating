@@ -27,7 +27,7 @@
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/review/list">리뷰글 관리</a></li>
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/report/list">고객센터 관리</a></li>
                     <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/notice/list">공지사항 관리</a></li>
-                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/usageLog/list">사용이력 관리</a></li>
+                    <li role="presentation"><a href="${ pageContext.servletContext.contextPath }/admin/usageLog/list">이용이력 관리</a></li>
                 </ul>
             </div>
             <c:if test="${ !empty sessionScope.loginMember }">

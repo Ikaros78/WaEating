@@ -77,7 +77,7 @@
 	            	</thead>
 	            	<tbody>
 	            		<tr>
-	            			<td><c:out value="${ report.content }"/></td>
+	            			<td><c:out value="${ report.content }" escapeXml="false"/></td>
 	            		</tr>
 	            	</tbody>
 	            </table>	
