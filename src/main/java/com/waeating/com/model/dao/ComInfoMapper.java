@@ -42,6 +42,8 @@ public interface ComInfoMapper {
 
 	ComInfoDTO selectComName(String comNo);
 
+	int selectComCountByGrade(Map<String, String> searchMap);
+
 
 
 	/* 업체 용도 */
