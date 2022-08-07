@@ -11,7 +11,10 @@
   <c:if test="${ !empty requestScope.no}"><script>	alert("문의하기 게시물이 수정되었습니다");
 	
 	location.replace("/report/detail?no=" + ${requestScope.no})</script></c:if>
-
+	
+    <c:if test="${ !empty requestScope.no}"><script>	alert("문의하기 게시물이 수정되었습니다");
+	
+	location.replace("/report/ceo/detail?no=" + ${requestScope.no})</script></c:if> 
  <script>
 		var successCode = "${ requestScope.success }";
 		
@@ -45,17 +48,27 @@
 				movePath = "${ pageContext.servletContext.contextPath }/report/list";
 				break;
 				
+		    case "insertCeoReport" : 
+				successMessage = "문의하기 게시물을 등록하였습니다";
+				movePath = "${ pageContext.servletContext.contextPath }/report/ceo/list";
+				break;	
+				
 		    case "deleteReport" : 
 				successMessage = "문의하기 게시물이 삭제되었습니다";
 				movePath = "${ pageContext.servletContext.contextPath }/report/list";
 				break;
-		      
-		   /*  case "updateReport" : 
+				
+		    case "deleteCeoReport" : 
+				successMessage = "문의하기 게시물이 삭제되었습니다";
+				movePath = "${ pageContext.servletContext.contextPath }/report/ceo/list";
+				break;
+		      	
+	      
+		/*     case "updateCeoReport" : 
 				successMessage = "문의하기 게시물이 수정되었습니다";
-				if(${requestScope.no})
-				{movePath = "${ pageContext.servletContext.contextPath }/report/detail?no=" + ${requestScope.no}
-				}
-				break; */
+				movePath = "${ pageContext.servletContext.contextPath }/report/ceo/list";
+				break;
+				 */
 			case "findCeoId" :
 				successMessage = "아이디는 ${ requestScope.ceoId }입니다.";
 				movePath = "${ pageContext.servletContext.contextPath }/member/ceo/login";
