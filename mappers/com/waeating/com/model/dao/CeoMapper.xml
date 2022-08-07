@@ -110,7 +110,7 @@
   <select id="dubleCkId" resultType="_int">
 		SELECT
 			   COUNT(*)
-		  FROM USER_INFO
+		  FROM MEMBER_INFO
 		 WHERE MEMBER_ID = #{ dubleCkId }
   </select>
   

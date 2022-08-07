@@ -19,7 +19,7 @@
 
   <div id="wrap">
    
-    
+    <img alt="메인 이미지" src="${ pageContext.servletContext.contextPath }/resources/images/user/userMain.png">
     
 
    
