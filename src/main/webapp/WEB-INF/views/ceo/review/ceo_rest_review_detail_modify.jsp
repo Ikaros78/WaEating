@@ -115,7 +115,7 @@
             
                   <!-- Modal body -->
                   <div class="modal-body">
-                    답변이 삭제되었습니다.
+                    답변을 삭제하시겠습니까?
                   </div>
             
                   <!-- Modal footer -->
@@ -139,7 +139,7 @@
             
                   <!-- Modal body -->
                   <div class="modal-body">
-                    답변 수정이 완료되었습니다.
+                    답변을 수정하시겠습니까?
                   </div>
             
                   <!-- Modal footer -->
