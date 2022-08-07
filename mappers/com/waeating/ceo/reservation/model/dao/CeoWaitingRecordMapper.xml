@@ -34,14 +34,16 @@
 		<result property="refuseReason" column="REFUSE_REASON"/>
 	</resultMap>
 	
-	<select id="selectTotalCount" resultType="_int">
+	<select id="selectTotalCount" resultType="_int" parameterType="hashmap">
 		SELECT
                COUNT(*)
           FROM WAITING_RECORD
-         WHERE COM_NO = 1
+         WHERE COM_NO = #{ comNo }
+           AND USE_STATUS = 'waiting'
+           AND TO_CHAR(USE_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
 	</select>
 	
-	<select id="selectAllWaitingList" resultMap="waitingRecordResultMap">
+	<select id="selectAllWaitingList" resultMap="waitingRecordResultMap" parameterType="hashmap">
 		 SELECT
   		   		A.RNUM
   		   	  , A.RECORD_NO
@@ -76,18 +78,104 @@
 						   FROM WAITING_RECORD REC
 						   LEFT JOIN WAITING_REFUSE REF ON (REC.RECORD_NO = REF.RECORD_NO)
 						   JOIN MEMBER_INFO MI ON (REC.MEMBER_ID = MI.MEMBER_ID)
-						  WHERE REC.COM_NO = 1
-  		   				 <where>
+						  WHERE REC.COM_NO = #{ comNo }
+						    AND REC.USE_STATUS = 'waiting'
+						    AND TO_CHAR(REC.USE_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+						  ORDER BY REC.USE_DATE
+  		   				 <!-- <where>
   		   				 	<if test="searchCondition == 'noticeTitle'">
 	           				   C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
 							</if>
-  		   				 </where>
+  		   				 </where> -->
   		   		   		) B
   		   		   	<![CDATA[
-	                WHERE ROWNUM <= #{ endRow }
+	                WHERE ROWNUM <= #{ selectCriteria.endRow }
 	                ]]>
   		   		) A	
-  		   	WHERE A.RNUM >= #{ startRow }
+  		   	WHERE A.RNUM >= #{ selectCriteria.startRow }
+  		   	
+	</select>
+	
+	<update id="updateWaitingRecord">
+		UPDATE
+		       WAITING_RECORD REC
+		   SET REC.USE_STATUS = #{ useStatus }
+		 WHERE REC.RECORD_NO = #{ recordNo }
+	</update>
+	
+	<insert id="insertWaitingRefuse">
+		INSERT
+		  INTO WAITING_REFUSE REF
+  		(
+  			REF.RECORD_NO, REFUSE_REASON
+  		)
+  		VALUES
+  		(
+  			#{ recordNo }, #{ refuseReason }
+  		)
+	</insert>
+	
+	<select id="selectTotalCountDate" resultType="_int" parameterType="hashmap">
+		SELECT
+               COUNT(*)
+          FROM WAITING_RECORD
+         WHERE COM_NO = #{ comNo }
+           AND USE_STATUS != 'waiting'
+           AND TO_CHAR(USE_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
+	
+	<select id="selectAllWaitingListDate" resultMap="waitingRecordResultMap" parameterType="hashmap">
+		 SELECT
+  		   		A.RNUM
+  		   	  , A.RECORD_NO
+		   	  , A.COM_NO
+		      , A.NAME
+		      , A.PHONE
+		      , A.USETIME
+		      , A.USE_STATUS
+		      , A.MEMBER_NUM
+		      , A.REQUIREMENT
+		      , A.REFUSE_REASON
+  		   FROM (SELECT ROWNUM RNUM
+  		   			  , B.RECORD_NO
+  		   			  , B.COM_NO
+				      , B.NAME
+				      , B.PHONE
+				      , B.USETIME
+				      , B.USE_STATUS
+				      , B.MEMBER_NUM
+				      , B.REQUIREMENT
+				      , B.REFUSE_REASON
+  		   		   FROM (SELECT
+						        REC.RECORD_NO
+						      , REC.COM_NO
+						      , MI.NAME
+						      , MI.PHONE
+						      , TO_CHAR(REC.USE_DATE, 'HH:MI') USETIME
+						      , REC.USE_STATUS
+						      , REC.MEMBER_NUM
+						      , REC.REQUIREMENT
+						      , REF.REFUSE_REASON
+						   FROM WAITING_RECORD REC
+						   LEFT JOIN WAITING_REFUSE REF ON (REC.RECORD_NO = REF.RECORD_NO)
+						   JOIN MEMBER_INFO MI ON (REC.MEMBER_ID = MI.MEMBER_ID)
+						  <where>
+  		   				 	<if test="selectCriteria.searchCondition == 'date'">
+	           				   TO_CHAR(REC.USE_DATE, 'YYYY-MM-DD') = #{ selectCriteria.searchValue }
+							</if>
+							AND REC.COM_NO = #{ comNo }
+							AND REC.USE_STATUS != 'waiting'
+  		   				 </where>
+						  ORDER BY REC.USE_STATUS
+						         , REC.USE_DATE      
+						    <!--  AND TO_CHAR(REC.USE_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')-->
+  		   				 
+  		   		   		) B
+  		   		   	<![CDATA[
+	                WHERE ROWNUM <= #{ selectCriteria.endRow }
+	                ]]>
+  		   		) A	
+  		   	WHERE A.RNUM >= #{ selectCriteria.startRow }
   		   	
 	</select>
 </mapper>

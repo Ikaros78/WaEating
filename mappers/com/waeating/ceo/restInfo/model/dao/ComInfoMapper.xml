@@ -24,6 +24,16 @@
 		<result property="comNo" column="COM_NO"/>
 	</resultMap>
 	
+	<resultMap type="com.waeating.com.model.dto.ComBoardAttachDTO" id="comBoardAttachMap">
+	    <id property="fileNo" column="FILE_NO"/>
+	    <result property="originName" column="ORIGIN_NAME"/>
+	    <result property="fileName" column="FILE_NAME"/>
+	    <result property="thumbnailName" column="THUMBNAIL_NAME"/>
+	    <result property="isDeleted" column="IS_DELETED"/>
+	    <result property="regDate" column="REG_DATE"/>
+	    <result property="comNo" column="COM_NO"/>
+    </resultMap>
+	
 	<select id="comSelectOneComInfo" resultMap="comInfoResultMap">
 		SELECT
 			   CI.COM_NO
@@ -37,7 +47,7 @@
 		     , SUBSTR(CI.WORK_TIME, 1, INSTR(CI.WORK_TIME, '~') -1) STARTTIME
 		     , SUBSTR(CI.WORK_TIME, INSTR(CI.WORK_TIME, '~') +1, LENGTH(CI.WORK_TIME)) ENDTIME
 		  FROM COM_INFO CI
-		 WHERE CI.COM_NO = 1
+		 WHERE CI.COM_NO = #{ comNo }
 	</select>
 	
 	<select id="comSelectOneComMenu" resultMap="comInfoResultMap">
@@ -47,7 +57,7 @@
 		     , CM.PRICE
 		  FROM COM_INFO CI
 		  JOIN COM_MENU CM ON (CI.COM_NO = CM.COM_NO)
-		 WHERE CI.COM_NO = 1
+		 WHERE CI.COM_NO = #{ comNo }
 	</select>
 	
 	<insert id="insertComMenu">
@@ -60,7 +70,7 @@
   		VALUES
   		(
   			SEQ_MENUNO.NEXTVAL, #{ menuName }, #{ price },
-  			1
+  			#{ comNo }
   		)
 	</insert>
 	
@@ -82,4 +92,24 @@
 		 WHERE CI.COM_NO = #{ comNo }
 	</update>
 
+	<insert id="insertComInfoImg" parameterType="com.waeating.com.model.dto.ComBoardAttachDTO">
+		INSERT
+		  INTO COM_BOARD_ATTACH A
+		  (
+		  	A.FILE_NO, A.ORIGIN_NAME, A.FILE_NAME,
+  			A.THUMBNAIL_NAME, A.IS_DELETED, A.REG_DATE, A.COM_NO
+		  )
+		  VALUES
+		  (
+		  	SEQ_COMATTACHNO.NEXTVAL, #{ originName }, #{ fileName },
+  			#{ originName }, 'N', SYSDATE, #{ comNo }
+		  )
+	</insert>
+	
+	 <select id="comSelectBoardImage" resultMap="comBoardAttachMap">
+	  	 SELECT
+	            A.FILE_NAME
+	         FROM COM_BOARD_ATTACH A
+	         WHERE A.COM_NO = #{ comNo }
+    </select>
 </mapper>
