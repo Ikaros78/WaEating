@@ -41,7 +41,7 @@ public class NoticeSelectCeoDetailServlet extends HttpServlet {
 			List<NoticeAttachDTO> attachList = noticeService.selectNoticeAttachList(searchMap);
 			System.out.println("attachList : " + attachList);
 			
-			if(attachList != null) {
+	    if(attachList != null) {
 				request.setAttribute("attachList", attachList);
 			}
 			request.setAttribute("noticeDetail", noticeDetail);
