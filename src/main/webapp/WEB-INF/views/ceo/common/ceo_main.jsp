@@ -12,9 +12,10 @@
 <body>
 	<jsp:include page="ceo_header.jsp"/>
 	<div id="wrap">
-	<section style="min-height : 860px">
-		<!-- 컨텐츠 -->
-	</section>
+	<!-- <section style="min-height : 860px">
+		컨텐츠
+	</section> -->
+	<img src="${ pageContext.servletContext.contextPath }/resources/images/ceo/ceomain.png" alt="ceomain" width="100%"> 
 	<jsp:include page="ceo_footer.jsp"/>
   	</div>
 </body>

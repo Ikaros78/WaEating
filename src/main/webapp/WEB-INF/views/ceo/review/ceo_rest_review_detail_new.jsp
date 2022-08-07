@@ -90,7 +90,7 @@
             
                   <!-- Modal body -->
                   <div class="modal-body">
-                    답변 등록이 완료되었습니다.
+                    답변을 등록하시겠습니까?
                   </div>
             
                   <!-- Modal footer -->
