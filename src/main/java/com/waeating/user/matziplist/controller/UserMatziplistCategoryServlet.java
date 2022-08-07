@@ -24,34 +24,6 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-		//request.getRequestDispatcher("/WEB-INF/views/user/user_matzip/user_matziplist_category.jsp").forward(request, response);
-		
-		/* 조회 */
-//		String selList = request.getParameter("sellist");
-//		System.out.println("selList : " + selList);
-//		String categoryName ="";
-//		if(selList == null) {
-//			selList = "korea";
-//		}
-//		
-//		switch(selList) {
-//		case "korea" : categoryName = "한식";
-//					   break;
-//		case "china" : categoryName = "중식";
-//					   break;
-//		case "japan" : categoryName = "일식";
-//					   break;
-//		case "snack" : categoryName = "분식";
-//					   break;
-//		case "america" : categoryName = "양식";
-//					   break;
-//		case "cafe" : categoryName = "카페";
-//					   break;
-//		case "etc" : categoryName = "기타";
-//					   break;
-//			
-//		}
 		
 		/* 페이징 처리*/
 		String currentPage = request.getParameter("currentPage");
@@ -70,7 +42,6 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		System.out.println(searchCondition);
 		
 		Map<String, String> searchMap = new HashMap<>();
-//		searchMap.put("categoryName", categoryName);
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		
@@ -94,9 +65,6 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		
 		System.out.println(selectCriteria);
 		
-		
-		
-		
 		List<ComInfoDTO> selectCom = comService.selectComByCategory(selectCriteria);
 		
 		System.out.println("selectCom : " + selectCom);
@@ -116,8 +84,6 @@ public class UserMatziplistCategoryServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
-		
-	
 		
 		
 	}
