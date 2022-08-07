@@ -16,6 +16,21 @@
 <jsp:include page="/WEB-INF/views/user/user_header.jsp"/>
 
   <div id="wrap">
+      <div id="wrap">
+    <!-- 왼쪽 (메뉴) -->
+    <section class="row container-fluid px-5">
+      <aside class="float-start col-2 mt-4 ms-5 px-3">
+        <!-- 메뉴 제목 -->
+        <h4 class="mb-3 ms-1">마이페이지</h4>
+        <div class="list-group list-group-flush border-top border-bottom">
+          <!-- 메뉴 세부 제목 -->
+          <a href="${ pageContext.servletContext.contextPath }/notice/list" class="list-group-item list-group-item-action py-3 select">공지사항</a>
+        </div>
+       </aside>
+       <!-- 오른쪽 (컨텐츠) -->
+       <aside class="float-end col-9 mt-4 ms-3 border">
+  
+  
    
  <div class="container">
         <section class="notice">
@@ -27,7 +42,7 @@
               </div>
           
               <!-- board seach area -->
-              <div id="board-search">
+            <!--   <div id="board-search">
                   <div class="container">
                       <div class="search-window">
                           <form action="">
@@ -39,7 +54,7 @@
                           </form>
                       </div>
                   </div>
-              </div>
+              </div> -->
              <div id="board-list">
                   <div class="container">
                       <table class="board-table">
@@ -55,7 +70,7 @@
                           <tr>
                               <td><c:out value="${ notice.noticeNo }"/></td>
                               <th>
-                                <a href="${ pageContext.servletContext.contextPath }/mainNotice/notice_detail?noticeNo=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
+                                <a href="${ pageContext.servletContext.contextPath }/notice/detail?no=${ notice.noticeNo }"><c:out value="${ notice.noticeTitle }"/></a>
                                 
                               </th>
                               <td><c:out value="${ notice.regDate }"/></td>
@@ -66,7 +81,6 @@
                           </tbody>
                       </table>
                   </div>
-            
             <jsp:include page="./common/paging.jsp"/>
              
             
@@ -79,20 +93,19 @@
 				    <select id="searchCondition" name="searchCondition" class="form-control">
 						<option value="noticeTitle" ${ requestScope.selectCriteria.searchCondition eq "noticeTitle"? "selected": "" }>제목</option>
 					</select>
-			        <input type="text" class="form-control" id="searchValue" name="searchValue" value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+			        <input type="text" class="form-control" id="searchValue" name="searchValue" placeholder="검색어를 입력해주세요."value="<c:out value="${ requestScope.selectCriteria.searchValue }"/>">
 					<button type="submit" class="btn btn-primary">검색하기</button>
 				</div>		
 				    
 				</form>
 				
 			</div>
-             
-        </div>
-       </aside>
-    </section>
+			</div>
+			</section>
+			 <jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
                          
-<jsp:include page="/WEB-INF/views/user/user_footer.jsp"/> 
   </div>
+  
   <script>
 		
 		if(document.getElementsByClassName('td')) {

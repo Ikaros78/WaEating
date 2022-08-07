@@ -10,29 +10,32 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.waeating.common.paging.Pagenation;
 import com.waeating.common.paging.SelectCriteria;
+import com.waeating.member.model.dto.MemberDTO;
+import com.waeating.report.model.dto.ReportDTO;
 import com.waeating.report.model.service.ReportService;
-import com.waeating.support.model.dto.ReportDTO;
 
 /**
- * Servlet implementation class SupportSelectListServlet
+ * Servlet implementation class ReportSelectListServlet
  */
-@WebServlet("/report/main")
-public class ReportmainServlet extends HttpServlet {
+@WebServlet("/report/list")
+public class ReportSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("loginMember");
 		
-		if(request.getSession().getAttribute("ifUpdate") != null){
-			request.getSession().removeAttribute("ifUpdate");
-		}
+		String memId = member.getId();
 		
 		String currentPage = request.getParameter("currentPage");
 		int pageNo = 1;
 		
-		if(currentPage != null && !"".equals(currentPage)) {
+		if(currentPage !=null && ! "".equals(currentPage)) {
 			pageNo = Integer.parseInt(currentPage);
 		}
 		
@@ -50,30 +53,40 @@ public class ReportmainServlet extends HttpServlet {
 		ReportService reportService = new ReportService();
 		int totalCount = reportService.selectTotalCount(searchMap);
 		
-		int limit = 10;
-		int buttonAmount = 5;
+		System.out.println("totalReportCount : " + totalCount);
+		
+		int limit = 5;
+		int buttonAmount =5;
 		
 		SelectCriteria selectCriteria = null;
 		
-		if(searchCondition != null && !"".equals(searchCondition)) {
+		if(searchCondition != null && ! "".equals(searchCondition)) {
 			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, searchValue);
-		}else {
-			selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
-		}
+			} else {
+				selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
+			}
+		System.out.println(selectCriteria);
 		
-		List<ReportDTO> reportList = reportService.selectAllreport(selectCriteria);
+		/* 두 가지 타입의 객체를 넘겨주기 위해서 Map객체를 생성 */
+		Map<String, Object> selectMap = new HashMap<>();
+		selectMap.put("memId", memId);
+		selectMap.put("selectCriteria", selectCriteria);
+		
+		List<ReportDTO> reportList = reportService.selectReportList(selectMap);
+	
+		System.out.println("reportList : " + reportList);
 		
 		String path = "";
+		
 		if(reportList != null) {
-			path= "/WEB-INF/views/report/reportList";
+			path= "/WEB-INF/views/report/ReportList.jsp";
 			request.setAttribute("reportList", reportList);
 			request.setAttribute("selectCriteria", selectCriteria);
-		}else {
-			path = "/WEB-INF/views/common/failed.jsp";
-			request.setAttribute("message", "문의정보 목록 조회 실패!");
-		}
-		
-		request.getRequestDispatcher(path).forward(request, response);
-	}
-
+			} else {
+				path = "/WEB-INF/views/common/errorPage.jsp";
+				request.setAttribute("message", "고객센터 조회에 실패했습니다");
+			}
+		   request.getRequestDispatcher(path).forward(request, response);
+	
+	}	
 }

@@ -60,6 +60,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	            WHERE A.RNUM >= #{ startRow }    
 	            ]]>
      </select>
+     
+     	<select id="selectNoticeDeatail" resultMap="noticeResultMap">
+		SELECT
+				A.NOTICE_NO
+			  , A.NOTICE_TITLE
+			  , A.NOTICE_CONTENT
+			  , A.REG_DATE
+			  , A.MEMBER_ID
+		  FROM ADMIN_NOTICE A
+		 WHERE A.NOTICE_NO = #{ noticeNo }			
+	</select>
+	
 
    <select id="selectTotalCount" resultType="_int" parameterType="hashMap">
      SELECT
@@ -73,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ORDER BY 1 DESC
    </select>
    
-   <select id="selectOneNotic" resultMap="noticeResultMap">
+   <select id="selectOneNotice" resultMap="noticeResultMap">
      SELECT
          AN.NOTICE_TITLE
         ,AN.NOTICE_CONTENT
@@ -206,7 +218,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			  , #{ originName }
 			  , #{ fileName }
 			)
-	</insert>
+	</insert> 
 	
 	<select id="selectNoticeAttachList" resultMap="attachResultMap" parameterType="hashmap">
 		SELECT
