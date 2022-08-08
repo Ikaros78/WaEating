@@ -26,26 +26,20 @@ import com.waeating.waitingRecord.model.dto.WaitingRecordDTO;
 public class UserReservationNowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("loginMember");
 		String userId = member.getId();
 		
 		Map<String, String> searchMap = new HashMap<>();
 		
 		searchMap.put("userId", userId);
-	
 		
 		ReservationService reservationService = new ReservationService();
-	
 
 		List<ComInfoDTO> waitingRecord = reservationService.selectNowReservation(searchMap);
-		
-		
+			
 		HttpSession session = request.getSession();
-		session.setAttribute("waitingRecord", waitingRecord); 
-		
+		session.setAttribute("waitingRecord", waitingRecord); 		
 		
 		System.out.println("waitingRecord : " + waitingRecord);
 		String path = "";
