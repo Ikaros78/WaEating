@@ -211,13 +211,19 @@ public class ComService {
 	}
 
 
-	public int selectComCountByGrade(Map<String, String> searchMap) {
+	/**
+	 * <pre>
+	 *  리뷰별 리스트 수 조회 페이징처리를 위해
+	 * </pre>
+	 * @return
+	 */
+	public int selectComCountByGrade() {
 		
 		SqlSession sqlSession = getSqlSession();
 		
 		comInfoMapper = sqlSession.getMapper(ComInfoMapper.class);
 		
-		int totalCount = comInfoMapper.selectComCountByGrade(searchMap);
+		int totalCount = comInfoMapper.selectComCountByGrade();
 		
 		sqlSession.close();
 		
